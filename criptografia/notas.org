@@ -1,0 +1,112 @@
+#+title: Notas Criptografia - Semestre VI
+
+* Introdución
+- Profesor: Hector Xavier Limón Riaño
+- Materia: Criptografia
+- Contacto: xavier120@hotmail.com
+- Carrera: Ciberseguridad e Infraestructura de Computo
+
+* Información
+** Prerrequisitos:
+  - Estructuras de datos (Python)
+  - Matematicas para la ciberseguridad
+  - Ciberseguridad
+** Evaluación:
+- Examenes: 60%
+- Tareas y practicas: 20%
+- Proyecto: 20%
+** Herramientas:
+- Eminus
+- Entorno controlado para examenes
+- Practical Cryptography in Python - Libro de Referencia
+
+* Temario
+** Descripción
+Es un elemento fundamental de la protección de la información.
+
+** Unidad 1
+- Cifrado Cesar
+- Usos de la criptografia
+- Criptografia y criptoanalisis
+
+** Unidad 2
+- Funciones de hash
+- AES
+- Modos de operación de AES
+- Padding
+- Manejo de llaves y vectores de inicialización
+
+** Unidad 3
+- Llaves publicas y privadas
+- RSA
+- PKCS
+
+** Unidad 4
+- MAC, HMAC. CBC-MAC
+- Firmas digitales
+- Curvas
+
+* Introducción a la criptografia
+- CIA:
+  Confidencialidad -> Impide ver algo a quien no debe verlo.
+  Integridad -> Evitar la manipulación de los datos.
+  Disponibilidad -> Tener la posibilidad de acceder a los datos (que tengamos permiso) en cualquier momento.
+
+Autenticar -> Probar que eres quien dices ser.
+Autorizar -> Dar acceso al que se autentica mediante permisos.
+
+Secretos
+
+Llaves privadas
+
+Datos pueden estar en 3 estados:
+- Reposo -> Esta almacenado en disco.
+- Transito -> Estan viajando por la red.
+- Uso -> Estan en la memoria
+
+** STRIDE
+- Spoofing: Suplantar la identidad en redes informaticas haciendose pasar por una persona, entidad o sistema de confianza para engañar a la victima. Se puede mitigar por firmas digitales, contraseñas, etc.
+- Tampering: Alterar, manipular o interferir con algo sin autorización, generalmente con el fin de causar daño, obtener beneficios ilegales o comprometer la integridad de un sistema, proceso o evidencia. Usa la tecnologia de hash para mitigarlo.
+- Repudation: El acto de negar, por parte de una persona o sistema, haber realizado una acción, transacción o comunicación especifica.
+- Information disclosure: Acceso no autorizado o la revelación inadvertida de datos sensibles, confidenciales o privados a personas, sistemas o entidades que no deberian tener acceso a ellos.
+- Denegation of service: Hacer que un sistema, servicio o red sea inaccesible para sus usuarios legitimos.
+- Elevation of privileges: Otorgar permisos a usuarios que no deben de tener dichos permisos.
+
+** Origen de la criptografia
+- Viene del griego kryptos que significa oculto y graphe que signfica grafo o escritura.
+- Es un ambito de la criptologia que se ocupa de las tecnicas de cifrado o codificado destinadas a alterar las representaciones linguisticas de cierntos mensajes con el fin de hacerlos ininteligibles.
+- Se encarga del estudio de los algoritmos, protocolos criptograficos, y sistemas que se utilizan para proteger la información y dotar de seguridad a las comunicaciones y a las entidades que se comunican.
+- El criptoanalisis es la parte que se dedica al estudio de los sistema criptograficos con el fin de encontrar debilidades en los sistemas y romper su seguridad sin el conocimiento de información secreta.
+
+** Criptografia
+- Esta en todos lados: ssh, criptomonedas y cualquier aplicación web.
+- Es un pilar de la seguridad informatica moderna.
+- La criptografia no es solo cifrado, se utiliza tambien para autenticación e integridad de los datos.
+- La criptografia bien implementada es efectiva sin importar:
+  - Que tan bien educado este el adversario.
+  - Que tantas computadoras tenga el adversario.
+  - Si el adversario conoce los algoritmos usados.
+  - Que tan motivado este el adversario.
+- La efectivad de la criptografia depende usualmente del contexto.
+- La buena seguridad depende de siempre kde tus elecciones.
+- Se debe de tomar la decisión adecuada de acuerdo al contexto del problema.
+- Nunca utilices un metodo criptografico si no entiendes su contexto de uso y su correcta configuración.
+- Nunca utilices un metodo criptografico usando la configuración por defecto a menos que la conozcas.
+- Revisa bien los metodos criptograficos que aplicaras muchos tienen vulnerabilidades conocidas.
+
+*** Tres protecciones principales de la criptografia
+- Autenticidad: Firmas digitales, Codigos MAC.
+- Confidencialidad: Cifrado, intercambio de llaves.
+- Integridad: Hashing.
+
+*** AES
+- Estandar de cifrado asimetrico.
+
+** YANAC
+- YANAC: You Are Not A Criptographer. Acronimo popular en la comunidad criptografica.
+- Dont roll your own crypto.
+- Es mas facil usar mal los metodos criptograficos que usarlos bien.
+- Abstente de crear tus propios metodos criptograficos.
+- Hasta expertos criptograficos han creado metodos con vulnerabilidades.
+- Un nuevo metodo pasa por muchas revisiones de expertos antes de ser usado de forma practica.
+- Incluso debes de abstenerte de hacer tus propias

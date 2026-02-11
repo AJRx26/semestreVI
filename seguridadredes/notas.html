@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-02-09 lun 12:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Seguridad en Redes de Computo - Notas Semestre VI</title>
+<meta name="author" content="Abraham Nuñez" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Seguridad en Redes de Computo - Notas Semestre VI</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3ef7d9a">1. Introducción</a></li>
+<li><a href="#org5fd567c">2. Información</a>
+<ul>
+<li><a href="#org264bc57">2.1. Evaluación:</a></li>
+<li><a href="#org41a3252">2.2. Herramientas:</a></li>
+</ul>
+</li>
+<li><a href="#org08a19f5">3. Introducción a la seguridad en redes de computo</a>
+<ul>
+<li><a href="#org77e8699">3.1. Seguridad de la información</a>
+<ul>
+<li><a href="#orgfc06be1">3.1.1. Gesionar el riesgo</a></li>
+<li><a href="#org5fb2c82">3.1.2. Regulaciones legales y estructuras de cumplimientos</a></li>
+<li><a href="#org4dd0b3f">3.1.3. Estrategias de seguridad de la información</a></li>
+<li><a href="#orgd963a62">3.1.4. Vector de ataque</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3ef7d9a" class="outline-2">
+<h2 id="org3ef7d9a"><span class="section-number-2">1.</span> Introducción</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Profesor: Martha Elizabet Dominguez Barcenas</li>
+<li>Marteria: Seguridad en Redes de Computo</li>
+<li>Carrera: Ciberseguridad e Infraestructura de Computo</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5fd567c" class="outline-2">
+<h2 id="org5fd567c"><span class="section-number-2">2.</span> Información</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org264bc57" class="outline-3">
+<h3 id="org264bc57"><span class="section-number-3">2.1.</span> Evaluación:</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Examenes: 45%</li>
+<li>Actividades: 30%</li>
+<li>Proyecto final: 25%</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org41a3252" class="outline-3">
+<h3 id="org41a3252"><span class="section-number-3">2.2.</span> Herramientas:</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>GNS3</li>
+<li>Packet Tracert</li>
+<li>Material de Cisco</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org08a19f5" class="outline-2">
+<h2 id="org08a19f5"><span class="section-number-2">3.</span> Introducción a la seguridad en redes de computo</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>Los sistemas de información sostienen la forma en la que la mayoria de las organizaciones hacen negocios.</li>
+<li>Información: Incluye datos, conocimiento, propiedad intelectual, etc. Que son importantes para una organización.</li>
+<li>La triada CIA:
+<ul class="org-ul">
+<li>Confidencialidad</li>
+<li>Accesibilidad</li>
+<li>Disponibilidad</li>
+<li>No repudio: Es la capacidad de demostrar el origen de la creación o modificación de cierta información.</li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-org77e8699" class="outline-3">
+<h3 id="org77e8699"><span class="section-number-3">3.1.</span> Seguridad de la información</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>Riesgo: Potencial de perdida, mediante el impacto y la probabilidad de una amenaza aproveche de una vulnerabilidad en uno o mas activos de un sistema de información.
+<ul class="org-ul">
+<li>Activo: Algo de valor para la organización. Como sistemas de información, información. Pueden ser activos digitales, fisicos e inclusos reputacionales.</li>
+</ul></li>
+<li>Amenaza: Peligro potencial para los activos, los datos o la red de una organización. Incluye un actor de amenaza o perpetrador de hechos que representan la amenaza.
+<ul class="org-ul">
+<li>Hackers maliciosos.</li>
+<li>Empleado deshonestos.</li>
+<li>Empleado que abre un archivo malicioso.</li>
+<li>Los actores de amenaza se pueden clasificar en: agentes maliciosos internos, agentes maliciosos externos, internos e internos accidentales.</li>
+</ul></li>
+<li>Vulnerabilidad: Es la debilidad de un activo (en un sistema o en su diseño) que puede ser explotada por una amenaza.
+<ul class="org-ul">
+<li>Activos de hardware</li>
+<li>Activos de software</li>
+</ul></li>
+</ul>
+</div>
+<div id="outline-container-orgfc06be1" class="outline-4">
+<h4 id="orgfc06be1"><span class="section-number-4">3.1.1.</span> Gesionar el riesgo</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<ul class="org-ul">
+<li>Proceso de minimizar el potencial de perdida.</li>
+<li>Implica identificar, evaluar, priorizar riesgos y aplicar medidas de control.</li>
+<li>Proporcionar transparencia y contabilidad de las operaciones diarias en una organización, alineando los riesgos con los objetivos estrategicos.</li>
+<li>Ayuda a la organización a prepararse para eventos adversos que podrian impactarle negativamente.</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org4314b9c"></a>Tratamiento del riesgo<br />
+<ol class="org-ol">
+<li><a id="orge21846c"></a>Forma de control<br />
+<div class="outline-text-6" id="text-3-1-1-1-1">
+<ul class="org-ul">
+<li>Evitar el riesgo.</li>
+<li>Reducir el riesgo.</li>
+<li>Transferir el riesgo.</li>
+<li>Aceptar el riesgo.</li>
+</ul>
+</div>
+</li>
+<li><a id="orgd45aa4d"></a>Controles de mitigación<br />
+<div class="outline-text-6" id="text-3-1-1-1-2">
+<ul class="org-ul">
+<li>Metodos por los cuales se intenta proteger cada activo de amenazas (contra-medida que reduce la probabilidad o la gravedad de una amenaza o riesgo).
+<ul class="org-ul">
+<li>Riesgo residual: Despues de aplicar el control de mitigación, se vuelve un riesgo aceptable.</li>
+</ul></li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div id="outline-container-org5fb2c82" class="outline-4">
+<h4 id="org5fb2c82"><span class="section-number-4">3.1.2.</span> Regulaciones legales y estructuras de cumplimientos</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<ul class="org-ul">
+<li>Los requisitos de la organización podrian proceder de autoridades gubernamentales o de organismos de certificación.</li>
+<li>Tambien hay estandares como los de la Organización Internacional para la Estandarización (ISO).
+<ul class="org-ul">
+<li>ISO 27001</li>
+<li>ISO 27018</li>
+</ul></li>
+<li>Las organizaciones que cumplen con los requisitos establecidos en la norma estan listas para ser auditadas por terceros y obtener certificaciones o acreditaciones al respecto.</li>
+<li>Importancia de una certificación:
+<ul class="org-ul">
+<li>Altamente valoradas por los clientes y empresas asociadas.</li>
+<li>Evidencia de que se ha alcanzado el nivel minimo de seguridad en la organización.</li>
+<li>Las regulaciones estan en constante evolución, por lo que la organización debe estar al pendiente de ello.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4dd0b3f" class="outline-4">
+<h4 id="org4dd0b3f"><span class="section-number-4">3.1.3.</span> Estrategias de seguridad de la información</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<ul class="org-ul">
+<li>Las organizaciones requieren de programas de seguridad de la información, documentados y actualizados regularmente (la periodicidad de la norma a seguir).</li>
+<li>Debe incluir:
+<ul class="org-ul">
+<li>Creación de politicas, procedimientos y manuales de seguridad de la información.</li>
+<li>Establecimiento y mantenimiento de un programa de concientización.</li>
+<li>Gestión de riesgos por parte de terceros (servicios en la nube: SLA).</li>
+<li>Presentación de informes y mejora continua.
+<ul class="org-ul">
+<li>Captar la atención de personas interesadas.</li>
+<li>Resaltar la relación costo-beneficio de la estrategia de seguridad de la información.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd963a62" class="outline-4">
+<h4 id="orgd963a62"><span class="section-number-4">3.1.4.</span> Vector de ataque</h4>
+<div class="outline-text-4" id="text-3-1-4">
+<ul class="org-ul">
+<li>Ruta por la que un actor de amenaza puede obtener acceso a un recurso en la red.</li>
+<li>Se originan dentro y fuera de la red corporativa.
+<ul class="org-ul">
+<li>Ataque de DoS</li>
+<li>Robo o copia de datos confidenciales</li>
+<li>Desconexión de la red.</li>
+</ul></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org7b3c803"></a>Ataques de red habituales<br />
+<div class="outline-text-5" id="text-3-1-4-1">
+<ul class="org-ul">
+<li>Ataques de reconocimiento</li>
+<li>Ataques de acceso</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Abraham Nuñez</p>
+<p class="date">Created: 2026-02-09 lun 12:08</p>
+</div>
+</body>
+</html>

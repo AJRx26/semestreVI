@@ -1,0 +1,16 @@
+#+title: Notas Desarrollo de Sistemas Web - Semestre VI
+
+* Introducción
+- Profesor: Erika Meneses Rico
+- Contacto: ermeneses@uv.mx
+- Materia: Desarrollo de Sistemas Web
+- Carrera: Ciberseguridad e Infraestructura de Computo
+
+* Información
+- Tareas y practicas: 30%
+- Proyecto: 25%
+- Examenes: 20%
+- Expocisión: 25% -> 15% revisiones y 10% evaluación final
+
+* Introducción
+-

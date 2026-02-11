@@ -1,0 +1,4 @@
+#+title: Sherlock - Preguntas
+
+- Construir una serie de inferencia en base a eventos previos.
+-
