@@ -1,0 +1,89 @@
+#+title: Seguridad en Redes de Computo - Notas Semestre VI
+
+* Introducción
+- Profesor: Martha Elizabet Dominguez Barcenas
+- Marteria: Seguridad en Redes de Computo
+- Carrera: Ciberseguridad e Infraestructura de Computo
+
+* Información
+** Evaluación:
+- Examenes: 45%
+- Actividades: 30%
+- Proyecto final: 25%
+
+** Herramientas:
+- GNS3
+- Packet Tracert
+- Material de Cisco
+
+* Introducción a la seguridad en redes de computo
+- Los sistemas de información sostienen la forma en la que la mayoria de las organizaciones hacen negocios.
+- Información: Incluye datos, conocimiento, propiedad intelectual, etc. Que son importantes para una organización.
+- La triada CIA:
+  - Confidencialidad
+  - Accesibilidad
+  - Disponibilidad
+  - No repudio: Es la capacidad de demostrar el origen de la creación o modificación de cierta información.
+
+** Seguridad de la información
+- Riesgo: Potencial de perdida, mediante el impacto y la probabilidad de una amenaza aproveche de una vulnerabilidad en uno o mas activos de un sistema de información.
+  - Activo: Algo de valor para la organización. Como sistemas de información, información. Pueden ser activos digitales, fisicos e inclusos reputacionales.
+- Amenaza: Peligro potencial para los activos, los datos o la red de una organización. Incluye un actor de amenaza o perpetrador de hechos que representan la amenaza.
+  - Hackers maliciosos.
+  - Empleado deshonestos.
+  - Empleado que abre un archivo malicioso.
+  - Los actores de amenaza se pueden clasificar en: agentes maliciosos internos, agentes maliciosos externos, internos e internos accidentales.
+- Vulnerabilidad: Es la debilidad de un activo (en un sistema o en su diseño) que puede ser explotada por una amenaza.
+  - Activos de hardware
+  - Activos de software
+
+*** Gesionar el riesgo
+- Proceso de minimizar el potencial de perdida.
+- Implica identificar, evaluar, priorizar riesgos y aplicar medidas de control.
+- Proporcionar transparencia y contabilidad de las operaciones diarias en una organización, alineando los riesgos con los objetivos estrategicos.
+- Ayuda a la organización a prepararse para eventos adversos que podrian impactarle negativamente.
+
+**** Tratamiento del riesgo
+***** Forma de control
+- Evitar el riesgo.
+- Reducir el riesgo.
+- Transferir el riesgo.
+- Aceptar el riesgo.
+
+***** Controles de mitigación
+- Metodos por los cuales se intenta proteger cada activo de amenazas (contra-medida que reduce la probabilidad o la gravedad de una amenaza o riesgo).
+  - Riesgo residual: Despues de aplicar el control de mitigación, se vuelve un riesgo aceptable.
+
+*** Regulaciones legales y estructuras de cumplimientos
+- Los requisitos de la organización podrian proceder de autoridades gubernamentales o de organismos de certificación.
+- Tambien hay estandares como los de la Organización Internacional para la Estandarización (ISO).
+  - ISO 27001
+  - ISO 27018
+- Las organizaciones que cumplen con los requisitos establecidos en la norma estan listas para ser auditadas por terceros y obtener certificaciones o acreditaciones al respecto.
+- Importancia de una certificación:
+  - Altamente valoradas por los clientes y empresas asociadas.
+  - Evidencia de que se ha alcanzado el nivel minimo de seguridad en la organización.
+  - Las regulaciones estan en constante evolución, por lo que la organización debe estar al pendiente de ello.
+
+*** Estrategias de seguridad de la información
+- Las organizaciones requieren de programas de seguridad de la información, documentados y actualizados regularmente (la periodicidad de la norma a seguir).
+- Debe incluir:
+  - Creación de politicas, procedimientos y manuales de seguridad de la información.
+  - Establecimiento y mantenimiento de un programa de concientización.
+  - Gestión de riesgos por parte de terceros (servicios en la nube: SLA).
+  - Presentación de informes y mejora continua.
+    - Captar la atención de personas interesadas.
+    - Resaltar la relación costo-beneficio de la estrategia de seguridad de la información.
+
+*** Vector de ataque
+- Ruta por la que un actor de amenaza puede obtener acceso a un recurso en la red.
+- Se originan dentro y fuera de la red corporativa.
+  - Ataque de DoS
+  - Robo o copia de datos confidenciales
+  - Desconexión de la red.
+
+**** Ataques de red habituales
+- Ataques de reconocimiento
+- Ataques de acceso
+- Ingenieria social
+-

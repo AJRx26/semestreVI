@@ -1,0 +1,110 @@
+#+title: Notas Aprendizajemaquina
+
+* Informacion
+- Maestro: David Martinez Galicia
+- Materia: Aprendizaje Maquina
+- Carrera: CIberseguridad e Infraestructura de Computo
+- Contacto: davidmartinez02@uv.mx
+
+* Informacion
+** Evaluacion
+- Examenes: 40%
+- Tareas: 30%
+- Proyecto: 30%
+
+* Temario
+- 1. Introduccion
+- 2. Manejo de datos
+- 3. Aprendizaje supervisado
+- 4. Aprendizaje no supervisado
+- 5. Aprendizaje por refuerzo
+- 6. Evaluacion de modelos
+
+* Introduccion
+** Inteligencia Artificial
+- Que es la inteligencia artificial?
+- "Cada aspecto de la inteligencia artificial puede ser descrito con suficiente precision que puede fabricarse una maquina para simularlo".
+- El concepto existe desde 1956.
+- Inteligencia artificial: Un enfoque moderno, Pearson Rusell, S. J., y Norving P. (2021).
+- Concuerdan que la IA debe estudiar sistemas inteligentes.
+- Caracteristicas para ser inteligentes:
+*** Cognicion y comportamiento
+  - Pensar (crear) -> Humano
+  - Actuar (simular) -> Racional
+** Tipos de sistemas
+- Sistemas que piensan como humanos
+- Sistemas que piensan racionalmente
+- Sistemas que actuan como humanos
+- Sistemas que actuan racionalmente
+** Simulacion del comportamiento humano
+- La prueba de Turing
+- El sistema debe de poseer las siguientes capacidades:
+  - Procesamiento de lenguaje natural
+  - Representacion del conocimiento
+  - Razonamiento automatico
+  - Aprendizaje maquina
+- Para superar la prueba de Turing la computadora debe incluir:
+  - Vision computacional para percibir objetos.
+  - Robotica para manipular y mover objetos.
+
+** Aprendizaje Maquina
+- Se refiere a un espectro de situaciones en las cuales un agente incrementa su conocimiento para cumplir una tarea.
+- Machine Learning. Mitchell, T. M. (1997).
+- Un programa de computadora aprende de la experiencia E, con respecto a alguna clase de tareas T y una medida de desempeno P, si su desempeno en las tareas T, medido por P, mejora con la experiencia E.
+*** Tipos de aprendizajes
+- Aprendizaje supervisado: Aprender una funcion a partir de ejemplos de sus entradas y sus salidas.
+  - Clasificacion: Diagnostico de enfermedades.
+  - Regresion: Prediccion de la temperatura.
+- Aprendizaje no supervisado: Aprender a partir de patrones de entradas que no tienen valores de salidas.
+  - Agrupacion: Segmentacion de clientes.
+  - Reduccion de dimensionalidad: Visualizar datos.
+  - Estimacion de la densidad: Describir la altura de una poblacion.
+- Aprendizaje por refuerzo: Aprender una forma de actuar usando un refuerzo (recompens o penalizacion)
+  - Aprender politicas de accion: Actuar en un entorno.
+** Introduccion al manejo de datos
+- La calidad de los datos determina la calidad del modelo.
+- "Garbage in, garbage out".
+- Sin la preparacion adecuada de los datos, no hay aprendizaje efectivo.
+- Transformamos datos crudos en patrones para la toma de decisiones.
+- Datos limpios dectetan amenazas reales en ciberseguridad.
+
+*** Datos estructurados
+- Datos organizados en formato tabular con esquema definido.
+**** Caracteristicas:
+- Formate predecible.
+- Tipos de datos definidos.
+- Faciles de almacenar y consultar en bases de datos relacionales.
+- Ejemplos:
+  - Tablas SQL.
+  - Hojas de calculo Excel/CSV.
+  - Logs de sistemas con formatos fijo.
+*** Datos NO estructurados
+- Datos sin formato predefinido ni organizacion tabular.
+**** Caracteristicas:
+- Sin esquema fijo.
+- Requieren procedimiento previo para extraer informacion.
+- Representan 80% de los datos empresariales,
+- Ejemplos:
+  - Texto.
+  - Imagenes y videos.
+  - Audio y grabaciones.
+*** Datos etiquetados
+- Conjunto de datos donde cada ejemplo tiene una etiqueta/clase asociada.
+**** Caracteristicas:
+- Requieren proceso manual o semi-automatico de etiquetado.
+- Esenciales para entrenar modelos supervisados.
+- Costosos de obtener y validar.
+- Ejemplos:
+  - Correos spam/no spam
+  - Imagenes de rostros con nombre de persona
+*** Datos NO etiquetados
+- Datos sin categorias o respuestas conocidas.
+**** Caracteristicas:
+- Abundantes y faciles de recolectar.
+- Requieren tecnicas de descubrimiento de patrones.
+- Utiles para deteccion de anomalias.
+- Ejemplos:
+  - Trafico de red
+  - Comportamiento de usuario
+  - Codigo malicioso
+*** Repositorio de datos
