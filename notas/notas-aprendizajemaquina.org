@@ -108,3 +108,32 @@
   - Comportamiento de usuario
   - Codigo malicioso
 *** Repositorio de datos
+*** Formatos de datos de texto
+- Los formatos de texto permiten almacenar y procesar datos eficientemente.
+- Son los mas comunes para cargar en la mayoria de las herramientas
+**** Tipos de datos de texto
+- CVS: Formato tabular simple y universalmente compatible.
+- TSV: Similar al CSV, pero con tabulaciones como delimitador.
+- JSON: Ligero yflexible para datos estructurados y anidados.
+- XML: Formato estructurado y autodescriptivo, aunque verboso.
+- ARFF: Incluye metadatos, usado comunmente en Weka.
+- Texto plano: Sin formato, para datos sin estructura o documentos.
+*** Limpieza y procesamiento de datos
+- Los datos del mundo real son inexactos, inconsistentes e incompletos.
+- El procesamiento de datos asegura la integridad de los datos.
+- Permite generar analisis confiables y conclusiones validas.
+- Evita decisiones incorrectas o modelos ineficaces.
+**** FLujo de trabajo de limpieza y preprocesamiento
+- Recopilacion: Obtener datos de bases de datos, APIs o scraping.
+- Limpieza: Corregir errores, eliminar duplicados y manejar valores faltantes.
+- Integracion: Unir datos de multiples fuentes, resolviendo inconsistencias.
+- Transformacion: Codificar, normalizar y crear nuevas variables.
+- Reduccion: Seleccionar caracteristicaspara simplificar el analisis.
+*** Python para el aprendizaje maquina
+- Lenguaje preferido por su facilidad y bibliotecas especializados.
+**** Bibliotecas importantes
+- Pandas: Manipulacion de datos.
+- Numpy: Calculos numericos.
+- SciPy: Computo cientifico, estadistica y senales.
+- Matplotlib/Seaborn: Visualizacion de datos.
+- Scikit-learn: Machine learning y preprocesamiento.
