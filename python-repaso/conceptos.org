@@ -1,0 +1,39 @@
+#+title: Conceptos de Python
+
+* Tipos de datos
+- Son la base cualquier programa, ya que determinan como se almacenan y manipulan los valores. Existen tipos primitivos como enteros, flotantes, cadenas de texto y booleanos, y estructuras de datos mas avanzadas como listas, tuplas, conjuntos y diccionarios.
+** Primitivos
+- Entero -> int -> 0
+- Flotante -> floatb -> 3.14
+- Cadena de texto -> str -> "Hola"
+- Booleano -> bool -> True/False
+- Complejo -> complex -> 1+2j
+- Byte -> bytes -> b"Hola"
+- Nulo -> NoneType -> None
+** Estructuras
+- Lista/Pila -> list -> [1,2,3]
+- Tupla -> tuple -> (1,2,3)
+- Conjunto -> set -> {1,2,3}
+- Conjunto inmutable -> frozenset -> frozenset({1,2,3})
+- Diccionario -> dict -> {"clave": "valor"}
+- Bytearray -> bytearrary -> bytearray(5)
+- Rango -> range -> range(5)
+- Memory view -> memoryview -> memoryview(bytes(5))
+
+* Sintaxis Basica
+- if -> if condicion:
+- elif -> elif otra_condicion:
+- else -> else:
+- for -> for elemento in secuencia:
+- while -> while condicion:
+- break -> break
+- continue -> continue
+- Funcion -> def -> def nombre(parametros):
+- Clase -> class -> class NombreClase:
+- Variable global -> global -> global nombre_variable
+- Excepciones -> try, except -> try:...except Excepcion:
+- Bloque finally -> finally -> finally:
+- Retorno -> return -> return valor
+- Comprobar tipo -> is -> if variable is tipo:
+- Existe -> in -> if elemento in coleccion:
+- Modulo -> import, from , import -> import nombre_modulo, from modulo import nombre
