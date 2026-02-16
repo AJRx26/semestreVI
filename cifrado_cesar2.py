@@ -108,8 +108,8 @@ if __name__ == "__main__":
     accion = sys.argv[2]
     shift = int(sys.argv[3])
 
-    if shift >= 0:
+    if shift > 0:
         cesar(archivo, accion, shift)
-    else:
+    elif shift == 0:
         print("Debe de ingresar un numero mayor a 0")
         exit(1)
