@@ -3,12 +3,32 @@
 import sys
 
 
-def cesar(archivo, accion, llave):
+def ayuda():
+    mensaje = """
+    Uso: cifrado_cesar2 <archivo> <accion> <shift> <destino>
+
+    Cifra y descifra el contenido de un archivo usando el cifrado Cesar.
+
+    Argumentos:
+        archivo: Nombre del archivo a cifrar o descifrar
+        accion: c para cifrar y d para descifrar
+        shift: Numero de recorrimeinto
+        destino: Nombre del archivo final
+
+    cifrado_cesar2 prueba.txt -c 3 resultado.txt
+    cifrado_cesar2 prueba.txt -d 3 resultado.txt
+    """
+    print(mensaje)
+    exit(0)
+
+
+def cesar(archivo, accion, llave, destino):
     """
     Funcion que cifra y descrifa el contenido de un archivo
     archivo: str
     accion: str
     llave: int
+    destino: str
 
     return: str
     """
@@ -73,19 +93,19 @@ def cesar(archivo, accion, llave):
             "Y",
             "Z",
         ]
+
         resultado = []
 
-        # with open(archivo + "result", "w") as f:
         for i in d:
             if i.isalpha():
-                if accion == "d":
+                if accion == "-d":
                     if i.isupper():
-                        x = int((alfabeto_mayus.index(i) - llave) % 26)
+                        x = int((alafabeto_mayus.index(i) - llave) % 26)
                         resultado += alfabeto_mayus[x]
                     else:
                         x = int((alfabeto_minus.index(i) - llave) % 26)
                         resultado += alfabeto_minus[x]
-                elif accion == "c":
+                elif accion == "-c":
                     if i.isupper():
                         x = int((alfabeto_mayus.index(i) + llave) % 26)
                         resultado += alfabeto_mayus[x]
@@ -94,12 +114,12 @@ def cesar(archivo, accion, llave):
                         resultado += alfabeto_minus[x]
                 else:
                     print("Operacion no permitida")
-                    print("Use <c> (cifrado) o <d> (descifrado)")
-                    print("'archivo' 'accion' 'shift'")
+                    ayuda()
                     exit(1)
             else:
                 resultado.append(i)
-        with open(archivo + "result", "w") as f:
+
+        with open(destino, "w") as f:
             f.write("".join(resultado))
 
 
@@ -107,9 +127,14 @@ if __name__ == "__main__":
     archivo = sys.argv[1]
     accion = sys.argv[2]
     shift = int(sys.argv[3])
+    destino = sys.argv[4]
+
+    """
+    if archivo == "-h" or "--help":
+        ayuda()
+    """
 
     if shift > 0:
-        cesar(archivo, accion, shift)
-    elif shift == 0:
-        print("Debe de ingresar un numero mayor a 0")
-        exit(1)
+        cesar(archivo, accion, shift, destino)
+    else:
+        ayuda()
