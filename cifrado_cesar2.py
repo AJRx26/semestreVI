@@ -30,6 +30,7 @@ def cesar(archivo, accion, llave):
             "l",
             "m",
             "n",
+            "ñ",
             "o",
             "p",
             "q",
@@ -43,6 +44,35 @@ def cesar(archivo, accion, llave):
             "y",
             "z",
         ]
+        alfabeto_mayus = [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "J",
+            "K",
+            "L",
+            "M",
+            "N",
+            "Ñ",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+            "Z",
+        ]
         resultado = []
 
         # with open(archivo + "result", "w") as f:
@@ -50,15 +80,18 @@ def cesar(archivo, accion, llave):
             if i.isalpha():
                 if accion == "d":
                     if i.isupper():
+                        x = int((alfabeto_mayus.index(i) - llave) % 26)
+                        resultado += alfabeto_mayus[x]
+                    else:
                         x = int((alfabeto_minus.index(i) - llave) % 26)
                         resultado += alfabeto_minus[x]
-                    else:
-                        resultado.append(chr((ord(i) - int(llave) - 97) % 26 + 97))
                 elif accion == "c":
                     if i.isupper():
-                        resultado.append(chr((ord(i) + int(llave) - 65) % 26 + 65))
+                        x = int((alfabeto_mayus.index(i) + llave) % 26)
+                        resultado += alfabeto_mayus[x]
                     else:
-                        resultado.append(chr((ord(i) + int(llave) - 97) % 26 + 97))
+                        x = int((alfabeto_minus.index(i) + llave) % 26)
+                        resultado += alfabeto_minus[x]
                 else:
                     print("Operacion no permitida")
                     print("Use <c> (cifrado) o <d> (descifrado)")
