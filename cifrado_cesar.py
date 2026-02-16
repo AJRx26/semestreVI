@@ -4,6 +4,14 @@ import sys
 
 
 def cesar(archivo, accion, llave):
+    """
+    Funcion que cifra y descrifa el contenido de un archivo
+    archivo: str
+    accion: str
+    llave: int
+
+    return: str
+    """
     with open(archivo, "r") as f:
         d = f.read()
         resultado = []
@@ -23,6 +31,8 @@ def cesar(archivo, accion, llave):
                         resultado.append(chr((ord(i) + int(llave) - 97) % 26 + 97))
                 else:
                     print("Operacion no permitida")
+                    print("Use <c> (cifrado) o <d> (descifrado)")
+                    print("'archivo' 'accion' 'shift'")
                     exit(1)
             else:
                 resultado.append(i)
