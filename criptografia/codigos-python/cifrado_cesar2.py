@@ -98,20 +98,20 @@ def cesar(archivo, accion, llave, destino):
 
         for i in d:
             if i.isalpha():
-                if accion == "-d":
+                if accion == "-c":
                     if i.isupper():
-                        x = int((alafabeto_mayus.index(i) - llave) % 26)
-                        resultado += alfabeto_mayus[x]
+                        x = int((alfabeto_mayus.index(i) + llave) % 27)
+                        resultado.append(alfabeto_mayus[x])
                     else:
-                        x = int((alfabeto_minus.index(i) - llave) % 26)
-                        resultado += alfabeto_minus[x]
-                elif accion == "-c":
+                        x = int((alfabeto_minus.index(i) + llave) % 27)
+                        resultado.append(alfabeto_minus[x])
+                elif accion == "-d":
                     if i.isupper():
-                        x = int((alfabeto_mayus.index(i) + llave) % 26)
-                        resultado += alfabeto_mayus[x]
+                        x = int((alfabeto_mayus.index(i) - llave) % 27)
+                        resultado.append(alfabeto_mayus[x])
                     else:
-                        x = int((alfabeto_minus.index(i) + llave) % 26)
-                        resultado += alfabeto_minus[x]
+                        x = int((alfabeto_minus.index(i) - llave) % 27)
+                        resultado.append(alfabeto_minus[x])
                 else:
                     print("Operacion no permitida")
                     ayuda()
