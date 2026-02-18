@@ -1,0 +1,24 @@
+#+title: Notas Cisco - Redes Empresariales, Seguridad y Automatizacion
+
+* Introducción al OSPF.
+- El protocolo OSPF es un protocolo de enrutamiento de estado enlace que se desarrollo como una alternativa al Protocolo de Información de Enrutamiento de Vector Dist ancia (RIP). RIP fue un protocolo de enrutamiento aceptable en los primeros dias de las redes e internet. El uso del conteo de saltos no escala bien en redes mas grandes con varios rutas de distintas velocidades. El OSPF tiene ventajas significativas sobre el RIP en el sentido que ofrece una convergencia mas rapida y se escala a implementaciones de redes mucho grandes.
+
+- OSPF es un protocolo de enrutamiento de estado de enlace que utiliza el concepto de areas. Un administrador de red puede dividir el dominio de enrutamiento en areas distintas que ayudan a controlar el trafico de actualización de enrutamiento. Un enlace es una interfaz en un router.
+
+** Componentes de OSPF
+*** Mensajes de protocolo de enrutamiento
+- Los routers que ejecutan OSPF intercambian mensajes para transmitir información de enrutamiento por medio de cinco tipos de paquetes. Estos paquetes, que pueden verse en la figura, son los siguientes:
+  - Paquete hello
+  - Paquete de descripcion de la base de datos
+  - Paquete de solicitud de estado de enlace
+  - Paquete de actualización de estado de enlace
+  - Paquete de acuse de recibo de estado de enlace
+- Estos paquetes se usan para descubrir routers vecinos y tambien para intercambiar información de enrutamiento, a fin de mantener información precisa acerca de la verdad.
+
+*** Estructura de datos
+- Los mensajes OSPF se utilizan para crear y mantener tres bases de datos OSPF, como se indica a continuación:
+  - Base de datos de adyacencia: Lista todos los routers vecinos a los que se ha conectado un router, esta tabla es unica para cada router, se puede ver con el comando "show ip ospf neighbor".
+  - Base de datos de estado de enlace (LSDB) - crea la table de topologia: Muestra información sobre todos los otros routers en la red. Representa la topologia de red. Todos los routers dentro de un area de tiene LSDB identicas. Se puede ver con el comando "show ip ospf database".
+  - Base de datos de reenvio - creo la tabla de enrutamiento: Lista de rutas generada cuando se ejecuta un algoritmo en la base de datos de estado de enlace OSPF. La tabla de enrutamiento de cada router es unica y contiene información sobre como y donde enviar paquetes a otros routers. Se puede ver con el comando "show ip route"
+
+*** Algoritmo
