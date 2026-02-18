@@ -64,6 +64,7 @@ def cesar(archivo, accion, llave, destino):
             "y",
             "z",
         ]
+
         alfabeto_mayus = [
             "A",
             "B",
@@ -100,17 +101,17 @@ def cesar(archivo, accion, llave, destino):
             if i.isalpha():
                 if accion == "-c":
                     if i.isupper():
-                        x = int((alfabeto_mayus.index(i) + llave) % 27)
+                        x = int((alfabeto_mayus.index(i) + llave) % len(alfabeto_mayus))
                         resultado.append(alfabeto_mayus[x])
                     else:
-                        x = int((alfabeto_minus.index(i) + llave) % 27)
+                        x = int((alfabeto_minus.index(i) + llave) % len(alfabeto_minus))
                         resultado.append(alfabeto_minus[x])
                 elif accion == "-d":
                     if i.isupper():
-                        x = int((alfabeto_mayus.index(i) - llave) % 27)
+                        x = int((alfabeto_mayus.index(i) - llave) % len(alfabeto_mayus))
                         resultado.append(alfabeto_mayus[x])
                     else:
-                        x = int((alfabeto_minus.index(i) - llave) % 27)
+                        x = int((alfabeto_minus.index(i) - llave) % len(alfabeto_minus))
                         resultado.append(alfabeto_minus[x])
                 else:
                     print("Operacion no permitida")

@@ -147,3 +147,88 @@ Datos pueden estar en 3 estados:
 - El binario se manipula en paquetes de bytes (8 bits), no se puede manipular directamentes menos (al menos en las arquitecturas populares modernas).
 
 - Tarea: Cifrado cesar para archivo de texto.
+
+** Hashing
+- 3**2 = 9 -> Biyectivas
+- 22 % 2 = 0 ->
+
+- El hashing es uno de los elementos principales de la seguridad criptografia.
+- Algunas funciones de hash son mejores que otras cumpliendo las propiedades antes mencionadas.
+- Buenas: SHA-256, SHA-512
+- No tan buenas: MD5, SHA-1. Estas no deberian ser usadas por sus vectores de seguridad.
+- Solo funciona con cadenas binarias
+
+*** Cifrado vs Hashing
+- El cifrado permite tener confidencialidad en los mensajes, pero ayuda a verificar la interidad de los mismos.
+- Confidencialidad: Solo las personas autorizadas pueden leer el mensaje.
+- Integridad: Las personas no autorizadas no pueden cambiar el contenido del mensaje sin que dicho cambio pueda ser percibido.
+- Solo porque un mensaje este cifrado (no pueda ser leido) no significa que no pueda ser alterado, incluso de formas que tengan sentido despues de cifrar.
+
+**** DIGESTS
+- Su traduccion seria "resumen"
+- Una funcion de hash produce un resumen o huella digital de algun contenido binario
+- Este resumen puede utilizarse como medida para verificacion de tampering (alteraciones de informacion), utilizadas en analisis forense.
+- En una transmision la idea es transmitir el mensaje junto con su digest, para verificar que haya llegado sin alteraciones.
+
+***** hashlib
+import hashlib
+md5hasher = hashlib.md5(b'cadenaBin')
+md5hasher.hexdigest()
+md5hasher.update(b'continuacionCadenaBin')
+md5hasher.hexdigest()
+
+*** Funciones de hash
+- Una funcion de hash toma un contenido de cualquier tamano(hasta vacio) y siempre produce un numero de un tamano fijo.
+- Por ejemplo, MD5 produce una salida de 16 bytes
+- Este tamano tiene una relacion con la seguridad de la funcion entre mas pequenos es peor.
+- Dominio -> Codominio
+- Una vez mas, las propiedades que una funcion de hash debe de cumplir son:
+  - El mismo documento siempre produce el mismo digest.
+  - El digest parece aleatorio, si tienes el digest eso no te da pistas del documento de entrada.
+  - Idealmente cada documento con contenido diferente deberia tener un digest diferente (lo cual en realidad no es posible).
+
+- Los digests son como huellas digitales: si tienes al sujeto se puede verificar que sea quien dice ser mediante su huella digital.
+- Sin embargo, si solo tiene la huella digital no es facil determinar el sujeto que la posee.
+- Es facil calcular el digests de un documento, pero si tiene solo el digest es muy dificil determinar el documento que lo produjo, entre mas dificil mejor.
+- Por esta razon son llamadas funciones de una sola via, se puede ir de entrada a la salida pero no al revez.
+
+**** Ejercicio
+
+- Extiende el cifrador ce Cesar binario para que incluya una verificacion de integridad mediante SHA-256
+- El profesor demostrara como agregar el hash en el cifrado
+- Tu tarea consistira en verificar el hash al descifrar, lanzando una excepcion si el archivo cifrado es alterado.
+
+*** Hashing
+- En computacion, el termino funcion de hash casi siempre se refiere a una funcion criptografica.
+- Sin embargo, el termino general
+- El tamano del codominio depende de la funcion de hash, por ejemplo, ya se dijo que MD5 genera digest de 16 bytes. Cual es el tamano del codominio para MD5?
+- SI se considera un numero muy grande de documentos de entrada es posible que muchos de ellos produzcan el mismo hash.
+- Dado lo anterior, las funciones de hash tienen perdida. Se pierde informacion de la fuente al digest.
+- Que tenga perdida es importante, de lo contrario habria una forma de regresar del digest al documento original.
+- Considerando de nuevo la funcion par
+- Cualquier numero puede dar como resultado 0 (par) o 1 (inpar)
+- Seria posible saber, dado un valor 0 o 1que numero produjo dicho resultado
+- Esta funcion tiene todas las propiedades: tienen perdida, comprime la entrada,
+- Las propiedades de consistencia, compresion y perdida son comunes en cualquier funcion de hash pero no suficientes para ser seguras o criptograficas.
+- Se requieren las sig. propiedades:
+  - Resistencia de preimagen.
+  - Segunda resistencia de preimagen.
+  - Resistencia de colisiones.
+
+**** Resistencia de preimagen
+- Es el conjunto de entradas de una funcion de hash que producen
+- Una preimagen de una funcion de hash H y un valor de hash k es el conjunto de valores x por el cual H(x) = k
+- Al tener un digest, existe un numero infinito de documentos que produjeron dicho digest.
+- Eso no quiere decir que dado un digest sea facil encontrar un elemento de la preimagen
+- La resistencia de preimagen es basicamente: si tengo un digest y no se como se obtuvo, no pudo ni siquiera encontrar un elemento en la preimagen sin realizar una cantidad ridicula de trabajo computacional.
+- Intratable -> Se puede resolver, pero cuesta demasiado
+- No computable -> No se puede resolver con una computadora
+- Idealmente, los elementos de la preimagen deberian estar muy separados entre ellos y no tener un espaciado predecible
+- El hecho de que las funciones de hash tengan perdida ayuda a la resistencia de preimagen
+- Si una funcion de hash tiene buena resistencia de preimagen, los ataques en este sentido seran aleatorios o bien consistiran en enumeraciones muy largas (fuerza bruta) hasta encontrar una coincidencia, lo cual no es computacionalmente tratable.
+- Al proceso de intentar encontrar un elemento de la preimagen dado un valor de hash se le llama invertir el hash
+- Encontrar un inverso
+
+**** Segunda resistencia de preimagen
+- Si tu tienes al menos un documento que produce un hash conocido, sigue siendo muy dificil encontrar otro documento que produzca el mismo hash
+-
