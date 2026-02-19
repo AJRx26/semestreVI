@@ -22,3 +22,62 @@
   - Base de datos de reenvio - creo la tabla de enrutamiento: Lista de rutas generada cuando se ejecuta un algoritmo en la base de datos de estado de enlace OSPF. La tabla de enrutamiento de cada router es unica y contiene información sobre como y donde enviar paquetes a otros routers. Se puede ver con el comando "show ip route"
 
 *** Algoritmo
+- El router arma la tabla de topologia: para ello, utiliza los resultados de calculos realizados a partir del algoritmo SPF (Primero la ruta mas corta) de Dijkstra. El algoritmo SPF se basa en el costo acumulado para llegar a un destino.
+
+- El algoritmo SPF crea un arbol SPF posicionando cada router en la raiz del arbol y calculando la ruta mas corta hacia cada nodo. Luego, el arbol SPF se usa para calcular las mejores rutas. OSPF coloca las mejores rutas en la base de datos de reenvio, que se usa para crear la tabla de enrutamiento.
+
+** Funcionamiento de estado de enlace
+*** Establecimiento de adyacencias de vecinos
+- Los routers con OSPF habilitado, deben reconocerne entre si en la red antes de que puedan compartir información. Los routes con OSPF habilitado envian paquetes hello por todas las interfaces con OSPF habilitado, para determinar si hay vecinos presentes en esos enlaces. Si se detecta un vecino, el router con OSPF habilitado intenta establecer una adyacencia de vecino con ese vecino.
+
+*** Intercambio de anuncios de estado de enlace
+- Despues de establecer las adyacencias, los routers intercambian anuncios de estado de enlace (LSA). Las LSA contienen el estado y el costo de cada enlace conectado directamente. Los routers saturan a los vecinos adyacentes con sus LSA. Los vecinos adyacentes que reciben las LSA saturan de inmediato a otros vecinos conectados directamente, hasta que todos los routers en el area tengan todas las LSA.
+
+*** Crear la base de datos de estado de vinculo
+- Una vez que se reciben los LSA, los routers con OSPF crean la tabla de topologia (LSDB) en funcion de los LSA recibidos. Esta base de datos finalmente contiene toda la información sobre la topologia del area.
+
+*** Ejecución del algoritmo SPF
+- Los routers luego ejecutan el algoritmo SPF. Los engranajes que se muestran en la ilustración se utilizan para indicar la ejecución del algoritmo SPF. El algoritmo SPF crea el arbol SPF.
+
+*** Elija la mejor ruta
+- Despues de construir el arbol SPF, se ofrecen las mejores rutas a cada red a la tabla de enrutamiento IP. La ruta sera insertada en la tabla de enrutamiento, a menos que haya un origen de rutas a la misma red con una distancia administrativa menor, como una ruta estatica. Las decisiones de enrutamiento se toman sobre la base de las entradas de la tabla de enrutamiento.
+
+** OSPF de area unica y OSPF multiarea
+- Este protocolo admite el enrutamiento jerarquico mediante areas. Un area OSPF es un grupo de routers que comparten la misma información de estado de enlace en sus LSDB. OSPF se puede implementar de un de estas dos maneras:
+
+*** OSPF de area unica:
+- Todos los enrutadores estan en un area. La mejor practica es usar el area 0.
+
+*** OSPF de multiarea:
+- OSPF se implementa mediante varias areas, de manera jerarquica. Todas las areas deben conectarse al area troncal (area 0). Los routers que interconectan las areas se denominan "routers fronterizos de area" (ABR).
+
+- OSPF puede dividir un dominio de enrutamiento grande en areas mas pequeñas a fin de admitir el enrutamiento jerarquico. El enrutamiento todavia ocurre entre las areas (enrutamiento entre areas), mientras que muchas de las operaciones de enrutamiento que son intensivas para el procesador, como el recalculo de la base de datos, se mantienen dentro de un area.
+
+** OPSFv3
+- Es el equivalente a OSPFv2 para intercambiar prefijos IPv6. Recuerde que, en IPv6, la dirección de red se denomina "prefijo" y la mascara de subred se denomina "longitud de prefijo".
+
+- OSPFv3 intercambia información de enrutamiento para completar la tabla de enrutamiento de IPv6 con prefijos remotos.
+
+- OSPFv2 se ejecuta sobre la capa de red IPv4, comunicandose con otros pares IPv4 de OSPF y publicitando solo rutas IPv4.
+
+- OSPFv3 tiene la misma ruta funcionalidad que OSPFv2, pero utiliza IPv6 como transporte de la capa de red, por lo que se comunica con pares de OSPFv3 y anuncia rutas IPv6. OSPFv3 tambien utiliza el algoritmo SPF como motor de computo para determinar las mejores rutas a lo largo del dominio de enrutamiento.
+
+- OSPFv3 tiene procesos separados de su contra-parte IPv4. Los procesos y las operaciones son basicamente los mismos que en el protocolo de enrutamiento IPv4, pero se ejecutan de forma independiente. OSPFv2 y OSPFv3 tienen tablas de adyacencia, tablas de topologia OSPF y tablas de enrutamiento IP independientes, como se muestra en la ilustración.
+
+
+* Conceptos de ACL
+- El trafico de red que pasa a traves de una interfaz configurada con una lista de control de acceso (ACL) ha permitido y denegado el trafico. El enrutador compara la información dentro del paquete con cada ACE, en orden secuencial, para determinar si el paquete coincide con uno de los ACE. Este proceso se denomina filtrado de paquetes.
+
+** ¿Qué es un ACL?
+- Una ACL es una serie de comandos del IOS que controlan si un router reenvia o descarta paquetes segun la información que se encuentra en el encabezado del paquete. De forma predeterminada, un enrutador no tiene ninguna ACL configurada. Sin embargo, cuando se aplica una ACL a una interfaz, el router realiza la tarea adicional de evaluar todos los paquetes de red a medida que pasan a traves de la interfaz para determinar si el paquete se puede reenviar.
+
+- Una ACL utiliza una lista secuencial de declaraciones de permiso o denegación, conocidas como entradas de control de acceso (ACE).
+
+- Cuando el trafico de la red atraviesa una interfaz configurada con una ACL, el router compara la información dentro del paquete con cada ACE, en orden secuencial, para determinar si el paquete coincide con una de las ACE. Este proceso se denomina filtrado de paquetes.
+
+** Filtrado de paquetes
+- El filtrado de paquetes controla el acceso a una red mediante el analisis de los paquetes entrantes y salientes y la transferencia o el descarte de estos segun criterios determinados. El filtrado de paquetes puede producirse en la capa 3 (red) o capa 4 (transporte), como se muestra en la ilustración.
+
+- Los routers Cisco admiten dos tipos de ACL:
+  - ACL estandar: Las ACL solo filtran en la capa 3 utilizando unicamente la dirección IPv4 de origen.
+  - ACL extendidas: Las ACL filtran en la capa 3 mediante la dirección IPv4 de origen y/o destino. Tambien pueden filtrar en la capa 4 mediante TCP, puertos UDP e información de tipo de protocolo opcional para un control mas preciso.
