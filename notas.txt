@@ -1,0 +1,15 @@
+1. Actualizar las notas
+- git pull
+
+2. Ver cambios
+- git status
+- git diff
+
+3. Añadir cambios
+- git add . / git add carpeta/archivo.txt
+- git commit -m "Comentario"
+- git push
+
+4. Obtener la carpeta en un equipo nuevo
+- git clone x
+
