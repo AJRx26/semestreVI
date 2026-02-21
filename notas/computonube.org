@@ -1,0 +1,30 @@
+#+title: Computo en la nube - Notas
+
+* Información
+- Contacto: hbonola@uv.mx
+- Profesor: Hector Bonola
+
+* Evaluación
+- 10% Tareas de investigación
+- 10% Practicas
+- 30% Exámenes
+- 50% Proyecto
+
+* Acuerdos
+- Respeto
+- Puntualidad
+- Restricción de uso de celular
+- Horario de atención de dudas
+- Uso de IA
+- No se porque anote esto si es algo basico pero bueno xd
+
+* Temario
+- Introducción a computo en la nube
+- Tecnologías base
+- Virtualización
+- Contenedores
+- Mecanismos de manejo de nube
+- Mecanismos de protección en la nube
+- Arquitecturas de nube fundamentales
+
+- Hacer una linea del tiempo o infografia de la evolución de la nube
