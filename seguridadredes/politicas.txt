@@ -1,0 +1,30 @@
+- Solo los dispositivos de las redes LAN3 y LAN4, asi como los dispositivos 192.168.11.1 a 192.168.11.63 de la LAN2, pueden acceder a LAN5
+
+access-list 1 permit 192.168.30.0 0.0.0.255
+access-list 1 permit 192.168.31.0 0.0.0.255
+access-list 1 permit 192.168.11.0 0.0.0.63
+access-list 1 deny any
+
+interface g0/0/0
+ip access-group 1 out
+
+- A la LAN3 solo pueden comunicarse los dispositivos de la LAN5 y LAN1
+
+ip access-list standard filtro
+permit 192.168.40.0 0.0.0.255
+permit 192.168.10.0 0.0.0.255
+deny any
+
+interface g0/0/0
+ip access-group filtro out
+
+- En la LAN4, solo puede enlazarse el host 192.168.11.10 de la red LAN2, asi como los dispositivos de la red LAN5.
+
+access-list 20 permit host 192.168.11.10
+access-list 20 permit 192.168.40.0 0.0.0.255
+access-list 20 deny any
+
+interface g0/0/1
+ip access-group 20 out
+
+- El acceso remoto seguro al router R2, debera estar restringido solo a PC4 y PC3
