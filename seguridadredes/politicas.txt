@@ -3,6 +3,7 @@
 access-list 1 permit 192.168.30.0 0.0.0.255
 access-list 1 permit 192.168.31.0 0.0.0.255
 access-list 1 permit 192.168.11.0 0.0.0.63
+access-list 1 permit host 10.1.1.9
 access-list 1 deny any
 
 interface g0/0/0
@@ -20,11 +21,29 @@ ip access-group filtro out
 
 - En la LAN4, solo puede enlazarse el host 192.168.11.10 de la red LAN2, asi como los dispositivos de la red LAN5.
 
-access-list 20 permit host 192.168.11.10
-access-list 20 permit 192.168.40.0 0.0.0.255
-access-list 20 deny any
+access-list 2 permit host 192.168.11.10
+access-list 2 permit 192.168.40.0 0.0.0.255
+access-list 2 permit host 10.1.1.5
+access-list 2 deny any
 
 interface g0/0/1
 ip access-group 20 out
 
 - El acceso remoto seguro al router R2, debera estar restringido solo a PC4 y PC3
+hostname R2
+enable secret cisco
+ip domain-name prueba
+username cisco secret cisco
+crypto key generate rsa
+ip ssh version 2
+ip access-list standard VTY-SSH
+permit host 192.168.40.10
+permit host 192.168.31.10
+deny any
+exit
+
+line vty 0 4
+login local
+transport input ssh
+access-class VTY-SSH in
+end

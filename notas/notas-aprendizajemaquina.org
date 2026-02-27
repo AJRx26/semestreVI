@@ -137,3 +137,12 @@
 - SciPy: Computo cientifico, estadistica y senales.
 - Matplotlib/Seaborn: Visualizacion de datos.
 - Scikit-learn: Machine learning y preprocesamiento.
+
+** Técnicas de codificación
+- Las variables categóricas representan grupos categóricas.
+- Algunos modelos de aprendizaje maquina requieren entradas numéricas.
+- Transformar categorías en números para análisis y modelado.
+
+*** Tecnicas comunes:
+- One-Hot Encoding: Para categorías sin orden (ej: puerto de embarque).
+- Label Encoding: Para categorías con orden (ej: nivel educativo).
