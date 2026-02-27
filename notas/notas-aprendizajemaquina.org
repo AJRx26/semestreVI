@@ -138,6 +138,7 @@
 - Matplotlib/Seaborn: Visualizacion de datos.
 - Scikit-learn: Machine learning y preprocesamiento.
 
+<<<<<<< Updated upstream
 ** Técnicas de codificación
 - Las variables categóricas representan grupos categóricas.
 - Algunos modelos de aprendizaje maquina requieren entradas numéricas.
@@ -146,3 +147,6 @@
 *** Tecnicas comunes:
 - One-Hot Encoding: Para categorías sin orden (ej: puerto de embarque).
 - Label Encoding: Para categorías con orden (ej: nivel educativo).
+=======
+- Puntuación Z: Es una medida estadistica que indica cuantas desviaciones estandar se encuentra por encima o por debajo de la medida de una distribución.
+>>>>>>> Stashed changes

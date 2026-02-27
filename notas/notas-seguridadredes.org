@@ -87,3 +87,42 @@
 - Ataques de acceso
 - Ingenieria social
 -
+
+** ACL
+- Proporcionar control de flujo de trafico. Limitar trafico a ciertos enlaces, restringir entrega de actualizaciones.
+
+*** Funcionamiento
+- Se pueden aplicar para trafico entrante y saliente
+  - Paquetes que ingresan por interfacez de entrada (antes de su busqueda en la table de routing)
+  - Paquetes que salen por las interfaces de salida del router (despues de que se enrutan)
+- Router compara IPv4 de origen con cada ACE en orden secuencial.
+- Si hay coincidencia se ejecuta la ACE (las ACE restantes )
+
+*** Mascara Wildcard
+- Para coincidencia con un host
+  - Host: 192.168.1.1
+  - Wildcard: 0.0.0.0
+
+- Para coincidencia con una subred IPv4
+  - 192.168.1.0/24
+  - 255.255.255.255 - 255.255.255.0 = 0.0.0.255
+  - Mascara Wildcard: 0.0.0.255
+
+- Para coincidencia de distintas subredes
+  - 192.168.10.0 y 192.168.11.0
+  - Calculas mascara sumarizada: 255.255.254.0
+    10 = 00001010
+    11 = 00001011
+  - Calculo de mascara wildcard: 0.0.1.255
+
+- Para coincidencia con un rango de direcciones:
+  - Ejemplo de rango: 192.168.16.0/24 a 192.168.31.0/24
+  - Mascara de subred sumarizada: 255.255.240.0
+    16 = 00010000
+    31 = 00011111
+
+  - Mascara wildcard: 255.255.255.255 - 255.255.240.0 = 0.0.15.255
+
+**** Palabras clave
+- Host: Equivale a una mascara wildcard 0.0.0.0
+- Any: Equivale a una mascara wildcard 255.255.255.255
