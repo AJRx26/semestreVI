@@ -1,4 +1,4 @@
-#+title: Computo en la nube - Notas
+#+title: Notas de Computo en la nube - Notas
 
 * Información
 - Contacto: hbonola@uv.mx
@@ -27,4 +27,17 @@
 - Mecanismos de protección en la nube
 - Arquitecturas de nube fundamentales
 
-- Hacer una linea del tiempo o infografia de la evolución de la nube
+- Hacer una linea del tiempo o infografía de la evolución de la nube
+
+* Introducción
+** ¿Que es la nube?
+- Según el NIST, es un modelo para habilitar el acceso conveniente por demanda a un conjunto compartido de recursos computacionales configurables, por ejemplo, redes, servidores, almacenamiento, aplicaciones y servicios, que pueden ser rápidamente aprovisionados y liberados con un esfuerzo mínimo de administración o de interacción con el proveedor de servicios.
+
+- Este modelo de nube promueve la disponibilidad y esta compuesto por cinco características esenciales, tres modelos de servicio y cuatro modelos de despliegue.
+
+** Características de la nube
+- Autoservicio en demanda
+- Acceso universal desde la red
+- Almacenes de recursos
+- Elasticidad, es la capacidad de ajustar automáticamente los recursos de computo (procesamiento, memoria, almacenamiento, ancho de banda) según la demanda en tiempo real.
+- Tarificación
