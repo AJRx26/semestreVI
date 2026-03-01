@@ -57,7 +57,10 @@ def _procesar_archivo(path_entrada: str, path_salida: str, shift: int, funcion) 
                 chunk_cifrado.append(byte_cifrado)
             salida.write(bytes(chunk_cifrado))
             hasher.update(chunk)
-        salida.write(hasher.digest())
+        hash = hasher.digest()
+        salida.write(hash)
+
+    print("Hash generado: ", hash)
 
 
 def _DESprocesar_archivo(
@@ -96,7 +99,7 @@ def _DESprocesar_archivo(
             print("Hash nuevo: ", hash_calculado)
         else:
             print("CUIDADO!!! ARCHIVO MODIFICADO")
-            print("Hash orignal: ", hash_guardado)
+            print("Hash original: ", hash_guardado)
             print("Hash nuevo: ", hash_calculado)
 
 
@@ -130,4 +133,3 @@ if __name__ == "__main__":
     else:
         print("Operación no valida")
         ayuda()
-        exit(1)
