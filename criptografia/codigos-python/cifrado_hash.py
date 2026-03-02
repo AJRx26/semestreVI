@@ -2,7 +2,6 @@ import sys
 import hashlib
 import os
 
-
 def ayuda():
     mensaje = """
     Uso: python3 cifrado_hash.py <archivo_entrada> <archivo_salida> <shift> <operacion>
@@ -24,9 +23,10 @@ def ayuda():
 
 def cifrarByte(byte: int, shift: int) -> int:
     """
-    Función para cifrar un byte.
-    byte: int, shift: int
-    returns: int
+    Función para cifrar un byte por desplazamiento.
+    byte: int (0-255)
+    shift: int (desplazamiento)
+    returns: int (nuevo valor)
     """
     return (byte + shift) % 256
 
@@ -34,18 +34,20 @@ def cifrarByte(byte: int, shift: int) -> int:
 def descifrarByte(byte: int, shift: int) -> int:
     """
     Función para descifrar un byte.
-    byte: int, shift: int
-    returns: int
+    byte: int (0-255)
+    shift: int (desplazamiento)
+    returns: int (Resultado inverso)
     """
     return (byte - shift) % 256
 
 
 def _procesar_archivo(path_entrada: str, path_salida: str, shift: int, funcion) -> None:
     """
-    Cifra el archivo de entrada y lo guarda cifrado en la ruta destino.
+    Cifra el archivo de entrada y lo guarda cifrado en la ruta destino. Ademas, añade el hash al final del archivo.
     path_entrada: str
     path_salida: str
     shift: int
+    funcion: cifrarByte
     returns: None
     """
     hasher = hashlib.sha256()
@@ -56,29 +58,35 @@ def _procesar_archivo(path_entrada: str, path_salida: str, shift: int, funcion) 
                 byte_cifrado = funcion(byte, shift)
                 chunk_cifrado.append(byte_cifrado)
             salida.write(bytes(chunk_cifrado))
+
+            # Actualiza el hash con el contenido original
             hasher.update(chunk)
+        #Obtiene el hash en formato binario
         hash = hasher.digest()
+        #Añade el hash final del archivo
         salida.write(hash)
 
-    print("Hash generado: ", hash)
+    print("Hash del archivo:", hash)
 
-
-def _DESprocesar_archivo(
-    path_entrada: str, path_salida: str, shift: int, funcion, tamano: int
-) -> None:
+def _procesar_cifrado(path_entrada: str, path_salida: str, shift: int, funcion, tamano: int) -> None:
     """
-    Descifra hasta 'tamano' bytes,
-    verifica hash
+    Descifra el archivo cifrado y verifica integridad.
+    path_entrada: str
+    path_salida: str
+    shift: int
+    funcion: descifrarByte
+    tamano: int
+    returns: None
     """
 
     hasher = hashlib.sha256()
-    leido = 0
+    contador = 0
     tam_chunk = 4096
 
     with open(path_entrada, "rb") as entrada, open(path_salida, "wb") as salida:
 
-        while leido < tamano:
-            bytes_restantes = tamano - leido
+        while contador < tamano:
+            bytes_restantes = tamano - contador
             chunk = entrada.read(min(tam_chunk, bytes_restantes))
             if not chunk:
                 break
@@ -86,22 +94,25 @@ def _DESprocesar_archivo(
             chunk_descifrado = bytes(funcion(b, shift) for b in chunk)
             salida.write(chunk_descifrado)
 
+            # Actualiza hash con contenido descifrado
             hasher.update(chunk_descifrado)
 
-            leido += len(chunk)
+            contador += len(chunk)
 
+        # Lee los ultimos 32 bytes
         hash_guardado = entrada.read(32)
+        # Calcula hash del contenido descifrado
         hash_calculado = hasher.digest()
 
+        # Compara ambos hashes
         if hash_calculado == hash_guardado:
-            print("Archivo no modificado")
+            print("Archivo NO modificado")
             print("Hash original: ", hash_guardado)
             print("Hash nuevo: ", hash_calculado)
         else:
-            print("CUIDADO!!! ARCHIVO MODIFICADO")
+            print("Archivo modificado")
             print("Hash original: ", hash_guardado)
             print("Hash nuevo: ", hash_calculado)
-
 
 def cifrar_archivo(path_entrada: str, path_salida: str, shift: int) -> None:
     """
@@ -110,14 +121,12 @@ def cifrar_archivo(path_entrada: str, path_salida: str, shift: int) -> None:
     """
     _procesar_archivo(path_entrada, path_salida, shift, cifrarByte)
 
-
 def descifrar_archivo(path_entrada: str, path_salida: str, shift: int, tamano) -> None:
     """
     Descifra el archivo dado.
     returns: None
     """
-    _DESprocesar_archivo(path_entrada, path_salida, shift, descifrarByte, tamano)
-
+    _procesar_cifrado(path_entrada, path_salida, shift, descifrarByte, tamano)
 
 if __name__ == "__main__":
     entrada = sys.argv[1]

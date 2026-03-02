@@ -21,6 +21,7 @@ def fuerza_bruta(salt, key):
         for minusculas in caracteres:
             for numeros in caracteres:
                 password = (mayusculas + minusculas + numeros).encode()
+                #print(f"{password.decode()}")
 
                 #Esta linea de codigo es (())
                 print(f"Probando: {password.decode()}", end="\r")
