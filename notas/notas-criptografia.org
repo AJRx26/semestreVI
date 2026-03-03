@@ -232,3 +232,13 @@ md5hasher.hexdigest()
 **** Segunda resistencia de preimagen
 - Si tu tienes al menos un documento que produce un hash conocido, sigue siendo muy dificil encontrar otro documento que produzca el mismo hash
 -
+
+**** Resistencia a colisiones
+- Significa que es dificil encontrar dos entradas que produzcan el mismo hash y garantiza que sea computacionalmente inviable encontrar dos entradas diferentes que produzcan el mismo valor hash.
+- No un hash especifico sino cualquier hash.
+- Propiedad avalancha: El valor de hash cambia drasticamente y de forma impredecible, un minimo del 50% de los bits del hash deberia ser diferente.
+
+
+*** Seguridad en funciones de hash
+- Hash es usado para el almacenamiento de passwords
+-
