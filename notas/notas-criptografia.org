@@ -108,6 +108,12 @@ Datos pueden estar en 3 estados:
 
 *** AES
 - Estandar de cifrado asimetrico.
+- Advanced Encryption Standard.
+- Es el algoritmo de cifrado simetrico mas usado en la actualidad.
+- Lo utiliza TLS (HTTPS) y las funciones de cifrado de sistemas de archivos de un OS.
+- Debe de saberse utilizar, tiene diferentes modos de operacion, algunos de ellos inseguros.
+- Existen variantes, como AES-128 que utiliza una llave de 16 bytes.
+- Una llave con contenido aleatorio es una llave valida.
 
 *** YANAC
 - YANAC: You Are Not A Criptographer. Acronimo popular en la comunidad criptografica.
@@ -141,7 +147,6 @@ Datos pueden estar en 3 estados:
 - (144 + 300) % 256 = 188
 - (188 - 300) % 256 = 144
 - El resultado sera siempre un numero natural.
--
 
 *** Binario
 - El binario se manipula en paquetes de bytes (8 bits), no se puede manipular directamentes menos (al menos en las arquitecturas populares modernas).
