@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2026-03-04 mié 07:53 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Notas Aprendizajemaquina</title>
+<meta name="author" content="Abraham Nunez" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Notas Aprendizajemaquina</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4a4008b">1. Informacion</a></li>
+<li><a href="#org2c28a1a">2. Informacion</a>
+<ul>
+<li><a href="#orged65e56">2.1. Evaluacion</a></li>
+</ul>
+</li>
+<li><a href="#orgea29a26">3. Temario</a></li>
+<li><a href="#orgba051f7">4. Introduccion</a>
+<ul>
+<li><a href="#org4269fd2">4.1. Inteligencia Artificial</a>
+<ul>
+<li><a href="#org19eacbe">4.1.1. Cognicion y comportamiento</a></li>
+</ul>
+</li>
+<li><a href="#orgffa3a34">4.2. Tipos de sistemas</a></li>
+<li><a href="#orgc6545a5">4.3. Simulacion del comportamiento humano</a></li>
+<li><a href="#org3e64189">4.4. Aprendizaje Maquina</a>
+<ul>
+<li><a href="#org5d3827a">4.4.1. Tipos de aprendizajes</a></li>
+</ul>
+</li>
+<li><a href="#org35020f0">4.5. Introduccion al manejo de datos</a>
+<ul>
+<li><a href="#org7eed474">4.5.1. Datos estructurados</a></li>
+<li><a href="#org2e3913a">4.5.2. Datos NO estructurados</a></li>
+<li><a href="#org3e0c1fc">4.5.3. Datos etiquetados</a></li>
+<li><a href="#org92cea94">4.5.4. Datos NO etiquetados</a></li>
+<li><a href="#org8d7e165">4.5.5. Repositorio de datos</a></li>
+<li><a href="#org5be9668">4.5.6. Formatos de datos de texto</a></li>
+<li><a href="#org9650caa">4.5.7. Limpieza y procesamiento de datos</a></li>
+<li><a href="#orgd90daf2">4.5.8. Python para el aprendizaje maquina</a></li>
+</ul>
+</li>
+<li><a href="#org3e249a4">4.6. Técnicas de codificación</a>
+<ul>
+<li><a href="#orgf8a596b">4.6.1. Tecnicas comunes:</a></li>
+</ul>
+</li>
+<li><a href="#org3465ee5">4.7. Aprendizaje supervisado</a>
+<ul>
+<li><a href="#orgdbe10d1">4.7.1. Flujo de aprendizaje supervisado</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4a4008b" class="outline-2">
+<h2 id="org4a4008b"><span class="section-number-2">1.</span> Informacion</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Maestro: David Martinez Galicia</li>
+<li>Materia: Aprendizaje Maquina</li>
+<li>Carrera: CIberseguridad e Infraestructura de Computo</li>
+<li>Contacto: davidmartinez02@uv.mx</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2c28a1a" class="outline-2">
+<h2 id="org2c28a1a"><span class="section-number-2">2.</span> Informacion</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orged65e56" class="outline-3">
+<h3 id="orged65e56"><span class="section-number-3">2.1.</span> Evaluacion</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>Examenes: 40%</li>
+<li>Tareas: 30%</li>
+<li>Proyecto: 30%</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgea29a26" class="outline-2">
+<h2 id="orgea29a26"><span class="section-number-2">3.</span> Temario</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>1. Introduccion</li>
+<li>2. Manejo de datos</li>
+<li>3. Aprendizaje supervisado</li>
+<li>4. Aprendizaje no supervisado</li>
+<li>5. Aprendizaje por refuerzo</li>
+<li>6. Evaluacion de modelos</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgba051f7" class="outline-2">
+<h2 id="orgba051f7"><span class="section-number-2">4.</span> Introduccion</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org4269fd2" class="outline-3">
+<h3 id="org4269fd2"><span class="section-number-3">4.1.</span> Inteligencia Artificial</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>Que es la inteligencia artificial?</li>
+<li>&ldquo;Cada aspecto de la inteligencia artificial puede ser descrito con suficiente precision que puede fabricarse una maquina para simularlo&rdquo;.</li>
+<li>El concepto existe desde 1956.</li>
+<li>Inteligencia artificial: Un enfoque moderno, Pearson Rusell, S. J., y Norving P. (2021).</li>
+<li>Concuerdan que la IA debe estudiar sistemas inteligentes.</li>
+<li>Caracteristicas para ser inteligentes:</li>
+</ul>
+</div>
+<div id="outline-container-org19eacbe" class="outline-4">
+<h4 id="org19eacbe"><span class="section-number-4">4.1.1.</span> Cognicion y comportamiento</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<ul class="org-ul">
+<li>Pensar (crear) -&gt; Humano</li>
+<li>Actuar (simular) -&gt; Racional</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgffa3a34" class="outline-3">
+<h3 id="orgffa3a34"><span class="section-number-3">4.2.</span> Tipos de sistemas</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li>Sistemas que piensan como humanos</li>
+<li>Sistemas que piensan racionalmente</li>
+<li>Sistemas que actuan como humanos</li>
+<li>Sistemas que actuan racionalmente</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc6545a5" class="outline-3">
+<h3 id="orgc6545a5"><span class="section-number-3">4.3.</span> Simulacion del comportamiento humano</h3>
+<div class="outline-text-3" id="text-4-3">
+<ul class="org-ul">
+<li>La prueba de Turing</li>
+<li>El sistema debe de poseer las siguientes capacidades:
+<ul class="org-ul">
+<li>Procesamiento de lenguaje natural</li>
+<li>Representacion del conocimiento</li>
+<li>Razonamiento automatico</li>
+<li>Aprendizaje maquina</li>
+</ul></li>
+<li>Para superar la prueba de Turing la computadora debe incluir:
+<ul class="org-ul">
+<li>Vision computacional para percibir objetos.</li>
+<li>Robotica para manipular y mover objetos.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3e64189" class="outline-3">
+<h3 id="org3e64189"><span class="section-number-3">4.4.</span> Aprendizaje Maquina</h3>
+<div class="outline-text-3" id="text-4-4">
+<ul class="org-ul">
+<li>Se refiere a un espectro de situaciones en las cuales un agente incrementa su conocimiento para cumplir una tarea.</li>
+<li>Machine Learning. Mitchell, T. M. (1997).</li>
+<li>Un programa de computadora aprende de la experiencia E, con respecto a alguna clase de tareas T y una medida de desempeno P, si su desempeno en las tareas T, medido por P, mejora con la experiencia E.</li>
+</ul>
+</div>
+<div id="outline-container-org5d3827a" class="outline-4">
+<h4 id="org5d3827a"><span class="section-number-4">4.4.1.</span> Tipos de aprendizajes</h4>
+<div class="outline-text-4" id="text-4-4-1">
+<ul class="org-ul">
+<li>Aprendizaje supervisado: Aprender una funcion a partir de ejemplos de sus entradas y sus salidas.
+<ul class="org-ul">
+<li>Clasificacion: Diagnostico de enfermedades.</li>
+<li>Regresion: Prediccion de la temperatura.</li>
+</ul></li>
+<li>Aprendizaje no supervisado: Aprender a partir de patrones de entradas que no tienen valores de salidas.
+<ul class="org-ul">
+<li>Agrupacion: Segmentacion de clientes.</li>
+<li>Reduccion de dimensionalidad: Visualizar datos.</li>
+<li>Estimacion de la densidad: Describir la altura de una poblacion.</li>
+</ul></li>
+<li>Aprendizaje por refuerzo: Aprender una forma de actuar usando un refuerzo (recompens o penalizacion)
+<ul class="org-ul">
+<li>Aprender politicas de accion: Actuar en un entorno.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org35020f0" class="outline-3">
+<h3 id="org35020f0"><span class="section-number-3">4.5.</span> Introduccion al manejo de datos</h3>
+<div class="outline-text-3" id="text-4-5">
+<ul class="org-ul">
+<li>La calidad de los datos determina la calidad del modelo.</li>
+<li>&ldquo;Garbage in, garbage out&rdquo;.</li>
+<li>Sin la preparacion adecuada de los datos, no hay aprendizaje efectivo.</li>
+<li>Transformamos datos crudos en patrones para la toma de decisiones.</li>
+<li>Datos limpios dectetan amenazas reales en ciberseguridad.</li>
+</ul>
+</div>
+<div id="outline-container-org7eed474" class="outline-4">
+<h4 id="org7eed474"><span class="section-number-4">4.5.1.</span> Datos estructurados</h4>
+<div class="outline-text-4" id="text-4-5-1">
+<ul class="org-ul">
+<li>Datos organizados en formato tabular con esquema definido.</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org5558ce0"></a>Caracteristicas:<br />
+<div class="outline-text-5" id="text-4-5-1-1">
+<ul class="org-ul">
+<li>Formate predecible.</li>
+<li>Tipos de datos definidos.</li>
+<li>Faciles de almacenar y consultar en bases de datos relacionales.</li>
+<li>Ejemplos:
+<ul class="org-ul">
+<li>Tablas SQL.</li>
+<li>Hojas de calculo Excel/CSV.</li>
+<li>Logs de sistemas con formatos fijo.</li>
+</ul></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org2e3913a" class="outline-4">
+<h4 id="org2e3913a"><span class="section-number-4">4.5.2.</span> Datos NO estructurados</h4>
+<div class="outline-text-4" id="text-4-5-2">
+<ul class="org-ul">
+<li>Datos sin formato predefinido ni organizacion tabular.</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org514e335"></a>Caracteristicas:<br />
+<div class="outline-text-5" id="text-4-5-2-1">
+<ul class="org-ul">
+<li>Sin esquema fijo.</li>
+<li>Requieren procedimiento previo para extraer informacion.</li>
+<li>Representan 80% de los datos empresariales,</li>
+<li>Ejemplos:
+<ul class="org-ul">
+<li>Texto.</li>
+<li>Imagenes y videos.</li>
+<li>Audio y grabaciones.</li>
+</ul></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org3e0c1fc" class="outline-4">
+<h4 id="org3e0c1fc"><span class="section-number-4">4.5.3.</span> Datos etiquetados</h4>
+<div class="outline-text-4" id="text-4-5-3">
+<ul class="org-ul">
+<li>Conjunto de datos donde cada ejemplo tiene una etiqueta/clase asociada.</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org31fb9f1"></a>Caracteristicas:<br />
+<div class="outline-text-5" id="text-4-5-3-1">
+<ul class="org-ul">
+<li>Requieren proceso manual o semi-automatico de etiquetado.</li>
+<li>Esenciales para entrenar modelos supervisados.</li>
+<li>Costosos de obtener y validar.</li>
+<li>Ejemplos:
+<ul class="org-ul">
+<li>Correos spam/no spam</li>
+<li>Imagenes de rostros con nombre de persona</li>
+</ul></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org92cea94" class="outline-4">
+<h4 id="org92cea94"><span class="section-number-4">4.5.4.</span> Datos NO etiquetados</h4>
+<div class="outline-text-4" id="text-4-5-4">
+<ul class="org-ul">
+<li>Datos sin categorias o respuestas conocidas.</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org3290f0c"></a>Caracteristicas:<br />
+<div class="outline-text-5" id="text-4-5-4-1">
+<ul class="org-ul">
+<li>Abundantes y faciles de recolectar.</li>
+<li>Requieren tecnicas de descubrimiento de patrones.</li>
+<li>Utiles para deteccion de anomalias.</li>
+<li>Ejemplos:
+<ul class="org-ul">
+<li>Trafico de red</li>
+<li>Comportamiento de usuario</li>
+<li>Codigo malicioso</li>
+</ul></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org8d7e165" class="outline-4">
+<h4 id="org8d7e165"><span class="section-number-4">4.5.5.</span> Repositorio de datos</h4>
+</div>
+<div id="outline-container-org5be9668" class="outline-4">
+<h4 id="org5be9668"><span class="section-number-4">4.5.6.</span> Formatos de datos de texto</h4>
+<div class="outline-text-4" id="text-4-5-6">
+<ul class="org-ul">
+<li>Los formatos de texto permiten almacenar y procesar datos eficientemente.</li>
+<li>Son los mas comunes para cargar en la mayoria de las herramientas</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org285fb57"></a>Tipos de datos de texto<br />
+<div class="outline-text-5" id="text-4-5-6-1">
+<ul class="org-ul">
+<li>CVS: Formato tabular simple y universalmente compatible.</li>
+<li>TSV: Similar al CSV, pero con tabulaciones como delimitador.</li>
+<li>JSON: Ligero yflexible para datos estructurados y anidados.</li>
+<li>XML: Formato estructurado y autodescriptivo, aunque verboso.</li>
+<li>ARFF: Incluye metadatos, usado comunmente en Weka.</li>
+<li>Texto plano: Sin formato, para datos sin estructura o documentos.</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org9650caa" class="outline-4">
+<h4 id="org9650caa"><span class="section-number-4">4.5.7.</span> Limpieza y procesamiento de datos</h4>
+<div class="outline-text-4" id="text-4-5-7">
+<ul class="org-ul">
+<li>Los datos del mundo real son inexactos, inconsistentes e incompletos.</li>
+<li>El procesamiento de datos asegura la integridad de los datos.</li>
+<li>Permite generar analisis confiables y conclusiones validas.</li>
+<li>Evita decisiones incorrectas o modelos ineficaces.</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgdb12b86"></a>FLujo de trabajo de limpieza y preprocesamiento<br />
+<div class="outline-text-5" id="text-4-5-7-1">
+<ul class="org-ul">
+<li>Recopilacion: Obtener datos de bases de datos, APIs o scraping.</li>
+<li>Limpieza: Corregir errores, eliminar duplicados y manejar valores faltantes.</li>
+<li>Integracion: Unir datos de multiples fuentes, resolviendo inconsistencias.</li>
+<li>Transformacion: Codificar, normalizar y crear nuevas variables.</li>
+<li>Reduccion: Seleccionar caracteristicaspara simplificar el analisis.</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgd90daf2" class="outline-4">
+<h4 id="orgd90daf2"><span class="section-number-4">4.5.8.</span> Python para el aprendizaje maquina</h4>
+<div class="outline-text-4" id="text-4-5-8">
+<ul class="org-ul">
+<li>Lenguaje preferido por su facilidad y bibliotecas especializados.</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgb21730c"></a>Bibliotecas importantes<br />
+<div class="outline-text-5" id="text-4-5-8-1">
+<ul class="org-ul">
+<li>Pandas: Manipulacion de datos.</li>
+<li>Numpy: Calculos numericos.</li>
+<li>SciPy: Computo cientifico, estadistica y senales.</li>
+<li>Matplotlib/Seaborn: Visualizacion de datos.</li>
+<li>Scikit-learn: Machine learning y preprocesamiento.</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org3e249a4" class="outline-3">
+<h3 id="org3e249a4"><span class="section-number-3">4.6.</span> Técnicas de codificación</h3>
+<div class="outline-text-3" id="text-4-6">
+<ul class="org-ul">
+<li>Las variables categóricas representan grupos categóricas.</li>
+<li>Algunos modelos de aprendizaje maquina requieren entradas numéricas.</li>
+<li>Transformar categorías en números para análisis y modelado.</li>
+</ul>
+</div>
+<div id="outline-container-orgf8a596b" class="outline-4">
+<h4 id="orgf8a596b"><span class="section-number-4">4.6.1.</span> Tecnicas comunes:</h4>
+<div class="outline-text-4" id="text-4-6-1">
+<ul class="org-ul">
+<li>One-Hot Encoding: Para categorías sin orden (ej: puerto de embarque).</li>
+<li>Label Encoding: Para categorías con orden (ej: nivel educativo).</li>
+<li>Puntuación Z: Es una medida estadistica que indica cuantas desviaciones estandar se encuentra por encima o por debajo de la medida de una distribución.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org3465ee5" class="outline-3">
+<h3 id="org3465ee5"><span class="section-number-3">4.7.</span> Aprendizaje supervisado</h3>
+<div class="outline-text-3" id="text-4-7">
+<ul class="org-ul">
+<li>Los humanos aprendemos de experiencias pasadas.</li>
+<li>Un nino aprende a identificar animales viendo ejemplos.</li>
+<li>La experiencia se acumula y permite generalizar.</li>
+<li>Una computadora no tiene expericencias. En su lugar, aprende de datos.</li>
+<li>Estos datos son ejemplos historicos con entradas y salidas conocidas.</li>
+<li>El objetivo es obtener una funcion que prediga salidas para nuevas entradas.</li>
+</ul>
+</div>
+<div id="outline-container-orgdbe10d1" class="outline-4">
+<h4 id="orgdbe10d1"><span class="section-number-4">4.7.1.</span> Flujo de aprendizaje supervisado</h4>
+<div class="outline-text-4" id="text-4-7-1">
+<ul class="org-ul">
+<li>Para generar un modelo se necesita un conjunto de datos, un algoritmo de aprendizaje y una forma de evaluarlo o interpretarlo.
+<ul class="org-ul">
+<li>Conjunto de datos</li>
+<li>Modelo supervisado: Existen mas de cientos cincuenta modelos clasificadores:
+<ul class="org-ul">
+<li>Regresion lineal.</li>
+<li>Redes neuronales.</li>
+<li>Redes bayesianas.</li>
+<li>Arboles de decision.</li>
+</ul></li>
+<li>Interpretacion/Evaluacion: Una vez obtenido el modelo, se puede:
+<ul class="org-ul">
+<li>Analizar el conocimiento o los patrones capturados.</li>
+<li>Medir su desempeno en datos no observados antes.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org427a608"></a>Datos en el aprendizaje supervisado<br />
+<div class="outline-text-5" id="text-4-7-1-1">
+<ul class="org-ul">
+<li>Un conjunto de datos compuesto por:
+<ul class="org-ul">
+<li>Una lista de registros (observaciones o ejemplos)</li>
+<li>Un conjunto de variables predictorias (caracteristicas o atributos)
+<ul class="org-ul">
+<li>Las variables cuantitativas se conocen como continuas o numericas.</li>
+<li>Las variables cualitativas se conocen como discretas o categoricas.</li>
+<li>Dentro de las categorias (cualitativas) existen las nominales y las ordinales.</li>
+</ul></li>
+<li>Una variable por predecir (dependiente, objetivo o clase).</li>
+</ul></li>
+<li>Si la variable objetivo es categorica se vuelve un problema de clasificacion.</li>
+<li>Si la variable objetivo es numerica se vuelve un problema de regresion.</li>
+</ul>
+</div>
+</li>
+<li><a id="orga4e7d48"></a>Modelos supervisados de aprendizaje<br />
+<div class="outline-text-5" id="text-4-7-1-2">
+<ul class="org-ul">
+<li>Un modelo es una funcion o teoria que se aprenda de los datos.</li>
+<li>Puede verse como una hipotesis sobre la relacion entre entradas y salidas.</li>
+<li>Se ajuta (entrena) un modelo usando un algoritmo de aprendizaje.</li>
+<li>El algorimo (metodo o tecnica) encuentra los <b>parametros</b> del modelo.</li>
+<li>Los algoritmos se configuran a traves de sus <b>hiperparametros</b>.</li>
+<li>Una vez entrenado, el modelo puede predecir salidas para nuevos datos.</li>
+
+<li>Si la variable objetivo es categorica, el modelo se llama <b>clasificador</b>.</li>
+<li>Si la variable objetivo es numerica, el modelo se llama de <b>regresion</b>.</li>
+</ul>
+</div>
+</li>
+<li><a id="orge756710"></a>Interpretacion y evaluacion de modelos.<br />
+<div class="outline-text-5" id="text-4-7-1-3">
+<ul class="org-ul">
+<li>Los modelos no solo predicen, tambien representan conocimiento.</li>
+<li>Ese conocimiento revela patrones sobre como se relacionan las variables.</li>
+<li>Es importante para tomar decisiones en situaciones complejas.</li>
+<li>Algunos modelos permiten interpretar ese conocimiento.</li>
+<li>Los modelos que no se pueden interpretar se denominan de caja negra.</li>
+<li>Evaluar un modelo es tan importante como entrenarlo.</li>
+<li>La evaluacion determina si el modelo es confiable o debe sustituirse.</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Abraham Nunez</p>
+<p class="date">Created: 2026-03-04 mié 07:53</p>
+</div>
+</body>
+</html>

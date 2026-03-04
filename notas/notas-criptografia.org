@@ -246,4 +246,12 @@ md5hasher.hexdigest()
 
 *** Seguridad en funciones de hash
 - Hash es usado para el almacenamiento de passwords
--
+
+*** Cifradores de bloque y de flujo
+- AES puede operar como cifrador de flujo, basta con usar un modo de AES
+
+*** Modo de operacion de AES
+- AES tiene diversos modos de operacion, en este tema nos concentraremos en 3:
+  - Electronic code book (ECB) (No usar nunca)
+  - Cipher block chaining (CBC)
+  - Counter mode (CTR)

@@ -138,7 +138,6 @@
 - Matplotlib/Seaborn: Visualizacion de datos.
 - Scikit-learn: Machine learning y preprocesamiento.
 
-<<<<<<< Updated upstream
 ** Técnicas de codificación
 - Las variables categóricas representan grupos categóricas.
 - Algunos modelos de aprendizaje maquina requieren entradas numéricas.
@@ -147,6 +146,75 @@
 *** Tecnicas comunes:
 - One-Hot Encoding: Para categorías sin orden (ej: puerto de embarque).
 - Label Encoding: Para categorías con orden (ej: nivel educativo).
-=======
 - Puntuación Z: Es una medida estadistica que indica cuantas desviaciones estandar se encuentra por encima o por debajo de la medida de una distribución.
->>>>>>> Stashed changes
+
+** Aprendizaje supervisado
+- Los humanos aprendemos de experiencias pasadas.
+- Un nino aprende a identificar animales viendo ejemplos.
+- La experiencia se acumula y permite generalizar.
+- Una computadora no tiene expericencias. En su lugar, aprende de datos.
+- Estos datos son ejemplos historicos con entradas y salidas conocidas.
+- El objetivo es obtener una funcion que prediga salidas para nuevas entradas.
+
+*** Flujo de aprendizaje supervisado
+- Para generar un modelo se necesita un conjunto de datos, un algoritmo de aprendizaje y una forma de evaluarlo o interpretarlo.
+  - Conjunto de datos
+  - Modelo supervisado: Existen mas de cientos cincuenta modelos clasificadores:
+    - Regresion lineal.
+    - Redes neuronales.
+    - Redes bayesianas.
+    - Arboles de decision.
+  - Interpretacion/Evaluacion: Una vez obtenido el modelo, se puede:
+    - Analizar el conocimiento o los patrones capturados.
+    - Medir su desempeno en datos no observados antes.
+
+**** Datos en el aprendizaje supervisado
+- Un conjunto de datos compuesto por:
+  - Una lista de registros (observaciones o ejemplos)
+  - Un conjunto de variables predictorias (caracteristicas o atributos)
+    - Las variables cuantitativas se conocen como continuas o numericas.
+    - Las variables cualitativas se conocen como discretas o categoricas.
+    - Dentro de las categorias (cualitativas) existen las nominales y las ordinales.
+  - Una variable por predecir (dependiente, objetivo o clase).
+- Si la variable objetivo es categorica se vuelve un problema de clasificacion.
+- Si la variable objetivo es numerica se vuelve un problema de regresion.
+
+**** Modelos supervisados de aprendizaje
+- Un modelo es una funcion o teoria que se aprenda de los datos.
+- Puede verse como una hipotesis sobre la relacion entre entradas y salidas.
+- Se ajuta (entrena) un modelo usando un algoritmo de aprendizaje.
+- El algorimo (metodo o tecnica) encuentra los *parametros* del modelo.
+- Los algoritmos se configuran a traves de sus *hiperparametros*.
+- Una vez entrenado, el modelo puede predecir salidas para nuevos datos.
+
+- Si la variable objetivo es categorica, el modelo se llama *clasificador*.
+- Si la variable objetivo es numerica, el modelo se llama de *regresion*.
+
+**** Interpretacion y evaluacion de modelos.
+- Los modelos no solo predicen, tambien representan conocimiento.
+- Ese conocimiento revela patrones sobre como se relacionan las variables.
+- Es importante para tomar decisiones en situaciones complejas.
+- Algunos modelos permiten interpretar ese conocimiento.
+- Los modelos que no se pueden interpretar se denominan de caja negra.
+- Evaluar un modelo es tan importante como entrenarlo.
+- La evaluacion determina si el modelo es confiable o debe sustituirse.
+
+**** Modelo de regresion lineal
+- Describe la relacion entre la variable independiente y una dependiente.
+- Asume que dicha relacion puede representarse mediante una linea recta.
+- Permite predecir valores continuos a partir de un solo atributo.
+- Es el puntaje de partida para entender las tareas de regresion.
+- y = mx + b (Funcion de una recta).
+- y = O(0) + 0(1)^x
+  - y: valor predicho por el modelo
+  - x: variable independiente
+  - O(0): intercepto que representa el valor de y cuando x = 0
+  - O(1): pendiente que representa el cambio en y por cada unidad en x.
+- El objetivo del modelo es que y sea lo mas cercano posible a y.
+- El modelo define una familia de todas las lineas posibles.
+- Los parametros 0 = [O(0), O(1)]^T determinen la linea especifica.
+- Funcion de perdida (Loss Function): Mide que tan mal se ajusta el modelo a los datos.
+  - Para cada punto, calculamos el error: diferencia entre el valor real y predicho.
+  - Se usa el error cuadratico para que la direccion no importe.
+  - La perdida total es la suma de errores cuadraticos (SSE).
+Agregar una imagen con la formula
