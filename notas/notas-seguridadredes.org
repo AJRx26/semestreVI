@@ -126,3 +126,6 @@
 **** Palabras clave
 - Host: Equivale a una mascara wildcard 0.0.0.0
 - Any: Equivale a una mascara wildcard 255.255.255.255
+
+** VPN's
+- Las organizanciones usan redes privadas virtuales (VPN) para crear conexiones de red privada de extremo a extremo. Una VPN es virtual porque transporta la información dentro de una red privada, pero en realidad, esa información se transporta usando una red publica.
