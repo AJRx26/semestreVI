@@ -10,14 +10,28 @@ header {
     /* background-color: #18529D; Azul institucional */
     background-color: #F7B32BFF;
     color: white;
-    padding: 16px 20px; /* 16 px  arriba/abajo, 20px izquierda/derecha */
+    padding: 10px 20px; /* 16 px  arriba/abajo, 20px izquierda/derecha */
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+}
+
+.header-info {
+    margin-left: 20px;
+}
+
+nav {
+    display: flex;
+    gap: 14px;
 }
 
 #logo-fei {
-    width: 110px;
+    width: 180px;
     height: auto;
-    display: inline-blocks; /* Aparecera en la misma linea que otros elementos en linea o en bloque */
-    vertical-align: middle;
+    /* display: inline-block; Aparecera en la misma linea que otros elementos en linea o en bloque */
+    /* vertical-align: middle; */
     margin-right: 12px;
 }
 
