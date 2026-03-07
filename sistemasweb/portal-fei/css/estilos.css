@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f9;
+    line-height: 1.5;
+}
+
+header {
+    background-color: #18529D; /* Azul institucional */
+    color: white;
+    padding: 16px 20px; /* 16 px  arriba/abajo, 20px izquierda/derecha */
+}
+
+#logo-fei {
+    width: 110px;
+    height: auto;
+    display: inline-blocks; /* Aparecera en la misma linea que otros elementos en linea o en bloque */
+    vertical-align: middle;
+    margin-right: 12px;
+}
+
+#titulo-portal {
+    color: #28AD56; /* Verde institucional */
+    margin-top: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 14px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #28AD56; /* Verde institucional al pasar el mouse */
+    text-decoration: underline;
+}
+
+main section {
+    background-color: white;
+    margin: 18px 20px;
+    padding: 18px;
+    border-radius: 6px; /* Permite agregar esquinas redondeadas a los elementos, define el radio de las esquinas */
+}
+
+h2 {
+    color: #18529D;
+    margin-top: 0;
+}
+
+.aviso {
+    border-left: 5px solid #28AD56;
+    padding-left: 12px;
+    margin-bottom: 14px;
+}
+
+aside {
+    border: 2px solid #18529D;
+    border-radius: 6px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Bordes sencillos */
+    margin-top: 10px;
+}
+
+caption {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #18529D;
+}
+
+th, td {
+    border: 1px solid #d0d7de;
+    padding: 10px;
+    text-align: left;
+}
+
+thead th {
+    background-color: #18529D;
+    color: white;
+}
+
+form {
+    margin-top: 10px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    border: 1px solid #c8d2dc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #28AD56;
+    color: white;
+    font-weight: bold;
+}
+
+footer {
+    background-color: #18529D;
+    color: white;
+    padding: 16px 20px; /* 16px arriba/abajo, 20px izquierda/derecha */
+    margin-top: 20px;
+}
+
+footer a {
+    color: #28AD56;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

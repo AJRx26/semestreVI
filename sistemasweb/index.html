@@ -81,10 +81,172 @@
                         <ul>
                             <li><a href="#">Reglamento de laboratorios</a></li>
                             <li><a href="#">Calendario academico</a></li>
-                            <li><a href="#">Diccionario</a></li>
-                        </ul>
-                    </section>
+                            <li><a href="#">Directorio</a></li>	
+					    </ul>
+				    </section>
+				
+				    <section aria-label="Accesibilidad">
+					    <h3>Accesibilidad</h3>
+					    <p>
+						Este portal busca seguir buenas prácticas de accesibilidad: estructura semántica, textos alternativos
+						y formularios con etiquetas claras.
+					    </p>
+					
+				    </section>
+			    </aside>
+		    </section>
 
+		    <!-- SERVICIOS -->
+		    <section id="servicios" aria-labelledby="servicios-titulo">
+			    <h2 id="servicios-titulo">Servicios</h2>
+			    <p>Servicios disponibles para estudiantes, docentes y personal administrativo.</p>
+
+			    <article aria-labelledby="servicio-1">
+				    <h3 id="servicio-1">Mesa de ayuda</h3>
+				    <p>Atención de incidentes: conectividad, cuentas, software, periféricos y aulas.</p>
+			    </article>
+			    <article aria-labelledby="servicio-2">
+				    <h3 id="servicio-2">Prestamos y resguardo de equipo</h3>
+				    <p>Solicitud, control y seguimiento de préstamos temporales de equipo.</p>
+			    </article>
+
+			    <article aria-labelledby="servicio-3">
+				    <h3 id="servicio-3">Acceso a laboratorios</h3>
+				    <p>Políticas de uso, horarios, lineamientos y buenas prácticas de seguridad.</p>
+			    </article>
+		    </section>
+		
+		    <!-- HORARIOS / TABLA -->
+		    <section id="horarios" aria-labelledby="horarios-titulo">
+			    <h2 id="horarios-titulo">Horarios de atención</h2>
+			    <p>Horarios referenciales. Confirma cambios en avisos.</p>
+			
+			    <table>
+				    <caption>Horario de atención por servicio</caption>
+				    <thead>
+					    <tr>
+						    <th scope="col">Servicio</th>
+						    <th scope="col">Dias</th>
+						    <th scope="col">Horario</th>
+						    <th scope="col">Ubicacion</th>
+					    </tr>
+				    </thead>
+				    <tbody>
+					    <tr>
+						    <td>Mesa de ayuda</td>
+						    <td>Lunes a viernes</td>
+						    <td>09:00-18:00</td>
+						    <td>Edificio A Planta baja</td>
+					    </tr>
+					    <tr>
+						    <td>Laboratorios</td>
+						    <td>Lunes a sábado</td>
+						    <td>07:00-20:00</td>
+						    <td>Edificio B Aulas de cómputo</td>
+					    </tr>
+					    <tr>
+						    <td>Préstamo de equipo</td>
+						    <td>Lunes a viernes</td>
+						    <td>10:00-14:00</td>
+						    <td>Centro de Cómputo</td>
+					    </tr>
+				    </tbody>
+			    </table>
+		    </section>
+		
+		    <!-- INDICADORES (LISTAS -->
+		    <section id="indicadores" aria-labelledby="indicadores-titulo">
+			    <h2 id="indicadores-titulo">Indicadores</h2>
+			    <p>Ejemplos de indicadores que después se podrán cargar con JSON/AJAX.</p>
+
+			    <section aria-label="Indicadores operativos">
+				    <h3>Operativos</h3>
+				    <ul>
+					    <li>Incidentes atendidos (mensual)</li>
+					    <li>Tiempo promedio de atención</li>
+					    <li>Disponibilidad de laboratorios</li>
+				    </ul>
+			    </section>
+			
+			    <section aria-label="Indicadores de infraestructura">
+				    <h3>Infraestructura</h3>
+				    <ol>
+					    <li>Uso de red por laboratorio</li>
+					    <li>Equipos en mantenimiento</li>
+					    <li>Actualizaciones aplicadas</li>
+				    </ol>
+			    </section>
+		    </section>
+
+		<!-- CONTACTO / FORMULARIO -->	
+		<section id="contacto" aria-labelledby="contacto-titulo">
+			<h2 id="contacto-titulo">Contacto y reporte de incidente</h2>
+			<p>Completa el formulario para registrar una solicitud. (En proximas clases se validará con JavaScript.)</p>
+			
+			<form action="#" method="post" aria-label="Formulario de contacto">
+				<fieldset>
+					<legend>Datos del solicitante</legend>
+					
+					<p>
+						<label for="nombre">Nombre completo</label><br>
+						<input type="text" id="nombre" name="nombre" required>
+					</p>
+					
+					<p>
+						<label for="correo">Correo institucional</label><br>
+						<input type="email" id="correo" name="correo" required>
+					</p>
+					
+					<p>
+						<label for="rol">Rol</label><br>
+						<select id="rol" name="rol" required>
+						<option value="">Selecciona una opción</option>
+						<option value="estudiante">Estudiante</option>
+						<option value="docente">Docente</option>
+						<option value="administrativo">Administrativo</option>	
+					</select>
+				</p>
+		    	</fieldset>
+
+		    	<fieldset>
+		    		<legend>Detalle del incidente</legend>
+		    		
+		    		<p>
+		    			<label for="tipo">Tipo de solicitud</label><br>
+		    			<select id="tipo" name="tipo" required>
+		    				<option value="">Selecciona una opción</option>
+		    				<option value="red">Red / Internet</option>
+		    				<option value="cuenta">Cuenta / Acceso</option>
+		    				<option value="software">Software</option>
+		    				<option value="equipo">Equipo / Periféricos</option>
+		    				<option value="otro">Otro</option>
+		    			</select>
+		    		</p>
+		    		
+		    		<p>
+		    			<label for="descripcion">Descripción</label><br>
+		    			<textarea id="descripcion" name="descripcion" rows="5" required></textarea>
+		    		</p>
+
+		    		<p>
+		    			<button type="submit">Enviar</button>
+		    			<button type="reset">Limpiar</button>
+		    		</p>
+		    	</fieldset>
+		    </form>
+		</section>
+	</main>
+
+	      <footer>
+		        <p><strong>Centro de Cómputo</strong>Facultad de Estádistica e Informática</p>
+		            <p>
+			              <a href="#">Aviso de privacidad</a>
+			              <a href="#">Términos de uso</a>
+		            </p>
+		        <p>2026 Universidad Veracruzana</p>
+	      </footer>
+    </body>
+</html>
 
     </body>
 </html>
