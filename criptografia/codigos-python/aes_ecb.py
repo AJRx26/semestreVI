@@ -4,12 +4,13 @@ from cryptography.hazmat.backends import default_backend
 import os
 import argparse
 import base64
+
 chunk_size = 1024
 BLOCK_SIZE = 16
 
 def generar_padding(padding_size: int) -> bytes:
     """
-    Función para generar padding de cierta longitud.
+    Función para generar padding de x longitud.
 
     padding_size: int
     returns: bytes 
@@ -20,23 +21,32 @@ def generar_padding(padding_size: int) -> bytes:
     byte_len_padding = bytes([padding_size])
     return b'0' * (padding_size - 1) + byte_len_padding
 
+def cifrar_bmp(archivo_entrada: str, archivo_salida: str ,llave : bytes) -> None:
+    """
+    Funcion para cifrar el archivo BMP usando ECB, ignorando los primeros 54 bytes.
+    Este script esta basado en otro script realizado en clase.
 
-def modificar_bmp(archivo_entrada: str, archivo_salida: str ,llave : bytes) -> None:
+    archivo_entrada: str
+    archivo_salida: str
+    llave: bytes
 
-    aesCipher = Cipher(algorithms.AES(llave),
-                     modes.ECB(),
-                     backend=default_backend)
+    returns: None
+    """
+
+    # Se crea el cifrador
+    aesCipher = Cipher(algorithms.AES(llave), modes.ECB(), backend=default_backend())
     aesEncryptor = aesCipher.encryptor()
 
-    with open(archivo_entrada, 'rb') as bmp:
-        encabezada = bmp.read(54)
-        chunk = bmp.read(chunk_size)
+    with open(archivo_entrada, 'rb') as entrada:
+        # Se escriben los primeros 54 bytes
+        encabezado = entrada.read(54)
+        chunk = entrada.read(chunk_size)
         with open(archivo_salida, 'wb') as salida:
-            salida.write(encabezada)
+            salida.write(encabezado)
             while len(chunk) == chunk_size:
                 cifrado = aesEncryptor.update(chunk)   
                 salida.write(cifrado)
-                chunk = bmp.read(chunk_size)
+                chunk = entrada.read(chunk_size)
 
             bytes_finales_cubiertos = len(chunk) % BLOCK_SIZE
             padding_size = BLOCK_SIZE - bytes_finales_cubiertos
@@ -45,7 +55,7 @@ def modificar_bmp(archivo_entrada: str, archivo_salida: str ,llave : bytes) -> N
             aesEncryptor.finalize()
             salida.write(cifrado)
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     all_args =  argparse.ArgumentParser()
     all_args.add_argument("-i", "--input", help="Archivo de entrada", required=True)
     all_args.add_argument("-o", "--output", help="Archivo de salida", required=True)
@@ -57,4 +67,4 @@ if _name_ == '_main_':
         print('La llave de entrada debe ser de 16 bytes')
         exit(1)
 
-    modificar_bmp(args['input'], args['output'], llave)
+    cifrar_bmp(args['input'], args['output'], llave)
