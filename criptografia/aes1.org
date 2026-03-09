@@ -1,0 +1,353 @@
+#+title: AES
+
+
+* ECB
+
+- Se necesita un objeto para cifrar y otro para descifrar
+- Notar que los métodos =update= tanto del cifrador como del descifrador
+  permiten procesar bloques de 16 bytes de forma independiente
+- Lo anterior permite procesar archivos grandes bloque por bloque
+- Es necesario llamar a finalize como buena práctica  
+
+#+begin_src python :session *py* :results output :exports both :tangled /tmp/test.py
+  import os
+  from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+  from cryptography.hazmat.backends import default_backend
+
+  key = os.urandom(16) # 16 o 32 bytes
+  aesCipher = Cipher(algorithms.AES(key),
+                     modes.ECB(),
+                     backend = default_backend)
+  aesEncryptor = aesCipher.encryptor()
+  datos = b'datos a cifrar..' # tienen que ser 16 bytes
+  cifrado = aesEncryptor.update(datos)
+  aesEncryptor.finalize()
+  print(cifrado)
+
+  aesDecryptor = aesCipher.decryptor()
+  plano = aesDecryptor.update(cifrado)
+  aesDecryptor.finalize()
+  print(plano)
+#+end_src
+
+#+RESULTS:
+: b'I1\xb4\r5\xe9?\xc0\xbav\xad\xc6\xb0\x12\xa0\x00'
+: b'datos a cifrar..'
+
+- El método =update= tiene un comportamiento especial de acuerdo al
+  tamaño de entrada que recibe
+- Si se le pasan más bytes que el tamaño de bloque, procesa
+  tanto bloques como es posible regresando el resultado del proceso
+  (cifrar o descifrar)
+- Si sobran byes que no completan un bloque, entonces eso bytes los
+  deja en un buffer interno, la próxima vez que se vuelva a invocar a
+  =update= los considera en el siguiente bloque
+- =finalize= sirve para saber si se pudo procesar todo lo que se
+  esperaba cifrar, esto es, si no quedaron bytes en el buffer interno
+  sin procesar, de haber bytes sobrantes se lanza una excepción
+- Por lo anterior es necesario asegurarse que la longitud de la cadena
+  de bytes a procesar sea un múltiplo de la longitud del bloque (16 en
+  el caso del ejemplo)
+
+  #+RESULTS:
+  : 39
+  : 32
+
+  #+begin_src python :session *py* :results output :exports both :tangled /tmp/test.py
+    aesEncryptor = aesCipher.encryptor()
+    datos = b'datos a cifrar que se pasan de 16 bytes'
+    res = aesEncryptor.update(datos)
+    print(len(datos))
+    print(len(res)) # se quedaron 7 bytes en el buffer
+    sobrante = aesEncryptor.update(b'000000000') #padding
+    aesEncryptor.finalize()
+    print(sobrante)
+  #+end_src
+
+  #+RESULTS:
+  : 39
+  : 32
+  : b'GW\xad`\x8fqOQ\x1d{\x1d\x90pY\xbf\xfa'
+
+** Ataque de texto plano escogido
+
+#+begin_src python :session ataque :results output :exports both :tangled /tmp/test.py
+  import os
+  from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+  from cryptography.hazmat.backends import default_backend
+
+  key = os.urandom(16)
+  aesCipher = Cipher(algorithms.AES(key),
+                     modes.ECB(),
+                     backend = default_backend)
+
+
+  mensaje1 = '''
+  De: paquito
+  Para: pepe
+  Asunto: Saludos
+  Fecha: 01/03/2022
+
+  Ataca al medio día..
+  '''
+
+  mensaje2 = '''
+  De: pepe
+  Para: paquito
+  Asunto: Saludos
+  Fecha: 01/03/2022
+
+  Atacaré mejor mañana
+  '''
+
+  aesEncryptor1 = aesCipher.encryptor()
+  aesEncryptor2 = aesCipher.encryptor()
+
+  cifrado1 = aesEncryptor1.update(mensaje1.encode('utf-8'))
+  cifrado2 = aesEncryptor2.update(mensaje2.encode('utf-8'))
+
+  print(len(cifrado1))
+  print(len(cifrado2))
+
+  print(list(cifrado1))
+  print(list(cifrado2))
+
+  valores1 = list(cifrado1)
+  valores2 = list(cifrado2)
+
+  valores3 = valores1[:-16] + valores2[-16:] + valores1[-16:]
+  cifrado3 = bytes(valores3)
+
+  aesDecryptor1 = aesCipher.decryptor()
+  aesDecryptor2 = aesCipher.decryptor()
+  aesDecryptor3 = aesCipher.decryptor()
+
+  print('Mensaje 1:')
+  print(aesDecryptor1.update(cifrado1).decode('utf-8'))
+  print()
+
+  print('Mensaje 2:')
+  print(aesDecryptor1.update(cifrado2).decode('utf-8'))
+  print()
+
+  print('Mensaje 3:')
+  print(aesDecryptor1.update(cifrado3).decode('utf-8'))
+  print()
+
+
+#+end_src
+
+#+RESULTS:
+#+begin_example
+80
+80
+[191, 36, 71, 23, 16, 52, 3, 109, 121, 22, 178, 91, 167, 23, 142, 82, 124, 231, 219, 94, 157, 215, 228, 247, 188, 80, 130, 153, 161, 10, 175, 194, 104, 75, 118, 126, 26, 227, 180, 218, 197, 43, 83, 223, 113, 49, 180, 243, 11, 96, 172, 182, 48, 11, 95, 239, 161, 50, 49, 243, 201, 152, 195, 72, 195, 67, 117, 165, 210, 11, 108, 211, 46, 149, 92, 115, 179, 70, 202, 111]
+[25, 174, 19, 183, 191, 85, 123, 58, 55, 148, 85, 17, 199, 137, 172, 248, 138, 105, 97, 48, 135, 175, 69, 107, 154, 190, 154, 148, 116, 139, 100, 112, 104, 75, 118, 126, 26, 227, 180, 218, 197, 43, 83, 223, 113, 49, 180, 243, 11, 96, 172, 182, 48, 11, 95, 239, 161, 50, 49, 243, 201, 152, 195, 72, 6, 207, 37, 201, 245, 55, 50, 244, 141, 137, 81, 237, 108, 189, 180, 78]
+Mensaje 1:
+
+De: paquito
+Para: pepe
+Asunto: Saludos
+Fecha: 01/03/2022
+
+Ataca al medio día..
+
+Mensaje 2:
+
+De: pepe
+Para: paquito
+Asunto: Saludos
+Fecha: 01/03/2022
+
+Atacaré mejor mañan
+
+Mensaje 3:
+
+De: paquito
+Para: pepe
+Asunto: Saludos
+Fecha: 01/03/2022
+
+Atacaré mejor mañan al medio día..
+#+end_example
+
+
+* CBC
+
+#+begin_src python :session *py* :results output :exports both :tangled /tmp/test.py
+  import os
+  from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+  from cryptography.hazmat.backends import default_backend
+
+  #key = os.urandom(16) # 16 o 32 bytes
+  key = b'7' * 16
+  iv = os.urandom(16)
+
+  aesCipher = Cipher(algorithms.AES(key),
+                     modes.CBC(iv),
+                     backend = default_backend)
+  aesEncryptor = aesCipher.encryptor()
+  datos = b'datos a cifrar..' # 16 bytes
+  cifrado = aesEncryptor.update(datos)
+  aesEncryptor.finalize()
+  print(cifrado)
+
+  aesDecryptor = aesCipher.decryptor()
+  plano = aesDecryptor.update(cifrado)
+  aesDecryptor.finalize()
+  print(plano)
+#+end_src
+
+#+RESULTS:
+: b'q\x83-L\xa8d-\x80\x96juA+R\xa0\x04'
+: b'datos a cifrar..'
+
+** Padding apropiado
+- También basado en =update= y =finalize=
+- Sólo finalize agrega padding update es sólo para rellenar el buffer interno 
+- Si se quiere utilizar en un ciclo:
+  + Antes de cifra usa padder.update
+  + El resultado de update es lo que se cifra
+  + Al final del ciclo cifra lo que entregue como resultado finalize
+- Para quitar el padding es lo mismo pero con un objeto unpadder
+  
+#+begin_src python :session *py* :results output :exports both :tangled /tmp/test.py
+  from cryptography.hazmat.primitives import padding
+
+  padder = padding.PKCS7(128).padder()
+  unpadder = padding.PKCS7(128).unpadder()
+
+  entrada = b'hola'
+  c = padder.update(entrada)
+  print(c)
+
+  c = padder.update(b'7' * 12)
+  print(c)
+
+  c += padder.finalize()
+  print(c)
+  print(len(c))
+
+#+end_src
+
+#+RESULTS:
+: b''
+: b'hola777777777777'
+: b'hola777777777777\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10'
+: 32
+
+
+* CTR
+
+- No se necesita padding por lo que se pueden procesar datos planos de
+  cualquier tamaño sin preocuparnos
+- =finalize= ya no hace nado pero es buena práctica invocarlo 
+
+#+begin_src python :session *py* :results output :exports both :tangled /tmp/test.py
+  import os
+  from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+  from cryptography.hazmat.backends import default_backend
+
+  key = os.urandom(16) # 16 o 32 bytes
+  iv = os.urandom(16)
+  aesCipher = Cipher(algorithms.AES(key),
+                     modes.CTR(iv),
+                     backend = default_backend)
+  aesEncryptor = aesCipher.encryptor()
+  datos = b'datos a cifrar' # 14 bytes, sin problema
+  cifrado = aesEncryptor.update(datos)
+  aesEncryptor.finalize()
+  print(cifrado)
+
+  aesDecryptor = aesCipher.decryptor()
+  plano = aesDecryptor.update(cifrado)
+  aesDecryptor.finalize()
+  print(plano)
+
+#+end_src
+
+#+RESULTS:
+: b'\xf6b\xc0\xc1-\x8f]\xfc-\xc28\xde\xcft'
+: b'datos a cifrar'
+
+** Ataque de reuso de IV y llave
+
+#+begin_src python :session *ataque* :results output :exports both :tangled /tmp/test.py
+
+  import os
+  from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+  from cryptography.hazmat.backends import default_backend
+
+  def calcualar_xor(binario1, binario2):
+      'Calcular xor de dos cadenas'
+
+      bytes1 = list(binario1)
+      bytes2 = list(binario2)
+
+      longitud_menor = len(bytes1)
+      lista_mas_larga = bytes2
+      if len(bytes2) < longitud_menor:
+          longitud_menor = len(bytes2)
+          lista_mas_larga = bytes1
+
+      res_bytes = []
+
+      for i in range(longitud_menor):
+          res_bytes.append(bytes1[i] ^ bytes2[i])
+
+      return bytes(res_bytes) + bytes(lista_mas_larga[longitud_menor:])
+
+  key = os.urandom(16) # 16 o 32 bytes
+  iv = os.urandom(16)
+  aesCipher = Cipher(algorithms.AES(key),
+                     modes.CTR(iv),
+                     backend = default_backend)
+
+
+  # atacante
+  aesEncryptor = aesCipher.encryptor()
+  plano_atacante = ''' # el atacante conoce el texto plano
+  <XML>
+  <CredictCardPurchase>
+  <Merchant>Acme Inc</Merchant>
+    <Buyer>John Smith</Buyer>
+    <Date>01/01/2001</Date>
+    <Amount>$100.00</Amount>
+    <CCNumber>555-555-555-555</CCNumber>
+  </CredictCardPurchase>
+  </XML>
+  '''
+
+  cifrado_atacante = aesEncryptor.update(plano_atacante.encode('utf-8'))
+  aesEncryptor.finalize()
+
+  key_stream = calcualar_xor(plano_atacante.encode('utf-8'), cifrado_atacante)
+
+  print(key_stream)
+
+  # Víctima
+  aesEncryptor = aesCipher.encryptor() # se está reusando misma llave e iv
+
+  plano_victima = '''
+  <XML>
+  <CredictCardPurchase>
+  <Merchant>Acme Inc</Merchant>
+    <Buyer>Pepe Pecas</Buyer>
+    <Date>10/02/2001</Date>
+    <Amount>$340.00</Amount>
+    <CCNumber>777-777-777-777</CCNumber>
+  </CredictCardPurchase>
+  </XML>
+  '''
+
+  cifrado_victima = aesEncryptor.update(plano_victima.encode('utf-8')) # el atacante puede recuperar con sniffing
+
+
+  # recuperar plano víctima
+  original = calcualar_xor(key_stream, cifrado_victima)
+  print(original)
+#+end_src
+
+#+RESULTS:
+: b'\x1a7uH\xa8\x9a\xa1v\xcf`\xf7/\x0e\x85B\xbf\x94\x9d`\xd7N\xc1\\/\xf5\xe5+\xf0\x04\x9e\x81\xda\xc3\x01\xf5\xe8aYa\xea\x8c\xeeb^2\xa3]O<rq\x80S\x04f\xfe\xa9\xd1\xca\x97\xbfq\xdd\xf0\x891\x01 r\xd7\xcb\x8f\xbb\xdc\xc0\xa8\xec\xf1U\x93u\xed"\xa6<Z`BC\x8d\x91\x7f\x06\x94\xca\xe6\xe2R\xbb\x10,\xe8\xb9\x08~u\xf3\x96:\xbeV-\xbf|\x18\x9c\xc8#\x8c\x88g\xaaX\x87G\x98\xd96\xa7)z\xfck\xd6\x0b\xdfe\xae\xbc\xf0\xf9\xe8\xc2\x83\xa9\tgoSp\x89\xbd\x8e])\x145D5(\xb1{\xa1\xd5L8d\xb7\xbcKB\x82\x8e\x07\x1f/\xc6d\xdc\xb3l\x1f\xd3M#\x15RC"R\x00\x9aL\x08d\xbcf\xb57\xb8\x8an`\xbd\x17T\tY\xa3|\xa7\\*5o\x8c\x10mb,gb\x8cQD\xf4\xb0\r\\0%\x0c\x06a3\x7f\xf8\xc9\xb9.\xca\x16\xfa\x08\xac'
+: b'\n<XML>\n<CredictCardPurchase>\n<Merchant>Acme Inc</Merchant>\n  <Buyer>Pepe Pecas</Buyer>\n  <Date>10/02/2001</Date>\n  <Amount>$340.00</Amount>\n  <CCNumber>777-777-777-777</CCNumber>\n</CredictCardPurchase>\n</XML>\n|\xa7\\*5o\x8c\x10mb,gb\x8cQD\xf4\xb0\r\\0%\x0c\x06a3\x7f\xf8\xc9\xb9.\xca\x16\xfa\x08\xac'
