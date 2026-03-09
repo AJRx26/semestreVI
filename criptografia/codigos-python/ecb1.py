@@ -67,9 +67,10 @@ def descifrar(archivo_entrada: str, archivo_salida: str, llave: bytes) -> None:
     aesCipher = Cipher(algorithms.AES(llave), modes.ECB(), backend=default_backend())
     aesDecryptor = aesCipher.decryptor()
 
-    # Varaible para ir un leer el chunk anterior
+    # Guarda el chunk anterior
     chunk_anterior = None
 
+    # Procesa todos los chunk pero no escribe el ultimo hasta eliminar el padding
     with open(archivo_salida, "wb") as salida:
         with open(archivo_entrada, "rb") as entrada:
             chunk = entrada.read(CHUNK_SIZE)
@@ -82,6 +83,7 @@ def descifrar(archivo_entrada: str, archivo_salida: str, llave: bytes) -> None:
                 chunk_anterior = descifrado
                 chunk = entrada.read(CHUNK_SIZE)
 
+            # Procesa el ultimo chunk incompleto
             if len(chunk) > 0:
                 descifrado = aesDecryptor.update(chunk)
 
@@ -91,6 +93,7 @@ def descifrar(archivo_entrada: str, archivo_salida: str, llave: bytes) -> None:
 
             aesDecryptor.finalize()
 
+            # Si el chunk anterior esta vacio, no hay nada que escribir
             if chunk_anterior is None:
                 return
 
