@@ -33,13 +33,15 @@ def cifrar_bmp(archivo_entrada: str, archivo_salida: str ,llave : bytes) -> None
     returns: None
     """
 
+    encabezado = 54
+
     # Se crea el cifrador
     aesCipher = Cipher(algorithms.AES(llave), modes.ECB(), backend=default_backend())
     aesEncryptor = aesCipher.encryptor()
 
     with open(archivo_entrada, 'rb') as entrada:
         # Se escriben los primeros 54 bytes
-        encabezado = entrada.read(54)
+        encabezado = entrada.read(encabezado)
         chunk = entrada.read(chunk_size)
         with open(archivo_salida, 'wb') as salida:
             salida.write(encabezado)

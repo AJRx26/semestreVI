@@ -255,3 +255,9 @@ md5hasher.hexdigest()
   - Electronic code book (ECB) (No usar nunca)
   - Cipher block chaining (CBC)
   - Counter mode (CTR)
+
+*** Seguridad en cifrado simetrico
+- Para tener un cifrado seguro y efectivo se necesita:
+  1. Cifrar el mismo mensaje de forma diferente cada vez que se haga, aunque se use la misma
+     llave.
+  2. Eliminar patrones predecibles entre los bloques.
