@@ -6,11 +6,47 @@ body {
     line-height: 1.5;
 }
 
+.layout-principal {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "main aside"
+        "footer footer";
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 10px;
+}
+
+header, main, aside, footer {
+    margin: 0;
+    min-width: 0;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: 0;
+}
+
 header {
     /* background-color: #18529D; Azul institucional */
     background-color: #F7B32BFF;
     color: white;
     padding: 16px 20px; /* 16 px  arriba/abajo, 20px izquierda/derecha */
+    grid-area: header;
+}
+
+main {
+    grid-area: main;
+    padding: 10px;
 }
 
 #logo-fei {
@@ -52,6 +88,11 @@ h2 {
     /* color: #18529D; */
     color: black;
     margin-top: 0;
+    font-size: 1.5rem;
+}
+
+p, li, a, label, input, select, textarea, button {
+    font-size: 1rem;
 }
 
 .aviso {
@@ -65,6 +106,9 @@ aside {
     /* border: 2px solid #18529D; */
     border: 2px solid #A9E5BBFF;
     border-radius: 6px;
+    grid-area: aside;
+    background-color: #f8fbff;
+    padding: 16px;
 }
 
 table {
@@ -124,6 +168,7 @@ footer {
     color: black;
     padding: 16px 20px; /* 16px arriba/abajo, 20px izquierda/derecha */
     margin-top: 20px;
+    grid-area: footer;
 }
 
 footer a {
@@ -134,4 +179,43 @@ footer a {
 
 footer a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .layout-principal {
+        grid-template-areas: 
+        "header"
+        "main"
+        "aside"
+        "footer";
+
+        grid-template-columns: 1fr;
+        padding: 5px;
+    }
+
+    nav a {
+        display: block;
+        margin: 6px 0;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p, li, a, label, input, select, textarea, button {
+        font-size: 1rem;
+    }
+
+    header, main, aside, footer {
+        margin: 0; 
+    }
+    
+    main section {
+        margin: 10px 0;
+        padding: 12px;
+    }
 }
