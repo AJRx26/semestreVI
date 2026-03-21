@@ -1,0 +1,300 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: white;
+    line-height: 1.5;
+}
+
+.layout-principal{
+    display: grid;
+    grid-template-areas: 
+    "header"
+    "fechas"
+    "main"
+    "footer";
+    gap: 20px;
+    padding: 10px;
+}
+
+/* Estilizar encabezado */
+header {
+    background-color: #09072b;
+    color: white; /* 16px arriba/abajo 20px izq/der */
+    padding: 16px 20px;
+    grid-area: header;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 
+    "logo info"
+    "logo nav";
+    align-items: center;
+    gap: 10px 20px;
+}
+
+header, main, aside, footer {
+    margin: 0;
+    min-width: 0;
+}
+
+header div {
+    grid-area: info;
+    text-align: center;
+}
+
+header nav {
+    grid-area: nav;
+}
+
+#logo-cine {
+    width: 110px;
+    height: auto;
+    display: inline-block; 
+    vertical-align: middle;
+    margin-right: 12px;
+    grid-area: logo;
+}
+
+#seccion-fechas {
+    /*background-color: #8d005c;*/
+    text-align: center;
+}
+
+img {
+
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
+
+figure {
+    margin: 0;
+}
+
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+    margin-right: 14px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    background-color: #561269;
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    grid-area: main;
+    padding: 10px;
+}
+
+main section {
+    background-color: #f4f6f9;
+    margin: 18px 5px;
+    padding: 18px;
+    border-radius: 6px;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    /*cambiar color*/
+    color: #269ece;
+    margin-top: 1;
+    font-size: 1.75rem;
+}
+
+.cartelera {
+    border: 3px solid #8916a8;
+    grid-template-columns: auto;
+    align-content: center;
+    display: flex;
+    gap: 20px;
+}
+
+.poster {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dia {
+    background-color: #8d005c;
+    color: white;
+}
+
+p, li, a, label, input, select, textarea, button {
+    font-size: 1.25rem;
+}
+
+aside {
+    grid-area: aside;
+    background-color: #f4f6f9;
+    padding: 16px;
+    border-radius: 6px;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 10px;
+    overflow-x: auto;
+}
+
+caption {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #8916a8;
+}
+
+th, td {
+    border: 1px solid #D0D7DE;
+    padding: 10px;
+    text-align: left;
+    background-color: white;
+}
+
+thead th {
+    background-color: #561269;
+    color: white;
+}
+
+#promociones {
+    border-left: 5px solid #8d005c;
+    padding-left: 12px;
+}
+
+form {
+    margin-top: 10px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    border: 1px solid #C8D2DC;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #561269;
+    color: white;
+    font-weight: bold;
+}
+
+button[type="reset"] {
+    background-color: #8d005c;
+    color: white;
+    font-weight: bold;
+}
+/* */
+
+footer {
+    background-color: #09072b;
+    color: white;
+    padding: 16px 20px;
+    margin-top: 20px;
+    grid-area: footer;
+}
+
+footer a {
+    color: #8916a8;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+
+    .layout-principal {
+        grid-template-areas: 
+        "header"
+        "main"
+        "aside"
+        "footer";
+
+        grid-template-columns: 1fr;
+        padding: 5px;
+    }
+
+    nav a {
+        display: block;
+        margin: 6px 0;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+    h2 {
+        font-size: 1.2rem;
+    }
+    p, li, a, label, input, select, textarea, button {
+        font-size: 0.95rem;
+    }
+
+    header, main, aside, footer {
+        margin: 0;
+    }
+
+    main section {
+        margin: 10px 0;
+        padding: 12px;
+    }
+    nav {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    nav a {
+        display: block;
+        margin: 0;
+        text-align: center;
+    }
+    header {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "logo"
+        "info"
+        "nav";
+        text-align: center;
+    }
+    table {
+    width: 100%;
+    }
+    #logo-cine {
+        margin: 0 auto;
+    }
+    .cartelera {
+    flex-direction: column;
+    align-items: stretch;
+    }
+}
