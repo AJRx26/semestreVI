@@ -7,8 +7,12 @@ import os
 import argparse
 import base64
 
+#Evitar numeros magicos
 CHUNK_SIZE = 1024
 BLOCK_SIZE = 16
+SIZE_IV = 16
+SIZE_HASH = 32
+SIZE_ALL = SIZE_HASH + SIZE_IV
 
 def ayuda():
     mensaje="""
@@ -45,45 +49,44 @@ def xor(bloque1: bytes, bloque2: bytes) -> bytes:
     Calcula el XOR entre dos bloques.
     returns: bytes
     """
-    tam_bloque = min(len(bloque1), len(bloque2))
+    tam_bloque = len(bloque1)
+    if len(bloque2) < len(bloque1):
+        tam_bloque = len(bloque2)
+
     res = []
     for i in range(tam_bloque):
         res.append(bloque1[i] ^ bloque2[i])
     return bytes(res)
 
-def cifrar_chunk_cbc(encryptor, chunk: bytes, bloque_anterior: bytes):
+def cifrar_chunk_ecb(encryptor, chunk: bytes, bloque_anterior: bytes):
     """
     Cifra un chunk completo aplicando CBC bloque a bloque (16 bytes).
-
     encryptor
     chunk: bytes
     bloque_anterior: bytes
-
     returns (chunk_cifrado, ultimo_bloque_cifrado)
     """
     #se escribe en bytes
     resultado = b""
-
     # range(x, y, z): x marca el inicio, y: marca el final, z: incremento del indice
     for i in range(0, len(chunk), BLOCK_SIZE):
         #toma un chunk desde i (0) hasta (15) dado que el tamaño del bloque es 16
         bloque = chunk[i:i + BLOCK_SIZE]
         # XOR
         bloque_xor = xor(bloque, bloque_anterior)
+        # Cifra el chunk con ecb
         cifrado = encryptor.update(bloque_xor)
         #Gurada el bloque cifrado para el siguiente ciclo
         bloque_anterior = cifrado
         resultado += cifrado
     return resultado, bloque_anterior
 
-def descifrar_chunk_cbc(decryptor, chunk: bytes, bloque_anterior: bytes):
+def descifrar_chunk_ecb(decryptor, chunk: bytes, bloque_anterior: bytes):
     """
     Descifra un chunk completo revirtiendo CBC bloque a bloque (16 bytes).
-
     encryptor
     chunk: bytes
     bloque_anterior: bytes
-
     returns (chunk_descifrado, ultimo_bloque_cifrado)
     """
     #se escribe en bytes
@@ -93,6 +96,7 @@ def descifrar_chunk_cbc(decryptor, chunk: bytes, bloque_anterior: bytes):
     for i in range(0, len(chunk), BLOCK_SIZE):
         #toma un chunk desde i (0) hasta (15) dado que el tamaño del bloque es 16
         bloque = chunk[i:i + BLOCK_SIZE]
+        # Descifra el chunk con ecb
         descifrado = decryptor.update(bloque)
         # XOR
         descifrado_xor = xor(descifrado, bloque_anterior)
@@ -110,7 +114,7 @@ def cifrar(archivo_entrada: str, archivo_salida: str, llave: bytes) -> None:
     returns: None
     """
     # Genera IV
-    iv = os.urandom(16)
+    iv = os.urandom(SIZE_IV)
     hasher = hashlib.sha256()
 
     aesCipher = Cipher(algorithms.AES(llave), modes.ECB(), backend=default_backend())
@@ -124,7 +128,7 @@ def cifrar(archivo_entrada: str, archivo_salida: str, llave: bytes) -> None:
 
             while len(chunk) == CHUNK_SIZE:
                 hasher.update(chunk)
-                cifrado, bloque_anterior = cifrar_chunk_cbc(aesEncryptor, chunk, bloque_anterior)
+                cifrado, bloque_anterior = cifrar_chunk_ecb(aesEncryptor, chunk, bloque_anterior)
                 salida.write(cifrado)
                 chunk = entrada.read(CHUNK_SIZE)
 
@@ -134,7 +138,7 @@ def cifrar(archivo_entrada: str, archivo_salida: str, llave: bytes) -> None:
             padding_size = BLOCK_SIZE - bytes_finales_cubiertos
             padding = generar_padding(padding_size)
             chunk_con_padding = chunk + padding
-            cifrado, bloque_anterior = cifrar_chunk_cbc(aesEncryptor, chunk_con_padding, bloque_anterior)
+            cifrado, bloque_anterior = cifrar_chunk_ecb(aesEncryptor, chunk_con_padding, bloque_anterior)
             aesEncryptor.finalize()
             salida.write(cifrado)
 
@@ -168,15 +172,15 @@ def descifrar(archivo_entrada: str, archivo_salida: str, llave: bytes) -> None:
         # file.seek(desplazamiento, inicio)
             # 0: inicio
             # 2: final del archivo
-        entrada.seek(-16, 2)
-        iv = entrada.read(16)
+        entrada.seek(-SIZE_IV, 2)
+        iv = entrada.read(SIZE_IV)
 
         # Leer hash (32 bytes antes del IV)
-        entrada.seek(-48, 2)
-        hash_guardado = entrada.read(32)
+        entrada.seek(-SIZE_ALL, 2)
+        hash_guardado = entrada.read(SIZE_HASH)
 
         # Tamaño real de los datos cifrados
-        tamano = os.path.getsize(archivo_entrada) - 48
+        tamano = os.path.getsize(archivo_entrada) - SIZE_ALL
         entrada.seek(0)
 
         with open(archivo_salida, "wb") as salida:
@@ -187,7 +191,7 @@ def descifrar(archivo_entrada: str, archivo_salida: str, llave: bytes) -> None:
                 chunk = entrada.read(bytes_a_leer)
                 contador += len(chunk)
 
-                descifrado, bloque_anterior = descifrar_chunk_cbc(aesDecryptor, chunk, bloque_anterior)
+                descifrado, bloque_anterior = descifrar_chunk_ecb(aesDecryptor, chunk, bloque_anterior)
 
                 if chunk_anterior is not None:
                     salida.write(chunk_anterior)

@@ -8,18 +8,19 @@ import argparse
 
 CHUNK_SIZE = 1024
 SIZE = 16
+SIZE_KEY = 32
 
 def ayuda():
     mensaje="""
     - Script que cifra y descifra un archivo con AES-CTR
 
-    python3 aes_ctr.py -p OPERACION -i archivo_entrada -o archivo_salida -l llave
+    python3 aes_ctr.py -p OPERACION -i archivo_entrada -o archivo_salida [-l llave]
 
     - Argumentos:
         - Operacion: cifrar o descifrar
         - Archivo de entrada
         - Archivo de salida
-        - Llave (base64)
+        - Llave (base64): Opcional solo para la operacion descifrar
     """
 
 def cifrar(archivo_entrada: str, archivo_salida: str) -> None:
@@ -33,7 +34,7 @@ def cifrar(archivo_entrada: str, archivo_salida: str) -> None:
 
     """
     # Crear llave aleatoria
-    key = os.urandom(32)
+    key = os.urandom(SIZE_KEY)
     # Crear nonce
     nonce = os.urandom(SIZE)
 
@@ -52,6 +53,7 @@ def cifrar(archivo_entrada: str, archivo_salida: str) -> None:
             # Se agrega el nonce al final del archivo
             salida.write(nonce)
 
+    print("Archivo cifrado")
     print("Llave del archivo cifrado: ", base64.b64encode(key).decode())
 
 def descifrar(archivo_entrada: str, archivo_salida: str, key: bytes) -> None:
@@ -66,10 +68,12 @@ def descifrar(archivo_entrada: str, archivo_salida: str, key: bytes) -> None:
     """
 
     with open(archivo_entrada, "rb") as entrada:
+        # Se pocisiona 16 bytes antes del final
         entrada.seek(-SIZE, 2)
+        # Recoje el nonce
         nonce = entrada.read(SIZE)
 
-        tamano = os.path.getsize(archivo_entrada) - SIZE
+        size = os.path.getsize(archivo_entrada) - SIZE
         entrada.seek(0)
 
         # Crear descifrador
@@ -77,12 +81,15 @@ def descifrar(archivo_entrada: str, archivo_salida: str, key: bytes) -> None:
         decryptor = aes_context.decryptor()
 
         with open(archivo_salida, "wb") as salida:
-            bytes_restantes = tamano
+            bytes_restantes = size
             while bytes_restantes > 0:
+                # Toma los ultimos bytes
                 chunk = entrada.read(min(CHUNK_SIZE, bytes_restantes))
                 salida.write(decryptor.update(chunk))
                 bytes_restantes -= len(chunk)
             salida.write(decryptor.finalize())
+
+    print("Archivo descifrado correctamente")
 
 if __name__ == "__main__":
     all_args = argparse.ArgumentParser()
@@ -97,7 +104,7 @@ if __name__ == "__main__":
         cifrar(args["input"], args["output"])
     else:
         llave = base64.b64decode(args["llave"])
-        if len(llave) != 32:
+        if len(llave) != SIZE_KEY:
             print("La llave de entrada debe ser de 32 bytes")
             exit(1)
         descifrar(args["input"], args["output"], llave)

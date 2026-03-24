@@ -93,7 +93,7 @@ def descifrar(archivo_entrada: str, archivo_salida: str, llave: bytes, iv: bytes
                 if not chunk:
                     descifrado = aesDecryptor.finalize()
                     salida.write(unpadder.update(descifrado))
-                    salida.write(unpadder.finalize())
+                    salida.write(unpadder.finalize()) #quita padding
                     break
                 descifrado = aesDecryptor.update(chunk)
                 salida.write(unpadder.update(descifrado))

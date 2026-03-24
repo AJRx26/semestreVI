@@ -261,3 +261,21 @@ md5hasher.hexdigest()
   1. Cifrar el mismo mensaje de forma diferente cada vez que se haga, aunque se use la misma
      llave.
   2. Eliminar patrones predecibles entre los bloques. (Maleabilidad entre bloques)
+
+*** Cifrado asimetrico
+- Las tecnicas asimetricas son variadas, no se limitan solo a cifrado
+  - Por ejemplo: firmas digitales e intercambio de llaves
+- Algoritmo RSA
+- Existen algoritmos derivados de las curvas elipticas
+
+**** Dos llaves
+- Se necesitan dos llaves: una publica y otra privada
+
+**** RSA
+- RSA esta casi obsoleto, debido a multiples vulnerabilidades
+- Sirve para ejemplicar el cifrado asimetrico
+
+- Factorización de primos
+
+- Las llaves son basicamente numeros primos muy grandes que se
+- Estos numeros son coprimos,
