@@ -278,4 +278,6 @@ md5hasher.hexdigest()
 - Factorización de primos
 
 - Las llaves son basicamente numeros primos muy grandes que se
-- Estos numeros son coprimos,
+- Estos numeros son coprimos
+
+- Si solo se tiene uno de los dos
