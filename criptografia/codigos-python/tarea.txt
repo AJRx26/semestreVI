@@ -1,0 +1,5 @@
+Hacer una demostración del ataque de texto cifrado escogido para RSA con los siguientes elementos:
+
+- Utilizar archivos, a partir del código visto en clase, para los archivos de entrada y salida, esto incluye la multiplicación de los dos contenidos cifrados
+
+- Mostrar que se puede recuperar el texto plano original sin utilizar la llave privada directamente
