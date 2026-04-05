@@ -1,3 +1,13 @@
+- Supon que el atacante tiene un texto cifrado c que intercepto, obtenido al cifrar con llave publica el mensaje m. Sin la llave privada el atacante no puede descifrar el mensaje. La victima con la llave privada probablemente no le vaya a dar directamente el texto m descifrado. Pero, con ingenieria social, es posible que si le de un multiplo de m. Con ese multiplo, el atacante puede recuperar el original. Suponiendo que el atacante escogio como multiplo el 2. El atacante cifra con RSA y la llave publica el 2 para obtener "cr". El texto cifrado interceptado por el atacante se denota mediante "c0". Si se multiplica cr y c0 (mod n) se obtiene c1. 
+
+- c1 = c0cr(mod n)
+- c1 = mere(mod n)
+- c1 = (mr)e (mod n)
+
+- El atacante envia c1 a la victima con la llave privada, la victima descifra el mensaje y obtiene mr, nota que no es legible y lo desecha. El atacante logra recuperar mr. Usando mr el atacante quiere recuperar m. Sin aritmetica modular lo tradicional seria: m = mr/r. Con aritmetica modular el equivalente es: m = mr * r-1modn (mod n)
+
+- m = (mr * gmpy2.powmod(r, -1, n)) % n 
+
 Hacer una demostración del ataque de texto cifrado escogido para RSA con los siguientes elementos:
 
 - Utilizar archivos, a partir del código visto en clase, para los archivos de entrada y salida, esto incluye la multiplicación de los dos contenidos cifrados
