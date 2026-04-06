@@ -133,3 +133,59 @@
 ** Tuneles
 
 ** Tunel PPTP
+
+
+** TLS HANDSHAKE
+- El intercambio de datos de la aplicacion mediante TLS requiere la negociación previa de un tunel de cifrado.
+- Cliente servidor deben acordar:
+  - La versión de TLS a utilizar
+  - Elegir el conjunto de cifrado
+  - Verificar los certificados
+
+1. Se realiza el handshake de TCP
+2. Cliente envia versión de TLS, lista de conjunto de cifrado compatibles y otras opciones de TLS que se desee utilizar (CLient Hello)
+3. Servidor selecciona version
+
+
+** RSA
+- Sistema criptográfico de clave publica o asimétrica, de Rivest, Shamir y Adleman.
+- Mecanismo de intercambio de claves predominante en la mayoría de las implementaciones de TLS
+- Esta clave simétrica negociada se utiliza para cifrar su sesión
+
+** Diffie-Hellman
+- Cliente y servidor pueden negociar el secreto compartido.
+
+- Los peers intercambian un valor inicial publicamente.
+- Los peers guardan un valor secreto.
+- Cada peer mezcla el valor publico con el valor secreto, obteniendo un valor distinta cada uno.
+- El valor se intercambia publicamente.
+- Cada peer combina dicho valor con su valor secreto.
+- El resultado es un valor final idéntica en cada peer.
+- El valor final es la clave compartida.
+
+** Open VPN
+- Es una VPN SSL
+- Implementa la extensión de red segura de capa 2 o 3 mediante el protocolo SSL/TLS
+- Admite metodos de autenticación de cliente
+
+
+** Configuracion de AutoVPN
+- apt-get install openvpn easy-rsa
+- ls /etc/openvpn
+- make-cadir easy-rsa (en /etc/openvpn)
+- cd easy-rsa/
+- ls -la
+- ./easyrsa init-pki (en /easy-rsa)
+- ls -la
+- vim /easyrsa/vars
+- ./easyrsa build-ca (en /easy-rsa)
+- poner un password (importante recordar)
+- SRC CA
+- ls pki/ca.crt
+- ls -la pki/
+- ls pki/private
+- cd easy-rsa/
+- ./easyrsa gen-req servidor-src-licic nopass
+- ./easyrsa sign-req server servidor-feiuvi
+- ./easyrsa gen-req cliente1-feiuv nopass
+- ./easyrsa sign-req client cliente1-feiuv
