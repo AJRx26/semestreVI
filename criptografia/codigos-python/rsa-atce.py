@@ -21,9 +21,11 @@ def ayuda():
     - Mostrar que se puede recuperar el texto plano original sin utilizar la llave privada directamente
     """
 
+# =========================
 # Cargar llave pública
-def load_public_key(llave):
-    with open(llave, "rb") as f:
+# =========================
+def load_public_key(path):
+    with open(path, "rb") as f:
         return serialization.load_pem_public_key(f.read())
 
 # Conversiones
@@ -36,48 +38,65 @@ def int_to_bytes(i):
     # asegurarse de que es un entero python
     return int(i).to_bytes((i.bit_length()+7)//8, byteorder='big')
 
-#Generar c1
-def generar_c1(archivo_entrada, llave, archivo_salida, r):
-    public_key = load_public_key(llave)
+# =========================
+# Leer archivo binario
+# =========================
+def read_file(path):
+    with open(path, "rb") as f:
+        return f.read()
+
+def write_file(path, data):
+    with open(path, "wb") as f:
+        f.write(data)
+
+# =========================
+# PASO 1: Generar c1
+# =========================
+def generar_c1(c0_path, pubkey_path, salida_c1, r):
+    public_key = load_public_key(pubkey_path)
     pub = public_key.public_numbers()
     e, n = pub.e, pub.n
 
-    # leer cifrado original
-    with open (archivo_entrada, "rb") as entrada:
-        c0_bytes = entrada.read()
-        c0 = bytes_to_int(c0_bytes)
-        print("+c0 cargado")
+    # leer ciphertext original
+    c0_bytes = read_file(c0_path)
+    c0 = bytes_to_int(c0_bytes)
+
+    print("[+] c0 cargado")
 
     # cifrar r
     cr = gmpy2.powmod(r, e, n)
+
     # generar c1
     c1 = (c0 * cr) % n
-    print("+c1 creadp")
-    
-    with open (archivo_salida, "wb") as salida:
-        salida.write(int_to_bytes(c1))
-    print(f"+c1 guardado en {archivo_salida}")
 
-#Descifrar m desde mr
-def descifrar_m(archivo_entrada, llave, archivo_salida, r):
-    public_key = load_public_key(llave)
+    print("[+] c1 generado")
+
+    write_file(salida_c1, int_to_bytes(c1))
+    print(f"[+] c1 guardado en {salida_c1}")
+
+# =========================
+# PASO 2: Descifrar m desde mr
+# =========================
+def descifrar_m(mr_path, pubkey_path, salida_m, r):
+    public_key = load_public_key(pubkey_path)
     n = public_key.public_numbers().n
 
     # leer mr (resultado de descifrar c1)
-    with open (archivo_entrada, "rb") as entrada:
-        mr_bytes = entrada.read()
-        mr = bytes_to_int(mr_bytes)
-        print("+mr cargado")
+    mr_bytes = read_file(mr_path)
+    mr = bytes_to_int(mr_bytes)
+
+    print("[+] mr cargado")
 
     # inverso modular
     r_inv = gmpy2.invert(r, n)
+
     # recuperar m
     m = (mr * r_inv) % n
-    print("+mensaje original recuperado")
 
-    with open (archivo_salida, "wb") as salida:
-        salida.write(int_to_bytes(m))
-    print(f"+mensaje guardado en {archivo_salida}")
+    print("[+] mensaje original recuperado")
+
+    write_file(salida_m, int_to_bytes(m))
+    print(f"[+] mensaje guardado en {salida_m}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
