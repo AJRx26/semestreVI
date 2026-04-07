@@ -41,3 +41,16 @@
 - Almacenes de recursos
 - Elasticidad, es la capacidad de ajustar automáticamente los recursos de computo (procesamiento, memoria, almacenamiento, ancho de banda) según la demanda en tiempo real.
 - Tarificación
+
+** No se que tema sea (DNS)
+- Registros en un servidor DNS
+  - A -> IPv4
+  - AAAA -> IPv6
+  - CNAME -> Nombre (Alias)
+  - NS - IP (NOmbre del dominio - Autoritativo)
+  - MX - Servidor de correo
+  - PTR - R. Inverso
+  - TXT - Texto
+  - SOA - Serv
+
+- Root servers

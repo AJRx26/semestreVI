@@ -1,0 +1,17 @@
+[
+    {
+        "nombre": "Super Mario Bros 2",
+        "precio": 60,
+        "categoria": "Aventura"
+    },
+    {
+        "nombre": "Star Fox",
+        "precio": 45,
+        "categoria": "Aventura Espacial"
+    },
+    {
+        "nombre": "Avatar World",
+        "precio": 80,
+        "categoria": "Creatividad"
+    }
+]

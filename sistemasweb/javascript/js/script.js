@@ -65,3 +65,73 @@ console.log(juego.nombre);
 console.log(juego.precio);
 
 document.getElementById("info").textContent = `Juego: ${juego.nombre} - Precio: $${juego.precio}`;
+
+const myJSON = '{"name": "John", "age": 30, "car": null}';
+const myObj = JSON.parse(myJSON);
+//x contiene John
+let x = myObj.name;
+console.log(myObj);
+
+let text = "";
+for (const x in myObj) {
+    text += x + ":" + myObj[x] + ", ";
+}
+//Escribe las propiedades y su valor
+console.log(text);
+
+/*
+const xhr = new XMLHttpRequest();
+xhr.open("GET", "datos/videojuegos.json");
+
+xhr.addEventListener("load", function () {
+    const videojuegos = JSON.parse(xhr.responseText);
+    const listaJuegos = document.getElementById("lista-juegos");
+
+    videojuegos.forEach((juego) => {
+        const tarjeta = document.createElement("article");
+        tarjeta.classList.add("juego");
+
+        tarjeta.innerHTML = `
+            <h3>${juego.nombre}</h3>
+            <p>Precio: $${juego.precio}</p>
+            <p>Categoria: ${juego.categoria}</p>
+            <button type="button">Comprar</button>
+        `;
+        listaJuegos.appendChild(tarjeta);
+    });
+});
+xhr.send();
+*/
+
+fetch("datos/videojuegos.json")
+  .then(respuesta => respuesta.json())
+  .then(videojuegos => {
+    const listaJuegos = document.getElementById("lista-juegos");
+
+    videojuegos.forEach((juego) => {
+      const tarjeta = document.createElement("article");
+      tarjeta.classList.add("juego");
+      tarjeta.innerHTML = `
+        <h3>${juego.nombre}</h3>
+        <p>Precio: $${juego.precio}</p>
+        <p>Categoría: ${juego.categoria}</p>
+        <button type="button">Comprar</button>
+      `;
+      listaJuegos.appendChild(tarjeta);
+    })
+  })
+  .catch(error => {
+    document.getElementById("info").textContent = "Error al cargar los datos";
+  });
+
+/*
+fetch("datos/videojuegos.json")
+  .then(respuesta => respuesta.json())
+  .then(videojuegos1 => {
+    const info = document.getElementById("info");
+    info.textContent = `Se cargaron ${videojuegos1.length} videojuegos`;
+  })
+  .catch(error => {
+    document.getElementById("info").textContent = "Error al cargar los datos";
+  });
+*/
