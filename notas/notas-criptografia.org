@@ -281,3 +281,66 @@ md5hasher.hexdigest()
 - Estos numeros son coprimos
 
 - Si solo se tiene uno de los dos
+
+*** Integridad de mensajes, firmas y certificados
+- MACS
+- Firmas digitales
+- Certificados
+
+- "Keyed Hashes"
+- Uso de criptografia asimetrica para integridad y autenticidad de mensajes
+- Certificados y su diferencia con las llaves
+
+**** Message Authentication Code (MAC)
+- Un cifrado puede ser alterado de formas que tenga sentido.
+- Un MAC es cualquier codigo o dato transmitido junto con el mensaje que puede ser evaluado para determinar si el mensaje fue alterado.
+- Usualmente se utiliza un hash como
+
+***** MAC, HMAC, CBC-MAC
+- Un MAC seguro no solo es codigo (hash) tambien debe incluir una llave.
+- Una llave MAC no esta relacionada con el cifrado
+- Sirve para asegurar que el codigo de autenticacion de mensaje solo puede ser computado por las entidades que conocen la llave.
+- No se debe de asumir que el atacante no conoce la funcion de hash, recuerda que una buena seguridad significa...
+- MAC protege la integridad del mensaje
+- Un atacante sin la llave no debe poder alterar el mensaje sin que se pueda detectar.
+- Mientras la llave se mantenga privada, el MAC
+
+****** HMAC
+- Hash-based Message Authentication Code
+- Es basicamente un hash keyed
+- Las funciones de hash son deterministas, dada la misma entrada siempre se produce la misma salida.
+- Solo agregar al inicio o al final
+- H(K XOR opad, H((K XOR ipad), text))
+  - H es la funcion de hash
+  - K es la llave que debe de cumplir ciertos requisitos
+  - text es cualquier binario que representa el contenido de entrada
+  - opad e ipad son dos valoresi
+  - B es el tamano del bloque de H (128 bytes)
+    1. Si K es mas corto que B, entonces a K se le tienen que agregar ceros de padding hasta ser de longitud B.
+    2. Si K es mas largo que B, entonces K se reduce aplicando H a K, osea H(K)
+    3. Si se aplico 2 y la llave quedo muy corta, entonces se aplica 1
+  - ipad se define com el byte 0x36 repetido B veces
+  - opad es el byte 0x5c repetido B veces
+  - Los pads parecen arbitrarios pero tienen un sentido de seguridad matematico que ayuda a mitigar
+- Primero computas
+
+****** CBC-MAC
+- Similar a AES-CBC
+- Recordar que CBC es Cipher Block Chaining
+- Un MAC a menudo se le llama "tag" (mensaje) del mensaje
+- Es info extra que se asocia al principio del contenido
+- En notacion matematica un tag se denota a menudo como t
+- Asi, un MAC sobre un mensaje m1 produce un tag t1
+- El par (m1, t1) es transmitido al receptor para ser verificado
+
+******* MAC Prepend Attack
+- Es posible mandar un mensaje manipulado y hacer que parezca que es el mensaje M1 o M2, suponiendo que esten generados por la misma llave.
+******** Proceso de ataque, anteponiendo M1 a M2
+- Recuperar el primer bloque de M2, denominado M21 (como es AES se toman los primeros 16 bytes)
+- Recuperar el resto de bloques de M2, denominado M2r
+- Obtener M'2 = t1 XOR M21
+- M3 = M1 + M'2 + M2r (+ significa concatenacion)
+- Con esto t3 = t2
+
+- Basicamente lo que hace el atacante es reemplazar el primer bloque de M2 por uno manipulado.
+- La victima vera todo el mensaje M1 completo (con su padding), un bloque que se vera posiblemente corrupto y el mensaje M2 sin su primer bloque.
