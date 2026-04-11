@@ -1,0 +1,14 @@
+[
+    {
+        "nombre": "Incidentes atendidos",
+        "valor": 128
+    },
+    {
+        "nombre": "Equipos disponibles",
+        "valor": 42
+    },
+    {
+        "nombre": "Solicitudes resueltas",
+        "valor": 97
+    }
+]

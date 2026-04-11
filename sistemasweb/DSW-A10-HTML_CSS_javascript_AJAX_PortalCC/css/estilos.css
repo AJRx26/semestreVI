@@ -1,0 +1,374 @@
+* {
+    box-sizing: border-box;
+}
+
+/*Aplicar estilo general a la página*/
+body {
+margin: 0;
+font-family: Arial, Helvetica, sans-serif;
+background-color: #18529D;
+line-height: 1.5;
+}
+
+/*Estilizar el encabezado*/
+header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+    "logo info"
+    "logo nav";
+    align-items: center;
+    gap: 10px 20px;
+    background-color: #f4f6f9; /* Azul institucional */
+    color: black;
+    padding: 10px 30px; /* 16px arriba/abajo, 20px izquierda/derecha */
+    grid-area: header; /* ----------> nuevo*/
+}
+
+header div {
+    grid-area: info;
+}
+
+header nav {
+    grid-area: nav;
+}
+
+/*Estilo del logo*/
+#logo-fei {
+    grid-area: logo;
+    width: 100px;
+    height: auto;
+    display: inline-block; /*Aparecerá en la misma línea que otros elementos en línea o en bloque*/
+    vertical-align: middle;
+    /* float: left; Pasar el texto al lado de la imagen*/
+    /*margin-right:20px; Para que el texto no quede pegado al logo fei*/
+}
+
+/*Esilo del título del portal*/
+#titulo-portal {
+    color: #28AD56; /*Verde institucional*/
+    margin-top: 1rem;
+    text-align: center; /* Centrar el título */
+}
+
+/* ----------> nuevo */
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+p, li, a, label, input, select, textarea, button {
+    font-size: 1rem;
+}
+
+nav {
+    margin-top: 15px;
+}
+
+/*Estilo del menú de navegación*/
+nav a {
+    display: inline-block;
+    padding: 8px 12px;
+    color: black;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.1); /*Establece el color de fondo en blanco muy claro y semitransparente*/
+    text-decoration: none;
+    margin-right: 40px; /* Aumenté el margen entre el menú */
+    font-weight: bold;
+}
+
+nav a:hover {
+    background-color: #28AD56;
+    color: white; /*Verde institucional al pasar el mouse*/
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+figure {
+    margin: 0;
+}
+
+/*Estilo para secciones*/
+main section {
+    background-color: #f4f6f9;
+    margin: 18px 40px;
+    padding: 18px;
+    border-radius: 10px; /*Permite esquinas redondeadas a los elementos, define el radio de las esquinas*/
+}
+
+/* ----------> se agregó */
+main {
+grid-area: main;
+padding: 10px;
+}
+
+/*Estilo para subtítulos*/
+h2 {
+    color: #18529D;
+    margin-top: 0;
+}
+
+/*Estilo para avisos*/
+.aviso {
+    border-left: 4px solid #28AD56;
+    padding-left: 12px;
+    margin-bottom: 14px;
+}
+
+/*Aside de recursos*/
+aside {
+    grid-area: aside; /* ----------> nuevo*/
+    background-color: #aac7ed;
+    border: 5px solid #18529D;
+    border-radius: 6px;
+    padding: 16px;
+}
+
+/*Tabla de horarios*/
+table {
+    width: 100%;
+    border-collapse: collapse; /*Bordes sencillos*/
+    margin-top: 10px;
+    display: block;
+    overflow-x: auto;
+}
+
+/* Sólo filas de la tabla tienen color azul claro*/
+tbody tr {
+    background-color:#a4c5ed;
+}
+
+caption {
+    font-weight: bold;
+    margin-bottom: 12px;
+    color: #18529D;
+}
+
+th, td {
+    border: 1px solid #000000;
+    padding: 10px;
+    text-align: left;
+}
+
+thead th {
+    background-color: #18529D;
+    color: white;
+}
+
+/*Formulario*/
+form {
+    margin-top: 10px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    box-sizing: border-box;
+    border: 1px solid #b0c4d8;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="reset"] {
+    background-color: #18529D;
+    color: white;
+    font-weight: bold;
+}
+
+/*Pie de página*/
+footer {
+    background-color: #28AD56;
+    color: white;
+    padding: 16px 20px; /* 16px arriba/abajo, 20px izquierda/derecha */
+    margin-top: 25px;
+    margin-bottom: 25px;
+    grid-area: footer; /* ----------> nuevo*/
+}
+
+footer a {
+    color: #000000;
+    /*text-decoration: none;*/
+    font-weight: bold;
+    padding: 30px; /*Ajustar el padding*/
+}
+
+footer a:hover {
+    color: #18529D
+}
+
+/*Definir layout general con CSS Grid*/
+.layout-principal {
+    display: grid;
+    grid-template-areas:
+    "header header"
+    "main aside"
+    "footer footer";
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 10px;
+}
+
+header, main, aside, footer {
+margin: 0;
+min-width: 0;
+}
+
+/*Estilos para Drag and Drop*/
+#zona-arrastre {
+    border: 2px dashed #18529D;
+    padding: 20px;
+    text-align: center;
+    background-color: #f8fbff;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#zona-arrastre.activa {
+    background-color: #e3f2fd;
+    border-color: #28AD56;
+}
+
+#archivo-seleccionado {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#mensaje-formulario {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/*Modo Nocturno*/
+.modo-nocturno {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+}
+
+.modo-nocturno main section,
+.modo-nocturno aside {
+    background-color: #2c2c2c;
+    color: #f5f5f5;
+}
+
+.modo-nocturno table,
+.modo-nocturno th,
+.modo-nocturno td {
+    color: #f5f5f5;
+}
+ /*Estilos indicadores*/
+#panel-indicadores {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.tarjeta-indicador {
+    background-color: #f8fbff;
+    border: 1px solid #18529D;
+    border-radius: 6px;
+    padding: 14px;
+    text-align: center;
+}
+
+.tarjeta-indicador h3 {
+    margin-top: 0;
+    color: #18529D;
+}
+
+.tarjeta-indicador p {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #28AD56;
+}
+
+/*Datos del form en JSON*/
+#salida-json {
+    background-color: #f4f6f9;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    padding: 12px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    margin-top: 10px;
+}
+
+/*Comportamiento responsivo*/
+@media (max-width: 768px) {
+    .layout-principal {
+        grid-template-areas:
+        "header"
+        "main"
+        "aside"
+        "footer";
+
+        grid-template-columns: 1fr;
+        padding: 5px;
+    }
+
+    nav a {
+        display: block;
+        margin: 6px 0;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+    p, li, a, label, input, select, textarea, button {
+        font-size: 0.95rem;
+    }
+
+    header, main, aside, footer {
+        margin: 0;
+    }
+
+    main section {
+        margin: 10px 0;
+        padding: 12px;
+    }
+
+    nav {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    nav a {
+        display: block;
+        margin: 0;
+        text-align: center;
+    }
+
+    header {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "logo"
+        "info"
+        "nav";
+        text-align: center;
+    }
+    
+    #logo-fei {
+        margin: 0 auto;
+    }
+ }
