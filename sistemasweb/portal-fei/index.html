@@ -72,46 +72,7 @@
 			<!-- BLOQUE DE ARÍCULOS -->
 			<section aria-label="Novedades y avisos">
 				<h2 id="avisos">Avisos y comunicados</h2>
-
-				<!-- Artículo 1 -->
-				<article class="aviso" aria-labelledby="aviso-1-titulo">
-					<header>
-						<h3 id="aviso-1-titulo">Mantenimiento programado de red</h3>
-						<p>
-							<time datetime="2026-03-06">6 de marzo de 2026</time>
-							<span>Infraestructura</span>
-						</p>
-					</header>
-					<p>
-						Se realizará mantenimiento preventido. Durante el periodo podría haber intermitencias de conectividad.
-					</p>
-					<p>
-						Recomendación: guardar avances y evitar cargas de archivos críticos durante el intervalo.
-					</p>
-					<footer>
-						<p>Contacto: <a href="#contacto">Mesa de ayuda</a></p>
-					</footer>
-				</article>
-
-				<!-- Artículo 2 -->
-				<article class="aviso" aria-labelledby="aviso-2-titulo">
-					<header>
-						<h3 id="aviso-2-titulo">Convocatoria: préstamo de equipo</h3>
-						<p>
-							<time datetime="2026-03-02">2 de marzo del 2026</time>
-								<span>Servicios</span>
-						</p>
-					</header>
-					<p>
-						Se habilitó el registro para préstamo temporal de equipo. Consulta requisitos y disponibilidad.
-					</p>
-					<p>
-						Consulta: <a href="#servicios">Servicios del Centro de Cómputo</a>
-					</p>
-					<footer>
-						<p>Nota: la asignación depende de disponibilidad.</p>
-					</footer>
-				</article>
+				<div id="lista-avisos"></div>
 			</section>
 		</section>
 
@@ -177,24 +138,7 @@
 		<section id="indicadores" aria-labelledby="indicadores-titulo">
 			<h2 id="indicadores-titulo">Indicadores</h2>
 			<p>Ejemplos de indicadores que después se podrán cargar con JSON/AJAX.</p>
-
-			<section aria-label="Indicadores operativos">
-				<h3>Operativos</h3>
-				<ul>
-					<li>Incidentes atendidos (mensual)</li>
-					<li>Tiempo promedio de atención</li>
-					<li>Disponibilidad de laboratorios</li>
-				</ul>
-			</section>
-			
-			<section aria-label="Indicadores de infraestructura">
-				<h3>Infraestructura</h3>
-				<ol>
-					<li>Uso de red por laboratorio</li>
-					<li>Equipos en mantenimiento</li>
-					<li>Actualizaciones aplicadas</li>
-				</ol>
-			</section>
+			<div id="panel-indicadores"></div>
 		</section>			
 
 		<!-- CONTACTO / FORMULARIO -->	
@@ -202,7 +146,7 @@
 			<h2 id="contacto-titulo">Contacto y reporte de incidente</h2>
 			<p>Completa el formulario para registrar una solicitud. (En proximas clases se validará con JavaScript.)</p>
 			
-			<form action="#" method="post" aria-label="Formulario de contacto" novalidate>
+			<form id="formulario-contacto" action="#" method="post" aria-label="Formulario de contacto" novalidate>
 				<fieldset>
 					<legend>Datos del solicitante</legend>
 					
@@ -263,6 +207,12 @@
 		     		</p>
 		     	</fieldset>
 		     </form>
+
+			 <section id="json-formulario" aria-labelledby="json-formulario-titulo">
+				<h3 id="json-formulario-titulo">Datos del formulario en formato JSON</h3>
+				<pre id="salida-json"></pre>
+			 </section>
+
 			<p id="mensaje-formulario"></p>
 		</section>
 	</main>

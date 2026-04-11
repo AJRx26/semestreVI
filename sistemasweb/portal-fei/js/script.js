@@ -1,5 +1,41 @@
+// Funcion reutilizable para cargar avisos
+const cargarAvisos = () => {
+  const mensajeDinamico2 = document.getElementById("mensaje-dinamico");
+  mensajeDinamico2.textContent = "Cargando avisos del portal...";
+
+  fetch("datos/avisos.json")
+    .then(respuesta => respuesta.json())
+    .then(avisos => {
+      const listaAvisos = document.getElementById("lista-avisos");
+
+      //Limpiar contenido previo (IMPORTANTE)
+
+      listaAvisos.innerHTML = "";
+
+      avisos.forEach(aviso => {
+        const tarjetaAviso = document.createElement("article");
+        tarjetaAviso.classList.add("aviso");
+
+        tarjetaAviso.innerHTML = `
+          <h3>${aviso.titulo}</h3>
+          <p><strong>Fecha:</strong> ${aviso.fecha}</p>
+          <p>${aviso.descripcion}</p>
+          `;
+
+        listaAvisos.appendChild(tarjetaAviso);
+      });
+
+      mensajeDinamico2.textContent = `Se cargaron ${avisos.length} avisos correctamente.`;
+    })
+    .catch(error => {
+      mensajeDinamico2.textContent = "Error al cargar los avisos del portal.";
+    });
+};
+
+cargarAvisos();
+
 const mensajeDinamico = document.getElementById("mensaje-dinamico");
-mensajeDinamico.textContent = "Portal cargado correctamente. JavaScript se encuentra activo.";
+mensajeDinamico.textContent = "Cargando informacion del portal...";
 
 mensajeDinamico.style.backgroundColor = "#e8f5e9";
 mensajeDinamico.style.color = "#18529D";
@@ -20,6 +56,7 @@ accionesRapidas.innerHTML = `
   <p>Utiliza los siguientes botones para interactuar con el portal.</p>
   <button type="button" id="btn-resaltar-avisos">Resaltar avisos</button>
   <button type="button" id="btn-ocultar-primer-aviso">Eliminar primer aviso</button>
+  <button type="button" id="btn-cargar-avisos">Cargar avisos</button>
   <button type="button" id="btn-restaurar-mensaje">Restaurar mensaje</button>
   `;
 
@@ -54,6 +91,8 @@ document.getElementById("btn-ocultar-primer-aviso").addEventListener("click", fu
         mensajeDinamico.textContent = "Ya no existen avisos para eliminar.";
     }
 });
+
+document.getElementById("btn-cargar-avisos").addEventListener("click", cargarAvisos);
 
 //Carrusel
 const imagenesCarrusel = [
@@ -263,4 +302,43 @@ btnModo.addEventListener("click", function () {
   } else {
     btnModo.textContent = "Activar modo nocturno";
   }
+});
+
+// Carga de indicadores con fetch()
+fetch("datos/indicadores.json")
+.then(respuesta => respuesta.json())
+.then(indicadores => {
+  const panelIndicadores = document.getElementById("panel-indicadores");
+
+  indicadores.forEach(indicador => {
+    const bloque = document.createElement("article");
+    bloque.classList.add("tarjeta-indicador");
+    bloque.innerHTML = `
+      <h3>${indicador.nombre}</h3>
+      <p>${indicador.valor}</p>
+    `;
+
+    panelIndicadores.appendChild(bloque);
+  });
+})
+.catch(error => {
+  console.log("Error al cargar indicadores:", error);
+});
+
+//Convertir datos del formulario a JSON
+
+document.getElementById("formulario-contacto").addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const solicitud = {
+    nombre: document.getElementById("nombre").value,
+    correo: document.getElementById("correo").value,
+    rol: document.getElementById("rol").value,
+    tipo: document.getElementById("tipo").value,
+    descripcion: document.getElementById("descripcion").value
+  };
+
+  /*Convierte el objeto javascript "solicitud" en una cadena JSON estableciendo el parametro replacer=null y el parametro space=2*/
+  const solicitudJSON = JSON.stringify(solicitud, null, 2);
+  document.getElementById("salida-json").textContent = solicitudJSON;
 });
