@@ -1,0 +1,24 @@
+1. Cipher Block Chaining
+2. Un MAC es un tag, es info extra que se agrega al regalo (contenido principal)
+
+tag = t
+mensaje (cifrado o descifrado) = m1
+MAC de mensaje = t1
+Se envian m1 y t1 al receptor
+
+AES se limita a cifrar 128 bits (16 bytes) de bloque a la vez
+
+AES-CBC encadena la salida de un bloque cifrado con el siguiente. En si el ultimo bloque de CBC es un MAC.
+
+Si hay dos mensajes M1 y M2 con sus tags t1 y t2 generados con la misma llave k, se puede crear un nuevo mensaje M3 cuyo tag sea igual a t1 o t2.
+
+M1 es agregado al inicio de M2: M1+M2
+M3 es una mezcla de M1 y M2
+
+1. Recuperar el primer bloque de M2, es decir, M21 (16 bytes)
+2. Recupera el resto de bloques de M2, M2r
+3. Obtener M'2, que es el resultado de t1 XOR M21
+4. Finalmente M3 es el resultado de concatenar M1 + M'2 + M2r
+5. Con esto t3 = t2 (dado que antepusimos m1)
+
+

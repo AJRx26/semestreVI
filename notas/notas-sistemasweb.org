@@ -12,5 +12,172 @@
 - Examenes: 20%
 - Expocisión: 25% -> 15% revisiones y 10% evaluación final
 
-* Introducción
--
+* Temario
+** Unidad 1. Fundamentos de tecnologias web
+*** Protocolos de Internet
+**** Arquitectura TCP/IP
+- Los equipos se resuleven mediante protocolos.
+- Los protocolos son conjuntos de normas para formatos de mensaje y procedimientos que permiten a las maquinas y los programas de aplicacion intercambiar informacion.
+- La arquitectura TCP/IP es uno de los protocolos mas viejos en los estandares de redes internas, ademas, define cuidadosamente como se meuve la informacion desde el remitente hasta el destinatario.
+
+  1. TCP
+     1. Es el encargado de proporcionar un servicio de comunicacion entre dos equipos con autorizacion de ambas partes y sin perdida de datos.
+     2. Fue creado entre 1973 a 1974 por Vint Cert y Robert Kahn.
+     3. Da soporte a muchas de las aplicaciones mas populares (navegadores, clientes FTP) de internet y protocolos de aplicacion (HTTP, SSH, SMTP y FTP).
+     4. Confiable, orientado a conexion, necesita sincronizar numeros de secuencia.
+
+  2. IP
+     1. Es el conjunto de reglas. para enrutar y direccionar paquetes de datos para que puedan viajar a traves de las redes y llegar al destino correcto.
+
+- TCP/IP son las siglas de Transmission Control Protocol/Internet Protocol.
+- Desarrollado por DARPA
+- Usado en ARPANET en el 1971.
+
+  1. Diferencias entre TCP e IP
+     1. IP es la parte que obtiene la direccion a la que se envian los datos.
+     2. TCP se encarga de la entrega de los datos una vez hallada dicha direccion IP.
+
+***** Funcionamiento TCP/IP
+- Se requieren 3 cosas para la transferencia de datos:
+  1. Reglas para el empaquetamiento de datos que se envian y reciben.
+  2. Red interconectada.
+  3. Manera de encontrar la ruta para hacer llegar los datos desde la computadora que envia hasta la que recibe.
+
+- TCP/IP descompone cada mensaje en paquetes que se vuelven a ensamblar en el otro extremo. Incluso, cada paquete podria tomar una ruta distinta hasta el equipo de destino si la ruta deja de estar disponible o esta muy congestionada.
+
+- Tambien divide tareas de comunicacion en capas. El proposito de las capas es crear un sistema estandarizado, para los distintos fabricantes de hardware y software.
+
+****** UDP (User Data Protocol)
+- Es un protocolo de nivel de transporte basado en la transmision sin conexion de datagramas y representa una alternativa al protocolo TCP.
+- No establece una conexion previa.
+- Tampoco tiene confirmacion ni control de flujo, por tanto, no se sabe si ha llegado correctamente.
+- Se usa cuando se prioriza la velocidad sobre la integridad como en los protocolos DHCP, DNS o cuando se trasmite voz o video.
+
+****** Three Hand Shake - Mensajes de TCP
+- Permite verificar si el servidor esta disponible, sincronizar numeros de secuencia y establecer una sesion confiable.
+  - SYN: El cliente solicita una conexion, iniciando un numero de secuencia aleatorio.
+  - SYN-ACK: El servidor responde confirmando la solicitud del cliente (SYN+1) y enviando su propio numero de secuencia inicial.
+  - ACK: El cliente confirma la recepcion del SYN-ACK del servidor, incrementando el numero de secuencia del servidor.
+
+****** Puertos
+- Usa puertos para permitir la comunicacion entre aplicaciones.
+- Tiene una longitud de 16 bits, por tanto, tiene un rango de 0 a 65535.
+  1. 0 - 1023: Puertos conocidos
+  2. 1024 - 49151: Puertos registrados
+  3. 49152 - 65535: Puertos privados/dinamicos
+
+****** Arquitectura TCP/IP
+- Application/Capa de Aplicacion: Representa datos para el usuario mas el control de codificacion y de dialogo.
+- Transport/Capa de Transporte: Admite la comunicacion entre distintos dispositivos a traves de diversas redes.
+- Internet/Capa de Internet: Determina el mejor camino a traves de una red.
+- Network interface/Capa de Acceso a la red: Controla los dispositivos del hardware y los medios que forman la red.
+
+- Capa y unidad
+  - Aplicacion: Datos
+  - Transporte: Segmento
+  - Red: Datagrama
+  - Enlace: Trama
+  - Fisica: Bits
+
+1. Aplicacion: Abre una pagina web
+2. Transporte: Divide el mensaje en paquetes, les pone un numero y anade verificacion de errores.
+3. Internet: Anade una direccion origen y destino.
+4. Red: Se envian como bits ya sea por cable o aire.
+
+******* Capas del Modelo TPC-IP
+1. Capa de aplicacion
+   - Define las aplicaciones de red y los servicios de internet. Estos servicios utilizan la capa de transporte para enviar y recibir datos.
+
+2. Capa de transporte
+   - Garantiza que los paquetes lleguen en secuencia y sin errores, al intercambiar la confirmacion de la recepcion de los datos y retransmitir los paquetes perdidos (Transmision Punto a punto).
+
+3. Capa de internet
+   - Acepta y transfiere paquetes para la red, es decir, es responsable de las funciones de direccionamiento, empaquetado y enrutamiento.
+
+*** Metodologias para aplicaciones de Hipertexto
+**** Procesos para el desarrollo web
+ - Se divide en dos partes:
+   1. Front-end
+   2. Back-end
+
+ - Etapas del desarrollo web:
+   1. Briefing: Documento en el que se establecen las bases de los proyectos y la informacion basica para disenar la web.
+   2. Planning: Se establecen los pasos para llegar a los objetos y las diferentes tareas a realizar. Se define cual es la estrategia de contenido y la estrcutura del sitio web mas adecuado para el proyecto.
+      - Existen diversas estructuras:
+        1. Lineal
+        2. Radial
+        3. Jerarquica
+        4. Asociativa
+   3. Diseno grafico: Se hace todo el diseno (colores, tipografias, iconografia y estilos). Es importante usar wireframes (bocetos) para crear un diseno responsivo. Se pueden usar mockups (bocetos con alta fidelidad) y otros fotomontajes para mejorar la previsualizacion del diseno.
+   4. Determinar contenidos web: Se consideran aspectos SEO (visibilidad en buscadores) y SEM (marketing en buscadores) para el contenido, banners e informacion. Ademas de textos legales.
+   5. Pruebas de lanzamiento: Verifican que todo funcione correctamente ademas de ser compatible con navegadores y dispositivos.
+   6. Mantenimiento: Desde actualizaciones hasta nuevas funciones.
+
+**** Aplicaciones de hipertexto
+- Conjunto de tecnicas y metodos organizativos que se aplcian para disenar soluciones de software informatico.
+
+***** Metodologias clasicas
+- Hypertext Desing Model (HDM)
+  - Una aplicacion hipermedia debe disenarse separando tres aspectos:
+    * Modelo conceptual: Tipo de informacion, entidades, relaciones, etc.
+    * Modelo de navegacion: Movimiento del usuario, jerarquia de rutas.
+    * Modelo de interfaz: Presentacion y organizacion de los contenidos.
+
+- Object-Oriented Hypermedia Design Method (OOHDM)
+  - Evolucion de HDM pero orientada a objetos con modelos independientes.
+    * Diseno conceptual: Clases y relaciones.
+    * Diseno navegacional: Nodos de navegacion y enlaces.
+    * Diseno abstracto de interfaz: Presentacion de los elementos.
+    * Implementacion: Se implementan al sistema.
+
+- Web Modeling Language (WebML)
+   - Para aplicaciones web basada en modelos.
+     * Modelo de datos: Entidades y relaciones.
+     * Modelo de estructura: Paginas del sitio.
+     * Modelo de navegacion: Enlaces entre paginas.
+     * Modelo de presentacion: Presentacion de los contenidos.
+
+***** Metodologias modernas
+- Agiles: Desarrollo iterativo, entregas incrementales, colab con el cliente y adaptacion. Usan ciclos:
+  1. Definir
+  2. Disenar
+  3. Implementar
+  4. Probar
+
+- Centrado al usuario (UCD/DCU): Se consideran necesidades del usuario, contexto de uso y pruebas con usuarios.
+  1. Contexto de uso
+  2. Especificar requerimentos
+  3. Diseno
+  4. Evaluar diseno
+
+- Information Architecture: Facilitar que los usuarios encuentren y comprendan la informacion dentro de un sistema.
+  1. Sistema de organizacion
+  2. Sistema de navegacion
+  3. Sistema de etiquetado
+  4. Sistema de busqueda
+
+** Unidad 2. Protocolo HTTP
+*** HTTP
+- Hypertext Transfer Protocol (HTTP) (o Protocolo de Transferencia de Hipertexto en español) es un protocolo de la capa de aplicación para la transmisión de documentos hipermedia, como HTML.
+- Fue diseñado para la comunicación entre los navegadores y servidores web, aunque se puede utilizar para otros propósitos también.
+
+- HTTP es sencillo. esta pensado y desarrollado para ser leído y fácilmente interpretado por las personas.
+- HTTP es extensible. las cabeceras de HTTP, han hecho que este protocolo sea fácil de ampliar y de experimentar con él.
+- HTTP es un protocolo con sesiones, pero sin estados. HTTP es un protocolo sin estado, es decir: no guarda ningún dato entre dos peticiones en la misma sesión. Las cookies permiten crear un contexto común para cada sesión de comunicación.
+- HTTP y conexiones. Una conexión se gestiona al nivel de la capa de trasporte, y por tanto queda fuera del alcance del protocolo HTTP.
+  - HTTP/1.0, HTTP/1.1, HTTP/2
+
+*** Solicitud-Respuesta
+1. El usuario final utiliza la interfaz de la aplicacióno el navegador y envía el comando al servidor a través de Internet.
+2. El servidor web luego transfiere el comando al servidor solicitado.
+3. El servidor solicitado busca los resultados de los comandos dados.
+4. La información procesada se transfiere a la aplicación web que la envía al servidor web.
+5. Ahora el servidor web proporciona los datos solicitados al usuario.
+
+*** Protocolos sin estado
+- HTTP es un protocolo sin estado, esto quiere decir que el servidor no retiene información o un estatus de los usuarios durante múltiples peticiones.
+- Una sesión HTTP solo incluye una interacción petición-respuesta, la cual incluye a su vez una sesión TCP.
+- Sin embargo, algunas aplicaciones Web implementan estados o sesiones del lado del servidor utilizando tecnologías como cookies o variables ocultas dentro de formularios para almacenar información de seguimiento de usuarios.
+
+*** Estrcutura de las peticiones HTTP
+**** URI
