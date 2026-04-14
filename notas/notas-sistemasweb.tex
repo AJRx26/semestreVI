@@ -1,0 +1,316 @@
+% Created 2026-04-13 lun 20:44
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Abraham Nuñez}
+\date{\today}
+\title{Notas Desarrollo de Sistemas Web - Semestre VI}
+\hypersetup{
+ pdfauthor={Abraham Nuñez},
+ pdftitle={Notas Desarrollo de Sistemas Web - Semestre VI},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.2 (Org mode 9.7.39)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introducción}
+\label{sec:orgfa2bf28}
+\begin{itemize}
+\item Profesor: Erika Meneses Rico
+\item Contacto: ermeneses@uv.mx
+\item Materia: Desarrollo de Sistemas Web
+\item Carrera: Ciberseguridad e Infraestructura de Computo
+\end{itemize}
+\section{Información}
+\label{sec:orga89a0cc}
+\begin{itemize}
+\item Tareas y practicas: 30\%
+\item Proyecto: 25\%
+\item Examenes: 20\%
+\item Expocisión: 25\% -> 15\% revisiones y 10\% evaluación final
+\end{itemize}
+\section{Temario}
+\label{sec:orgb9c7efa}
+\subsection{Unidad 1. Fundamentos de tecnologias web}
+\label{sec:orgb9a48ee}
+\subsubsection{Protocolos de Internet}
+\label{sec:org8b59a79}
+\begin{enumerate}
+\item Arquitectura TCP/IP
+\label{sec:orgb26ddb8}
+\begin{itemize}
+\item Los equipos se resuleven mediante protocolos.
+\item Los protocolos son conjuntos de normas para formatos de mensaje y procedimientos que permiten a las maquinas y los programas de aplicacion intercambiar informacion.
+\item La arquitectura TCP/IP es uno de los protocolos mas viejos en los estandares de redes internas, ademas, define cuidadosamente como se meuve la informacion desde el remitente hasta el destinatario.
+
+\begin{enumerate}
+\item TCP
+\begin{enumerate}
+\item Es el encargado de proporcionar un servicio de comunicacion entre dos equipos con autorizacion de ambas partes y sin perdida de datos.
+\item Fue creado entre 1973 a 1974 por Vint Cert y Robert Kahn.
+\item Da soporte a muchas de las aplicaciones mas populares (navegadores, clientes FTP) de internet y protocolos de aplicacion (HTTP, SSH, SMTP y FTP).
+\item Confiable, orientado a conexion, necesita sincronizar numeros de secuencia.
+\end{enumerate}
+
+\item IP
+\begin{enumerate}
+\item Es el conjunto de reglas. para enrutar y direccionar paquetes de datos para que puedan viajar a traves de las redes y llegar al destino correcto.
+\end{enumerate}
+\end{enumerate}
+
+\item TCP/IP son las siglas de Transmission Control Protocol/Internet Protocol.
+\item Desarrollado por DARPA
+\item Usado en ARPANET en el 1971.
+
+\begin{enumerate}
+\item Diferencias entre TCP e IP
+\begin{enumerate}
+\item IP es la parte que obtiene la direccion a la que se envian los datos.
+\item TCP se encarga de la entrega de los datos una vez hallada dicha direccion IP.
+\end{enumerate}
+\end{enumerate}
+\end{itemize}
+\begin{enumerate}
+\item Funcionamiento TCP/IP
+\label{sec:org5e9bb9a}
+\begin{itemize}
+\item Se requieren 3 cosas para la transferencia de datos:
+\begin{enumerate}
+\item Reglas para el empaquetamiento de datos que se envian y reciben.
+\item Red interconectada.
+\item Manera de encontrar la ruta para hacer llegar los datos desde la computadora que envia hasta la que recibe.
+\end{enumerate}
+
+\item TCP/IP descompone cada mensaje en paquetes que se vuelven a ensamblar en el otro extremo. Incluso, cada paquete podria tomar una ruta distinta hasta el equipo de destino si la ruta deja de estar disponible o esta muy congestionada.
+
+\item Tambien divide tareas de comunicacion en capas. El proposito de las capas es crear un sistema estandarizado, para los distintos fabricantes de hardware y software.
+\end{itemize}
+\begin{enumerate}
+\item UDP (User Data Protocol)
+\label{sec:orgaa02bae}
+\begin{itemize}
+\item Es un protocolo de nivel de transporte basado en la transmision sin conexion de datagramas y representa una alternativa al protocolo TCP.
+\item No establece una conexion previa.
+\item Tampoco tiene confirmacion ni control de flujo, por tanto, no se sabe si ha llegado correctamente.
+\item Se usa cuando se prioriza la velocidad sobre la integridad como en los protocolos DHCP, DNS o cuando se trasmite voz o video.
+\end{itemize}
+\item Three Hand Shake - Mensajes de TCP
+\label{sec:orgb70d856}
+\begin{itemize}
+\item Permite verificar si el servidor esta disponible, sincronizar numeros de secuencia y establecer una sesion confiable.
+\begin{itemize}
+\item SYN: El cliente solicita una conexion, iniciando un numero de secuencia aleatorio.
+\item SYN-ACK: El servidor responde confirmando la solicitud del cliente (SYN+1) y enviando su propio numero de secuencia inicial.
+\item ACK: El cliente confirma la recepcion del SYN-ACK del servidor, incrementando el numero de secuencia del servidor.
+\end{itemize}
+\end{itemize}
+\item Puertos
+\label{sec:org4772c70}
+\begin{itemize}
+\item Usa puertos para permitir la comunicacion entre aplicaciones.
+\item Tiene una longitud de 16 bits, por tanto, tiene un rango de 0 a 65535.
+\begin{enumerate}
+\item 0 - 1023: Puertos conocidos
+\item 1024 - 49151: Puertos registrados
+\item 49152 - 65535: Puertos privados/dinamicos
+\end{enumerate}
+\end{itemize}
+\item Arquitectura TCP/IP
+\label{sec:org45f0b5b}
+\begin{itemize}
+\item Application/Capa de Aplicacion: Representa datos para el usuario mas el control de codificacion y de dialogo.
+\item Transport/Capa de Transporte: Admite la comunicacion entre distintos dispositivos a traves de diversas redes.
+\item Internet/Capa de Internet: Determina el mejor camino a traves de una red.
+\item Network interface/Capa de Acceso a la red: Controla los dispositivos del hardware y los medios que forman la red.
+
+\item Capa y unidad
+\begin{itemize}
+\item Aplicacion: Datos
+\item Transporte: Segmento
+\item Red: Datagrama
+\item Enlace: Trama
+\item Fisica: Bits
+\end{itemize}
+
+\item Aplicacion: Abre una pagina web
+\item Transporte: Divide el mensaje en paquetes, les pone un numero y anade verificacion de errores.
+\item Internet: Anade una direccion origen y destino.
+\item Red: Se envian como bits ya sea por cable o aire.
+\end{itemize}
+\begin{enumerate}
+\item Capas del Modelo TPC-IP
+\label{sec:org19f05f0}
+\begin{enumerate}
+\item Capa de aplicacion
+\begin{itemize}
+\item Define las aplicaciones de red y los servicios de internet. Estos servicios utilizan la capa de transporte para enviar y recibir datos.
+\end{itemize}
+
+\item Capa de transporte
+\begin{itemize}
+\item Garantiza que los paquetes lleguen en secuencia y sin errores, al intercambiar la confirmacion de la recepcion de los datos y retransmitir los paquetes perdidos (Transmision Punto a punto).
+\end{itemize}
+
+\item Capa de internet
+\begin{itemize}
+\item Acepta y transfiere paquetes para la red, es decir, es responsable de las funciones de direccionamiento, empaquetado y enrutamiento.
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\subsubsection{Metodologias para aplicaciones de Hipertexto}
+\label{sec:org8c7d919}
+\begin{enumerate}
+\item Procesos para el desarrollo web
+\label{sec:org3c64c1f}
+\begin{itemize}
+\item Se divide en dos partes:
+\begin{enumerate}
+\item Front-end
+\item Back-end
+\end{enumerate}
+
+\item Etapas del desarrollo web:
+\begin{enumerate}
+\item Briefing: Documento en el que se establecen las bases de los proyectos y la informacion basica para disenar la web.
+\item Planning: Se establecen los pasos para llegar a los objetos y las diferentes tareas a realizar. Se define cual es la estrategia de contenido y la estrcutura del sitio web mas adecuado para el proyecto.
+\begin{itemize}
+\item Existen diversas estructuras:
+\begin{enumerate}
+\item Lineal
+\item Radial
+\item Jerarquica
+\item Asociativa
+\end{enumerate}
+\end{itemize}
+\item Diseno grafico: Se hace todo el diseno (colores, tipografias, iconografia y estilos). Es importante usar wireframes (bocetos) para crear un diseno responsivo. Se pueden usar mockups (bocetos con alta fidelidad) y otros fotomontajes para mejorar la previsualizacion del diseno.
+\item Determinar contenidos web: Se consideran aspectos SEO (visibilidad en buscadores) y SEM (marketing en buscadores) para el contenido, banners e informacion. Ademas de textos legales.
+\item Pruebas de lanzamiento: Verifican que todo funcione correctamente ademas de ser compatible con navegadores y dispositivos.
+\item Mantenimiento: Desde actualizaciones hasta nuevas funciones.
+\end{enumerate}
+\end{itemize}
+\item Aplicaciones de hipertexto
+\label{sec:orgbc23d0f}
+\begin{itemize}
+\item Conjunto de tecnicas y metodos organizativos que se aplcian para disenar soluciones de software informatico.
+\end{itemize}
+\begin{enumerate}
+\item Metodologias clasicas
+\label{sec:org93bf14b}
+\begin{itemize}
+\item Hypertext Desing Model (HDM)
+\begin{itemize}
+\item Una aplicacion hipermedia debe disenarse separando tres aspectos:
+\begin{itemize}
+\item Modelo conceptual: Tipo de informacion, entidades, relaciones, etc.
+\item Modelo de navegacion: Movimiento del usuario, jerarquia de rutas.
+\item Modelo de interfaz: Presentacion y organizacion de los contenidos.
+\end{itemize}
+\end{itemize}
+
+\item Object-Oriented Hypermedia Design Method (OOHDM)
+\begin{itemize}
+\item Evolucion de HDM pero orientada a objetos con modelos independientes.
+\begin{itemize}
+\item Diseno conceptual: Clases y relaciones.
+\item Diseno navegacional: Nodos de navegacion y enlaces.
+\item Diseno abstracto de interfaz: Presentacion de los elementos.
+\item Implementacion: Se implementan al sistema.
+\end{itemize}
+\end{itemize}
+
+\item Web Modeling Language (WebML)
+\begin{itemize}
+\item Para aplicaciones web basada en modelos.
+\begin{itemize}
+\item Modelo de datos: Entidades y relaciones.
+\item Modelo de estructura: Paginas del sitio.
+\item Modelo de navegacion: Enlaces entre paginas.
+\item Modelo de presentacion: Presentacion de los contenidos.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\item Metodologias modernas
+\label{sec:org1c7f32b}
+\begin{itemize}
+\item Agiles: Desarrollo iterativo, entregas incrementales, colab con el cliente y adaptacion. Usan ciclos:
+\begin{enumerate}
+\item Definir
+\item Disenar
+\item Implementar
+\item Probar
+\end{enumerate}
+
+\item Centrado al usuario (UCD/DCU): Se consideran necesidades del usuario, contexto de uso y pruebas con usuarios.
+\begin{enumerate}
+\item Contexto de uso
+\item Especificar requerimentos
+\item Diseno
+\item Evaluar diseno
+\end{enumerate}
+
+\item Information Architecture: Facilitar que los usuarios encuentren y comprendan la informacion dentro de un sistema.
+\begin{enumerate}
+\item Sistema de organizacion
+\item Sistema de navegacion
+\item Sistema de etiquetado
+\item Sistema de busqueda
+\end{enumerate}
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+\subsection{Unidad 2. Protocolo HTTP}
+\label{sec:orgd55a62c}
+\subsubsection{HTTP}
+\label{sec:orge148eca}
+\begin{itemize}
+\item Hypertext Transfer Protocol (HTTP) (o Protocolo de Transferencia de Hipertexto en español) es un protocolo de la capa de aplicación para la transmisión de documentos hipermedia, como HTML.
+\item Fue diseñado para la comunicación entre los navegadores y servidores web, aunque se puede utilizar para otros propósitos también.
+
+\item HTTP es sencillo. esta pensado y desarrollado para ser leído y fácilmente interpretado por las personas.
+\item HTTP es extensible. las cabeceras de HTTP, han hecho que este protocolo sea fácil de ampliar y de experimentar con él.
+\item HTTP es un protocolo con sesiones, pero sin estados. HTTP es un protocolo sin estado, es decir: no guarda ningún dato entre dos peticiones en la misma sesión. Las cookies permiten crear un contexto común para cada sesión de comunicación.
+\item HTTP y conexiones. Una conexión se gestiona al nivel de la capa de trasporte, y por tanto queda fuera del alcance del protocolo HTTP.
+\begin{itemize}
+\item HTTP/1.0, HTTP/1.1, HTTP/2
+\end{itemize}
+\end{itemize}
+\subsubsection{Solicitud-Respuesta}
+\label{sec:org87cec2e}
+\begin{enumerate}
+\item El usuario final utiliza la interfaz de la aplicacióno el navegador y envía el comando al servidor a través de Internet.
+\item El servidor web luego transfiere el comando al servidor solicitado.
+\item El servidor solicitado busca los resultados de los comandos dados.
+\item La información procesada se transfiere a la aplicación web que la envía al servidor web.
+\item Ahora el servidor web proporciona los datos solicitados al usuario.
+\end{enumerate}
+\subsubsection{Protocolos sin estado}
+\label{sec:org8714ab1}
+\begin{itemize}
+\item HTTP es un protocolo sin estado, esto quiere decir que el servidor no retiene información o un estatus de los usuarios durante múltiples peticiones.
+\item Una sesión HTTP solo incluye una interacción petición-respuesta, la cual incluye a su vez una sesión TCP.
+\item Sin embargo, algunas aplicaciones Web implementan estados o sesiones del lado del servidor utilizando tecnologías como cookies o variables ocultas dentro de formularios para almacenar información de seguimiento de usuarios.
+\end{itemize}
+\subsubsection{Estrcutura de las peticiones HTTP}
+\label{sec:org8ea66ba}
+\begin{enumerate}
+\item URI
+\label{sec:orgac7c388}
+\end{enumerate}
+\end{document}
