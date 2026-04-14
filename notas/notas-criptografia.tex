@@ -1,0 +1,519 @@
+% Created 2026-04-13 lun 11:00
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Abraham Nuñez}
+\date{\today}
+\title{Notas Criptografia - Semestre VI}
+\hypersetup{
+ pdfauthor={Abraham Nuñez},
+ pdftitle={Notas Criptografia - Semestre VI},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.2 (Org mode 9.7.39)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introdución}
+\label{sec:org63b7c62}
+\begin{itemize}
+\item Profesor: Hector Xavier Limón Riaño
+\item Materia: Criptografia
+\item Contacto: xavier120@hotmail.com
+\item Carrera: Ciberseguridad e Infraestructura de Computo
+\end{itemize}
+\section{Información}
+\label{sec:org222db1e}
+\subsection{Prerrequisitos:}
+\label{sec:org54691bc}
+\begin{itemize}
+\item Estructuras de datos (Python)
+\item Matematicas para la ciberseguridad
+\item Ciberseguridad
+\item Manipulacion de archivos de texto y binarios
+\item Manipulacion de cadenas de texto y binarios
+\item Manipulacion de datos binarios
+\item Sockets TCP
+\end{itemize}
+\subsection{Evaluación:}
+\label{sec:orgae33651}
+\begin{itemize}
+\item Examenes: 60\%
+\item Tareas y practicas: 20\%
+\item Proyecto: 20\%
+\end{itemize}
+\subsection{Herramientas:}
+\label{sec:org9e9829d}
+\begin{itemize}
+\item Eminus
+\item Entorno controlado para examenes
+\item Practical Cryptography in Python - Libro de Referencia
+\end{itemize}
+\section{Temario}
+\label{sec:orgfa4fca1}
+\subsection{Descripción}
+\label{sec:org8eec1a4}
+Es un elemento fundamental de la protección de la información.
+\subsection{Unidad 1}
+\label{sec:orge9994c3}
+\begin{itemize}
+\item Cifrado Cesar
+\item Usos de la criptografia
+\item Criptografia y criptoanalisis
+\end{itemize}
+\subsection{Unidad 2}
+\label{sec:orge964742}
+\begin{itemize}
+\item Funciones de hash
+\item AES
+\item Modos de operación de AES
+\item Padding
+\item Manejo de llaves y vectores de inicialización
+\end{itemize}
+\subsection{Unidad 3}
+\label{sec:org41382e4}
+\begin{itemize}
+\item Llaves publicas y privadas
+\item RSA
+\item PKCS
+\end{itemize}
+\subsection{Unidad 4}
+\label{sec:org16eb9f9}
+\begin{itemize}
+\item MAC, HMAC. CBC-MAC
+\item Firmas digitales
+\item Curvas
+\end{itemize}
+\section{Introducción a la criptografia}
+\label{sec:org51e20ae}
+\begin{itemize}
+\item CIA:
+Confidencialidad -> Impide ver algo a quien no debe verlo.
+Integridad -> Evitar la manipulación de los datos.
+Disponibilidad -> Tener la posibilidad de acceder a los datos (que tengamos permiso) en cualquier momento.
+\end{itemize}
+
+Autenticar -> Probar que eres quien dices ser.
+Autorizar -> Dar acceso al que se autentica mediante permisos.
+
+Secretos
+
+Llaves privadas
+
+Datos pueden estar en 3 estados:
+\begin{itemize}
+\item Reposo -> Esta almacenado en disco.
+\item Transito -> Estan viajando por la red.
+\item Uso -> Estan en la memoria
+\end{itemize}
+\subsection{STRIDE}
+\label{sec:org60be3eb}
+\begin{itemize}
+\item Spoofing: Suplantar la identidad en redes informaticas haciendose pasar por una persona, entidad o sistema de confianza para engañar a la victima. Se puede mitigar por firmas digitales, contraseñas, etc.
+\item Tampering: Alterar, manipular o interferir con algo sin autorización, generalmente con el fin de causar daño, obtener beneficios ilegales o comprometer la integridad de un sistema, proceso o evidencia. Usa la tecnologia de hash para mitigarlo.
+\item Repudation: El acto de negar, por parte de una persona o sistema, haber realizado una acción, transacción o comunicación especifica.
+\item Information disclosure: Acceso no autorizado o la revelación inadvertida de datos sensibles, confidenciales o privados a personas, sistemas o entidades que no deberian tener acceso a ellos.
+\item Denegation of service: Hacer que un sistema, servicio o red sea inaccesible para sus usuarios legitimos.
+\item Elevation of privileges: Otorgar permisos a usuarios que no deben de tener dichos permisos.
+\end{itemize}
+\subsection{Origen de la criptografia}
+\label{sec:orgcc4257a}
+\begin{itemize}
+\item Viene del griego kryptos que significa oculto y graphe que signfica grafo o escritura.
+\item Es un ambito de la criptologia que se ocupa de las tecnicas de cifrado o codificado destinadas a alterar las representaciones linguisticas de cierntos mensajes con el fin de hacerlos ininteligibles.
+\item Se encarga del estudio de los algoritmos, protocolos criptograficos, y sistemas que se utilizan para proteger la información y dotar de seguridad a las comunicaciones y a las entidades que se comunican.
+\item El criptoanalisis es la parte que se dedica al estudio de los sistema criptograficos con el fin de encontrar debilidades en los sistemas y romper su seguridad sin el conocimiento de información secreta.
+\end{itemize}
+\subsection{Criptografia}
+\label{sec:orgbd8c6df}
+\begin{itemize}
+\item Esta en todos lados: ssh, criptomonedas y cualquier aplicación web.
+\item Es un pilar de la seguridad informatica moderna.
+\item La criptografia no es solo cifrado, se utiliza tambien para autenticación e integridad de los datos.
+\item La criptografia bien implementada es efectiva sin importar:
+\begin{itemize}
+\item Que tan bien educado este el adversario.
+\item Que tantas computadoras tenga el adversario.
+\item Si el adversario conoce los algoritmos usados.
+\item Que tan motivado este el adversario.
+\end{itemize}
+\item La efectivad de la criptografia depende usualmente del contexto.
+\item La buena seguridad depende de siempre kde tus elecciones.
+\item Se debe de tomar la decisión adecuada de acuerdo al contexto del problema.
+\item Nunca utilices un metodo criptografico si no entiendes su contexto de uso y su correcta configuración.
+\item Nunca utilices un metodo criptografico usando la configuración por defecto a menos que la conozcas.
+\item Revisa bien los metodos criptograficos que aplicaras muchos tienen vulnerabilidades conocidas.
+\item TLS: Transport Layer Security, es la base para otras tecnologias como HTTPS y VPN.
+\item OpenSSL
+\item Determinismo -> Es predecible
+\end{itemize}
+\subsubsection{Tres protecciones principales de la criptografia}
+\label{sec:org2c4eadf}
+\begin{itemize}
+\item Autenticidad: Firmas digitales, Codigos MAC.
+\item Confidencialidad: Cifrado, intercambio de llaves.
+\item Integridad: Hashing.
+\end{itemize}
+\subsubsection{AES}
+\label{sec:orgbd423b0}
+\begin{itemize}
+\item Estandar de cifrado asimetrico.
+\item Advanced Encryption Standard.
+\item Es el algoritmo de cifrado simetrico mas usado en la actualidad.
+\item Lo utiliza TLS (HTTPS) y las funciones de cifrado de sistemas de archivos de un OS.
+\item Debe de saberse utilizar, tiene diferentes modos de operacion, algunos de ellos inseguros.
+\item Existen variantes, como AES-128 que utiliza una llave de 16 bytes.
+\item Una llave con contenido aleatorio es una llave valida.
+\end{itemize}
+\subsubsection{YANAC}
+\label{sec:orgcc2f09b}
+\begin{itemize}
+\item YANAC: You Are Not A Criptographer. Acronimo popular en la comunidad criptografica.
+\item Dont roll your own crypto.
+\item Es mas facil usar mal los metodos criptograficos que usarlos bien.
+\item Abstente de crear tus propios metodos criptograficos.
+\item Hasta expertos criptograficos han creado metodos con vulnerabilidades.
+\item Un nuevo metodo pasa por muchas revisiones de expertos antes de ser usado de forma practica.
+\item Incluso debes de abstenerte de hacer tus propias
+\end{itemize}
+\subsubsection{Codificar}
+\label{sec:orgd4a0321}
+\begin{itemize}
+\item Transformar de una representacion a otra sin perdida.
+\item Base64
+\end{itemize}
+\subsubsection{Cifrar}
+\label{sec:orge4f3a4d}
+\begin{itemize}
+\item Es el proceso de convertir informacion sensible en un formato ilegible mediante un secreto (llave) a las que solo partes autorizadas tienen acceso.
+\end{itemize}
+\subsubsection{Ofuscar}
+\label{sec:orgaa3e0c9}
+\begin{itemize}
+\item Se refiere a encubrir el significado haciendola mas confusa y complicada de interpretar.
+\end{itemize}
+\subsubsection{Hashear}
+\label{sec:org2138129}
+\begin{itemize}
+\item Es la funcion de aplicar una funcion de hash, es decir, que transforma un conjunto de datos en una cadena alfanumerica unica que actua como una huella digital del contenido original. No es invertible.
+\end{itemize}
+\subsubsection{Cifrado cesar}
+\label{sec:org9cc3fd6}
+\begin{itemize}
+\item Se basaen reemplazar una letra de un mensaje por otra letra.
+\item Se puede aplicar tanto a texto como a binario.
+\item Si es binario debe considerarse el modulo 256, si es texto debe cuidarse el valor ASCII
+\end{itemize}
+\subsubsection{Aritmetica Modular}
+\label{sec:org25181e1}
+\begin{itemize}
+\item 4 \% 4
+\item (144 + 300) \% 256 = 188
+\item (188 - 300) \% 256 = 144
+\item El resultado sera siempre un numero natural.
+\end{itemize}
+\subsubsection{Binario}
+\label{sec:orged639ac}
+\begin{itemize}
+\item El binario se manipula en paquetes de bytes (8 bits), no se puede manipular directamentes menos (al menos en las arquitecturas populares modernas).
+
+\item Tarea: Cifrado cesar para archivo de texto.
+\end{itemize}
+\subsection{Hashing}
+\label{sec:orge39629f}
+\begin{itemize}
+\item 3**2 = 9 -> Biyectivas
+\item 22 \% 2 = 0 ->
+
+\item El hashing es uno de los elementos principales de la seguridad criptografia.
+\item Algunas funciones de hash son mejores que otras cumpliendo las propiedades antes mencionadas.
+\item Buenas: SHA-256, SHA-512
+\item No tan buenas: MD5, SHA-1. Estas no deberian ser usadas por sus vectores de seguridad.
+\item Solo funciona con cadenas binarias
+\end{itemize}
+\subsubsection{Cifrado vs Hashing}
+\label{sec:org70dea18}
+\begin{itemize}
+\item El cifrado permite tener confidencialidad en los mensajes, pero ayuda a verificar la interidad de los mismos.
+\item Confidencialidad: Solo las personas autorizadas pueden leer el mensaje.
+\item Integridad: Las personas no autorizadas no pueden cambiar el contenido del mensaje sin que dicho cambio pueda ser percibido.
+\item Solo porque un mensaje este cifrado (no pueda ser leido) no significa que no pueda ser alterado, incluso de formas que tengan sentido despues de cifrar.
+\end{itemize}
+\begin{enumerate}
+\item DIGESTS
+\label{sec:orge735539}
+\begin{itemize}
+\item Su traduccion seria ``resumen''
+\item Una funcion de hash produce un resumen o huella digital de algun contenido binario
+\item Este resumen puede utilizarse como medida para verificacion de tampering (alteraciones de informacion), utilizadas en analisis forense.
+\item En una transmision la idea es transmitir el mensaje junto con su digest, para verificar que haya llegado sin alteraciones.
+\end{itemize}
+\begin{enumerate}
+\item hashlib
+\label{sec:orge5edf4b}
+import hashlib
+md5hasher = hashlib.md5(b'cadenaBin')
+md5hasher.hexdigest()
+md5hasher.update(b'continuacionCadenaBin')
+md5hasher.hexdigest()
+\end{enumerate}
+\end{enumerate}
+\subsubsection{Funciones de hash}
+\label{sec:org99a7a6f}
+\begin{itemize}
+\item Una funcion de hash toma un contenido de cualquier tamano(hasta vacio) y siempre produce un numero de un tamano fijo.
+\item Por ejemplo, MD5 produce una salida de 16 bytes
+\item Este tamano tiene una relacion con la seguridad de la funcion entre mas pequenos es peor.
+\item Dominio -> Codominio
+\item Una vez mas, las propiedades que una funcion de hash debe de cumplir son:
+\begin{itemize}
+\item El mismo documento siempre produce el mismo digest.
+\item El digest parece aleatorio, si tienes el digest eso no te da pistas del documento de entrada.
+\item Idealmente cada documento con contenido diferente deberia tener un digest diferente (lo cual en realidad no es posible).
+\end{itemize}
+
+\item Los digests son como huellas digitales: si tienes al sujeto se puede verificar que sea quien dice ser mediante su huella digital.
+\item Sin embargo, si solo tiene la huella digital no es facil determinar el sujeto que la posee.
+\item Es facil calcular el digests de un documento, pero si tiene solo el digest es muy dificil determinar el documento que lo produjo, entre mas dificil mejor.
+\item Por esta razon son llamadas funciones de una sola via, se puede ir de entrada a la salida pero no al revez.
+\end{itemize}
+\begin{enumerate}
+\item Ejercicio
+\label{sec:org6b94463}
+
+\begin{itemize}
+\item Extiende el cifrador ce Cesar binario para que incluya una verificacion de integridad mediante SHA-256
+\item El profesor demostrara como agregar el hash en el cifrado
+\item Tu tarea consistira en verificar el hash al descifrar, lanzando una excepcion si el archivo cifrado es alterado.
+\end{itemize}
+\end{enumerate}
+\subsubsection{Hashing}
+\label{sec:orga23ef0e}
+\begin{itemize}
+\item En computacion, el termino funcion de hash casi siempre se refiere a una funcion criptografica.
+\item Sin embargo, el termino general
+\item El tamano del codominio depende de la funcion de hash, por ejemplo, ya se dijo que MD5 genera digest de 16 bytes. Cual es el tamano del codominio para MD5?
+\item SI se considera un numero muy grande de documentos de entrada es posible que muchos de ellos produzcan el mismo hash.
+\item Dado lo anterior, las funciones de hash tienen perdida. Se pierde informacion de la fuente al digest.
+\item Que tenga perdida es importante, de lo contrario habria una forma de regresar del digest al documento original.
+\item Considerando de nuevo la funcion par
+\item Cualquier numero puede dar como resultado 0 (par) o 1 (inpar)
+\item Seria posible saber, dado un valor 0 o 1que numero produjo dicho resultado
+\item Esta funcion tiene todas las propiedades: tienen perdida, comprime la entrada,
+\item Las propiedades de consistencia, compresion y perdida son comunes en cualquier funcion de hash pero no suficientes para ser seguras o criptograficas.
+\item Se requieren las sig. propiedades:
+\begin{itemize}
+\item Resistencia de preimagen.
+\item Segunda resistencia de preimagen.
+\item Resistencia de colisiones.
+\end{itemize}
+\end{itemize}
+\begin{enumerate}
+\item Resistencia de preimagen
+\label{sec:org124fafc}
+\begin{itemize}
+\item Es el conjunto de entradas de una funcion de hash que producen
+\item Una preimagen de una funcion de hash H y un valor de hash k es el conjunto de valores x por el cual H(x) = k
+\item Al tener un digest, existe un numero infinito de documentos que produjeron dicho digest.
+\item Eso no quiere decir que dado un digest sea facil encontrar un elemento de la preimagen
+\item La resistencia de preimagen es basicamente: si tengo un digest y no se como se obtuvo, no pudo ni siquiera encontrar un elemento en la preimagen sin realizar una cantidad ridicula de trabajo computacional.
+\item Intratable -> Se puede resolver, pero cuesta demasiado
+\item No computable -> No se puede resolver con una computadora
+\item Idealmente, los elementos de la preimagen deberian estar muy separados entre ellos y no tener un espaciado predecible
+\item El hecho de que las funciones de hash tengan perdida ayuda a la resistencia de preimagen
+\item Si una funcion de hash tiene buena resistencia de preimagen, los ataques en este sentido seran aleatorios o bien consistiran en enumeraciones muy largas (fuerza bruta) hasta encontrar una coincidencia, lo cual no es computacionalmente tratable.
+\item Al proceso de intentar encontrar un elemento de la preimagen dado un valor de hash se le llama invertir el hash
+\item Encontrar un inverso
+\end{itemize}
+\item Segunda resistencia de preimagen
+\label{sec:org3767e60}
+\begin{itemize}
+\item Si tu tienes al menos un documento que produce un hash conocido, sigue siendo muy dificil encontrar otro documento que produzca el mismo hash
+\item 
+\end{itemize}
+\item Resistencia a colisiones
+\label{sec:org03f1b7f}
+\begin{itemize}
+\item Significa que es dificil encontrar dos entradas que produzcan el mismo hash y garantiza que sea computacionalmente inviable encontrar dos entradas diferentes que produzcan el mismo valor hash.
+\item No un hash especifico sino cualquier hash.
+\item Propiedad avalancha: El valor de hash cambia drasticamente y de forma impredecible, un minimo del 50\% de los bits del hash deberia ser diferente.
+\end{itemize}
+\end{enumerate}
+\subsubsection{Seguridad en funciones de hash}
+\label{sec:orga014e73}
+\begin{itemize}
+\item Hash es usado para el almacenamiento de passwords
+\end{itemize}
+\subsubsection{Cifradores de bloque y de flujo}
+\label{sec:org44aa179}
+\begin{itemize}
+\item AES puede operar como cifrador de flujo, basta con usar un modo de AES
+\end{itemize}
+\subsubsection{Modo de operacion de AES}
+\label{sec:orgd416295}
+\begin{itemize}
+\item AES tiene diversos modos de operacion, en este tema nos concentraremos en 3:
+\begin{itemize}
+\item Electronic code book (ECB) (No usar nunca)
+\item Cipher block chaining (CBC)
+\item Counter mode (CTR)
+\end{itemize}
+\end{itemize}
+\subsubsection{Seguridad en cifrado simetrico}
+\label{sec:org27c0086}
+\begin{itemize}
+\item Para tener un cifrado seguro y efectivo se necesita:
+\begin{enumerate}
+\item Cifrar el mismo mensaje de forma diferente cada vez que se haga, aunque se use la misma
+llave.
+\item Eliminar patrones predecibles entre los bloques. (Maleabilidad entre bloques)
+\end{enumerate}
+\end{itemize}
+\subsubsection{Cifrado asimetrico}
+\label{sec:orgf5053bd}
+\begin{itemize}
+\item Las tecnicas asimetricas son variadas, no se limitan solo a cifrado
+\begin{itemize}
+\item Por ejemplo: firmas digitales e intercambio de llaves
+\end{itemize}
+\item Algoritmo RSA
+\item Existen algoritmos derivados de las curvas elipticas
+\end{itemize}
+\begin{enumerate}
+\item Dos llaves
+\label{sec:org34ac4dd}
+\begin{itemize}
+\item Se necesitan dos llaves: una publica y otra privada
+\end{itemize}
+\item RSA
+\label{sec:org5f5ef38}
+\begin{itemize}
+\item RSA esta casi obsoleto, debido a multiples vulnerabilidades
+\item Sirve para ejemplicar el cifrado asimetrico
+
+\item Factorización de primos
+
+\item Las llaves son basicamente numeros primos muy grandes que se
+\item Estos numeros son coprimos
+
+\item Si solo se tiene uno de los dos
+\end{itemize}
+\end{enumerate}
+\subsubsection{Integridad de mensajes, firmas y certificados}
+\label{sec:orgcdbe7e8}
+\begin{itemize}
+\item MACS
+\item Firmas digitales
+\item Certificados
+
+\item ``Keyed Hashes''
+\item Uso de criptografia asimetrica para integridad y autenticidad de mensajes
+\item Certificados y su diferencia con las llaves
+\end{itemize}
+\begin{enumerate}
+\item Message Authentication Code (MAC)
+\label{sec:org8b4ce2e}
+\begin{itemize}
+\item Un cifrado puede ser alterado de formas que tenga sentido.
+\item Un MAC es cualquier codigo o dato transmitido junto con el mensaje que puede ser evaluado para determinar si el mensaje fue alterado.
+\item Usualmente se utiliza un hash como
+\end{itemize}
+\begin{enumerate}
+\item MAC, HMAC, CBC-MAC
+\label{sec:orga611209}
+\begin{itemize}
+\item Un MAC seguro no solo es codigo (hash) tambien debe incluir una llave.
+\item Una llave MAC no esta relacionada con el cifrado
+\item Sirve para asegurar que el codigo de autenticacion de mensaje solo puede ser computado por las entidades que conocen la llave.
+\item No se debe de asumir que el atacante no conoce la funcion de hash, recuerda que una buena seguridad significa\ldots{}
+\item MAC protege la integridad del mensaje
+\item Un atacante sin la llave no debe poder alterar el mensaje sin que se pueda detectar.
+\item Mientras la llave se mantenga privada, el MAC
+\end{itemize}
+\begin{enumerate}
+\item HMAC
+\label{sec:org4df28e0}
+\begin{itemize}
+\item Hash-based Message Authentication Code
+\item Es basicamente un hash keyed
+\item Las funciones de hash son deterministas, dada la misma entrada siempre se produce la misma salida.
+\item Solo agregar al inicio o al final
+\item H(K XOR opad, H((K XOR ipad), text))
+\begin{itemize}
+\item H es la funcion de hash
+\item K es la llave que debe de cumplir ciertos requisitos
+\item text es cualquier binario que representa el contenido de entrada
+\item opad e ipad son dos valoresi
+\item B es el tamano del bloque de H (128 bytes)
+\begin{enumerate}
+\item Si K es mas corto que B, entonces a K se le tienen que agregar ceros de padding hasta ser de longitud B.
+\item Si K es mas largo que B, entonces K se reduce aplicando H a K, osea H(K)
+\item Si se aplico 2 y la llave quedo muy corta, entonces se aplica 1
+\end{enumerate}
+\item ipad se define com el byte 0x36 repetido B veces
+\item opad es el byte 0x5c repetido B veces
+\item Los pads parecen arbitrarios pero tienen un sentido de seguridad matematico que ayuda a mitigar
+\end{itemize}
+\item Primero computas
+\end{itemize}
+\item CBC-MAC
+\label{sec:org9e73108}
+\begin{itemize}
+\item Similar a AES-CBC
+\item Recordar que CBC es Cipher Block Chaining
+\item Un MAC a menudo se le llama ``tag'' (mensaje) del mensaje
+\item Es info extra que se asocia al principio del contenido
+\item En notacion matematica un tag se denota a menudo como t
+\item Asi, un MAC sobre un mensaje m1 produce un tag t1
+\item El par (m1, t1) es transmitido al receptor para ser verificado
+\end{itemize}
+\begin{enumerate}
+\item MAC Prepend Attack
+\label{sec:orgbbdba20}
+\begin{itemize}
+\item Es posible mandar un mensaje manipulado y hacer que parezca que es el mensaje M1 o M2, suponiendo que esten generados por la misma llave.
+\end{itemize}
+\begin{enumerate}
+\item Proceso de ataque, anteponiendo M1 a M2
+\label{sec:org4f2b50f}
+\begin{itemize}
+\item Recuperar el primer bloque de M2, denominado M21 (como es AES se toman los primeros 16 bytes)
+\item Recuperar el resto de bloques de M2, denominado M2r
+\item Obtener M'2 = t1 XOR M21
+\item M3 = M1 + M'2 + M2r (+ significa concatenacion)
+\item Con esto t3 = t2
+
+\item Basicamente lo que hace el atacante es reemplazar el primer bloque de M2 por uno manipulado.
+\item La victima vera todo el mensaje M1 completo (con su padding), un bloque que se vera posiblemente corrupto y el mensaje M2 sin su primer bloque.
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\item Firmas digitales
+\label{sec:org964dff9}
+\begin{itemize}
+\item Protocolo reto-respuesta
+\begin{enumerate}
+\item El cliente recibe la llave publica del servidor (certificado).
+\item El cliente le manda un reto al servidor.
+\item El cliente le pide al servidor que firme el dato.
+\item El servidor firma el dato y regresa la firma.
+\item El cliente comprueba la firma con la llave publica.
+\end{enumerate}
+\end{itemize}
+\end{enumerate}
+\end{document}

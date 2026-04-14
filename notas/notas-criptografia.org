@@ -344,3 +344,11 @@ md5hasher.hexdigest()
 
 - Basicamente lo que hace el atacante es reemplazar el primer bloque de M2 por uno manipulado.
 - La victima vera todo el mensaje M1 completo (con su padding), un bloque que se vera posiblemente corrupto y el mensaje M2 sin su primer bloque.
+
+**** Firmas digitales
+- Protocolo reto-respuesta
+  1. El cliente recibe la llave publica del servidor (certificado).
+  2. El cliente le manda un reto al servidor.
+  3. El cliente le pide al servidor que firme el dato.
+  4. El servidor firma el dato y regresa la firma.
+  5. El cliente comprueba la firma con la llave publica.

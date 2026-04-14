@@ -5,7 +5,6 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import padding
 import os
 
-
 def ayuda():
     mensaje = """
     Script que simula un ataque antepuesto en CBC-MAC.
@@ -32,7 +31,6 @@ def ayuda():
     5. Con esto t3 = t2 (dado que antepusimos m1)
     """
 
-
 def calcular_xor_bloque(bloque1: bytes, bloque2: bytes) -> bytes:
     """
     Calcula el XOR entre bloques.
@@ -47,7 +45,6 @@ def calcular_xor_bloque(bloque1: bytes, bloque2: bytes) -> bytes:
         res.append(bloque1[i] ^ bloque2[i])
     return bytes(res)
 
-
 def cifrar(message, key):
     aesCipher = Cipher(
         algorithms.AES(key), modes.CBC(bytes(16)), backend=default_backend()
@@ -57,7 +54,6 @@ def cifrar(message, key):
     padded_message = padder.update(message) + padder.finalize()
     cifrado = aesEncryptor.update(padded_message)
     return cifrado
-
 
 def descifrar(message, key):
     aesCipher = Cipher(
@@ -69,15 +65,13 @@ def descifrar(message, key):
     mensaje = unpadder.update(descifrado) + unpadder.finalize()
     return mensaje
 
-
-def ataque(m1, m2):
-    t1 = m1[-16:]
-    m21 = m2[:16]
-    m2r = m2[16:]
-    m_prima2 = calcular_xor_bloque(t1, m21)
-    m3 = m1 + m_prima2 + m2r
-    return m3, m_prima2, m2r
-
+def ataque(M1, M2):
+    t1 = M1[-16:]
+    M21 = M2[:16]
+    M2r = M2[16:]
+    M_prima2 = calcular_xor_bloque(t1, M21)
+    M3 = M1 + M_prima2 + M2r
+    return M3, M_prima2, M2r
 
 def descifrar_ataque(message, key):
     aesCipher = Cipher(
@@ -89,15 +83,16 @@ def descifrar_ataque(message, key):
     # mensaje = unpadder.update(descifrado) + unpadder.finalize()
     return descifrado
 
-
 if __name__ == "__main__":
     key = os.urandom(32)
     message1 = b"Hola soy Skull!!"
-    message2 = b"hola soy skull??"
+    message2 = b"Quien eres ?????"
+    #message1 = b"hello world, hello world, hello world, hello world"
+    #message2 = b"Hello world, hello world, hello world, hello world"
 
     cifrado1 = cifrar(message1, key)
     cifrado2 = cifrar(message2, key)
-    cifrado3, m_prima2, m2r = ataque(cifrado1, cifrado2)
+    cifrado3, M_prima2, M2r = ataque(cifrado1, cifrado2)
 
     t1 = cifrado1[-16:]
     t2 = cifrado2[-16:]
@@ -105,7 +100,7 @@ if __name__ == "__main__":
 
     descifrado1 = descifrar(cifrado1, key)
     descifrado2 = descifrar(cifrado2, key)
-    # descifrado3 = (descifrar_ataque(cifrado3, key) + descifrar_ataque(m_prima2, key) + descifrar_ataque(m2r, key))
+    descifrado3 = descifrar_ataque(cifrado1, key) + descifrar_ataque(M_prima2, key) + descifrar_ataque(M2r, key)
 
     print(f"[+] Cifrado1: {cifrado1}")
     print(f"[+] CBC-MAC1: {t1}")
@@ -118,6 +113,6 @@ if __name__ == "__main__":
     print()
 
     print(f"[+] Cifrado3: {cifrado3}")
-    # print(f"[+] Mensaje3: {descifrado3}")
+    print(f"[+] Mensaje3: {descifrado3}")
     print(f"[+] CBC-MAC3: {t3}")
     print(f"[+] Verificacion: {t3 == t2}")
