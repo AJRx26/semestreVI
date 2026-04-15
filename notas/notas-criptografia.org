@@ -69,12 +69,19 @@ Datos pueden estar en 3 estados:
 - Uso -> Estan en la memoria
 
 ** STRIDE
-- Spoofing: Suplantar la identidad en redes informaticas haciendose pasar por una persona, entidad o sistema de confianza para engañar a la victima. Se puede mitigar por firmas digitales, contraseñas, etc.
-- Tampering: Alterar, manipular o interferir con algo sin autorización, generalmente con el fin de causar daño, obtener beneficios ilegales o comprometer la integridad de un sistema, proceso o evidencia. Usa la tecnologia de hash para mitigarlo.
-- Repudation: El acto de negar, por parte de una persona o sistema, haber realizado una acción, transacción o comunicación especifica.
-- Information disclosure: Acceso no autorizado o la revelación inadvertida de datos sensibles, confidenciales o privados a personas, sistemas o entidades que no deberian tener acceso a ellos.
-- Denegation of service: Hacer que un sistema, servicio o red sea inaccesible para sus usuarios legitimos.
-- Elevation of privileges: Otorgar permisos a usuarios que no deben de tener dichos permisos.
+- STRIDE es un modelo de amenazas, utilizado para ayudar a razonar y encontrar amenazas a un sistema.
+
+- Spoofing: Suplantar la identidad en redes informaticas haciendose pasar por una persona, entidad o sistema de confianza para engañar a la victima. Se puede mitigar por firmas digitales, contraseñas, etc. -> Autenticidad
+
+- Tampering: Alterar, manipular o interferir con algo sin autorización, generalmente con el fin de causar daño, obtener beneficios ilegales o comprometer la integridad de un sistema, proceso o evidencia. Usa la tecnologia de hash para mitigarlo. -> Integridad
+
+- Repudation: El acto de negar, por parte de una persona o sistema, haber realizado una acción, transacción o comunicación especifica. -> No repudio
+
+- Information disclosure: Acceso no autorizado o la revelación inadvertida de datos sensibles, confidenciales o privados a personas, sistemas o entidades que no deberian tener acceso a ellos. -> Confidencialidad
+
+- Denegation of service: Hacer que un sistema, servicio o red sea inaccesible para sus usuarios legitimos. -> Disponibilidad
+
+- Elevation of privileges: Otorgar permisos a usuarios que no deben de tener dichos permisos. -> Autorizacion
 
 ** Origen de la criptografia
 - Viene del griego kryptos que significa oculto y graphe que signfica grafo o escritura.
@@ -94,12 +101,22 @@ Datos pueden estar en 3 estados:
 - La efectivad de la criptografia depende usualmente del contexto.
 - La buena seguridad depende de siempre kde tus elecciones.
 - Se debe de tomar la decisión adecuada de acuerdo al contexto del problema.
-- Nunca utilices un metodo criptografico si no entiendes su contexto de uso y su correcta configuración.
-- Nunca utilices un metodo criptografico usando la configuración por defecto a menos que la conozcas.
+  - Nunca utilices un metodo criptografico si no entiendes su contexto de uso y su correcta configuración.
+  - Nunca utilices un metodo criptografico usando la configuración por defecto a menos que la conozcas.
 - Revisa bien los metodos criptograficos que aplicaras muchos tienen vulnerabilidades conocidas.
 - TLS: Transport Layer Security, es la base para otras tecnologias como HTTPS y VPN.
 - OpenSSL
 - Determinismo -> Es predecible
+
+*** Herramientas
+- cryptography: Biblioteca de python con todos los algoritmos criptograficos que se usaran en el curso.
+- gmpy2: Biblioteca python para el tratamiento matematico de numeros grandes.
+
+*** Cifrado Cesar
+- Consiste en reemplazar una letra de un mensaje por otra letra, o tambien, desplazar por un valor x (shift-cipher) el numero de letras.
+  - Se puede aplica tanto a texto como a binario.
+    - Si es binario debe considerarse el modulo 256
+    - Si es texto debe considerarse el valor ASCII
 
 *** Tres protecciones principales de la criptografia
 - Autenticidad: Firmas digitales, Codigos MAC.
@@ -157,7 +174,11 @@ Datos pueden estar en 3 estados:
 - 3**2 = 9 -> Biyectivas
 - 22 % 2 = 0 ->
 
-- El hashing es uno de los elementos principales de la seguridad criptografia.
+- El hashing es uno de los elementos principales de la seguridad criptografia. Involucra el concepto de una funcion de una sola via y huella digital.
+  - Una funcion hash solo funciona si cumple con los siguientes requisitos:
+    1. Producen valores unicos y repetibles, es decir, son deterministas para cada entrada.
+    2. El valor de salida no da ninguna pista (o patron) con respecto a la entrada que lo produjo.
+
 - Algunas funciones de hash son mejores que otras cumpliendo las propiedades antes mencionadas.
 - Buenas: SHA-256, SHA-512
 - No tan buenas: MD5, SHA-1. Estas no deberian ser usadas por sus vectores de seguridad.
@@ -167,15 +188,15 @@ Datos pueden estar en 3 estados:
 - El cifrado permite tener confidencialidad en los mensajes, pero ayuda a verificar la interidad de los mismos.
 - Confidencialidad: Solo las personas autorizadas pueden leer el mensaje.
 - Integridad: Las personas no autorizadas no pueden cambiar el contenido del mensaje sin que dicho cambio pueda ser percibido.
-- Solo porque un mensaje este cifrado (no pueda ser leido) no significa que no pueda ser alterado, incluso de formas que tengan sentido despues de cifrar.
+- Solo porque un mensaje este cifrado (no pueda ser leido) no significa que no pueda ser alterado, incluso de formas que no tengan sentido despues de cifrar.
 
-**** DIGESTS
+*** DIGESTS
 - Su traduccion seria "resumen"
 - Una funcion de hash produce un resumen o huella digital de algun contenido binario
 - Este resumen puede utilizarse como medida para verificacion de tampering (alteraciones de informacion), utilizadas en analisis forense.
 - En una transmision la idea es transmitir el mensaje junto con su digest, para verificar que haya llegado sin alteraciones.
 
-***** hashlib
+*** hashlib
 import hashlib
 md5hasher = hashlib.md5(b'cadenaBin')
 md5hasher.hexdigest()
@@ -195,17 +216,12 @@ md5hasher.hexdigest()
 - Los digests son como huellas digitales: si tienes al sujeto se puede verificar que sea quien dice ser mediante su huella digital.
 - Sin embargo, si solo tiene la huella digital no es facil determinar el sujeto que la posee.
 - Es facil calcular el digests de un documento, pero si tiene solo el digest es muy dificil determinar el documento que lo produjo, entre mas dificil mejor.
-- Por esta razon son llamadas funciones de una sola via, se puede ir de entrada a la salida pero no al revez.
-
-**** Ejercicio
-
-- Extiende el cifrador ce Cesar binario para que incluya una verificacion de integridad mediante SHA-256
-- El profesor demostrara como agregar el hash en el cifrado
-- Tu tarea consistira en verificar el hash al descifrar, lanzando una excepcion si el archivo cifrado es alterado.
+- Por esta razon son llamadas funciones de una sola via, se puede ir de entrada a la salida pero no al reves.
 
 *** Hashing
 - En computacion, el termino funcion de hash casi siempre se refiere a una funcion criptografica.
-- Sin embargo, el termino general
+- Sin embargo, el termino es general
+- Por ejemplo: Una funcion hash que establece si un numero es par o impar. Esencialmente, las funciones hash relaciona elementos de un dominio muy grande, con elementos de un codominio relativamente pequeno.
 - El tamano del codominio depende de la funcion de hash, por ejemplo, ya se dijo que MD5 genera digest de 16 bytes. Cual es el tamano del codominio para MD5?
 - SI se considera un numero muy grande de documentos de entrada es posible que muchos de ellos produzcan el mismo hash.
 - Dado lo anterior, las funciones de hash tienen perdida. Se pierde informacion de la fuente al digest.
@@ -213,7 +229,8 @@ md5hasher.hexdigest()
 - Considerando de nuevo la funcion par
 - Cualquier numero puede dar como resultado 0 (par) o 1 (inpar)
 - Seria posible saber, dado un valor 0 o 1que numero produjo dicho resultado
-- Esta funcion tiene todas las propiedades: tienen perdida, comprime la entrada,
+- Esta funcion tiene todas las propiedades: tienen perdida, comprime la entrada y es consistente ya que dada la misma entrada siempre produce la misma salida.
+
 - Las propiedades de consistencia, compresion y perdida son comunes en cualquier funcion de hash pero no suficientes para ser seguras o criptograficas.
 - Se requieren las sig. propiedades:
   - Resistencia de preimagen.
@@ -221,40 +238,69 @@ md5hasher.hexdigest()
   - Resistencia de colisiones.
 
 **** Resistencia de preimagen
-- Es el conjunto de entradas de una funcion de hash que producen
+- Una preimagen es el conjunto de entradas de una funcion de hash que producen, en el caso de par o impar, una preimagen son todos los numeros pares que den valor 0.
 - Una preimagen de una funcion de hash H y un valor de hash k es el conjunto de valores x por el cual H(x) = k
+
 - Al tener un digest, existe un numero infinito de documentos que produjeron dicho digest.
 - Eso no quiere decir que dado un digest sea facil encontrar un elemento de la preimagen
+
 - La resistencia de preimagen es basicamente: si tengo un digest y no se como se obtuvo, no pudo ni siquiera encontrar un elemento en la preimagen sin realizar una cantidad ridicula de trabajo computacional.
+
 - Intratable -> Se puede resolver, pero cuesta demasiado
 - No computable -> No se puede resolver con una computadora
 - Idealmente, los elementos de la preimagen deberian estar muy separados entre ellos y no tener un espaciado predecible
 - El hecho de que las funciones de hash tengan perdida ayuda a la resistencia de preimagen
 - Si una funcion de hash tiene buena resistencia de preimagen, los ataques en este sentido seran aleatorios o bien consistiran en enumeraciones muy largas (fuerza bruta) hasta encontrar una coincidencia, lo cual no es computacionalmente tratable.
 - Al proceso de intentar encontrar un elemento de la preimagen dado un valor de hash se le llama invertir el hash
-- Encontrar un inverso
+- Encontrar un inverso deberia ser muy dificil.
 
 **** Segunda resistencia de preimagen
-- Si tu tienes al menos un documento que produce un hash conocido, sigue siendo muy dificil encontrar otro documento que produzca el mismo hash
--
+- Si tu tienes al menos un documento que produce un hash conocido, sigue siendo muy dificil encontrar otro documento que produzca el mismo hash.
+- Esto funciona porque no existe patron repetible en los elementos de la preimagen.
 
 **** Resistencia a colisiones
 - Significa que es dificil encontrar dos entradas que produzcan el mismo hash y garantiza que sea computacionalmente inviable encontrar dos entradas diferentes que produzcan el mismo valor hash.
 - No un hash especifico sino cualquier hash.
+- Es mas facil encontrar una colision en un hash cualquiera que encontrar un elemento de la preimagen de un hash dado.
 - Propiedad avalancha: El valor de hash cambia drasticamente y de forma impredecible, un minimo del 50% de los bits del hash deberia ser diferente.
 
-
 *** Seguridad en funciones de hash
-- Hash es usado para el almacenamiento de passwords
+- Hash es usado para el almacenamiento de passwords, pero siguen teniendo problemas de seguridad, el mas comun es la situacion donde dos usuarios usen la misma contrasena y por tanto, genere el mismo hash, existen muchas soluciones (A2F, Token fisico, etc) pero la mas recomendada es agregqar un salt.
 
-*** Cifradores de bloque y de flujo
-- AES puede operar como cifrador de flujo, basta con usar un modo de AES
+  - Salt: Es un valor usualmente aleatorio que se debe de agregar al password antes de aplicarse a la funcion de hash. Debido a la propiedad de avalancha, con el salt el hash resultante cambiara drasticamente. Y como son aleatorios, es poco probable que dos usuarios con la misma password tenga el mismo salt.
 
-*** Modo de operacion de AES
-- AES tiene diversos modos de operacion, en este tema nos concentraremos en 3:
-  - Electronic code book (ECB) (No usar nunca)
-  - Cipher block chaining (CBC)
-  - Counter mode (CTR)
+salt = os.urandom(16)
+
+** Cifrado simetrico
+- Cifrado que usa la misma llave para cifrar y descifrar, la llave es un secreto compartido.
+
+*** AES
+- Advanced Encryption Standard
+- Lo utiliza TLS (HTTPS) y funciones de cifrado de sistemas de archivos de un OS.
+- AES es un cifrador de bloque, cifra por bloques de 16 bytes, si no cumple con los 16 bytes se debe de agregar un padding (datos de relleno).
+- Tambien puede cifrar un byte a la vez, esto se concoe como cifrado de flujo y no necesitan padding.
+- En general, es mas eficiente cifrar bloques que en flujo.
+
+**** Modos de operacion de AES
+***** ECB - Electronic Code Book
+- Cualquier texto plano de 16 bytes tiene 16 bytes correspondientes de salida.
+- Cada bloque es tratado independientemente, esa es su debilidad.
+  - Puede generar un ataque de texto plano escogido, que se basa en tener muchos mensajes de estructura parecida para enganar con un mensaje falso con una respuesta predecible.
+- Parametros: Texto plano y llave.
+
+***** CBC - Cipher Block Chaining
+- Despues de cifrar el bloque aplicar una funcion XOR con el siguiente bloque en texto plano, el resultado se cifra y se guarda ese bloque. Para descifrar se tiene que invertir el proceso.
+- Para el primer bloque a cifrar, se utiliza el IV dado que no hay un bloque anterior para hacer XOR, el IV debe de ser del mismo tamano del bloque (16 bytes).
+  - Parametros: Texto plano, llave e IV
+  - Debe de tener su respectivo padding.
+
+***** CTR - Counter Mode
+- No requiere de padding
+- Genera un key stream de cualquier longitud a partir de una llave AES de al menos 128 bits (16 bytes), luego aplica XOR para combinarlos.
+- CTR incrementa el contador en uno y asi sucesivamente. Si el texto plano no es multiplo de 16, los ultimos 16 bytes del key stream se truncan para corresponder al texto.
+- Al IV se le llama nonce.
+- CTR puede cifrar de forma independiente.
+- Parametros: key, nonce, texto plano.
 
 *** Seguridad en cifrado simetrico
 - Para tener un cifrado seguro y efectivo se necesita:
@@ -262,7 +308,11 @@ md5hasher.hexdigest()
      llave.
   2. Eliminar patrones predecibles entre los bloques. (Maleabilidad entre bloques)
 
-*** Cifrado asimetrico
+- Para resolver el primer problema, se utiliza un vector de inicializacion (IV), el cual es una cadena aleatoria externa al texto plano y la llave. El IV es publico ya que solo hace que los mensajes no sean repetibles y no generar patrones.
+- Nunca debe reusarse el mismo IV
+- Existen ataques donde si conoces el texto plano y el IV (suponiendo que lo reutilizan) puedes obtener el key-stream.
+
+** Cifrado asimetrico
 - Las tecnicas asimetricas son variadas, no se limitan solo a cifrado
   - Por ejemplo: firmas digitales e intercambio de llaves
 - Algoritmo RSA
@@ -270,6 +320,9 @@ md5hasher.hexdigest()
 
 **** Dos llaves
 - Se necesitan dos llaves: una publica y otra privada
+  - Un mensaje se cifra con la llave publica
+  - Ese mensaje solo se puede descifrar con la llave privada
+  - La llave publica se comparte y la privada no.
 
 **** RSA
 - RSA esta casi obsoleto, debido a multiples vulnerabilidades
