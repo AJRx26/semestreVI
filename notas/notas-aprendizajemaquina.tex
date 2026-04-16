@@ -1,0 +1,382 @@
+% Created 2026-04-15 mié 21:28
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Abraham Nuñez}
+\date{\today}
+\title{Notas Aprendizajemaquina}
+\hypersetup{
+ pdfauthor={Abraham Nuñez},
+ pdftitle={Notas Aprendizajemaquina},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.2 (Org mode 9.7.39)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Informacion}
+\label{sec:org4f7593c}
+\begin{itemize}
+\item Maestro: David Martinez Galicia
+\item Materia: Aprendizaje Maquina
+\item Carrera: CIberseguridad e Infraestructura de Computo
+\item Contacto: davidmartinez02@uv.mx
+\end{itemize}
+\section{Informacion}
+\label{sec:orgb0a7e25}
+\subsection{Evaluacion}
+\label{sec:orgf0ff750}
+\begin{itemize}
+\item Examenes: 40\%
+\item Tareas: 30\%
+\item Proyecto: 30\%
+\end{itemize}
+\section{Temario}
+\label{sec:orge341fb2}
+\begin{itemize}
+\item 1. Introduccion
+\item 2. Manejo de datos
+\item 3. Aprendizaje supervisado
+\item 4. Aprendizaje no supervisado
+\item 5. Aprendizaje por refuerzo
+\item 6. Evaluacion de modelos
+\end{itemize}
+\section{Introduccion}
+\label{sec:org384c1c5}
+\subsection{Inteligencia Artificial}
+\label{sec:orgb6d3a3e}
+\begin{itemize}
+\item Que es la inteligencia artificial?
+\item ``Cada aspecto de la inteligencia artificial puede ser descrito con suficiente precision que puede fabricarse una maquina para simularlo''.
+\item El concepto existe desde 1956.
+\item Inteligencia artificial: Un enfoque moderno, Pearson Rusell, S. J., y Norving P. (2021).
+\item Concuerdan que la IA debe estudiar sistemas inteligentes.
+\item Caracteristicas para ser inteligentes:
+\end{itemize}
+\subsubsection{Cognicion y comportamiento}
+\label{sec:orgf729da0}
+\begin{itemize}
+\item Pensar (crear) -> Humano
+\item Actuar (simular) -> Racional
+\end{itemize}
+\subsection{Tipos de sistemas}
+\label{sec:orgd41c00c}
+\begin{itemize}
+\item Sistemas que piensan como humanos
+\item Sistemas que piensan racionalmente
+\item Sistemas que actuan como humanos
+\item Sistemas que actuan racionalmente
+\end{itemize}
+\subsection{Simulacion del comportamiento humano}
+\label{sec:orge064234}
+\begin{itemize}
+\item La prueba de Turing
+\item El sistema debe de poseer las siguientes capacidades:
+\begin{itemize}
+\item Procesamiento de lenguaje natural
+\item Representacion del conocimiento
+\item Razonamiento automatico
+\item Aprendizaje maquina
+\end{itemize}
+\item Para superar la prueba de Turing la computadora debe incluir:
+\begin{itemize}
+\item Vision computacional para percibir objetos.
+\item Robotica para manipular y mover objetos.
+\end{itemize}
+\end{itemize}
+\subsection{Aprendizaje Maquina}
+\label{sec:orgd5f2089}
+\begin{itemize}
+\item Se refiere a un espectro de situaciones en las cuales un agente incrementa su conocimiento para cumplir una tarea.
+\item Machine Learning. Mitchell, T. M. (1997).
+\item Un programa de computadora aprende de la experiencia E, con respecto a alguna clase de tareas T y una medida de desempeno P, si su desempeno en las tareas T, medido por P, mejora con la experiencia E.
+\end{itemize}
+\subsubsection{Tipos de aprendizajes}
+\label{sec:org89c0f34}
+\begin{itemize}
+\item Aprendizaje supervisado: Aprender una funcion a partir de ejemplos de sus entradas y sus salidas.
+\begin{itemize}
+\item Clasificacion: Diagnostico de enfermedades.
+\item Regresion: Prediccion de la temperatura.
+\end{itemize}
+\item Aprendizaje no supervisado: Aprender a partir de patrones de entradas que no tienen valores de salidas.
+\begin{itemize}
+\item Agrupacion: Segmentacion de clientes.
+\item Reduccion de dimensionalidad: Visualizar datos.
+\item Estimacion de la densidad: Describir la altura de una poblacion.
+\end{itemize}
+\item Aprendizaje por refuerzo: Aprender una forma de actuar usando un refuerzo (recompens o penalizacion)
+\begin{itemize}
+\item Aprender politicas de accion: Actuar en un entorno.
+\end{itemize}
+\end{itemize}
+\subsection{Introduccion al manejo de datos}
+\label{sec:org631d826}
+\begin{itemize}
+\item La calidad de los datos determina la calidad del modelo.
+\item ``Garbage in, garbage out''.
+\item Sin la preparacion adecuada de los datos, no hay aprendizaje efectivo.
+\item Transformamos datos crudos en patrones para la toma de decisiones.
+\item Datos limpios dectetan amenazas reales en ciberseguridad.
+\end{itemize}
+\subsubsection{Datos estructurados}
+\label{sec:org5ed7743}
+\begin{itemize}
+\item Datos organizados en formato tabular con esquema definido.
+\end{itemize}
+\begin{enumerate}
+\item Caracteristicas:
+\label{sec:orgb09a81d}
+\begin{itemize}
+\item Formate predecible.
+\item Tipos de datos definidos.
+\item Faciles de almacenar y consultar en bases de datos relacionales.
+\item Ejemplos:
+\begin{itemize}
+\item Tablas SQL.
+\item Hojas de calculo Excel/CSV.
+\item Logs de sistemas con formatos fijo.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+\subsubsection{Datos NO estructurados}
+\label{sec:org454e43f}
+\begin{itemize}
+\item Datos sin formato predefinido ni organizacion tabular.
+\end{itemize}
+\begin{enumerate}
+\item Caracteristicas:
+\label{sec:orgf41adc4}
+\begin{itemize}
+\item Sin esquema fijo.
+\item Requieren procedimiento previo para extraer informacion.
+\item Representan 80\% de los datos empresariales,
+\item Ejemplos:
+\begin{itemize}
+\item Texto.
+\item Imagenes y videos.
+\item Audio y grabaciones.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+\subsubsection{Datos etiquetados}
+\label{sec:org62e848c}
+\begin{itemize}
+\item Conjunto de datos donde cada ejemplo tiene una etiqueta/clase asociada.
+\end{itemize}
+\begin{enumerate}
+\item Caracteristicas:
+\label{sec:orgd0149be}
+\begin{itemize}
+\item Requieren proceso manual o semi-automatico de etiquetado.
+\item Esenciales para entrenar modelos supervisados.
+\item Costosos de obtener y validar.
+\item Ejemplos:
+\begin{itemize}
+\item Correos spam/no spam
+\item Imagenes de rostros con nombre de persona
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+\subsubsection{Datos NO etiquetados}
+\label{sec:orgfcffd6f}
+\begin{itemize}
+\item Datos sin categorias o respuestas conocidas.
+\end{itemize}
+\begin{enumerate}
+\item Caracteristicas:
+\label{sec:org9862a7b}
+\begin{itemize}
+\item Abundantes y faciles de recolectar.
+\item Requieren tecnicas de descubrimiento de patrones.
+\item Utiles para deteccion de anomalias.
+\item Ejemplos:
+\begin{itemize}
+\item Trafico de red
+\item Comportamiento de usuario
+\item Codigo malicioso
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+\subsubsection{Repositorio de datos}
+\label{sec:org3b87195}
+\subsubsection{Formatos de datos de texto}
+\label{sec:org9de4795}
+\begin{itemize}
+\item Los formatos de texto permiten almacenar y procesar datos eficientemente.
+\item Son los mas comunes para cargar en la mayoria de las herramientas
+\end{itemize}
+\begin{enumerate}
+\item Tipos de datos de texto
+\label{sec:orgf4a1ac3}
+\begin{itemize}
+\item CVS: Formato tabular simple y universalmente compatible.
+\item TSV: Similar al CSV, pero con tabulaciones como delimitador.
+\item JSON: Ligero yflexible para datos estructurados y anidados.
+\item XML: Formato estructurado y autodescriptivo, aunque verboso.
+\item ARFF: Incluye metadatos, usado comunmente en Weka.
+\item Texto plano: Sin formato, para datos sin estructura o documentos.
+\end{itemize}
+\end{enumerate}
+\subsubsection{Limpieza y procesamiento de datos}
+\label{sec:org510d824}
+\begin{itemize}
+\item Los datos del mundo real son inexactos, inconsistentes e incompletos.
+\item El procesamiento de datos asegura la integridad de los datos.
+\item Permite generar analisis confiables y conclusiones validas.
+\item Evita decisiones incorrectas o modelos ineficaces.
+\end{itemize}
+\begin{enumerate}
+\item FLujo de trabajo de limpieza y preprocesamiento
+\label{sec:orgd50a2f4}
+\begin{itemize}
+\item Recopilacion: Obtener datos de bases de datos, APIs o scraping.
+\item Limpieza: Corregir errores, eliminar duplicados y manejar valores faltantes.
+\item Integracion: Unir datos de multiples fuentes, resolviendo inconsistencias.
+\item Transformacion: Codificar, normalizar y crear nuevas variables.
+\item Reduccion: Seleccionar caracteristicaspara simplificar el analisis.
+\end{itemize}
+\end{enumerate}
+\subsubsection{Python para el aprendizaje maquina}
+\label{sec:org35bfaa0}
+\begin{itemize}
+\item Lenguaje preferido por su facilidad y bibliotecas especializados.
+\end{itemize}
+\begin{enumerate}
+\item Bibliotecas importantes
+\label{sec:orge80feb7}
+\begin{itemize}
+\item Pandas: Manipulacion de datos.
+\item Numpy: Calculos numericos.
+\item SciPy: Computo cientifico, estadistica y senales.
+\item Matplotlib/Seaborn: Visualizacion de datos.
+\item Scikit-learn: Machine learning y preprocesamiento.
+\end{itemize}
+\end{enumerate}
+\subsection{Técnicas de codificación}
+\label{sec:orgf88b41d}
+\begin{itemize}
+\item Las variables categóricas representan grupos categóricas.
+\item Algunos modelos de aprendizaje maquina requieren entradas numéricas.
+\item Transformar categorías en números para análisis y modelado.
+\end{itemize}
+\subsubsection{Tecnicas comunes:}
+\label{sec:org28b193d}
+\begin{itemize}
+\item One-Hot Encoding: Para categorías sin orden (ej: puerto de embarque).
+\item Label Encoding: Para categorías con orden (ej: nivel educativo).
+\item Puntuación Z: Es una medida estadistica que indica cuantas desviaciones estandar se encuentra por encima o por debajo de la medida de una distribución.
+\end{itemize}
+\subsection{Aprendizaje supervisado}
+\label{sec:orgd554a07}
+\begin{itemize}
+\item Los humanos aprendemos de experiencias pasadas.
+\item Un nino aprende a identificar animales viendo ejemplos.
+\item La experiencia se acumula y permite generalizar.
+\item Una computadora no tiene expericencias. En su lugar, aprende de datos.
+\item Estos datos son ejemplos historicos con entradas y salidas conocidas.
+\item El objetivo es obtener una funcion que prediga salidas para nuevas entradas.
+\end{itemize}
+\subsubsection{Flujo de aprendizaje supervisado}
+\label{sec:org1bb89bb}
+\begin{itemize}
+\item Para generar un modelo se necesita un conjunto de datos, un algoritmo de aprendizaje y una forma de evaluarlo o interpretarlo.
+\begin{itemize}
+\item Conjunto de datos
+\item Modelo supervisado: Existen mas de cientos cincuenta modelos clasificadores:
+\begin{itemize}
+\item Regresion lineal.
+\item Redes neuronales.
+\item Redes bayesianas.
+\item Arboles de decision.
+\end{itemize}
+\item Interpretacion/Evaluacion: Una vez obtenido el modelo, se puede:
+\begin{itemize}
+\item Analizar el conocimiento o los patrones capturados.
+\item Medir su desempeno en datos no observados antes.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\begin{enumerate}
+\item Datos en el aprendizaje supervisado
+\label{sec:orgd57ac84}
+\begin{itemize}
+\item Un conjunto de datos compuesto por:
+\begin{itemize}
+\item Una lista de registros (observaciones o ejemplos)
+\item Un conjunto de variables predictorias (caracteristicas o atributos)
+\begin{itemize}
+\item Las variables cuantitativas se conocen como continuas o numericas.
+\item Las variables cualitativas se conocen como discretas o categoricas.
+\item Dentro de las categorias (cualitativas) existen las nominales y las ordinales.
+\end{itemize}
+\item Una variable por predecir (dependiente, objetivo o clase).
+\end{itemize}
+\item Si la variable objetivo es categorica se vuelve un problema de clasificacion.
+\item Si la variable objetivo es numerica se vuelve un problema de regresion.
+\end{itemize}
+\item Modelos supervisados de aprendizaje
+\label{sec:orgaea1cb2}
+\begin{itemize}
+\item Un modelo es una funcion o teoria que se aprenda de los datos.
+\item Puede verse como una hipotesis sobre la relacion entre entradas y salidas.
+\item Se ajuta (entrena) un modelo usando un algoritmo de aprendizaje.
+\item El algorimo (metodo o tecnica) encuentra los \textbf{parametros} del modelo.
+\item Los algoritmos se configuran a traves de sus \textbf{hiperparametros}.
+\item Una vez entrenado, el modelo puede predecir salidas para nuevos datos.
+
+\item Si la variable objetivo es categorica, el modelo se llama \textbf{clasificador}.
+\item Si la variable objetivo es numerica, el modelo se llama de \textbf{regresion}.
+\end{itemize}
+\item Interpretacion y evaluacion de modelos.
+\label{sec:org1fb6cb6}
+\begin{itemize}
+\item Los modelos no solo predicen, tambien representan conocimiento.
+\item Ese conocimiento revela patrones sobre como se relacionan las variables.
+\item Es importante para tomar decisiones en situaciones complejas.
+\item Algunos modelos permiten interpretar ese conocimiento.
+\item Los modelos que no se pueden interpretar se denominan de caja negra.
+\item Evaluar un modelo es tan importante como entrenarlo.
+\item La evaluacion determina si el modelo es confiable o debe sustituirse.
+\end{itemize}
+\item Modelo de regresion lineal
+\label{sec:org25d0f9e}
+\begin{itemize}
+\item Describe la relacion entre la variable independiente y una dependiente.
+\item Asume que dicha relacion puede representarse mediante una linea recta.
+\item Permite predecir valores continuos a partir de un solo atributo.
+\item Es el puntaje de partida para entender las tareas de regresion.
+\item y = mx + b (Funcion de una recta).
+\item y = O(0) + 0(1)\textsuperscript{x}
+\begin{itemize}
+\item y: valor predicho por el modelo
+\item x: variable independiente
+\item O(0): intercepto que representa el valor de y cuando x = 0
+\item O(1): pendiente que representa el cambio en y por cada unidad en x.
+\end{itemize}
+\item El objetivo del modelo es que y sea lo mas cercano posible a y.
+\item El modelo define una familia de todas las lineas posibles.
+\item Los parametros 0 = [O(0), O(1)]\textsuperscript{T} determinen la linea especifica.
+\item Funcion de perdida (Loss Function): Mide que tan mal se ajusta el modelo a los datos.
+\begin{itemize}
+\item Para cada punto, calculamos el error: diferencia entre el valor real y predicho.
+\item Se usa el error cuadratico para que la direccion no importe.
+\item La perdida total es la suma de errores cuadraticos (SSE).
+\end{itemize}
+\end{itemize}
+Agregar una imagen con la formula
+\end{enumerate}
+\end{document}
