@@ -405,3 +405,36 @@ salt = os.urandom(16)
   3. El cliente le pide al servidor que firme el dato.
   4. El servidor firma el dato y regresa la firma.
   5. El cliente comprueba la firma con la llave publica.
+
+- Quien firma es quien quiere ser autenticado
+- Siempre se firma con la llave privada
+- Se verifica la firma con la llave publica
+
+- La firma tiene dos propiedades de seguridad
+  - Integridad
+  - Autenticidad
+
+*** Curvas elipticas
+- Alternativa moderna para RSA
+- DSA (Digital Signing Algorithm) es un algoritmo asimetrico que solo se usa para firmas digitales.
+- Las curvas elipticas se utilizan para firmas digitales y para intercambio de llaves.
+- Algoritmo ECDSA
+- El parametro es el tipo de curva.
+
+- Entran a sitio web amazon.com
+- El sitio des da su llave publica
+- Verificar autenticidad del sitio (reto-respuesta)
+
+- Certificados:
+  - Metadatos del propietario (subject)
+  - Metadatos de la propiedad de confianza (CA/issuer)
+  - Llave publica
+  - Firma del CA
+
+- El certificado no tiene nada que ver con el cifrado, ni con la protección del canal en general.
+- El certificado no se usa directamente para autenticar, eso se hace con firmas digitales.
+- El certificado solo es un mecanismo para confiar en la llave publica
+
+- Criptografia asimetrica
+  - Firmas digitales
+  - Intercambios de llaves
