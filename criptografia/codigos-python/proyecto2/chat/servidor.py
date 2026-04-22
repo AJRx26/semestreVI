@@ -12,7 +12,7 @@ import sys
 
 import mensajes
 
-_lock = threading.lock()
+_lock = threading.Lock()
 
 def crear_socket_servidor(puerto):
     servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -57,7 +57,7 @@ def atencion(cliente, clientes):
 
     print(f'[+] Cliente conectado: {nombre}')
     aviso = f'--- {nombre} se unio al chat ---'.encode('utf-8')
-    broadcast(aviso, 'Servidor', cliente)
+    broadcast(aviso, 'Servidor', clientes)
 
     try:
         while True:
