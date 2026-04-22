@@ -5,4 +5,5 @@
 - Considera que el servidor y cada cliente deben conocer la llave de cifrado simétrico y la llave MAC, para simplificar, dichas llaves estarán en archivos, al ejecutar los clientes simplemente se pasan la llaves como parámetro.
 - Cada cliente tiene su llave MAC y su llave de cifrado propia, éstas se le pasan al servidor de forma no segura al inicio
 - El servidor debe de tener un mutex para evitar condiciones de carrera
-- Tambien debera de tener una funcion que permita al cliente salir mediante un comando, ademas, de reconocer los usuarios/clientes que se conecten. 
+- Tambien debera de tener una funcion que permita al cliente salir mediante un comando, ademas, de reconocer los usuarios/clientes que se conecten.
+- El servidor debera de enviar un mensaje ACK cuando se conecte un cliente.

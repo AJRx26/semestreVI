@@ -4,8 +4,8 @@ import argparse
 
 
 def generar_llave_cifrado():
-    # AES-256 → 32 bytes
-    return os.urandom(32)
+    # AES-128 → 16 bytes
+    return os.urandom(16)
 
 
 def generar_llave_mac():

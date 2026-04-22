@@ -15,13 +15,13 @@ from cryptography.hazmat.backends import default_backend
 DELIMITADOR = b'\r\n'
 # Cifrado de mensajes usando CTR
 def cifrar_mensaje(mensaje, llave_cifrado):
-    nonce = os.urandom(16)
-    cipher = Cipher(algorithms.AES(llave_cifrado), modes.CTR(nonce),backend=default_backend())
+    iv = os.urandom(16)
+    cipher = Cipher(algorithms.AES(llave_cifrado), modes.CTR(iv),backend=default_backend())
     encryptor = cipher.encryptor()
-    return nonce, encryptor.update(mensaje) + encryptor.finalize()
+    return iv, encryptor.update(mensaje) + encryptor.finalize()
 
-def descifrar_mensaje(nonce, mensaje_cifrado, llave_cifrado):
-    cipher = Cipher(algorithms.AES(llave_cifrado), modes.CTR(nonce),backend=default_backend())
+def descifrar_mensaje(iv,mensaje_cifrado, llave_cifrado):
+    cipher = Cipher(algorithms.AES(llave_cifrado), modes.CTR(iv),backend=default_backend())
     decryptor = cipher.decryptor()
     return decryptor.update(mensaje_cifrado) + decryptor.finalize()
 
@@ -37,8 +37,9 @@ def verificar_mac(mensaje, mac, llave_mac):
     try:
         h.verify(mac)
         return True
-    except:
+    except Exception:
         return False
+
 
 def quitar_delimitador(mensaje):
     """
@@ -88,5 +89,5 @@ def mandar_mensaje(socket, mensaje, llave_cifrado, llave_mac):
     nonce, mensaje_cifrado = cifrar_mensaje(mensaje, llave_cifrado)
     #aqui tengo duda de si solo usamos el mensaje cifrado para generar el mac o si usamos el iv + mensaje cifrado,
     #ya alrato me dices que prefieres
-    mac = generar_mac(mensaje_cifrado, llave_mac)
-    socket.send(nonce + mensaje_cifrado + mac + DELIMITADOR)
+    mac = generar_mac(nonce + mensaje_cifrado, llave_mac)
+    socket.sendall(nonce + mensaje_cifrado + mac + DELIMITADOR)

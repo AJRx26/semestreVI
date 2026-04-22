@@ -12,7 +12,7 @@ def conectar_servidor(host, puerto):
     try:
         cliente.connect((host, int(puerto)))
         return cliente
-    except Exception:
+    except:
         print('Servidor inalcanzable')
         exit()
 
@@ -20,30 +20,19 @@ def conectar_servidor(host, puerto):
 def leer_llave(path):
     with open(path, 'rb') as f:
         return base64.b64decode(f.read())
-
 # ya madamas agrege llave cifrado y mac 
 def leer_mensajes(cliente, llave_cifrado, llave_mac):
-    try:
-        while True:
-            mensaje = mensajes.leer_mensaje(cliente, llave_cifrado, llave_mac)
-            print('-->' + mensaje.decode('utf-8'))
-            print('Mensaje: ', end='', flush=True)
-    except Exception:
-        print('\n[!] Conexion cerrada por el servidor.')
-
-#agregue la funcion de salida, se lee el mensaje y se envia
-def enviar_mensaje_loop(cliente, llave_cifrado, llave_mac):
     while True:
-        try:
-            texto = input("Mensaje: ")
-        except EOFError:
-            break
-        mensaje = texto.encode('utf-8')
+        mensaje = mensajes.leer_mensaje(cliente, llave_cifrado, llave_mac)
+        print('-->' + mensaje.decode('utf-8'))
+
+
+def enviar_mensaje_loop(cliente, llave_cifrado, llave_mac):
+    mensaje = b''
+    while mensaje.strip() != b'exit':
+        mensaje = input('Mensaje: ')
+        mensaje = mensaje.encode('utf-8')
         mensajes.mandar_mensaje(cliente, mensaje, llave_cifrado, llave_mac)
-        if texto.strip() == "exit":
-            print("Desconectandose...")
-            cliente.close()
-            break
 
 # agregue llave cifrado y mac a la funcion main para que se puedan usar en los mensajes
 if __name__ == '__main__':
@@ -51,19 +40,11 @@ if __name__ == '__main__':
     puerto = sys.argv[2]
     path_key = sys.argv[3]
     path_mac = sys.argv[4]
-    nombre = sys.argv[5]
-
     llave_cifrado = leer_llave(path_key)
     llave_mac = leer_llave(path_mac)
-
     cliente = conectar_servidor(host, puerto)
-
-    cliente.send(nombre.encode('utf-8') + b'\r\n') # enviar nombre del usuario para identificarlo
-
-    cliente.send(llave_cifrado) # enviar llave de cifrado al servidor
-    cliente.send(llave_mac) # enviar llave de mac al servidor
-
+    cliente.sendall(llave_cifrado) # enviar llave de cifrado al servidor
+    cliente.sendall(llave_mac) # enviar llave de mac al servidor
     hilo = threading.Thread(target=leer_mensajes, args=(cliente, llave_cifrado, llave_mac))
     hilo.start()
-
     enviar_mensaje_loop(cliente, llave_cifrado, llave_mac)
