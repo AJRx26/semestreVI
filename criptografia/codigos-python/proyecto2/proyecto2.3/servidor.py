@@ -1,13 +1,3 @@
-"""
-Servidor.
-
-Servidor de un chat. Es una implementación incompleta:
-- Falta manejo de exclusión mutua
-- Falta poder desconectar de forma limpia clientes
-- Falta poder identificar clientes
-"""
-
-
 import socket
 import threading
 import sys
@@ -28,7 +18,6 @@ def recv_exact(sock, num_bytes):
             raise ConnectionError('Conexion cerrada mientras se recibian datos')
         datos += chunk
     return datos
-
 
 def broadcast(mensaje, clientes, lock):
     with lock:
@@ -80,27 +69,28 @@ def atencion(cliente, clientes, lock):
         mensaje_con_usuario = usuario.encode('utf-8') + b' --> ' + mensaje
         broadcast(mensaje_con_usuario, clientes, lock)
 
+    # Esta linea modifica la lista de clientes conectados en caso que un cliente se desconecte, modifica la lista original
     with lock:
         clientes[:] = [par for par in clientes if par[0] is not cliente]
 
+    # Muestra la desconexion a los demas clientes
     print(f'[+] Cliente desconectado: {usuario}')
     broadcast(f'--- {usuario} salio del chat ---'.encode(), clientes, lock)
     cliente.close()
 
 def escuchar(servidor):
     servidor.listen(5) # peticiones de conexion simultaneas
-    clientes = []
-    lock = threading.Lock()
+    clientes = [] # lista con todos los clientes conectados actualmente
+    lock = threading.Lock() #se crea el mutex
 
     while True:
         cliente, _ = servidor.accept() # bloqueante, hasta que llegue una peticion
 
-        with lock:
+        with lock: # se usa mutex para evitar condiciones de carrera al modificar/acceder al listado
             clientes.append((cliente, {'llave_cifrado': None, 'llave_mac': None}))
         hiloAtencion = threading.Thread(target=atencion, args=
-                                        (cliente, clientes, lock)) # se crea un hilo de atención por cliente
+                                        (cliente, clientes, lock)) # se crea un hilo de atención por cliente y se usa el mismo mutex para todos
         hiloAtencion.start()
-
 
 if __name__ == '__main__':
     servidor = crear_socket_servidor(sys.argv[1])
