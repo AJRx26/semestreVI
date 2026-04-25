@@ -1,0 +1,264 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f6f9;
+  color: #222;
+  line-height: 1.5;
+}
+
+.layout-principal {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "main aside"
+    "footer footer";
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  padding: 16px;
+}
+
+header {
+  grid-area: header;
+  background-color: #18529D;
+  color: white;
+  padding: 20px;
+}
+
+.identidad h1 {
+  margin: 0;
+  color: white;
+}
+
+.identidad p {
+  margin: 6px 0 0;
+}
+
+.menu-principal a {
+  display: inline-block;
+  margin-right: 12px;
+  margin-top: 14px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  background-color: rgba(255,255,255,0.12);
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+main {
+  grid-area: main;
+}
+
+aside {
+  grid-area: aside;
+  background-color: #ffffff;
+  border: 1px solid #d0d7de;
+  padding: 16px;
+  border-radius: 8px;
+  min-width: 0;
+}
+
+footer {
+  grid-area: footer;
+  background-color: #18529D;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+}
+
+main section,
+#bloque-categorias-wrapper {
+  background-color: white;
+  margin-bottom: 18px;
+  padding: 18px;
+  border-radius: 8px;
+  border: 1px solid #d0d7de;
+}
+
+h2, h3 {
+  color: #18529D;
+  margin-top: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  margin-top: 14px;
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+  padding: 10px 14px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+button[type="submit"],
+#btn-resaltar-categorias {
+  background-color: #28AD56;
+  color: white;
+}
+
+button[type="reset"],
+#btn-eliminar-categoria {
+  background-color: #18529D;
+  color: white;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+  margin-top: 12px;
+}
+
+th, td {
+  border: 1px solid #d0d7de;
+  padding: 10px;
+  text-align: left;
+  min-width: 180px;
+}
+
+thead th {
+  background-color: #18529D;
+  color: white;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #c8d2dc;
+  border-radius: 4px;
+}
+
+#zona-arrastre {
+  border: 2px dashed #18529D;
+  padding: 20px;
+  text-align: center;
+  background-color: #f8fbff;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#zona-arrastre.activa {
+  background-color: #e3f2fd;
+  border-color: #28AD56;
+}
+
+#archivo-seleccionado,
+#mensaje-formulario,
+#salida-json {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#panel-estadisticas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.tarjeta-estadistica {
+  background-color: #f8fbff;
+  border: 1px solid #18529D;
+  border-radius: 6px;
+  padding: 14px;
+  text-align: center;
+}
+
+.tarjeta-estadistica h3 {
+  margin-top: 0;
+  color: #18529D;
+}
+
+.tarjeta-estadistica p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #28AD56;
+  margin-bottom: 0;
+}
+
+#lista-estrenos article {
+  border-left: 4px solid #28AD56;
+  padding-left: 12px;
+  margin-bottom: 12px;
+}
+
+#salida-json {
+  background-color: #f4f6f9;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 12px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  min-height: 48px;
+  font-weight: normal;
+}
+
+/* IMPORTANTE:
+   En este examen el estudiante debe agregar EXACTAMENTE las reglas de:
+   .bloque-categorias
+   .tarjeta-categoria
+   .titulo-categoria
+   así como la media query responsiva solicitada en el enunciado.
+*/
+
+/* Estilos agregados */
+.bloque-categorias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.tarjeta-categoria {
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+.titulo-categoria {
+  font-size: 18px;
+  font-weight: bold;
+  color: #18529D;
+}
+
+/* Diseno responsivo */
+@media (max-width: 768px) {
+  .layout-principal {
+    grid-template-areas:
+      "header"
+      "main"
+      "aside"
+      "footer";
+    grid-template-columns: 1fr;
+    padding: 5px;
+  }
+
+  .menu-principal a {
+    display: block;
+    margin: 8px 0;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+}

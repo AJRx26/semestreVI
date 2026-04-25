@@ -1,0 +1,20 @@
+[
+  {
+    "titulo": "Horizonte Digital",
+    "anio": 2026,
+    "categoria": "Documental",
+    "descripcion": "Serie documental sobre innovación universitaria."
+  },
+  {
+    "titulo": "Código Abierto",
+    "anio": 2026,
+    "categoria": "Serie",
+    "descripcion": "Historias de comunidades tecnológicas estudiantiles."
+  },
+  {
+    "titulo": "Campus Nocturno",
+    "anio": 2025,
+    "categoria": "Película",
+    "descripcion": "Thriller ambientado en una residencia universitaria."
+  }
+]

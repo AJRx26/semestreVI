@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UVStream - Examen práctico A</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+  <div class="layout-principal">
+    <header>
+      <div class="identidad">
+        <h1>UVStream</h1>
+        <p>Streaming universitario</p>
+      </div>
+
+      <!-- Se cambio div por un nav --> 
+      <nav class="menu-principal" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#estrenos">Estrenos</a>
+        <a href="#planes">Planes</a>
+        <a href="#estadisticas">Estadísticas</a>
+        <a href="#suscripcion">Suscribirse</a>
+      </nav>
+    </header>
+
+    <main id="contenido">
+      <section id="panel-mensajes" aria-label="Mensajes de estado del portal">
+        <h2>Estado del portal</h2>
+        <p id="mensaje-dinamico">Pendiente de activar JavaScript.</p>
+      </section>
+
+      <section id="inicio" aria-labelledby="bienvenida-titulo">
+        <h2 id="bienvenida-titulo">Bienvenido a UVStream</h2>
+        <p>Explora estrenos, planes de suscripción y contenido seleccionado para la comunidad.</p>
+
+        <!-- Se agrego la descripcion de la imagen con alt-->
+        <img src="img/banner-streaming.png" alt="Banner de UVStream">
+      </section>
+
+      <!-- Se cambio el div por section porque es mas apropiado-->
+      <section id="bloque-categorias-wrapper">
+        <h2>Categorías destacadas</h2>
+        <div class="bloque-categorias">
+          <div class="tarjeta-categoria">
+            <div class="titulo-categoria">Películas</div>
+            <p>Catálogo de cine y largometrajes.</p>
+          </div>
+          <div class="tarjeta-categoria">
+            <div class="titulo-categoria">Series</div>
+            <p>Temporadas y episodios recomendados.</p>
+          </div>
+          <div class="tarjeta-categoria">
+            <div class="titulo-categoria">Documentales</div>
+            <p>Contenido académico y cultural.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="acciones-js" aria-labelledby="acciones-js-titulo">
+        <h2 id="acciones-js-titulo">Acciones rápidas</h2>
+        <div id="contenedor-dinamico"></div>
+      </section>
+
+      <section id="estrenos" aria-labelledby="estrenos-titulo">
+        <h2 id="estrenos-titulo">Estrenos</h2>
+        <p>Esta sección debe llenarse dinámicamente con <code>fetch()</code>.</p>
+        <div id="lista-estrenos"></div>
+      </section>
+
+      <section id="planes" aria-labelledby="planes-titulo">
+        <h2 id="planes-titulo">Planes de suscripción</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Plan</th>
+              <th>Beneficio principal</th>
+              <th>Costo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Básico</td>
+              <td>Acceso a catálogo general</td>
+              <td>$99</td>
+            </tr>
+            <tr>
+              <td>Premium</td>
+              <td>Estrenos y contenido exclusivo</td>
+              <td>$149</td>
+            </tr>
+            <tr>
+              <td>Institucional</td>
+              <td>Acceso para comunidad académica</td>
+              <td>$199</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="estadisticas" aria-labelledby="estadisticas-titulo">
+        <h2 id="estadisticas-titulo">Estadísticas</h2>
+        <p>Esta sección debe llenarse dinámicamente con tarjetas.</p>
+        <div id="panel-estadisticas"></div>
+      </section>
+
+      <section id="suscripcion" aria-labelledby="suscripcion-titulo">
+        <h2 id="suscripcion-titulo">Suscribirse</h2>
+        <form id="formulario-suscripcion" action="#" method="post" novalidate>
+          <p>
+            <label for="nombre">Nombre completo</label><br>
+            <input type="text" id="nombre" name="nombre">
+          </p>
+
+          <p>
+            <label for="correo">Correo electrónico</label><br>
+            <input type="email" id="correo" name="correo">
+          </p>
+
+          <p>
+            <label for="plan">Tipo de suscripción</label><br>
+            <select id="plan" name="plan">
+              <option value="">Selecciona una opción</option>
+              <option value="basico">Básico</option>
+              <option value="premium">Premium</option>
+              <option value="institucional">Institucional</option>
+            </select>
+          </p>
+
+          <section id="comprobante" aria-labelledby="comprobante-titulo">
+            <h3 id="comprobante-titulo">Comprobante de pago de inscripción</h3>
+            <p>Adjunta el comprobante para completar tu solicitud.</p>
+            <div id="zona-arrastre" tabindex="0">
+              Arrastra aquí el comprobante o haz clic para seleccionarlo.
+            </div>
+            <input type="file" id="archivo-comprobante" name="archivo-comprobante" hidden>
+            <p id="archivo-seleccionado">Ningún archivo seleccionado.</p>
+          </section>
+
+          <p>
+            <button type="submit">Enviar suscripción</button>
+            <button type="reset">Limpiar</button>
+          </p>
+        </form>
+
+        <p id="mensaje-formulario"></p>
+
+        <section id="json-formulario" aria-labelledby="json-formulario-titulo">
+          <h3 id="json-formulario-titulo">Datos del formulario en formato JSON</h3>
+          <pre id="salida-json"></pre>
+        </section>
+      </section>
+    </main>
+
+    <aside aria-label="Información adicional">
+      <h2>Ayuda</h2>
+      <p>Revisa las etapas del examen y completa cada sección en orden.</p>
+      <ul>
+        <li>Corrige HTML</li>
+        <li>Agrega estilos faltantes</li>
+        <li>Implementa JavaScript</li>
+        <li>Carga datos con AJAX</li>
+      </ul>
+    </aside>
+
+    <footer>
+      <p>Examen práctico - UVStream</p>
+    </footer>
+  </div>
+</body>
+</html>
