@@ -64,7 +64,7 @@ def procesar_paquete(
 
     # verificar si la firma digital es autentica
     llave_publica_cliente = utils.regresar_llave_publica_certificado(
-        subject_cliente, certificado_cliente, publica_issuer
+        subject_cliente, certificado_cliente_bytes, publica_issuer
     )
     if not utils.es_firma_valida(llave_publica_cliente, parte2, paquete_llaves):
         raise Exception("Firma digital invalida")
