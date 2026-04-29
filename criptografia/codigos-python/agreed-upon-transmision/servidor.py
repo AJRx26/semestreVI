@@ -98,7 +98,7 @@ def atencion(
             paquete,
             llave_privada_servidor,
             subject_cliente,
-            certificado_cliente_bytes,
+            cert_cliente_bytes,
             publica_issuer,
         )
 
@@ -106,7 +106,7 @@ def atencion(
         print(mensaje.decode("utf-8"))
 
     except Exception as e:
-        print(f"[+] Error con {direccion}")
+        print(f"[+] Error con {direccion} : {e}")
     finally:
         cliente.close()
         print(f"[+] Conexion cerrada: {direccion}")
