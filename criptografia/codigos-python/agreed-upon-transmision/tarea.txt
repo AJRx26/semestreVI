@@ -1,0 +1,21 @@
+- Básicamente es el uso de RSA para cifrar llaves AES que serán compartidas en una comunicación
+▶ Para establecer la sesión de confianza, ambas partes deben tener el certificado de la otra parte (los cuales incluyen las llaves públicas)
+▶ Un protocolo simple para transmitir un solo mensaje de emisor a receptor, que incluya llaves simétricas es agreed-upon transmision, en éste se manda un solo flujo de bytes con todos los datos necesarios concatenados
+
+- El flujo de transmisión del protocolo incluye:
+1. La llave AES, IV y llave MAC cifradas con la llave pública del receptor
+2. La firma digital sobre la concatenación (no cifrada) de la llave AES, IV y llave MAC
+3. Los bytes del mensaje transmitido, cifrados con la llave AES e IV
+4. El HMAC sobre toda la transmisión (osea todo lo de arriba) utilizando la llave MAC
+
+- El receptor sigue el siguiente proceso:
+▶ Separa las partes 1, 2, 3, 4
+▶ Descifra 1 mediante su llave privada, obteniendo la llave AES, IV y llave MAC
+▶ Verifica la firma digital (2), mediante el certificado del emisor (verificando también el certificado de ser necesario)
+▶ Calcula el HMAC de 1, 2, y 3 con la llave MAC y lo compara con 4 para ver si es consistente
+▶ Descifra 3 mediante la llave AES y el IV
+
+▶ Implementar agreed-upon transmision usando sockets TCP
+▶ En este caso el cliente envı́a el mensaje de una sola vı́a al servidor, el servidor (receptor) comprueba que todo se haya recibido bien e imprime el mensaje recibido
+▶ El maestro implementará la parte del cliente
+▶ Tu trabajo consiste en hacer la parte del servidor (se te dará una plantilla)
