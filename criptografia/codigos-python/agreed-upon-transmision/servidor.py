@@ -98,7 +98,7 @@ def atencion(
             paquete,
             llave_privada_servidor,
             subject_cliente,
-            cert_cliente_bytes,
+            certificado_cliente_bytes,
             publica_issuer,
         )
 
