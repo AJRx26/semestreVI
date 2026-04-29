@@ -1,0 +1,137 @@
+Con gusto. Te explico función por función de arriba a abajo.
+
+---
+
+## Variables globales
+
+```python
+RSA_SIZE = 256
+HMAC_SIZE = 32
+```
+
+Constantes que definen los tamaños fijos del protocolo. RSA-2048 siempre produce exactamente 256 bytes, y HMAC-SHA256 siempre produce 32. Se usan para cortar el paquete en sus 4 partes sin ambigüedad.
+
+---
+
+## `crear_socket_servidor(puerto)`
+
+```python
+servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+servidor.bind(("", int(puerto)))
+```
+
+Crea un socket TCP sobre IPv4. El `bind` con `""` significa "escucha en cualquier interfaz de red disponible" — tanto localhost como la IP de red local. Convierte `puerto` a `int()` porque `sys.argv` siempre llega como string.
+
+---
+
+## `recv_exact(sock, num_bytes)`
+
+```python
+while len(datos) < num_bytes:
+    chunk = sock.recv(num_bytes - len(datos))
+```
+
+TCP no garantiza que un solo `recv()` entregue todos los bytes pedidos — puede llegar fragmentado en varios chunks. Esta función sigue llamando a `recv()` hasta acumular exactamente `num_bytes`. Si el socket se cierra antes, lanza `ConnectionError`.
+
+---
+
+## `recibir_paquete(cliente)`
+
+```python
+while b"---" not in encabezado:
+    byte = cliente.recv(1)
+    encabezado += byte
+
+tam = int(encabezado.replace(b"---", b"").strip())
+paquete = recv_exact(cliente, tam)
+```
+
+Lee byte a byte hasta encontrar el delimitador `---`. Todo lo que vino antes es el tamaño del paquete en texto (por ejemplo `b"556---"`). Lo convierte a entero y luego llama a `recv_exact()` para leer exactamente esos bytes. Así sabe cuándo terminó el paquete sin necesidad de otro delimitador al final.
+
+---
+
+## `procesar_paquete(...)`
+
+Es el núcleo criptográfico. Ejecuta 4 operaciones en orden:
+
+**1. Separar las partes**
+```python
+parte1 = paquete[:256]           # llaves cifradas con RSA
+parte2 = paquete[256:512]        # firma digital
+parte3 = paquete[512:-32]        # mensaje cifrado con AES
+parte4 = paquete[-32:]           # HMAC
+```
+Funciona porque los tamaños son fijos y predecibles.
+
+**2. Descifrar las llaves simétricas**
+```python
+paquete_llaves = utils.descifrar_RSA(llave_privada_servidor, parte1)
+llave_aes = paquete_llaves[:16]
+iv        = paquete_llaves[16:32]
+llave_mac = paquete_llaves[32:48]
+```
+Solo el servidor puede hacer esto porque tiene la llave privada. El cliente cifró parte1 con la llave pública del servidor, así que nadie más puede descifrarla.
+
+**3. Verificar la firma digital**
+```python
+llave_publica_cliente = utils.regresar_llave_publica_certificado(
+    subject_cliente, certificado_cliente_bytes, publica_issuer)
+if not utils.es_firma_valida(llave_publica_cliente, parte2, paquete_llaves):
+    raise Exception("Firma digital invalida")
+```
+Primero valida el certificado del cliente contra la CA (`publica_issuer`). Si el certificado es legítimo, extrae la llave pública del cliente y la usa para verificar que parte2 es una firma válida sobre `paquete_llaves`. Esto garantiza que quien envió el mensaje realmente tiene la llave privada del cliente.
+
+**4. Verificar el HMAC**
+```python
+hmac_calculado = utils.calcular_hmac(parte1 + parte2 + parte3, llave_mac)
+if hmac_calculado != parte4:
+    raise Exception("HMAC invalido")
+```
+Recalcula el HMAC sobre las tres primeras partes usando `llave_mac` y lo compara con parte4. Si cualquier byte del paquete fue modificado en tránsito, este valor no coincidirá.
+
+**5. Descifrar el mensaje**
+```python
+mensaje = utils.cifrar_ctr(parte3, llave_aes, iv)
+```
+Solo si las dos verificaciones anteriores pasaron. AES-CTR es simétrico, la misma función cifra y descifra.
+
+---
+
+## `atencion(cliente, direccion, ...)`
+
+Es la función que ejecuta cada hilo. Su estructura es simple:
+
+```
+recibir_paquete()  →  procesar_paquete()  →  imprimir mensaje
+```
+
+El `try/except/finally` garantiza que pase lo que pase — firma inválida, HMAC incorrecto, conexión cortada — el socket siempre se cierra en el bloque `finally` y se imprime un mensaje de cierre. El `except` ahora muestra `: {e}` para que el error sea visible.
+
+---
+
+## `escuchar(servidor, ...)`
+
+```python
+servidor.listen(5)
+while True:
+    cliente, direccion = servidor.accept()
+    hilo = threading.Thread(target=atencion, args=(...))
+    hilo.daemon = True
+    hilo.start()
+```
+
+Bucle infinito que acepta conexiones. Por cada cliente que llega crea un hilo independiente apuntando a `atencion()`. `daemon = True` significa que si el proceso principal termina, los hilos hijos mueren con él sin necesidad de limpiarlos manualmente. El `listen(5)` permite hasta 5 conexiones en cola simultánea esperando ser aceptadas.
+
+---
+
+## `__main__`
+
+```python
+puerto               = sys.argv[1]   # puerto TCP
+llave_privada        = sys.argv[2]   # ruta a servidor_priv.pem
+subject_cliente      = sys.argv[3]   # nombre del cliente (ej: "cliente")
+certificado_cliente  = sys.argv[4]   # ruta a cliente_cert.bin
+publica_ca           = sys.argv[5]   # ruta a ca_pub.pem
+```
+
+Lee los 5 argumentos, abre los 3 archivos necesarios y los convierte a objetos Python antes de pasarlos a `escuchar()`. Esto se hace aquí una sola vez en lugar de hacerlo dentro de cada hilo, lo que es más eficiente.

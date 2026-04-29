@@ -438,3 +438,34 @@ salt = os.urandom(16)
 - Criptografia asimetrica
   - Firmas digitales
   - Intercambios de llaves
+
+** Combinación de metodos simetricos con asimetricos
+- Intercambio de llaves (simetricas)
+
+*** Agree Upon Transmission
+- Transporte de llaves RSA
+- Sirve para transferir un solo mensaje
+- Tienes: llaves_aes, llave_mac, iv
+- Llave publica del receptor (viene con el vertificado)
+- Cifras las llaves con la llave publica (RSA)
+- Firmar llaves planas
+- Cifras el mensaje con la llave_aes e IV
+- Calcular el HMAC sobre todos los datos
+- De sesiones cortas
+- Es practico para mensajes largos
+
+- CIfrado en masa: Se cifra una gran cantidad de datos.
+- Payload: cargo util
+
+- cliente - servidor
+4 llaves de cada lado (sin certificados)
+- llave privada ECDH de la parte 1
+- llave publica ECDH de la parte 1
+- llave privada ECDSA de la parte
+- llave publica ECDSA del contrario
+
+- El script termina imprimiendo la llave AES (usen HDFK) acordada en ambos lados
+
+- A veces para establecer un canal de confianza necesitas transmitir datos con poca protección (pueden ser manipulados)
+- Eventualmente se llega a tener un canal que se cree protegido (ya se hizo bien el intercambio de llaves)
+- Mientras tanto se fueron calculando hashes de todos lo que se transmitio
