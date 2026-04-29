@@ -41,7 +41,7 @@ def enviar_archivo(
     paso4 = utils.calcular_hmac(paso1 + paso2 + paso3, llave_mac)
 
     paquete = paso1 + paso2 + paso3 + paso4
-    tam_bytes = str(paquete).encode("utf-8")
+    tam_bytes = str(len(paquete)).encode("utf-8")
 
     socket.send(tam_bytes)
     socket.send(b"---")

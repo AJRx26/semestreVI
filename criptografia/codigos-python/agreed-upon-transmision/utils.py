@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives import serialization, hashes, hmac
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
-ISSUER_NAME = 'WACKO'  # debe coincidir con ISSUER_NAME en issuer.py del maestro
+ISSUER_NAME = 'WACKO'
 
 
 def convertir_llave_privada_bytes(llave_privada):
