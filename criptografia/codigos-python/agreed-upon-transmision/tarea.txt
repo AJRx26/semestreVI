@@ -19,3 +19,37 @@
 ▶ En este caso el cliente envı́a el mensaje de una sola vı́a al servidor, el servidor (receptor) comprueba que todo se haya recibido bien e imprime el mensaje recibido
 ▶ El maestro implementará la parte del cliente
 ▶ Tu trabajo consiste en hacer la parte del servidor (se te dará una plantilla)
+
+- Servidor
+1. puerto
+2. llave privada del servidor RSA
+3. nombre del cliente
+4. certificado del cliente
+5. llave publica del CA
+
+- cliente
+1. host
+2. puerto
+3. llave privada del cliente RSA
+4. nombre del servidor
+5. certificado del servidor
+6. llave publica del CA
+7. archivo 
+
+- llaves del CA
+1. generarllaves
+
+- llaves del servidor y cliente
+1. generarllaves
+
+- certificados del cliente y servidor
+1. issuer
+
+python3 generarLlaves.py ca_priv.pem ca_pub.pem
+python3 generarLlaves.py servidor_priv.pem servidor_pub.pem
+python3 generarLlaves.py cliente_priv.pem cliente_pub.pem
+python3 issuer.py servidor servidor_pub.pem ca_priv.pem servidor_cert.bin
+python3 issuer.py cliente  cliente_pub.pem  ca_priv.pem cliente_cert.bin
+
+python3 servidor.py 9000 servidor_priv.pem cliente cliente_cert.bin ca_pub.pem
+python3 cliente.py 127.0.0.1 9000 cliente_priv.pem servidor servidor_cert.bin ca_pub.pem mensaje.txt
