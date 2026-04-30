@@ -1,0 +1,19 @@
+- Al menos una ACL deberá ser nombrada, utilizando tu nombre y apellido (nombre-apellido).
+
+- Definir una ACL que no permita a los host en la red 192.168.1.0/26 tener acceso al servidor Web 192.168.3.2/30, pero si puedan tener acceso a las demas redes (2 puntos)
+
+access-list 100 permit tcp 192.168.1.0 0.0.0.255 192.168.3.2 255.255.255.255
+
+deny udp/tcp 192.168.1.0 0.0.0.255 192.168.3.2 eq 80
+deny udp/tcp 192.168.1.0 0.0.0.255 192.168.3.2 eq 443
+permit any
+
+- Defina una ACL que limite el ping dela PCB hacia la PCC, pero todo el demas tráfico debe ser permitido (2 puntos)
+
+deny icmp 192.168.1.128 255.255.255.255 192.172.16.2.128
+permit any
+
+- Defina una ACL que permita el acceso de solo la mitad inicial de la red 192.168.30.0/24 al servidor Web 172.16.2.2/27. Todo el demas tráfico está restringido (3 puntos)
+
+permit tcp 192.168.30.0 0.0.0.128 172.16.2.2
+permit any
