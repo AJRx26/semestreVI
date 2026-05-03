@@ -69,7 +69,7 @@ def handshake(conn, priv_ecdsa, pub_ecdsa_servidor):
     # PASO 3: Verificar firma del servidor
     if not utils.verificar(pub_ecdh_servidor_bytes, firma_servidor, pub_ecdsa_servidor):
         raise ValueError('Firma del servidor inválida')
-    print('[+] Firma del servidor verificada ✅')
+    print('[+] Firma del servidor verificada')
 
     # PASO 4: Derivar llave AES
     pub_ecdh_servidor = utils.deserializar_publica(pub_ecdh_servidor_bytes)
