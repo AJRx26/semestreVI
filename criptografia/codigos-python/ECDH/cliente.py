@@ -33,11 +33,11 @@ def recibir(conn) -> bytes:
     return recv_exact(conn, longitud)
 
 
-def cargar_identidad():
+def cargar_identidad(ruta_privada, ruta_publica):
     """Carga las llaves ECDSA del cliente y la pública del servidor."""
     print('[*] Cargando llaves ECDSA...')
-    priv_ecdsa         = utils.cargar_llave_privada('cliente_privada.pem')
-    pub_ecdsa_servidor = utils.cargar_llave_publica('servidor_publica.pem')
+    priv_ecdsa         = utils.cargar_llave_privada(ruta_privada)
+    pub_ecdsa_servidor = utils.cargar_llave_publica(ruta_publica)
     print('[+] Llaves ECDSA cargadas')
     return priv_ecdsa, pub_ecdsa_servidor
 
@@ -91,7 +91,9 @@ def conectar(host, puerto, priv_ecdsa, pub_ecdsa_servidor):
 
 
 if __name__ == '__main__':
-    host   = sys.argv[1] if len(sys.argv) > 1 else '127.0.0.1'
-    puerto = sys.argv[2] if len(sys.argv) > 2 else 65432
-    priv_ecdsa, pub_ecdsa_servidor = cargar_identidad()
+    host   = sys.argv[1]
+    puerto = sys.argv[2]
+    ruta_privada = sys.argv[3]
+    ruta_publica = sys.argv[4]
+    priv_ecdsa, pub_ecdsa_servidor = cargar_identidad(ruta_privada, ruta_publica)
     conectar(host, puerto, priv_ecdsa, pub_ecdsa_servidor)

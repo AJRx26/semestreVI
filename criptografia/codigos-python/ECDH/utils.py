@@ -10,11 +10,7 @@ from cryptography.hazmat.primitives.serialization import (
 )
 from cryptography.exceptions import InvalidSignature
 
-
-# ─────────────────────────────────────────────
 #  GENERACIÓN DE LLAVES
-# ─────────────────────────────────────────────
-
 def generar_llaves_ecdh():
     """Genera un par de llaves ECDH efímeras (privada, publica)."""
     privada = ec.generate_private_key(ec.SECP384R1(), default_backend())
@@ -22,10 +18,7 @@ def generar_llaves_ecdh():
     return privada, publica
 
 
-# ─────────────────────────────────────────────
 #  CARGA DE LLAVES ECDSA DESDE ARCHIVO PEM
-# ─────────────────────────────────────────────
-
 def cargar_llave_privada(ruta: str):
     """
     Carga una llave privada ECDSA desde un archivo PEM.
@@ -43,33 +36,24 @@ def cargar_llave_publica(ruta: str):
     with open(ruta, 'rb') as f:
         return load_pem_public_key(f.read())
 
-
-# ─────────────────────────────────────────────
 #  SERIALIZACIÓN
 #  Convertir llaves a bytes para enviarlas por socket
-# ─────────────────────────────────────────────
-
 def serializar_publica(llave_publica) -> bytes:
     """Convierte una llave pública (ECDH o ECDSA) a bytes."""
     return llave_publica.public_bytes(Encoding.X962, PublicFormat.UncompressedPoint)
-
 
 def deserializar_publica(datos: bytes):
     """Reconstruye una llave pública desde bytes."""
     return ec.EllipticCurvePublicKey.from_encoded_point(ec.SECP384R1(), datos)
 
 
-# ─────────────────────────────────────────────
 #  FIRMA Y VERIFICACIÓN (ECDSA)
-# ─────────────────────────────────────────────
-
 def firmar(llave_publica_ecdh: bytes, priv_ecdsa) -> bytes:
     """
     Firma los bytes de la llave pública ECDH con la llave privada ECDSA.
     Devuelve la firma en bytes.
     """
     return priv_ecdsa.sign(llave_publica_ecdh, ec.ECDSA(hashes.SHA256()))
-
 
 def verificar(llave_publica_ecdh: bytes, firma: bytes, pub_ecdsa) -> bool:
     """
@@ -83,11 +67,7 @@ def verificar(llave_publica_ecdh: bytes, firma: bytes, pub_ecdsa) -> bool:
     except InvalidSignature:
         return False
 
-
-# ─────────────────────────────────────────────
-#  INTERCAMBIO ECDH + DERIVACIÓN HKDF
-# ─────────────────────────────────────────────
-
+#  INTERCAMBIO ECDH
 def derivar_llave(priv_ecdh, pub_ecdh_remota) -> bytes:
     """
     Realiza el intercambio ECDH y deriva una llave AES-256 con HKDF.
