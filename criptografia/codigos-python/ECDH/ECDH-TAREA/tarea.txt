@@ -1,0 +1,17 @@
+cliente - servidor
+
+4 llaves de cada lado (sin certificados):
+- llave privada ECDH de la parte 
+- llave pública ECDH de la parte
+- llave privada ECDSA de la parte
+- llave pública ECDSA del contrario
+
+El script termina imprimiendo la llave AES (usen HDFK) acordada en ambos lados.
+
+Crear un servidor y cliente que hagan un intercambio de llaves ECDH ademas de autenticacion mediante ECDSA.
+1. Existiran 3 scripts en total (servidor, cliente y utils)
+2. Utils sera una biblioteca donde estaran las funciones para generar las llaves de ECDH, firmar las llaves ECDH con ECDSA, verificar la firma y hacer el procedimiento de ECDH para obtener la misma llave en ambos lados.
+3. Servidor se activara primero y genera sus propias llaves ECDH y ECDSA, firma las llaves ECDH con ECDSA y espera a enviarlas a un cliente en lo que espera una conexion
+4. Cliente crea sus llaves ECDH y ECDSA, hace la firma y envia la llave publica ECDH y ECDSA al servidor
+5. Servidor verifica las ECDH y si es correcto, envia sus llaves publicas, el cliente verifica y si es correcto inicia el proceso de ECDH.
+6. Ambos lados hacen el proceso ECDH e imprimen la llave que obtuvieron.
