@@ -29,13 +29,13 @@ def handshake(cliente, priv_ecdsa, pub_ecdsa_cliente):
 
     # genera llaves ECDH firmardas
     priv_ecdh, pub_ecdh = utils.generar_llaves_ecdh()
-    pub_ecdh_bytes      = utils.serializar_publica(pub_ecdh)
-    firma               = utils.firmar(pub_ecdh_bytes, priv_ecdsa)
+    pub_ecdh_bytes = utils.serializar_publica(pub_ecdh)
+    firma = utils.firmar(pub_ecdh_bytes, priv_ecdsa)
 
     # recibe pub_ECDH + firma del cliente
     print('[+] Esperando llaves del cliente')
-    pub_ecdh_cliente_bytes = recibir(cliente)
-    firma_cliente          = recibir(cliente)
+    pub_ecdh_cliente_bytes = utils.leer_datos(cliente)
+    firma_cliente = utils.leer_datos(cliente)
 
     # verifica firma del cliente
     if not utils.verificar(pub_ecdh_cliente_bytes, firma_cliente, pub_ecdsa_cliente):
@@ -43,8 +43,8 @@ def handshake(cliente, priv_ecdsa, pub_ecdsa_cliente):
     print('[+] Firma del cliente verificada')
 
     # envia pub_ECDH + firma al cliente
-    utils.mandar_dato(cliente, pub_ecdh_bytes)
-    utils.mandar_dato(cliente, firma)
+    utils.mandar_datos(cliente, pub_ecdh_bytes)
+    utils.mandar_datos(cliente, firma)
     print('[+] Llaves enviadas al cliente')
 
     # deriva la llave AES
