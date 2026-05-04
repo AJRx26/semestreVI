@@ -41,6 +41,8 @@ class DataContext
 
 		$stmt = self::$mysqli->prepare($sql);
 		$stmt->bind_param(
+			"ssssss"
+			$datos['']
 		)
 	}
 }
