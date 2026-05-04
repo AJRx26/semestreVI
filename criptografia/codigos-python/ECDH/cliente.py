@@ -40,8 +40,8 @@ def handshake(conn, priv_ecdsa, pub_ecdsa_servidor):
 
     # recibe pub_ECDH + firma
     print('[+] Esperando llaves del servidor')
-    pub_ecdh_servidor_bytes = utils.leer_dato(conn)
-    firma_servidor = utils.leer_dato(conn)
+    pub_ecdh_servidor_bytes = utils.leer_datos(conn)
+    firma_servidor = utils.leer_datos(conn)
 
     # verificar firma del servidor
     if not utils.verificar(pub_ecdh_servidor_bytes, firma_servidor, pub_ecdsa_servidor):
