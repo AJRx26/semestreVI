@@ -1,0 +1,17 @@
+[
+    {
+        "titulo": "Mantenimiento programado de red",
+        "fecha": "10 de junio de 2026",
+        "descripcion": "Se realizarán tareas de mantenimiento en la red institucional de 7:00 a 9:00 horas."
+    },
+    {
+        "titulo": "Actualización de software en laboratorios",
+        "fecha": "12 de junio de 2026",
+        "descripcion": "Se instalarán nuevas versiones de software académico en los equipos del laboratorio."
+    },
+    {
+        "titulo": "Convocatoria para préstamo de equipo",
+        "fecha": "14 de junio de 2026",
+        "descripcion": "Se habilita el registro para solicitar préstamo temporal de equipo de cómputo."
+    }
+]
