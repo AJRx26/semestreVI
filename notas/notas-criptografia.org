@@ -469,3 +469,13 @@ salt = os.urandom(16)
 - A veces para establecer un canal de confianza necesitas transmitir datos con poca protección (pueden ser manipulados)
 - Eventualmente se llega a tener un canal que se cree protegido (ya se hizo bien el intercambio de llaves)
 - Mientras tanto se fueron calculando hashes de todos lo que se transmitio
+
+** AES-GCM
+ - IV de tamano de 12 bytes
+ - No usar IV 0
+ - Segementar lo que transmites
+ - Un IV difeente para cada segmento
+ - No transmitir mas de 64 gb con la misma llave
+
+** AES-CCM
+-
