@@ -18,4 +18,12 @@
 
 - Procesar cifrado y descifrado a la par y solo ve guardando tiempos para al final sacar datos estadisticos.
 
+1024 = 1KB
+32768 = 32KB
+65536 = 64KB
+131072 = 128KB
+262144 = 256KB
+524288 = 512KB
+1048576 = 1 MB
+
 
