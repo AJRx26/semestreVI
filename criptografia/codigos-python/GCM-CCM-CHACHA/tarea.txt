@@ -1,0 +1,21 @@
+1. Hacer una comparacion de velocidad de cifrado y descifrado de AES-GCM, AES-CCM y ChaCha
+
+- El programa compara la eficiencia en tiempo de los algoritmos AEAD.
+- El programa recibe los siguientes parametros: 
+	- Tamano segmento: Tamano en bytes de cadena binaria que se cifra de golpe.
+	- Numero de segmentos
+
+- El programa debera realizar comparaciones equivalentes con los 3 metodos, de tal manera que procesen los mismos datos binarios.
+- Se compara tanto tiempo de cifrado como tiempo de descifrado.
+
+2. Se realizara un reporte con la siguiente info: 
+	- Reporte separado para cifrado y descifrado.
+	- Media de tiempo por metodo
+	- Desviacion estandar del metodo
+
+3. Se debe de usar el generador de segmentos visto en clase para que se procesen los mismos datos.
+4. Solo se debe de cronometrar el tiempo de procesamiento del algoritmo durante el cifrado y descifrado.
+
+- Procesar cifrado y descifrado a la par y solo ve guardando tiempos para al final sacar datos estadisticos.
+
+
