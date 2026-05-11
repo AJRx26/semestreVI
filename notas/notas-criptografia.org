@@ -479,3 +479,7 @@ salt = os.urandom(16)
 
 ** AES-CCM
 -
+
+** AEAD
+- Authenticated encryption with aditional data
+-
