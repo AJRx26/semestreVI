@@ -1,0 +1,30 @@
+1. Script "Servidor CC"
+	- Llave privada local cifrada (RSA): La recibe por parte del "ransomware" via sockets y la descifra usando la "llave privada permanente" a la cual tiene acceso.
+	- Llave privada permanente (RSA): Se usa cuando la victima paga el rescate.
+	- Llave publica permanente (RSA): Se usa para ejecutar el ataque, esta hardcodeada en el script ransomware
+
+	- Este script seria similar a un "listener", es decir, estaria esperando a recibir una bandera del script de ransomware (en este caso la llave privada local cifrada) para iniciar el descifrado y devolverlo a la victima. Tendria sockets abiertos para recibir la bandera. Similar a lo que se hace en el script de ECDH.
+
+2. Script "Ransomware"
+	- Llave publica permanente (RSA): Esta hardocodeada dentro del script
+	- Llave publica local (RSA): La crea el script al momento de ejecutar el ataque. Cifrara las llaves AES creadas por cada archivo.
+	- Llave privada local (RSA): La crea el script al momento de ejecutar el ataque. Descifrara las llaves AES creadas por cada archivo.
+	- Llave AES: La crea el script al momento de ejecutar el ataque. Cifrara y descifrada cada archivo.
+
+	- Parametros:
+		- directorio: Ubicacion donde se hara el ataque
+
+	- Este script hara un ataque de ransomware cifrando los archivos dentro de una carpeta en especifica.
+	1. Al ejecutar el script, sera necesario pasarle como parametro la direccion de la carpeta que sera cifrada.
+	2. Despues crearia un par de llaves RSA (publica y privada).
+	3. Cifraria la llave privada local usando la llave publica permanente (esta llave ya esta por defecto en el script).
+	4. Usando un ciclo, se crea una llave AES y un IV por cada archivo dentro del directorio.
+		4.1. Cifraria cada archivo por via CTR usando la llave AES y el IV previamente creado. 
+		4.2. Se cifra la llave AES usando la llave publica local.
+		4.3. El nuevo archivo cifrado se le agregaria el IV mas la llave cifrada al final.
+	5. Se manda un mensaje a la victima diciendole que sus archivos estan cifrados y su equipo esta infectado.
+	6. La victima hace un pago y manda una senal al script confirmando el rescate. En este caso se hara usando una palabra magica o un enter.
+	7. Para descifrar, el script de ransomware envia la llava privada local cifrada al script "Servidor CC" para que la descifre usando la llave privada permanente.
+	8. El servidor cc envia la llave privada local ya descifrad al script de ransomware.
+	9. El scrip de ransomware hace todo el proceso de descifrado. Seria el mismo proceso que el cifrado pero a la inversa descifrando cada llave AES mediante la llave privada local. 
+	10. Se muestra un mensaje diciendo que los archivos han sido restaurados.
