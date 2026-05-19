@@ -483,3 +483,18 @@ salt = os.urandom(16)
 ** AEAD
 - Authenticated encryption with aditional data
 -
+
+** TLS
+- Los certificados vienen firmados por un issuer.
+- Si quiero comprobar un certificado tambien necesito el certificado del issuer (la llave publica del issuer).
+- Se necesita una cadena de certificados, hasta llegar al certificado raiz (autofirmado).
+- Si quieres engañar a alguien para entrar a un sitio web falso que necesitas?
+  - Sitio web con dominio casi igual.
+    - IDS/IPS
+    - Educar al usuario
+
+- Envenenamiento de DNS
+  - Solo funciona si usas http o si se tiene una llave privada asociada a la cadena de certificados.
+    - Se mitiga para http con redireccion hacia https
+  - Por que no funciona con https?
+    - Por la comprobación de certificados
