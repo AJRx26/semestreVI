@@ -1,6 +1,8 @@
 import socket
 import zipfile
 import os
+import argparse
+
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
@@ -48,7 +50,7 @@ def procesar_zip_y_descifrar(nombre_zip, privada_perm):
 
             if nombre in af.namelist():
                 segmento_cifrado = af.read(nombre)
-                print(f"{nombre}: {len(segmento_cifrado)} bytes")
+                #print(f"{nombre}: {len(segmento_cifrado)} bytes")
 
                 segmento_claro = privada_perm.decrypt(
                     segmento_cifrado,
@@ -69,7 +71,7 @@ def crear_socket_servidor(puerto):
         encoding=serialization.Encoding.PEM,
         format=serialization.PublicFormat.SubjectPublicKeyInfo
     )
-    print(pem.decode())
+    #print(pem.decode())
     
     servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     servidor.bind(('', int(puerto)))
@@ -106,4 +108,8 @@ def crear_socket_servidor(puerto):
 
 
 if __name__ == "__main__":
-    crear_socket_servidor(9999)
+    all_args = argparse.ArgumentParser()
+    all_args.add_argument("-p", "--puerto", help="Puerto del servidor CC", required=True)
+    args = all_args.parse_args()
+
+    crear_socket_servidor(args.puerto)
