@@ -498,3 +498,8 @@ salt = os.urandom(16)
     - Se mitiga para http con redireccion hacia https
   - Por que no funciona con https?
     - Por la comprobación de certificados
+
+- Yo tengo un certificado
+- Como lo avala un tercero?
+- Una cosa es que se compruebe que la entidad es la propietaria verdadera del certificado
+- Y otra es que el certificado sea confiable.
