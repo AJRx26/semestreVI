@@ -480,6 +480,17 @@ salt = os.urandom(16)
 ** AES-CCM
 -
 
+** Transporte de llaves RSA
+1. Alguna de las partes genera la llave simetrica. (probablemente el servidor)
+2. Se cifra la llave simetrica con una llave publica.
+3. La otra parte tiene una llave privada.
+4. Se transmite la llave cifrada y se descifra.
+
+- Seguridad hacia delante (Forward Secrecy)
+
+** Transporte de llaves DH
+1. Generas
+
 ** AEAD
 - Authenticated encryption with aditional data
 -
@@ -503,3 +514,33 @@ salt = os.urandom(16)
 - Como lo avala un tercero?
 - Una cosa es que se compruebe que la entidad es la propietaria verdadera del certificado
 - Y otra es que el certificado sea confiable.
+
+*** TLS 1.2
+**** Handshake
+1. Comienza con un cliente enviando un mensaje hello al servidor. Este mensaje contiene info de configuración, tipo nonce. Tambien esta la lista de Cipher Suites.
+   - El objetivo es ponerse de acuerdo en cuanto al algoritmo y protocolos criptograficos a usar. La Cipher Suite da opciones.
+   - La seguridad depende del Cipher Suite usado.
+2. El servidor recibe un hello cliente, escoge uno de los cipher suites propuestos del cliente. Cuando escoge uno, envia una respuesta con la siguiente info:
+   - Hello con nonce
+   - Certificado
+   - Intercambio de llaves DHE O ECDHE
+3. El cliente hace el proceso como auntenticar al servidor, derivar la llave y empezar a enviar datos cifrados.
+
+- TLS solo autentica el servidor, el cliente no envia un certificado para autenticarse.
+- Una sesión puede tener varias llaves simetricas.
+   - Confidencialidad (transporte en si)
+     - Llave emisor-receptor
+     - Llave receptor-emisor
+   - Autenticación/Integridad (MAC)
+     - Llave emisor-receptor
+     - Llave receptor-emisor
+
+- Con DH o transporte RSA generas un PMS, que permite generar un master secret.
+   - Con el PMS puedes tener un generador de llaves
+
+   - Intercambiar hellos (nonces, certificados, lista de cipher suits)
+   - Negociación de cihper suites
+   - Autenticacion
+   - Intercambio/derivación de llaves
+   - ChangeCipherspec
+   - Finish (comprobación de hash)
