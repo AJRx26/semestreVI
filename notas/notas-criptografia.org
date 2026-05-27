@@ -526,8 +526,8 @@ salt = os.urandom(16)
    - Intercambio de llaves DHE O ECDHE
 3. El cliente hace el proceso como auntenticar al servidor, derivar la llave y empezar a enviar datos cifrados.
 
-- TLS solo autentica el servidor, el cliente no envia un certificado para autenticarse.
-- Una sesión puede tener varias llaves simetricas.
+4. TLS solo autentica el servidor, el cliente no envia un certificado para autenticarse.
+5. Una sesión puede tener varias llaves simetricas.
    - Confidencialidad (transporte en si)
      - Llave emisor-receptor
      - Llave receptor-emisor
@@ -535,7 +535,7 @@ salt = os.urandom(16)
      - Llave emisor-receptor
      - Llave receptor-emisor
 
-- Con DH o transporte RSA generas un PMS, que permite generar un master secret.
+6. Con DH o transporte RSA generas un PMS, que permite generar un master secret.
    - Con el PMS puedes tener un generador de llaves
 
    - Intercambiar hellos (nonces, certificados, lista de cipher suits)
@@ -544,3 +544,28 @@ salt = os.urandom(16)
    - Intercambio/derivación de llaves
    - ChangeCipherspec
    - Finish (comprobación de hash)
+
+7. Handshake TLS
+   - Establecer identidad
+   - Establecer llaves de sesion
+     - DH
+     - Transporte de llaves RSA
+
+8. Transferencia en masa (bulk):
+   - Se transfieren los datos de interes (payload)
+   - Esa transferencia se hace con metodos simetricos.
+
+9. Http
+   - Es un protocolo peticion-respuesta
+   - La cantidad de interacciones peticion-respuesta hay una sesion http es de una por sesion.
+
+10. MiM en TLS
+    - Cliente manda su hello que incluye la lista de cipher suite soportados
+    - Un tercero altera la lista de cipher suits dejando solo las debiles
+    - La forma de mitigacion es verificar el finished del handshake el hash de todo lo que se ha transmitido.
+
+    - Verificar certificados
+    - Verificar identidad -> reto-respuesta
+
+- La criptografia es segura siempre y cuando no se comprometan los secretos
+- Tiempo promedio para detectar una brecha es de 6 meses a 1 year
