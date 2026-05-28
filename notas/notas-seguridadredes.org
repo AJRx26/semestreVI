@@ -189,3 +189,71 @@
 - ./easyrsa sign-req server servidor-feiuvi
 - ./easyrsa gen-req cliente1-feiuv nopass
 - ./easyrsa sign-req client cliente1-feiuv
+
+** Detección de intrusiones
+- Supervisar eventos en un sistema informatico o una red y analizarlos en busca de indicios de posibles incidentes.
+- Incidentes: Amenazas inminentes de infracción de las politicas de seguridad informatica. Puede tener multiples causas.
+
+- IDS: Programa informatico que automatiza el proceso de detección de intrusiones.
+- IPS: Programa informatio que tiene las
+
+- Enfoque en la identificación de posibles incidentes.
+- No detectan cuando un sistema ya fue comprometido
+
+- Identificación de problemas en las politicas de seguridad.
+- Documentación de amenazas para la organización.
+- Disuadir a personas de infringir politicas de seguridad.
+
+*** Funciones clave de los IDPS
+- Registro de información sobre los eventos observados
+- Notificación de eventos observados al administrador de seguridad.
+- Generación de reportes.
+
+*** Tecnicas de respuesta de los IPS
+- Detiene el ataque por si mismo.
+- Modifica el entorno de seguridad.
+- Modifica el contenido del ataque.
+
+*** Precisión en la detección
+- Los IDPS no son totalmente precisos.
+- Falsos positivos: Actividad benigna como maliciosa.
+- Falsos negativos: Actividad maliciosa como benigna.
+
+*** Metodologias de detección comunes
+**** Detección basada en firmas
+- Firma: Un patron que corresponde a una amenaza conocida.
+- Proceso de comparar firmas contra eventos observados para identificar posibles incidentes.
+- Es ineficaz para detectar amenazas no conocidas o camufladas mediante tecnicas de evasión.
+
+**** Detección basada en anomalias
+- Proceso de comparar definiciones de lo que se considera una actividad normal con los eventos observados para identificar desviaciones significativas.
+- Usa perfiles que representan un comportamiento normal de elementos como usuarios, host, conexiones de red o aplicaciones.
+- Es muy efectiva detectando amenazas desconocidas previamente.
+- Periodo de entrenamiento que puede durar dias o semanas.
+
+***** Tipos de perfiles
+- Perfil estatico: No cambia el perfil, solo cuando el IDPS sea configurado para generar un nuevo perfil.
+- Perfil dinamicos: Se ajusta constantemente con eventos adiciones que son observados .
+- Ambientes muy diversos o dinamicos, pueden generar muchos falsos positivos.
+
+**** Analisis de protocolos con estado
+- Proceso de comparar perfiles predeterminados de funciones generalmente aceptadas, como actividades de protocolos benignas para cada estado del protocolo, con los eventos observados y con el fin de identificar desviaciones.
+- Se basa en perfiles universales desarrollados por los provedores que especifican como deben y como no deben utilizarse determinados protocolos.
+- Con estado: Significa que el IDPS es capaz de comprender y rastrear el estado de los protocolos de red, transporte y aplicación (que tienen noción de estado).
+
+- Protocolo con estado: FTP
+
+- Permite identificar secuencias de comandos inesperadas
+- Con protocolos que realizan autenticación
+- Comprueba aspectos como la longitud minima y maxima de los argumentos para un comando.
+- Se basan principalmente en estandares de protocolo de proveedores y organismos de normalización como la IETF
+
+- Consumen muchos recursos, debido a la complejidad del analisis.
+- No pueden detectar ataques que no violen las caracteristicas de comportamiento "aceptable" de un protocolo.
+- El modelo de protocolo utilizado por un IDPS podria entrar en conflicto con la forma en que se implementa el protocolo en una aplicación o sistema operativo especifico.
+
+*** Tipos de tecnologias IDPS
+- Basados en red
+- Inalambricos
+- Basados en analisis de red (NBA)
+- Basados en host2
