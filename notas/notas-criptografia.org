@@ -569,3 +569,22 @@ salt = os.urandom(16)
 
 - La criptografia es segura siempre y cuando no se comprometan los secretos
 - Tiempo promedio para detectar una brecha es de 6 meses a 1 year
+
+*** Ventajas de TLS 1.3
+- No tiene ciphersuits debiles
+  - Nada con RSA -> transporte RSA
+  - Solo AEAD
+- Menor latencia
+
+- Heartbeats (latido): En un sistema distribuido no puedes saber si un nodo esta activo o inactivo, solo puedes comprobarlo haciendo una petición, el heartbeat es una forma de comprobar si un nodo sigue activo cada x tiempo.
+
+** Proyecto final
+- Versión 1
+  - Hacer una aplicación que le permita a un cliente subir o descargar archivos de manera segura.
+
+** Examen
+- MACS, Firmas digitales, Certificados
+- DH y transporte de RSA (cifrado hibrido)
+- Cifrado simetrico AEAD
+- TLS (versiones, handshake)
+- Tareas/Proyectos

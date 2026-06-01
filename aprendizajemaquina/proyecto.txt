@@ -1,0 +1,25 @@
+1. Selecciona un conjunto de datos relacionado con ciberseguridad
+2. Define una tarea de aprendizaje supervisado (clasificacion o regresion)
+3. Realiza un analisis exploratorio de datos:
+	3.1. Estructura, tipos de datos, valores faltantes
+	3.2. Distribucion de la variable objetivo
+	3.3. Visualizacion relevantes de apoyo
+4. Preprocesa los datos (codificacion, escalado, particion entrenamiento/prueba)
+5. Selecciona dos modelos de aprendizaje supervisado diferentes.
+6. Entrena ambos modelos con los datos de entrenamiento.
+7. Evalua su rendimiento con las metricas correspondientes:
+	7.1. Clasificacion: Exactitud, precision, sensibilidad, matriz de confusion
+	7.2. Regresion: MSE, RMSE, MAE, R2
+8. Aplica validacion cruzada para obtener estimaciones robustas.
+9. Compara el desempeño de ambos modelos.
+
+Tambien se deberan de tomar en cuenta cosas como:
+- Tipo de tarea
+- Por que es relevante para ciberseguridad
+- Desvanlanceo o valores atipicos
+- Codificacion de variables categoricas (si aplica)
+- Configuracion de hiperparametros
+- Tabla con metricas de entrenamiento
+- Comparacion de modelos con k-fold (k=5 o 10) o stratifield
+- Tabla comparativa: media +- desviacion para cada metrica principal
+- Grafico de cajas para comparar distribuciones de rendimiento si aplica.

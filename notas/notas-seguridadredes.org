@@ -257,3 +257,42 @@
 - Inalambricos
 - Basados en analisis de red (NBA)
 - Basados en host2
+
+*** Componentes tipicos de IDPs
+- Sensor o agente.
+- Servidor de gestión
+- Servidor de gestión
+- Servidor de base de datos
+- Consola
+
+*** Capacidades de detección
+- Umbrales
+- Listas negras: Actividades maliciosas
+- Listas blancas: Actividades benignas
+- Configurar alertas
+- Edición y visualización del codigo
+
+*** IDPs basado en red
+- Sensores (appliance)
+- Uno o mas servidores de gestión
+- Multiples consolas
+- Uno o mas servidores de BD (opcional)
+
+- Las tarjetas estan en modo promiscuo para aceptar todos los paquetes entrantes detectados.
+
+- Pueden instalarse en uno o dos modos
+  - En linea/Inline: El trafico supervisado debe de pasar a traves de el.
+  - Pasivo/Passive: Supervisa una copia del trafico real. No pasa a travez del sensor.
+
+*** Capacidades de prevención
+- Finalizar sesiones TCP
+- Implementar firewall en linea
+- Limite de bandhwith
+- Alteración de contenido malicioso
+- Reconfiguración de dispositivos de red
+- Ejecución de un programa o script
+
+*** Soluciones de NIDPS Open Source
+- Snort
+- Suricata
+- Zeek
