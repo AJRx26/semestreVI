@@ -335,7 +335,7 @@ salt = os.urandom(16)
 
 - Si solo se tiene uno de los dos
 
-*** Integridad de mensajes, firmas y certificados
+** Integridad de mensajes, firmas y certificados
 - MACS
 - Firmas digitales
 - Certificados
@@ -363,7 +363,7 @@ salt = os.urandom(16)
 - Es basicamente un hash keyed
 - Las funciones de hash son deterministas, dada la misma entrada siempre se produce la misma salida.
 - Solo agregar al inicio o al final
-- H(K XOR opad, H((K XOR ipad), text))
+- H(K XOR opad + H((K XOR ipad)+ text))
   - H es la funcion de hash
   - K es la llave que debe de cumplir ciertos requisitos
   - text es cualquier binario que representa el contenido de entrada
@@ -372,6 +372,7 @@ salt = os.urandom(16)
     1. Si K es mas corto que B, entonces a K se le tienen que agregar ceros de padding hasta ser de longitud B.
     2. Si K es mas largo que B, entonces K se reduce aplicando H a K, osea H(K)
     3. Si se aplico 2 y la llave quedo muy corta, entonces se aplica 1
+  - Si se aplica lo anterior, siempre se va a tener una llave de longitud B.
   - ipad se define com el byte 0x36 repetido B veces
   - opad es el byte 0x5c repetido B veces
   - Los pads parecen arbitrarios pero tienen un sentido de seguridad matematico que ayuda a mitigar
@@ -386,8 +387,16 @@ salt = os.urandom(16)
 - Asi, un MAC sobre un mensaje m1 produce un tag t1
 - El par (m1, t1) es transmitido al receptor para ser verificado
 
+- AES solo puede cifrar 128 bits de bloque a la vez.
+- AES-CBC encadena la salida de un bloque cifrado con el siguiente bloque.
+- Si se altera uno se alteran todos los bloques siguientes.
+- El ultimo bloque de CBC es en si un MAC.
+
 ******* MAC Prepend Attack
 - Es posible mandar un mensaje manipulado y hacer que parezca que es el mensaje M1 o M2, suponiendo que esten generados por la misma llave.
+- M3 es una mezcla de M1 y M2.
+- No es necesario conocer la llave de MAC.
+
 ******** Proceso de ataque, anteponiendo M1 a M2
 - Recuperar el primer bloque de M2, denominado M21 (como es AES se toman los primeros 16 bytes)
 - Recuperar el resto de bloques de M2, denominado M2r
@@ -398,7 +407,75 @@ salt = os.urandom(16)
 - Basicamente lo que hace el atacante es reemplazar el primer bloque de M2 por uno manipulado.
 - La victima vera todo el mensaje M1 completo (con su padding), un bloque que se vera posiblemente corrupto y el mensaje M2 sin su primer bloque.
 
+******** Soluciones
+- Agregar siempre la longitud del mensaje al inicio. Esto ayduara a corroborar si hay información extra.
+- Si se cifraron los datos usando AES-CBC, no se debe usar la misma llave para cifrar ni para obtener el MAC.
+- El IV debe ser diferente a un valor de cero.
+
+***** Cifrado y MAC
+- Encrypt-Then-MAC: El MAC se aplica al texto cifrado.
+- MAC-Then-Encrypt: Se aplica al texto plano, luego se cifra el texto plano junto al MAC.
+- Encrypt-And-Mac: Se aplica MAC sobre el texto plano, pero no se cifra el MAC, solo el texto plano.
+
+- Recomendación: Siempre usar Encrypt-Then-MAC.
+- El ataque de padding oraculo a CBC funciona en MAC-Then-Encrypt.
+
 **** Firmas digitales
+***** RSA
+- Dado que los MAC usan llaves simetricas, si se compromete la llave puede ambos lados estan en riesgo de spoofing (usurpación de identidad).
+- Las firmas intentan mitigarlo mediante criptografia asimetrica. Ya que nos existen llaves "compartidas".
+- La llave publica solo se puede descifrar con la llave privada y vise-versa.
+- Si se cifra con la llave privada, puede ser descifrado por la llave publica.
+
+- Autenticidad en reversa: El receptor no sabra de quien es el mensaje pero el emisor sabe que solo podra ser procesada por la entidad autorizada.
+
+- Existen muchos problemas con el cifrado asimetrico (RSA), es ineficiente para archivos grandes, no viene comprobación de integridad y solo puede procesar archivos del tamaño de modulo (2048 bits).
+
+- Para solucionar eso, se hace lo siguiente: Cifrar el hash del mensaje, dando tanto integridad como autenticidad.
+  1. Calcular el hash del mensaje.
+  2. Cifrar el hash mediante la llave privada, este hash cifrado es la firma del emisor.
+  3. El receptor calcula el hash del mensaje, descifra la firma mediante la llave publica y comprueba que coincidan ambos hashes.
+
+- La firma debe de aplicarse siempre al texto plano, nunca al cifrado.
+
+- El cifrado con la llave publica es confidencialidad.
+- El cifrado con la llave privada es autenticidad.
+
+- El padding para firmas RSA es PSS.
+
+- Es comun usar tecnicas asimetricas al inicio de la comunicación para el establecimiento de confianza e intercambio de llaves simetricas. Despues todo el proceso se hace con llaves simetricas.
+
+***** Curvas Elipticas
+- Alternativa a RSA
+- Se usa para firmas digitales y el intercambio de llaves.
+- Se usa ECDSA para firmar.
+- Parametros:
+  - Tipo de curva (P-384 - SECP384r1)
+
+**** Certificados
+- Prueban la pertenencia de las llaves publicas.
+
+- Modelo PKI (Public Key Infraestructure)
+  - Un registro global donde se almacenaban las llaves publicas asociadas a una entidad.
+  - La llave publica se compartia.
+  - No era escalable.
+
+- Un certificado solo son datos, incluyen:
+  - Una llave publica
+  - Metadatos del propietario de la llave (identidad del propietario de la llave, identidad del issuer, fecha de expiración, numero de serie, etc)
+    - La identidad del propietario puede ser un nombre, email, URL, etc.
+  - Firma digital sobre todo el contenido del certificado
+  - Firma por la entida de confianza (issuer)
+
+- Se comparten los certificados en lugar de las llaves publicas.
+- Una entidad quiere un certificado:
+  1. Genera su par de llaves
+  2. La entidad de confianza recibe la llave publica y genera el certificado
+  3. La entidad de confianza firma el certificado con su llave privada
+
+- Para evitar que un agente malicioso use un certificado que no es suyo, se usa el proceso reto-respuesta (challenge-response).
+  - Se basa en pedirle que firme un mensaje con la llave privada y verificarla con la llave publica del certificado. Si coincide, entonces si puedes confiar.
+
 - Protocolo reto-respuesta
   1. El cliente recibe la llave publica del servidor (certificado).
   2. El cliente le manda un reto al servidor.
@@ -414,16 +491,8 @@ salt = os.urandom(16)
   - Integridad
   - Autenticidad
 
-*** Curvas elipticas
-- Alternativa moderna para RSA
-- DSA (Digital Signing Algorithm) es un algoritmo asimetrico que solo se usa para firmas digitales.
-- Las curvas elipticas se utilizan para firmas digitales y para intercambio de llaves.
-- Algoritmo ECDSA
-- El parametro es el tipo de curva.
-
-- Entran a sitio web amazon.com
-- El sitio des da su llave publica
-- Verificar autenticidad del sitio (reto-respuesta)
+- Al issuer se le llama Certificate Authority (CA)
+  - Estos tambien tienen sus propios certificados con nombre de identidad y su llave publica.
 
 - Certificados:
   - Metadatos del propietario (subject)
@@ -439,14 +508,37 @@ salt = os.urandom(16)
   - Firmas digitales
   - Intercambios de llaves
 
+***** Revocación de certificados
+- Si la llave privada de un certificado creado por un CA es comprometido, el CA debe hacer saber a los demas que ya no es confiable.
+
+- Dado que no se puede tener un sistema offline de revocación, existen dos alternativas:
+  - Tener un componente en tiempo real
+  - No se puede actualizar en tiempo real
+
+- Un ejemplo es OCSP (Online Certificate Status Protocol)
+  - Revisa el estatus del certificado en tiempo real
+  - Tambien revisa CRL's (listas de certificados revocados)
+
+- La recomendación final siempre sera proteger las llaves privadas, de preferencia en un lugar offline y/o con permisos minimos con un cifrado adicional.
+- Los certificados deben tener un tiempo de vida relativamente corto.
+
+***** Ataques de repetición
+- Un mensaje legitimo es utilizado por un atacante tiempo despues cuando el mensaje ya no es valido.
+
+- Soluciones:
+  - Se agrega un nonce (numero aleatorio) para hacer seguimiento de mensajes recibidos.
+  - Usar timestamp (fecha del mensaje) para rechazar mensajes demasiados viejos. Aunque es necesario una ventana de tiempo para lidiar con retrasos.
+  - Combinar timestamp y nonces aleatorios, rechazar mensajes muy viejos ademas que tengan el nonce repetidos dentro de la ventana de tiempo permitida.
+
 ** Combinación de metodos simetricos con asimetricos
 - Intercambio de llaves (simetricas)
+- RSA cifra llaves AES compartidas en la comunicación
 
 *** Agree Upon Transmission
-- Transporte de llaves RSA
+- Transmite un solo flujo de bytes con todos los datos necesarios concatenados
 - Sirve para transferir un solo mensaje
-- Tienes: llaves_aes, llave_mac, iv
-- Llave publica del receptor (viene con el vertificado)
+- Tienes: llaves_aes, llave_mac, iv cifradas con la llave publica
+- Llave publica del receptor (viene con el certificado)
 - Cifras las llaves con la llave publica (RSA)
 - Firmar llaves planas
 - Cifras el mensaje con la llave_aes e IV
@@ -454,46 +546,120 @@ salt = os.urandom(16)
 - De sesiones cortas
 - Es practico para mensajes largos
 
+1. Llave AES, IV y llave MAC cifradas con la llave publica del receptor
+2. La firma digital sobre la concatenación (no cifrada) de la llave AES, IV y llave MAC.
+3. Los bytes del mensaje transmitido, cifrados con la llave AES e IV.
+4. El HMAC sobre la transmisión utilizando la llave MAC.
+
+5. Descifra mediante su llave privada, obtiene la llave AES, IV y MAC
+6. Verifica la firma digital, mediante el certificado del emisor.
+7. Calcula HMAC de 1, 2 y 3 con la llave MAC y lo compara con 4.
+8. Descifra 3 mediante la llave AES y el IV.
+
+*** Llaves de sesión
+- Se usa una sola vez y se descarta permanentemente, es decir, son efimeras.
+- Llaves para el cifrado en masa
 - CIfrado en masa: Se cifra una gran cantidad de datos.
 - Payload: cargo util
+- Son faciles de crear
+- Se pueden derivar de un secreto base usando funciones de derivación de llaves.
 
-- cliente - servidor
-4 llaves de cada lado (sin certificados)
-- llave privada ECDH de la parte 1
-- llave publica ECDH de la parte 1
-- llave privada ECDSA de la parte
-- llave publica ECDSA del contrario
+*** Diffie-Hellman DH
+- Criptografia asimetrica
+- Una variante es con curvas elipticas ECDH
+- Intercambia parametros publicos para computar simultaneamente la misma llave en ambos lados, esto se llama Key Agreement
 
-- El script termina imprimiendo la llave AES (usen HDFK) acordada en ambos lados
+1. Primero crea un par de numeros matematicos, uno privado y publico. Esto para cada participante.
+2. Ambas partes intercambian sus numeros publicos.
+3. Con el numero publico externo y el numero privado local se genera la misma llave compartida en ambos lados.
+
+- El resultado es una llave simetrica o un dato que permite derivar una llave simetrica.
+- Requiere comunicación bidireccional.
+- Los parametros de DH deben ser iguales
+  - Tamaño de la llave (2048)
+  - Generador (2, 5)
+
+- Se recomienda usar HKDF para derivar la llave
+- DH no tiene autenticación integrada
+- Una o ambas partes deben de firmar publicos intercambiados.
+
+- Son preferiables para el transporte de llaves antes que RSA.
+- Principalmente porque ofrecen "Confidencialidad hacia delante" (Forward Secrecy) dada la naturaleza de las llaves efimeras, si una llave es comprometida, no se revela nada acerca de comunicaciones previas.
 
 - A veces para establecer un canal de confianza necesitas transmitir datos con poca protección (pueden ser manipulados)
 - Eventualmente se llega a tener un canal que se cree protegido (ya se hizo bien el intercambio de llaves)
 - Mientras tanto se fueron calculando hashes de todos lo que se transmitio
 
-** AES-GCM
- - IV de tamano de 12 bytes
- - No usar IV 0
- - Segementar lo que transmites
- - Un IV difeente para cada segmento
- - No transmitir mas de 64 gb con la misma llave
+**** Autenticación con DH y ECDH
+- El intercambio de llaves requiere una llave publica RSA o ECDSA, con su certificado firmado. Se usan para establecer identidad de cada parte, firmando info efimera durante el proceso de generación.
+- Ademas se agrega challenge-response.
 
-** AES-CCM
--
+*** Protocolo Reto-Respuesta
 
-** Transporte de llaves RSA
+*** Ramsonware
+- Software que cifra archivos y se rehusa a liberarlos hasta que le pagues al extorsionador que esta detras de todo.
+
+1. El atacante genera dos llaves permanentes.
+2. El atacante hardcodea la llave publica permanente en el ramsonware
+3. Cuando el malware se activa se crean un par de llaves locales
+4. Se cifra la llave privada local con la llave publica permanente y se elimina la versión plana.
+5. El malware cifra los archivos usando AES, cada archivo cifrado tiene una llave diferente que es cifrada con la llave publica local, solo pueden ser descifradas por la llave privada local.
+6. Cuando se haga el pago, el malware envia la llave privada local cifrada al servidor CC
+7. Con la llave privada permanente se descifra la llave privada local y se reenvia a la victima
+8. Ahora se pueden descifrar las llaves AES.
+9. La llave privada permanente nunca es revelada.
+
+** Cifrado simetrico avanzado
+*** Cifrado autenticado con datos adicionales (AEAD)
+- Authenticated Encryption with Aditional Data
+- Proveen autenticidad, integridad y confidencialidad.
+- Reemplazan a los MAC's
+- Es mejor usar AEAD antes que los MAC
+
+**** AES-GCM (Galois/Counter Mode)
+- Permite cifrar y autenticar con una sola llave
+- IV de tamano de 12 bytes
+- No usa padding
+- Recomendable usar junto a Scrypt o HDKF
+- Datos adicionales no se cifran pero deben de autenticarse mediante la llave derivada.
+- Al terminar el proceso se obtiene un tag.
+
+- No usar IV 0
+- Segementar lo que transmites
+- Un IV difeente para cada segmento
+- No transmitir mas de 64 gb con la misma llave
+- No usar el mismo par de llave e IV (nonce)
+
+- GCM usa IV's de 12 bytes, a los 4 bytes restantes se les agrega un padding de ceros, para tener un contador de 16 bytes.
+
+**** AES-CCM
+- Basado en CBC
+- Tag computado similar a CBC-MAC
+- IV de entre 7 a 13 bytes
+- Puede cifrar datos mayores a 64 GB
+- No es tan eficiente como GCM
+
+**** Chacha20-Poly1305
+- Combina un cifrador de flujo (ChaCha20) con un algoritmo de MAC (Poly1305)
+- No se han encontrado vulnerabilidades en este algoritmo
+- Suele ser mas rapido que AES
+- Es verdaderamente de flujo
+- Usa un IV de 12 bytes.
+
+*** Kerberos
+- Es un protocolo muy conocido basado en cifrado simetrico para autenticación.
+- Es un intermediario entre dos entidades que se desean comunicar siendo un tercero de confianza.
+- Si el cliente se autentica primero al servicio de Kerberos, le permite el acceso a los servicios que esten conectados a Kerberos
+- Componentes basicos:
+  - Servicio de autenticación
+  - Servidor de tickets
+
+**** Transporte de llaves RSA
 1. Alguna de las partes genera la llave simetrica. (probablemente el servidor)
 2. Se cifra la llave simetrica con una llave publica.
 3. La otra parte tiene una llave privada.
 4. Se transmite la llave cifrada y se descifra.
-
 - Seguridad hacia delante (Forward Secrecy)
-
-** Transporte de llaves DH
-1. Generas
-
-** AEAD
-- Authenticated encryption with aditional data
--
 
 ** TLS
 - Los certificados vienen firmados por un issuer.
