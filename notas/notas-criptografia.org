@@ -452,6 +452,13 @@ salt = os.urandom(16)
 - Parametros:
   - Tipo de curva (P-384 - SECP384r1)
 
+***** Transporte de Llaves RSA
+1. Alguna de las partes genera la llave simetrica. (probablemente el servidor)
+2. Se cifra la llave simetrica con una llave publica.
+3. La otra parte tiene una llave privada.
+4. Se transmite la llave cifrada y se descifra.
+- Seguridad hacia delante (Forward Secrecy)
+
 **** Certificados
 - Prueban la pertenencia de las llaves publicas.
 
@@ -595,6 +602,38 @@ salt = os.urandom(16)
 - Ademas se agrega challenge-response.
 
 *** Protocolo Reto-Respuesta
+- "Yo te envío un reto aleatorio. Si puedes responder correctamente, demuestras que posees la llave privada."
+
+- Paso 1: Alice envía su certificado
+  - Alice → Bob
+  - El certificado contiene:
+    - Nombre Alice
+    - Llave pública Alice
+    - Firma del CA
+
+  - Bob verifica:
+    - Certificado válido
+    - No expirado
+    - Firmado por una CA confiable
+
+- Paso 2: Bob genera un reto
+  - Bob crea un número aleatorio:
+  - Reto (Nonce) = 93741852 (Porque debe ser imposible predecirlo.)
+
+- Paso 3: Bob envía el reto
+  - Bob → Alice (93741852)
+
+- Paso 4: Alice firma el reto
+  - Alice calcula: Firma = Sign(93741852) usando la llave privada de Alice.
+  - Con RSA: Firma = Reto^d mod n
+
+- Paso 5: Alice responde
+  - Alice → Bob (Firma)
+
+- Paso 6: Bob verifica
+  - Bob utiliza: Llave pública de Alice obtenida del certificado.
+  - Verifica: Verify(Firma, Reto)
+    - Si la verificación es correcta: Sólo alguien con la llave privada pudo generar esa firma.
 
 *** Ramsonware
 - Software que cifra archivos y se rehusa a liberarlos hasta que le pagues al extorsionador que esta detras de todo.
@@ -654,14 +693,37 @@ salt = os.urandom(16)
   - Servicio de autenticación
   - Servidor de tickets
 
-**** Transporte de llaves RSA
-1. Alguna de las partes genera la llave simetrica. (probablemente el servidor)
-2. Se cifra la llave simetrica con una llave publica.
-3. La otra parte tiene una llave privada.
-4. Se transmite la llave cifrada y se descifra.
-- Seguridad hacia delante (Forward Secrecy)
-
 ** TLS
+- HTTPS basicamente encapsula trafico HTTP dentro de TLS.
+- TLS permite a un cliente verificar la identidad de un servidor y establecer una sesion segura y mantener llaves compartidas de cifrado.
+- Las llaves se mantienen secretas incluso si un atacante intercepta el trafico.
+- Usa PKI
+- Si una entidad quiere TLS requiere de un certificado X.509
+
+*** Certificados X.509
+- Su proposito es ligar la identidad de un subject a una llave publica bajo la firma de un issuer.
+
+- Tiene 3 posibles campos, pueden tener varios niveles de sub-campos.
+  - Certificate
+    - (a) Version Number
+    - (b) Serial Number
+    - (c) Signature Algorithm ID
+    - (d) Issuer Name (describe la identidad pretendida)
+    - (e) Validity Period
+      - i. Not Before
+      - ii. Not After
+    - (f) Subject Name (describe la identidad pretendida)
+    - (g) Subject Public Key Info
+      - i. Public Key Algorithm
+      - ii. Subject Public Key
+    - (h) Issuer Unique Identifier (optional)
+    - (i) Subject Unique Identifier (optional)
+    - (j) Extensions (optional)
+  - Certificate Signature Algorithm
+  - Certificate Signature
+
+- La version 3: Incluye el campo adicional "Subject Alternative Name"
+- Una vez identificados el issuer y el subject, los campos restantes son la llave pública del subject y la firma del contenido del certificado.
 - Los certificados vienen firmados por un issuer.
 - Si quiero comprobar un certificado tambien necesito el certificado del issuer (la llave publica del issuer).
 - Se necesita una cadena de certificados, hasta llegar al certificado raiz (autofirmado).
@@ -669,6 +731,17 @@ salt = os.urandom(16)
   - Sitio web con dominio casi igual.
     - IDS/IPS
     - Educar al usuario
+
+- Si alguien quiere tener un certificado, necesita un Certificate Signing Request (CSR) y enviarselo al CA. Esta peticion tiene todos los campos que un certificado X.509 solo que sin los campos del issuer.
+- El CA usa su porpio certificado y llave privada para generar el certificado con los campos faltantes. El issuer del certificado debe ser igual al campo de subject del certificado de quien firma.
+- Cuando los campos son rellenados el CA firma el certificado con su llave privada.
+- El CSR solo tiene la llave publica.
+- Los certificados estan en formato DER o PEM.
+- Prueba de posesion: El CSR esta firmado por la llave privada del subject.
+- En un certificado auto-firmado el subjec e issuer son iguales.
+
+1. Generar una llave privada (2048 bits) y el CSR (durante su creacion se extrae la llave publica y se agrega a la peticion).
+2. El issuer genera el certificado firmandolo con su llave
 
 - Envenenamiento de DNS
   - Solo funciona si usas http o si se tiene una llave privada asociada a la cadena de certificados.
