@@ -1,4 +1,4 @@
-% Created 2026-04-15 mié 01:25
+% Created 2026-06-02 mar 19:23
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -28,7 +28,7 @@
 \tableofcontents
 
 \section{Introdución}
-\label{sec:orgcc98291}
+\label{sec:orga6bb0a6}
 \begin{itemize}
 \item Profesor: Hector Xavier Limón Riaño
 \item Materia: Criptografia
@@ -36,9 +36,9 @@
 \item Carrera: Ciberseguridad e Infraestructura de Computo
 \end{itemize}
 \section{Información}
-\label{sec:orgdcee561}
+\label{sec:orga249e15}
 \subsection{Prerrequisitos:}
-\label{sec:orgfe108b1}
+\label{sec:org65fccbb}
 \begin{itemize}
 \item Estructuras de datos (Python)
 \item Matematicas para la ciberseguridad
@@ -49,33 +49,33 @@
 \item Sockets TCP
 \end{itemize}
 \subsection{Evaluación:}
-\label{sec:orgbc23113}
+\label{sec:orgccf30b8}
 \begin{itemize}
 \item Examenes: 60\%
 \item Tareas y practicas: 20\%
 \item Proyecto: 20\%
 \end{itemize}
 \subsection{Herramientas:}
-\label{sec:org5d67f0b}
+\label{sec:org1a09a7b}
 \begin{itemize}
 \item Eminus
 \item Entorno controlado para examenes
 \item Practical Cryptography in Python - Libro de Referencia
 \end{itemize}
 \section{Temario}
-\label{sec:orga755174}
+\label{sec:org89ac879}
 \subsection{Descripción}
-\label{sec:org232148d}
+\label{sec:org5278d35}
 Es un elemento fundamental de la protección de la información.
 \subsection{Unidad 1}
-\label{sec:org37a698b}
+\label{sec:orge78eda0}
 \begin{itemize}
 \item Cifrado Cesar
 \item Usos de la criptografia
 \item Criptografia y criptoanalisis
 \end{itemize}
 \subsection{Unidad 2}
-\label{sec:org721bd8b}
+\label{sec:org8847759}
 \begin{itemize}
 \item Funciones de hash
 \item AES
@@ -84,21 +84,21 @@ Es un elemento fundamental de la protección de la información.
 \item Manejo de llaves y vectores de inicialización
 \end{itemize}
 \subsection{Unidad 3}
-\label{sec:orged1356f}
+\label{sec:org39d85b4}
 \begin{itemize}
 \item Llaves publicas y privadas
 \item RSA
 \item PKCS
 \end{itemize}
 \subsection{Unidad 4}
-\label{sec:orge1d944d}
+\label{sec:org0f550ce}
 \begin{itemize}
 \item MAC, HMAC. CBC-MAC
 \item Firmas digitales
 \item Curvas
 \end{itemize}
 \section{Introducción a la criptografia}
-\label{sec:org57bdabe}
+\label{sec:orgc463e78}
 \begin{itemize}
 \item CIA:
 Confidencialidad -> Impide ver algo a quien no debe verlo.
@@ -120,7 +120,7 @@ Datos pueden estar en 3 estados:
 \item Uso -> Estan en la memoria
 \end{itemize}
 \subsection{STRIDE}
-\label{sec:org5f21bda}
+\label{sec:org0228619}
 \begin{itemize}
 \item STRIDE es un modelo de amenazas, utilizado para ayudar a razonar y encontrar amenazas a un sistema.
 
@@ -137,7 +137,7 @@ Datos pueden estar en 3 estados:
 \item Elevation of privileges: Otorgar permisos a usuarios que no deben de tener dichos permisos. -> Autorizacion
 \end{itemize}
 \subsection{Origen de la criptografia}
-\label{sec:orgade47f6}
+\label{sec:org2b5be85}
 \begin{itemize}
 \item Viene del griego kryptos que significa oculto y graphe que signfica grafo o escritura.
 \item Es un ambito de la criptologia que se ocupa de las tecnicas de cifrado o codificado destinadas a alterar las representaciones linguisticas de cierntos mensajes con el fin de hacerlos ininteligibles.
@@ -145,7 +145,7 @@ Datos pueden estar en 3 estados:
 \item El criptoanalisis es la parte que se dedica al estudio de los sistema criptograficos con el fin de encontrar debilidades en los sistemas y romper su seguridad sin el conocimiento de información secreta.
 \end{itemize}
 \subsection{Criptografia}
-\label{sec:org87ee992}
+\label{sec:orgea71204}
 \begin{itemize}
 \item Esta en todos lados: ssh, criptomonedas y cualquier aplicación web.
 \item Es un pilar de la seguridad informatica moderna.
@@ -170,13 +170,13 @@ Datos pueden estar en 3 estados:
 \item Determinismo -> Es predecible
 \end{itemize}
 \subsubsection{Herramientas}
-\label{sec:orge50ecde}
+\label{sec:orgad4682f}
 \begin{itemize}
 \item cryptography: Biblioteca de python con todos los algoritmos criptograficos que se usaran en el curso.
 \item gmpy2: Biblioteca python para el tratamiento matematico de numeros grandes.
 \end{itemize}
 \subsubsection{Cifrado Cesar}
-\label{sec:org8ee0f4d}
+\label{sec:orgb95a766}
 \begin{itemize}
 \item Consiste en reemplazar una letra de un mensaje por otra letra, o tambien, desplazar por un valor x (shift-cipher) el numero de letras.
 \begin{itemize}
@@ -188,14 +188,14 @@ Datos pueden estar en 3 estados:
 \end{itemize}
 \end{itemize}
 \subsubsection{Tres protecciones principales de la criptografia}
-\label{sec:org8619e7e}
+\label{sec:org67eeb70}
 \begin{itemize}
 \item Autenticidad: Firmas digitales, Codigos MAC.
 \item Confidencialidad: Cifrado, intercambio de llaves.
 \item Integridad: Hashing.
 \end{itemize}
 \subsubsection{AES}
-\label{sec:org86c3579}
+\label{sec:org0c4da08}
 \begin{itemize}
 \item Estandar de cifrado asimetrico.
 \item Advanced Encryption Standard.
@@ -206,7 +206,7 @@ Datos pueden estar en 3 estados:
 \item Una llave con contenido aleatorio es una llave valida.
 \end{itemize}
 \subsubsection{YANAC}
-\label{sec:orgfc4e157}
+\label{sec:orge9a899f}
 \begin{itemize}
 \item YANAC: You Are Not A Criptographer. Acronimo popular en la comunidad criptografica.
 \item Dont roll your own crypto.
@@ -217,35 +217,35 @@ Datos pueden estar en 3 estados:
 \item Incluso debes de abstenerte de hacer tus propias
 \end{itemize}
 \subsubsection{Codificar}
-\label{sec:org5b0a3f6}
+\label{sec:org688aa64}
 \begin{itemize}
 \item Transformar de una representacion a otra sin perdida.
 \item Base64
 \end{itemize}
 \subsubsection{Cifrar}
-\label{sec:org4701744}
+\label{sec:org6453012}
 \begin{itemize}
 \item Es el proceso de convertir informacion sensible en un formato ilegible mediante un secreto (llave) a las que solo partes autorizadas tienen acceso.
 \end{itemize}
 \subsubsection{Ofuscar}
-\label{sec:org341ac14}
+\label{sec:orgaf5fa95}
 \begin{itemize}
 \item Se refiere a encubrir el significado haciendola mas confusa y complicada de interpretar.
 \end{itemize}
 \subsubsection{Hashear}
-\label{sec:org96be42d}
+\label{sec:org4fca66a}
 \begin{itemize}
 \item Es la funcion de aplicar una funcion de hash, es decir, que transforma un conjunto de datos en una cadena alfanumerica unica que actua como una huella digital del contenido original. No es invertible.
 \end{itemize}
 \subsubsection{Cifrado cesar}
-\label{sec:org02da6a5}
+\label{sec:org1281b5b}
 \begin{itemize}
 \item Se basaen reemplazar una letra de un mensaje por otra letra.
 \item Se puede aplicar tanto a texto como a binario.
 \item Si es binario debe considerarse el modulo 256, si es texto debe cuidarse el valor ASCII
 \end{itemize}
 \subsubsection{Aritmetica Modular}
-\label{sec:orgce77548}
+\label{sec:org6bbca28}
 \begin{itemize}
 \item 4 \% 4
 \item (144 + 300) \% 256 = 188
@@ -253,14 +253,14 @@ Datos pueden estar en 3 estados:
 \item El resultado sera siempre un numero natural.
 \end{itemize}
 \subsubsection{Binario}
-\label{sec:org5d08909}
+\label{sec:org7a69e42}
 \begin{itemize}
 \item El binario se manipula en paquetes de bytes (8 bits), no se puede manipular directamentes menos (al menos en las arquitecturas populares modernas).
 
 \item Tarea: Cifrado cesar para archivo de texto.
 \end{itemize}
 \subsection{Hashing}
-\label{sec:orgb1ce8cd}
+\label{sec:org8c27ce7}
 \begin{itemize}
 \item 3**2 = 9 -> Biyectivas
 \item 22 \% 2 = 0 ->
@@ -280,7 +280,7 @@ Datos pueden estar en 3 estados:
 \item Solo funciona con cadenas binarias
 \end{itemize}
 \subsubsection{Cifrado vs Hashing}
-\label{sec:org0d44e0d}
+\label{sec:org18d8e95}
 \begin{itemize}
 \item El cifrado permite tener confidencialidad en los mensajes, pero ayuda a verificar la interidad de los mismos.
 \item Confidencialidad: Solo las personas autorizadas pueden leer el mensaje.
@@ -288,7 +288,7 @@ Datos pueden estar en 3 estados:
 \item Solo porque un mensaje este cifrado (no pueda ser leido) no significa que no pueda ser alterado, incluso de formas que no tengan sentido despues de cifrar.
 \end{itemize}
 \subsubsection{DIGESTS}
-\label{sec:orgb508a00}
+\label{sec:orgc8bb8c6}
 \begin{itemize}
 \item Su traduccion seria ``resumen''
 \item Una funcion de hash produce un resumen o huella digital de algun contenido binario
@@ -296,14 +296,14 @@ Datos pueden estar en 3 estados:
 \item En una transmision la idea es transmitir el mensaje junto con su digest, para verificar que haya llegado sin alteraciones.
 \end{itemize}
 \subsubsection{hashlib}
-\label{sec:org509ae0e}
+\label{sec:orgd9b5f10}
 import hashlib
 md5hasher = hashlib.md5(b'cadenaBin')
 md5hasher.hexdigest()
 md5hasher.update(b'continuacionCadenaBin')
 md5hasher.hexdigest()
 \subsubsection{Funciones de hash}
-\label{sec:org0954b74}
+\label{sec:org088ba06}
 \begin{itemize}
 \item Una funcion de hash toma un contenido de cualquier tamano(hasta vacio) y siempre produce un numero de un tamano fijo.
 \item Por ejemplo, MD5 produce una salida de 16 bytes
@@ -322,7 +322,7 @@ md5hasher.hexdigest()
 \item Por esta razon son llamadas funciones de una sola via, se puede ir de entrada a la salida pero no al reves.
 \end{itemize}
 \subsubsection{Hashing}
-\label{sec:org59a46c0}
+\label{sec:org86349ef}
 \begin{itemize}
 \item En computacion, el termino funcion de hash casi siempre se refiere a una funcion criptografica.
 \item Sin embargo, el termino es general
@@ -346,7 +346,7 @@ md5hasher.hexdigest()
 \end{itemize}
 \begin{enumerate}
 \item Resistencia de preimagen
-\label{sec:org4a54a5d}
+\label{sec:orgd22355d}
 \begin{itemize}
 \item Una preimagen es el conjunto de entradas de una funcion de hash que producen, en el caso de par o impar, una preimagen son todos los numeros pares que den valor 0.
 \item Una preimagen de una funcion de hash H y un valor de hash k es el conjunto de valores x por el cual H(x) = k
@@ -365,13 +365,13 @@ md5hasher.hexdigest()
 \item Encontrar un inverso deberia ser muy dificil.
 \end{itemize}
 \item Segunda resistencia de preimagen
-\label{sec:orgf9d7239}
+\label{sec:orgf5aeb48}
 \begin{itemize}
 \item Si tu tienes al menos un documento que produce un hash conocido, sigue siendo muy dificil encontrar otro documento que produzca el mismo hash.
 \item Esto funciona porque no existe patron repetible en los elementos de la preimagen.
 \end{itemize}
 \item Resistencia a colisiones
-\label{sec:orga19155b}
+\label{sec:orga296d27}
 \begin{itemize}
 \item Significa que es dificil encontrar dos entradas que produzcan el mismo hash y garantiza que sea computacionalmente inviable encontrar dos entradas diferentes que produzcan el mismo valor hash.
 \item No un hash especifico sino cualquier hash.
@@ -380,7 +380,7 @@ md5hasher.hexdigest()
 \end{itemize}
 \end{enumerate}
 \subsubsection{Seguridad en funciones de hash}
-\label{sec:org9432edd}
+\label{sec:org48c623b}
 \begin{itemize}
 \item Hash es usado para el almacenamiento de passwords, pero siguen teniendo problemas de seguridad, el mas comun es la situacion donde dos usuarios usen la misma contrasena y por tanto, genere el mismo hash, existen muchas soluciones (A2F, Token fisico, etc) pero la mas recomendada es agregqar un salt.
 
@@ -391,12 +391,12 @@ md5hasher.hexdigest()
 
 salt = os.urandom(16)
 \subsection{Cifrado simetrico}
-\label{sec:orgafe4817}
+\label{sec:orgf87ab2a}
 \begin{itemize}
 \item Cifrado que usa la misma llave para cifrar y descifrar, la llave es un secreto compartido.
 \end{itemize}
 \subsubsection{AES}
-\label{sec:org70e8edc}
+\label{sec:org8fbe865}
 \begin{itemize}
 \item Advanced Encryption Standard
 \item Lo utiliza TLS (HTTPS) y funciones de cifrado de sistemas de archivos de un OS.
@@ -406,10 +406,10 @@ salt = os.urandom(16)
 \end{itemize}
 \begin{enumerate}
 \item Modos de operacion de AES
-\label{sec:orgbe06266}
+\label{sec:org9fc050c}
 \begin{enumerate}
 \item ECB - Electronic Code Book
-\label{sec:orgf44d04e}
+\label{sec:org9f8f37c}
 \begin{itemize}
 \item Cualquier texto plano de 16 bytes tiene 16 bytes correspondientes de salida.
 \item Cada bloque es tratado independientemente, esa es su debilidad.
@@ -419,7 +419,7 @@ salt = os.urandom(16)
 \item Parametros: Texto plano y llave.
 \end{itemize}
 \item CBC - Cipher Block Chaining
-\label{sec:org25da528}
+\label{sec:org26954ef}
 \begin{itemize}
 \item Despues de cifrar el bloque aplicar una funcion XOR con el siguiente bloque en texto plano, el resultado se cifra y se guarda ese bloque. Para descifrar se tiene que invertir el proceso.
 \item Para el primer bloque a cifrar, se utiliza el IV dado que no hay un bloque anterior para hacer XOR, el IV debe de ser del mismo tamano del bloque (16 bytes).
@@ -429,7 +429,7 @@ salt = os.urandom(16)
 \end{itemize}
 \end{itemize}
 \item CTR - Counter Mode
-\label{sec:org6c29d19}
+\label{sec:org9618abb}
 \begin{itemize}
 \item No requiere de padding
 \item Genera un key stream de cualquier longitud a partir de una llave AES de al menos 128 bits (16 bytes), luego aplica XOR para combinarlos.
@@ -441,7 +441,7 @@ salt = os.urandom(16)
 \end{enumerate}
 \end{enumerate}
 \subsubsection{Seguridad en cifrado simetrico}
-\label{sec:org1544e2e}
+\label{sec:org5d34636}
 \begin{itemize}
 \item Para tener un cifrado seguro y efectivo se necesita:
 \begin{enumerate}
@@ -455,7 +455,7 @@ llave.
 \item Existen ataques donde si conoces el texto plano y el IV (suponiendo que lo reutilizan) puedes obtener el key-stream.
 \end{itemize}
 \subsection{Cifrado asimetrico}
-\label{sec:org9459f9e}
+\label{sec:orgce4b5db}
 \begin{itemize}
 \item Las tecnicas asimetricas son variadas, no se limitan solo a cifrado
 \begin{itemize}
@@ -466,7 +466,7 @@ llave.
 \end{itemize}
 \begin{enumerate}
 \item Dos llaves
-\label{sec:orgfb7cacf}
+\label{sec:orgf5dd081}
 \begin{itemize}
 \item Se necesitan dos llaves: una publica y otra privada
 \begin{itemize}
@@ -476,7 +476,7 @@ llave.
 \end{itemize}
 \end{itemize}
 \item RSA
-\label{sec:org445b6af}
+\label{sec:org3d84b80}
 \begin{itemize}
 \item RSA esta casi obsoleto, debido a multiples vulnerabilidades
 \item Sirve para ejemplicar el cifrado asimetrico
@@ -489,8 +489,8 @@ llave.
 \item Si solo se tiene uno de los dos
 \end{itemize}
 \end{enumerate}
-\subsubsection{Integridad de mensajes, firmas y certificados}
-\label{sec:orgfa48a4f}
+\subsection{Integridad de mensajes, firmas y certificados}
+\label{sec:orgd15d69e}
 \begin{itemize}
 \item MACS
 \item Firmas digitales
@@ -500,18 +500,12 @@ llave.
 \item Uso de criptografia asimetrica para integridad y autenticidad de mensajes
 \item Certificados y su diferencia con las llaves
 \end{itemize}
-\begin{enumerate}
-\item Message Authentication Code (MAC)
-\label{sec:org2a285f8}
+\subsubsection{Message Authentication Code (MAC)}
+\label{sec:org33d1b95}
 \begin{itemize}
 \item Un cifrado puede ser alterado de formas que tenga sentido.
 \item Un MAC es cualquier codigo o dato transmitido junto con el mensaje que puede ser evaluado para determinar si el mensaje fue alterado.
 \item Usualmente se utiliza un hash como
-\end{itemize}
-\begin{enumerate}
-\item MAC, HMAC, CBC-MAC
-\label{sec:org2115e64}
-\begin{itemize}
 \item Un MAC seguro no solo es codigo (hash) tambien debe incluir una llave.
 \item Una llave MAC no esta relacionada con el cifrado
 \item Sirve para asegurar que el codigo de autenticacion de mensaje solo puede ser computado por las entidades que conocen la llave.
@@ -522,13 +516,13 @@ llave.
 \end{itemize}
 \begin{enumerate}
 \item HMAC
-\label{sec:orgd833347}
+\label{sec:orgefba13e}
 \begin{itemize}
 \item Hash-based Message Authentication Code
 \item Es basicamente un hash keyed
 \item Las funciones de hash son deterministas, dada la misma entrada siempre se produce la misma salida.
 \item Solo agregar al inicio o al final
-\item H(K XOR opad, H((K XOR ipad), text))
+\item H(K XOR opad + H((K XOR ipad)+ text))
 \begin{itemize}
 \item H es la funcion de hash
 \item K es la llave que debe de cumplir ciertos requisitos
@@ -540,6 +534,7 @@ llave.
 \item Si K es mas largo que B, entonces K se reduce aplicando H a K, osea H(K)
 \item Si se aplico 2 y la llave quedo muy corta, entonces se aplica 1
 \end{enumerate}
+\item Si se aplica lo anterior, siempre se va a tener una llave de longitud B.
 \item ipad se define com el byte 0x36 repetido B veces
 \item opad es el byte 0x5c repetido B veces
 \item Los pads parecen arbitrarios pero tienen un sentido de seguridad matematico que ayuda a mitigar
@@ -547,7 +542,7 @@ llave.
 \item Primero computas
 \end{itemize}
 \item CBC-MAC
-\label{sec:orgd553deb}
+\label{sec:org2fd3a68}
 \begin{itemize}
 \item Similar a AES-CBC
 \item Recordar que CBC es Cipher Block Chaining
@@ -556,16 +551,23 @@ llave.
 \item En notacion matematica un tag se denota a menudo como t
 \item Asi, un MAC sobre un mensaje m1 produce un tag t1
 \item El par (m1, t1) es transmitido al receptor para ser verificado
+
+\item AES solo puede cifrar 128 bits de bloque a la vez.
+\item AES-CBC encadena la salida de un bloque cifrado con el siguiente bloque.
+\item Si se altera uno se alteran todos los bloques siguientes.
+\item El ultimo bloque de CBC es en si un MAC.
 \end{itemize}
 \begin{enumerate}
 \item MAC Prepend Attack
-\label{sec:orgfa6126f}
+\label{sec:org9237df5}
 \begin{itemize}
 \item Es posible mandar un mensaje manipulado y hacer que parezca que es el mensaje M1 o M2, suponiendo que esten generados por la misma llave.
+\item M3 es una mezcla de M1 y M2.
+\item No es necesario conocer la llave de MAC.
 \end{itemize}
 \begin{enumerate}
 \item Proceso de ataque, anteponiendo M1 a M2
-\label{sec:orgdff2aa5}
+\label{sec:orgcc1b0b2}
 \begin{itemize}
 \item Recuperar el primer bloque de M2, denominado M21 (como es AES se toman los primeros 16 bytes)
 \item Recuperar el resto de bloques de M2, denominado M2r
@@ -576,13 +578,117 @@ llave.
 \item Basicamente lo que hace el atacante es reemplazar el primer bloque de M2 por uno manipulado.
 \item La victima vera todo el mensaje M1 completo (con su padding), un bloque que se vera posiblemente corrupto y el mensaje M2 sin su primer bloque.
 \end{itemize}
-\end{enumerate}
-\end{enumerate}
-\end{enumerate}
-\end{enumerate}
-\item Firmas digitales
-\label{sec:org4b6cf33}
+\begin{enumerate}
+\item Soluciones
+\label{sec:org7a1db12}
 \begin{itemize}
+\item Agregar siempre la longitud del mensaje al inicio. Esto ayduara a corroborar si hay información extra.
+\item Si se cifraron los datos usando AES-CBC, no se debe usar la misma llave para cifrar ni para obtener el MAC.
+\item El IV debe ser diferente a un valor de cero.
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\subsubsection{Cifrado y MAC}
+\label{sec:org7b18a76}
+\begin{itemize}
+\item Encrypt-Then-MAC: El MAC se aplica al texto cifrado.
+\item MAC-Then-Encrypt: Se aplica al texto plano, luego se cifra el texto plano junto al MAC.
+\item Encrypt-And-Mac: Se aplica MAC sobre el texto plano, pero no se cifra el MAC, solo el texto plano.
+
+\item Recomendación: Siempre usar Encrypt-Then-MAC.
+\item El ataque de padding oraculo a CBC funciona en MAC-Then-Encrypt.
+\end{itemize}
+\subsubsection{Firmas digitales}
+\label{sec:org8abbd1a}
+\begin{enumerate}
+\item RSA
+\label{sec:org0323ffd}
+\begin{itemize}
+\item Dado que los MAC usan llaves simetricas, si se compromete la llave puede ambos lados estan en riesgo de spoofing (usurpación de identidad).
+\item Las firmas intentan mitigarlo mediante criptografia asimetrica. Ya que nos existen llaves ``compartidas''.
+\item La llave publica solo se puede descifrar con la llave privada y vise-versa.
+\item Si se cifra con la llave privada, puede ser descifrado por la llave publica.
+\item Tambien pueden usarse para firmar listas de revocación de certificados CRL's.
+
+\item Autenticidad en reversa: El receptor no sabra de quien es el mensaje pero el emisor sabe que solo podra ser procesada por la entidad autorizada.
+
+\item Existen muchos problemas con el cifrado asimetrico (RSA), es ineficiente para archivos grandes, no viene comprobación de integridad y solo puede procesar archivos del tamaño de modulo (2048 bits).
+
+\item Para solucionar eso, se hace lo siguiente: Cifrar el hash del mensaje, dando tanto integridad como autenticidad.
+\begin{enumerate}
+\item Calcular el hash del mensaje.
+\item Cifrar el hash mediante la llave privada, este hash cifrado es la firma del emisor.
+\item El receptor calcula el hash del mensaje, descifra la firma mediante la llave publica y comprueba que coincidan ambos hashes.
+\end{enumerate}
+
+\item La firma debe de aplicarse siempre al texto plano, nunca al cifrado.
+
+\item El cifrado con la llave publica es confidencialidad.
+\item El cifrado con la llave privada es autenticidad.
+
+\item El padding para firmas RSA es PSS.
+
+\item Es comun usar tecnicas asimetricas al inicio de la comunicación para el establecimiento de confianza e intercambio de llaves simetricas. Despues todo el proceso se hace con llaves simetricas.
+\end{itemize}
+\end{enumerate}
+\subsubsection{Curvas Elipticas}
+\label{sec:org29e0143}
+\begin{itemize}
+\item Alternativa a RSA
+\item Se usa para firmas digitales y el intercambio de llaves.
+\item Se usa ECDSA para firmar.
+\item Parametros:
+\begin{itemize}
+\item Tipo de curva (P-384 - SECP384r1)
+\end{itemize}
+\end{itemize}
+\subsubsection{Transporte de Llaves RSA}
+\label{sec:org7912280}
+\begin{enumerate}
+\item Alguna de las partes genera la llave simetrica. (probablemente el servidor)
+\item Se cifra la llave simetrica con una llave publica.
+\item La otra parte tiene una llave privada.
+\item Se transmite la llave cifrada y se descifra.
+\item Seguridad hacia delante (Forward Secrecy)
+\end{enumerate}
+\subsubsection{Certificados}
+\label{sec:org5b0f5e9}
+\begin{itemize}
+\item Prueban la pertenencia de las llaves publicas.
+
+\item Modelo PKI (Public Key Infraestructure)
+\begin{itemize}
+\item Un registro global donde se almacenaban las llaves publicas asociadas a una entidad.
+\item La llave publica se compartia.
+\item No era escalable.
+\end{itemize}
+
+\item Un certificado solo son datos, incluyen:
+\begin{itemize}
+\item Una llave publica
+\item Metadatos del propietario de la llave (identidad del propietario de la llave, identidad del issuer, fecha de expiración, numero de serie, etc)
+\begin{itemize}
+\item La identidad del propietario puede ser un nombre, email, URL, etc.
+\end{itemize}
+\item Firma digital sobre todo el contenido del certificado
+\item Firma por la entida de confianza (issuer)
+\end{itemize}
+
+\item Se comparten los certificados en lugar de las llaves publicas.
+\item Una entidad quiere un certificado:
+\begin{enumerate}
+\item Genera su par de llaves
+\item La entidad de confianza recibe la llave publica y genera el certificado
+\item La entidad de confianza firma el certificado con su llave privada
+\end{enumerate}
+
+\item Para evitar que un agente malicioso use un certificado que no es suyo, se usa el proceso reto-respuesta (challenge-response).
+\begin{itemize}
+\item Se basa en pedirle que firme un mensaje con la llave privada y verificarla con la llave publica del certificado. Si coincide, entonces si puedes confiar.
+\end{itemize}
+
 \item Protocolo reto-respuesta
 \begin{enumerate}
 \item El cliente recibe la llave publica del servidor (certificado).
@@ -591,6 +697,599 @@ llave.
 \item El servidor firma el dato y regresa la firma.
 \item El cliente comprueba la firma con la llave publica.
 \end{enumerate}
+
+\item Quien firma es quien quiere ser autenticado
+\item Siempre se firma con la llave privada
+\item Se verifica la firma con la llave publica
+
+\item La firma tiene dos propiedades de seguridad
+\begin{itemize}
+\item Integridad
+\item Autenticidad
+\end{itemize}
+
+\item Al issuer se le llama Certificate Authority (CA)
+\begin{itemize}
+\item Estos tambien tienen sus propios certificados con nombre de identidad y su llave publica.
+\end{itemize}
+
+\item Certificados:
+\begin{itemize}
+\item Metadatos del propietario (subject)
+\item Metadatos de la propiedad de confianza (CA/issuer)
+\item Llave publica
+\item Firma del CA
+\end{itemize}
+
+\item El certificado no tiene nada que ver con el cifrado, ni con la protección del canal en general.
+\item El certificado no se usa directamente para autenticar, eso se hace con firmas digitales.
+\item El certificado solo es un mecanismo para confiar en la llave publica
+
+\item Criptografia asimetrica
+\begin{itemize}
+\item Firmas digitales
+\item Intercambios de llaves
+\end{itemize}
+\end{itemize}
+\begin{enumerate}
+\item Revocación de certificados
+\label{sec:orgf114efb}
+\begin{itemize}
+\item Si la llave privada de un certificado creado por un CA es comprometido, el CA debe hacer saber a los demas que ya no es confiable.
+
+\item Dado que no se puede tener un sistema offline de revocación, existen dos alternativas:
+\begin{itemize}
+\item Tener un componente en tiempo real
+\item No se puede actualizar en tiempo real
+\end{itemize}
+
+\item Un ejemplo es OCSP (Online Certificate Status Protocol)
+\begin{itemize}
+\item Revisa el estatus del certificado en tiempo real
+\item Tambien revisa CRL's (listas de certificados revocados)
+\end{itemize}
+
+\item La recomendación final siempre sera proteger las llaves privadas, de preferencia en un lugar offline y/o con permisos minimos con un cifrado adicional.
+\item Los certificados deben tener un tiempo de vida relativamente corto.
 \end{itemize}
 \end{enumerate}
+\subsubsection{Ataques de repetición}
+\label{sec:orgae1dc67}
+\begin{itemize}
+\item Un mensaje legitimo es utilizado por un atacante tiempo despues cuando el mensaje ya no es valido.
+
+\item Soluciones:
+\begin{itemize}
+\item Se agrega un nonce (numero aleatorio) para hacer seguimiento de mensajes recibidos.
+\item Usar timestamp (fecha del mensaje) para rechazar mensajes demasiados viejos. Aunque es necesario una ventana de tiempo para lidiar con retrasos.
+\item Combinar timestamp y nonces aleatorios, rechazar mensajes muy viejos ademas que tengan el nonce repetidos dentro de la ventana de tiempo permitida.
+\end{itemize}
+\end{itemize}
+\subsection{Combinación de metodos simetricos con asimetricos}
+\label{sec:orgd8cda29}
+\begin{itemize}
+\item Intercambio de llaves (simetricas)
+\item RSA cifra llaves AES compartidas en la comunicación
+\end{itemize}
+\subsubsection{Agree Upon Transmission}
+\label{sec:orgf07bba4}
+\begin{itemize}
+\item Transmite un solo flujo de bytes con todos los datos necesarios concatenados
+\item Sirve para transferir un solo mensaje
+\item Tienes: llaves\textsubscript{aes}, llave\textsubscript{mac}, iv cifradas con la llave publica
+\item Llave publica del receptor (viene con el certificado)
+\item Cifras las llaves con la llave publica (RSA)
+\item Firmar llaves planas
+\item Cifras el mensaje con la llave\textsubscript{aes} e IV
+\item Calcular el HMAC sobre todos los datos
+\item De sesiones cortas
+\item Es practico para mensajes largos
+
+\item Llave AES, IV y llave MAC cifradas con la llave publica del receptor
+\item La firma digital sobre la concatenación (no cifrada) de la llave AES, IV y llave MAC.
+\item Los bytes del mensaje transmitido, cifrados con la llave AES e IV.
+\item El HMAC sobre la transmisión utilizando la llave MAC.
+
+\item Descifra mediante su llave privada, obtiene la llave AES, IV y MAC
+\item Verifica la firma digital, mediante el certificado del emisor.
+\item Calcula HMAC de 1, 2 y 3 con la llave MAC y lo compara con 4.
+\item Descifra 3 mediante la llave AES y el IV.
+\end{itemize}
+\subsubsection{Llaves de sesión}
+\label{sec:orgb554a99}
+\begin{itemize}
+\item Se usa una sola vez y se descarta permanentemente, es decir, son efimeras.
+\item Llaves para el cifrado en masa
+\item CIfrado en masa: Se cifra una gran cantidad de datos.
+\item Payload: cargo util
+\item Son faciles de crear
+\item Se pueden derivar de un secreto base usando funciones de derivación de llaves.
+\end{itemize}
+\subsubsection{Diffie-Hellman DH}
+\label{sec:orgc660f7d}
+\begin{itemize}
+\item Criptografia asimetrica
+\item Una variante es con curvas elipticas ECDH
+\item Intercambia parametros publicos para computar simultaneamente la misma llave en ambos lados, esto se llama Key Agreement
+
+\item Primero crea un par de numeros matematicos, uno privado y publico. Esto para cada participante.
+\item Ambas partes intercambian sus numeros publicos.
+\item Con el numero publico externo y el numero privado local se genera la misma llave compartida en ambos lados.
+
+\item El resultado es una llave simetrica o un dato que permite derivar una llave simetrica.
+\item Requiere comunicación bidireccional.
+\item Los parametros de DH deben ser iguales
+\begin{itemize}
+\item Tamaño de la llave (2048)
+\item Generador (2, 5)
+\end{itemize}
+
+\item Se recomienda usar HKDF para derivar la llave
+\item DH no tiene autenticación integrada
+\item Una o ambas partes deben de firmar publicos intercambiados.
+
+\item Son preferiables para el transporte de llaves antes que RSA.
+\item Principalmente porque ofrecen ``Confidencialidad hacia delante'' (Forward Secrecy) dada la naturaleza de las llaves efimeras, si una llave es comprometida, no se revela nada acerca de comunicaciones previas.
+
+\item A veces para establecer un canal de confianza necesitas transmitir datos con poca protección (pueden ser manipulados)
+\item Eventualmente se llega a tener un canal que se cree protegido (ya se hizo bien el intercambio de llaves)
+\item Mientras tanto se fueron calculando hashes de todos lo que se transmitio
+\end{itemize}
+\begin{enumerate}
+\item Autenticación con DH y ECDH
+\label{sec:orga6cdb43}
+\begin{itemize}
+\item El intercambio de llaves requiere una llave publica RSA o ECDSA, con su certificado firmado. Se usan para establecer identidad de cada parte, firmando info efimera durante el proceso de generación.
+\item Ademas se agrega challenge-response.
+\end{itemize}
+\end{enumerate}
+\subsubsection{Protocolo Reto-Respuesta}
+\label{sec:org6504c36}
+\begin{itemize}
+\item ``Yo te envío un reto aleatorio. Si puedes responder correctamente, demuestras que posees la llave privada.''
+
+\item Paso 1: Alice envía su certificado
+\begin{itemize}
+\item Alice → Bob
+\item El certificado contiene:
+\begin{itemize}
+\item Nombre Alice
+\item Llave pública Alice
+\item Firma del CA
+\end{itemize}
+
+\item Bob verifica:
+\begin{itemize}
+\item Certificado válido
+\item No expirado
+\item Firmado por una CA confiable
+\end{itemize}
+\end{itemize}
+
+\item Paso 2: Bob genera un reto
+\begin{itemize}
+\item Bob crea un número aleatorio:
+\item Reto (Nonce) = 93741852 (Porque debe ser imposible predecirlo.)
+\end{itemize}
+
+\item Paso 3: Bob envía el reto
+\begin{itemize}
+\item Bob → Alice (93741852)
+\end{itemize}
+
+\item Paso 4: Alice firma el reto
+\begin{itemize}
+\item Alice calcula: Firma = Sign(93741852) usando la llave privada de Alice.
+\item Con RSA: Firma = Reto\textsuperscript{d} mod n
+\end{itemize}
+
+\item Paso 5: Alice responde
+\begin{itemize}
+\item Alice → Bob (Firma)
+\end{itemize}
+
+\item Paso 6: Bob verifica
+\begin{itemize}
+\item Bob utiliza: Llave pública de Alice obtenida del certificado.
+\item Verifica: Verify(Firma, Reto)
+\begin{itemize}
+\item Si la verificación es correcta: Sólo alguien con la llave privada pudo generar esa firma.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\subsubsection{Ramsonware}
+\label{sec:orgd64531f}
+\begin{itemize}
+\item Software que cifra archivos y se rehusa a liberarlos hasta que le pagues al extorsionador que esta detras de todo.
+
+\item El atacante genera dos llaves permanentes.
+\item El atacante hardcodea la llave publica permanente en el ramsonware
+\item Cuando el malware se activa se crean un par de llaves locales
+\item Se cifra la llave privada local con la llave publica permanente y se elimina la versión plana.
+\item El malware cifra los archivos usando AES, cada archivo cifrado tiene una llave diferente que es cifrada con la llave publica local, solo pueden ser descifradas por la llave privada local.
+\item Cuando se haga el pago, el malware envia la llave privada local cifrada al servidor CC
+\item Con la llave privada permanente se descifra la llave privada local y se reenvia a la victima
+\item Ahora se pueden descifrar las llaves AES.
+\item La llave privada permanente nunca es revelada.
+\end{itemize}
+\subsection{Cifrado simetrico avanzado}
+\label{sec:org275ac68}
+\subsubsection{Cifrado autenticado con datos adicionales (AEAD)}
+\label{sec:org1877eaa}
+\begin{itemize}
+\item Authenticated Encryption with Aditional Data
+\item Proveen autenticidad, integridad y confidencialidad.
+\item Reemplazan a los MAC's
+\item Es mejor usar AEAD antes que los MAC
+\end{itemize}
+\begin{enumerate}
+\item AES-GCM (Galois/Counter Mode)
+\label{sec:orga23cdd9}
+\begin{itemize}
+\item Permite cifrar y autenticar con una sola llave
+\item IV de tamano de 12 bytes
+\item No usa padding
+\item Recomendable usar junto a Scrypt o HDKF
+\item Datos adicionales no se cifran pero deben de autenticarse mediante la llave derivada.
+\item Al terminar el proceso se obtiene un tag.
+
+\item No usar IV 0
+\item Segementar lo que transmites
+\item Un IV difeente para cada segmento
+\item No transmitir mas de 64 gb con la misma llave
+\item No usar el mismo par de llave e IV (nonce)
+
+\item GCM usa IV's de 12 bytes, a los 4 bytes restantes se les agrega un padding de ceros, para tener un contador de 16 bytes.
+\end{itemize}
+\item AES-CCM
+\label{sec:orgeaabaa6}
+\begin{itemize}
+\item Basado en CBC
+\item Tag computado similar a CBC-MAC
+\item IV de entre 7 a 13 bytes
+\item Puede cifrar datos mayores a 64 GB
+\item No es tan eficiente como GCM
+\end{itemize}
+\item Chacha20-Poly1305
+\label{sec:orge0d1fc2}
+\begin{itemize}
+\item Combina un cifrador de flujo (ChaCha20) con un algoritmo de MAC (Poly1305)
+\item No se han encontrado vulnerabilidades en este algoritmo
+\item Suele ser mas rapido que AES
+\item Es verdaderamente de flujo
+\item Usa un IV de 12 bytes.
+\end{itemize}
+\end{enumerate}
+\subsubsection{Kerberos}
+\label{sec:orgdb09f56}
+\begin{itemize}
+\item Es un protocolo muy conocido basado en cifrado simetrico para autenticación.
+\item Es un intermediario entre dos entidades que se desean comunicar siendo un tercero de confianza.
+\item Si el cliente se autentica primero al servicio de Kerberos, le permite el acceso a los servicios que esten conectados a Kerberos
+\item Componentes basicos:
+\begin{itemize}
+\item Servicio de autenticación
+\item Servidor de tickets
+\end{itemize}
+\end{itemize}
+\subsection{TLS}
+\label{sec:org65de22d}
+\begin{itemize}
+\item Es una combinación de protocolos que trabajan en conjunto y soporta un numero de combinaciones de algoritmos y protocolos.
+\item HTTPS basicamente encapsula trafico HTTP dentro de TLS.
+\item TLS permite a un cliente verificar la identidad de un servidor y establecer una sesion segura y mantener llaves compartidas de cifrado.
+\item Las llaves se mantienen secretas incluso si un atacante intercepta el trafico.
+\item Usa PKI
+\item Si una entidad quiere TLS requiere de un certificado X.509
+\item Brinda seguridad a TCP/IP.
+\item Existen dos versiones 1.2 y 1.3.
+\end{itemize}
+\subsubsection{Certificados X.509}
+\label{sec:orgcd8860c}
+\begin{itemize}
+\item Su proposito es ligar la identidad de un subject a una llave publica bajo la firma de un issuer.
+
+\item Tiene 3 posibles campos, pueden tener varios niveles de sub-campos.
+\begin{itemize}
+\item Certificate
+\begin{itemize}
+\item (a) Version Number
+\item (b) Serial Number
+\item (c) Signature Algorithm ID
+\item (d) Issuer Name (describe la identidad pretendida)
+\item (e) Validity Period
+\begin{itemize}
+\item i. Not Before
+\item ii. Not After
+\end{itemize}
+\item (f) Subject Name (describe la identidad pretendida)
+\item (g) Subject Public Key Info
+\begin{itemize}
+\item i. Public Key Algorithm
+\item ii. Subject Public Key
+\end{itemize}
+\item (h) Issuer Unique Identifier (optional)
+\item (i) Subject Unique Identifier (optional)
+\item (j) Extensions (optional)
+\end{itemize}
+\item Certificate Signature Algorithm
+\item Certificate Signature
+\end{itemize}
+
+\item La version 3: Incluye el campo adicional ``Subject Alternative Name''
+\item Una vez identificados el issuer y el subject, los campos restantes son la llave pública del subject y la firma del contenido del certificado.
+\item Los certificados vienen firmados por un issuer.
+\item Si quiero comprobar un certificado tambien necesito el certificado del issuer (la llave publica del issuer).
+\item Se necesita una cadena de certificados, hasta llegar al certificado raiz (autofirmado).
+\item Si quieres engañar a alguien para entrar a un sitio web falso que necesitas?
+\begin{itemize}
+\item Sitio web con dominio casi igual.
+\begin{itemize}
+\item IDS/IPS
+\item Educar al usuario
+\end{itemize}
+\end{itemize}
+
+\item Si alguien quiere tener un certificado, necesita un Certificate Signing Request (CSR) y enviarselo al CA. Esta peticion tiene todos los campos que un certificado X.509 solo que sin los campos del issuer.
+\item El CA usa su porpio certificado y llave privada para generar el certificado con los campos faltantes. El issuer del certificado debe ser igual al campo de subject del certificado de quien firma.
+\item Cuando los campos son rellenados el CA firma el certificado con su llave privada.
+\item El CSR solo tiene la llave publica.
+\item Los certificados estan en formato DER o PEM.
+\item Prueba de posesion: El CSR esta firmado por la llave privada del subject.
+\item En un certificado auto-firmado el subjec e issuer son iguales.
+
+\item Generar una llave privada (2048 bits) y el CSR (durante su creacion se extrae la llave publica y se agrega a la peticion).
+\item El issuer genera el certificado firmandolo con su llave
+\item Con este certificado se pueden firmar nuevos certificados.
+\item Para los nuevos certificados se deben de crean sus respectivas llaves.
+\item Con los certificados del CA, se pueden generar certificados asociados a los nuevos CSR.
+\item Se pueden agregar limitaciones usando un archivo v3.ext
+\item El CA firma el CSR del subject, el issuer del nuevo certificado debe ser igual al subject del certificado del CA.
+\end{itemize}
+\begin{enumerate}
+\item Requerimentos
+\label{sec:org76b8fd9}
+\begin{itemize}
+\item Se debe probar tener el control sobre el dominio del sitio.
+\item Mediante protocolos como ACME o webhosting.
+
+\item Envenenamiento de DNS
+\begin{itemize}
+\item Solo funciona si usas http o si se tiene una llave privada asociada a la cadena de certificados.
+\begin{itemize}
+\item Se mitiga para http con redireccion hacia https
+\end{itemize}
+\item Por que no funciona con https?
+\begin{itemize}
+\item Por la comprobación de certificados
+\end{itemize}
+\end{itemize}
+
+\item Yo tengo un certificado
+\item Como lo avala un tercero?
+\item Una cosa es que se compruebe que la entidad es la propietaria verdadera del certificado
+\item Y otra es que el certificado sea confiable.
+\end{itemize}
+\end{enumerate}
+\subsubsection{Handshake}
+\label{sec:orgffc6877}
+\begin{itemize}
+\item Tiene como objetivos: establecer identidad y derivar llaves de sesión para el transporte seguro.
+\end{itemize}
+\begin{enumerate}
+\item TLS - 1.2
+\label{sec:org4bb8692}
+\begin{enumerate}
+\item Comienza con un cliente enviando un mensaje hello al servidor. Este mensaje contiene info de configuración, tipo nonce. Tambien esta la lista de Cipher Suites.
+\begin{itemize}
+\item El objetivo es ponerse de acuerdo en cuanto al algoritmo y protocolos criptograficos a usar. La Cipher Suite da opciones.
+\item La seguridad depende del Cipher Suite usado.
+\item El chiper suite incluye:
+\begin{itemize}
+\item Intercambio de llaves
+\item Firma digital
+\item Cifrado en masa
+\item Hashing
+\end{itemize}
+\end{itemize}
+\item El servidor recibe un hello cliente, escoge uno de los cipher suites propuestos del cliente. Cuando escoge uno, envia una respuesta con la siguiente info:
+\begin{itemize}
+\item Hello con nonce aleatorio del servidor
+\item Certificado del servidor
+\item Parte publica del intercambio de llaves DHE O ECDHE, en caso de usarse Diffie-Hellman y no RSA.
+\end{itemize}
+\item El cliente hace el proceso como auntenticar al servidor, derivar la llave y empezar a enviar datos cifrados.
+\begin{itemize}
+\item TLS solo autentica el servidor, el cliente no envia un certificado para autenticarse.
+\item Cuando ambas partes se autentican con un certificado se le llama Mutual TLS o MTLS.
+\item Para autenticar al cliente se usa mas la identidad del usuario como user-password entre otros. Esto despues de establecer una sesión segura con una llave compartida.
+\end{itemize}
+\item El handshake no genera una llave en si, sino un PMS (pre-master-secret) junto a otros datos (nonce de ambas partes) para obtener el master secret.
+\begin{itemize}
+\item Este master secret se usa para generar las llaves de sesión para la comunicación en masa.
+\item En el caso de usar RSA, no es necesario usar firmas dado que se envian las llaves publicas (en los certificados).
+\item Mientras que DHE y ECDHE se derivan de manera simultanea y efimera. Ademas que debe de ser autenticado, al menos del lado del servidor, usando la llave privada del servidor de larga duración (RSA o ECDSA). El cliente cuando recibe los datos firmados usa la llave publica en el certificado del servidor para verificar la firma.
+\item Es recomendable usar DH/ECHD siempre.
+\end{itemize}
+\item Finalizado el intercambio de llaves, toda la info debera ir cifrada y autenticada.
+\item El cliente envia un mensaje llamado ``ChangeCipherSpec'' que indica que todos los mensajes siguientes usaran el CipherSuite negociado.
+\item El servidor contesta con su propio CHangeCipherSpec.
+\item Finalmente, cada parte manda un mensaje ya cifrado ``Finished'' que completa el handshake. Este finished contiene todos los hashes del handshake enviado. Asegurando que ningun atacante altero alguna parte del handshake.
+\begin{itemize}
+\item En caso que no pase la comprobación, se cierra el canal dado que esta comprometido.
+\end{itemize}
+
+\item TLS segmenta las transmisiones en paquetes, cada paquetes esta cifrado y autenticado, ademas, estan estructurados en un formato llamado TLSCipherText.
+\item Son de 16 kilobytes y son similares al struct de C.
+\end{enumerate}
+\begin{enumerate}
+\item Derivación de llaves
+\label{sec:org61dc098}
+\begin{itemize}
+\item El PMS se expande al master secret usando una función pseudo-aleatoria (PRF), que toma un secreto y lo expande a mas bytes, usando un mecanismo HMAC-SHA256 para expandir bytes de entrada a un tamaño arbitrario.
+\item El PMS se expande hasta 48 bytes para generar el master secret.
+\item El master secret tambien se expande (usando PRF) a tantos bytes sea necesario para obtener las llaves de sesión e IV's requeridos.
+\item Del master secret se obtiene el key\textsubscript{block} que varia del tamaño dependiendo del cipher suite.
+\item El key\textsubscript{block} tiene maximo 6 parametros, esto depende del Cipher Suite:
+\begin{itemize}
+\item Cliente MAC key
+\item Servidor MAC key
+\item Cliente cifrado key
+\item Servidor cifrado key
+\item Cliente IV
+\item Servidor IV
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+\item TLS - 1.3
+\label{sec:org3dcef18}
+\begin{itemize}
+\item Desecha la mayoria de cipher suits, quedando solo 5 que estan basados en AEAD.
+\item RSA ya no se usa para transporte de llaves.
+\item Solo DHE y ECDHE.
+\item El handshake se hace en una sola ronda de mensajes.
+
+\item Cliente envia su Hello junto a Cipher Suites y su llave publica (ECDH).
+\item El servidor recibe el Hello del cliente, envia al cliente su Hello con la elección del Cipher Suite, su llave publica, el certificado del servidor, la firma del certificado y el finished.
+\item El cliente recibe todo lo anterior del servidor y envia su finished.
+
+\item TLS 1.3 elimina la latencia de transmisión.
+\end{itemize}
+\begin{enumerate}
+\item Datos miscelaneos
+\label{sec:org60d78dc}
+\begin{itemize}
+\item Una sesión puede tener varias llaves simetricas.
+\item Confidencialidad (transporte en si)
+\begin{itemize}
+\item Llave emisor-receptor
+\item Llave receptor-emisor
+\end{itemize}
+\item Autenticación/Integridad (MAC)
+\begin{itemize}
+\item Llave emisor-receptor
+\item Llave receptor-emisor
+\end{itemize}
+
+\item Con DH o transporte RSA generas un PMS, que permite generar un master secret.
+\begin{itemize}
+\item Con el PMS puedes tener un generador de llaves
+
+\item Intercambiar hellos (nonces, certificados, lista de cipher suits)
+\item Negociación de cihper suites
+\item Autenticacion
+\item Intercambio/derivación de llaves
+\item ChangeCipherspec
+\item Finish (comprobación de hash)
+\end{itemize}
+
+\item Handshake TLS
+\begin{itemize}
+\item Establecer identidad
+\item Establecer llaves de sesion
+\begin{itemize}
+\item DH
+\item Transporte de llaves RSA
+\end{itemize}
+\end{itemize}
+
+\item Transferencia en masa (bulk):
+\begin{itemize}
+\item Se transfieren los datos de interes (payload)
+\item Esa transferencia se hace con metodos simetricos.
+\end{itemize}
+
+\item Http
+\begin{itemize}
+\item Es un protocolo peticion-respuesta
+\item La cantidad de interacciones peticion-respuesta hay una sesion http es de una por sesion.
+\end{itemize}
+
+\item MiM en TLS
+\begin{itemize}
+\item Cliente manda su hello que incluye la lista de cipher suite soportados
+\item Un tercero altera la lista de cipher suits dejando solo las debiles
+\item La forma de mitigacion es verificar el finished del handshake el hash de todo lo que se ha transmitido.
+
+\item Verificar certificados
+\item Verificar identidad -> reto-respuesta
+\end{itemize}
+
+\item La criptografia es segura siempre y cuando no se comprometan los secretos
+\item Tiempo promedio para detectar una brecha es de 6 meses a 1 año.
+\end{itemize}
+\end{enumerate}
+\item Ventajas de TLS 1.3
+\label{sec:org0d51e2f}
+\begin{itemize}
+\item No tiene ciphersuits debiles
+\begin{itemize}
+\item Nada con RSA -> transporte RSA
+\item Solo AEAD
+\end{itemize}
+\item Menor latencia
+
+\item Heartbeats (latido): En un sistema distribuido no puedes saber si un nodo esta activo o inactivo, solo puedes comprobarlo haciendo una petición, el heartbeat es una forma de comprobar si un nodo sigue activo cada x tiempo.
+\end{itemize}
+\end{enumerate}
+\subsubsection{Verificación de certificados}
+\label{sec:orgc3f06b1}
+\begin{itemize}
+\item No debe de estar expirado
+\item No debe de estar revocado
+\item Se debe respetar la jerarquia de issuer siendo el subject del siguiente certificado en la cadena hasta llegar a la raiz.
+\end{itemize}
+\subsubsection{Ataques a TLS}
+\label{sec:org9bd3261}
+\begin{itemize}
+\item Padding Oracle On Downgrade Legacy Encryption: TLS 1.0 puede ser explotado cuando se usa CBC. En caso de usarse 1.1 o 1.2, se puede re-negociar para usar el protocolo 1.0.
+\begin{itemize}
+\item Deshabilitar TLS 1.0 y 1.1
+\item Verificar TLS 1.2 mediante una herramienta de auditoria
+\item Migrar a TLS 1.3
+\end{itemize}
+
+\item Se forzo al servidor a bajar de versión para tener cipher suites debiles.
+
+\item Logjam: El hello-client es interceptado y cambia la lista del cipher suite a sus versiones EXPORT de DH.
+\item EXPORT: Son algoritmos debiles en la cipher suite dado que eran exportadas a otros gobiernos.
+\item FREAK: Ataca al transporte de llaves RSA usando versiones export.
+\begin{itemize}
+\item Deshabilitar Cipher-suites debiles, en especial versiones EXPORT
+\item Usa clientes que no acepten parametros debiles en DH/ECDH o RSA.
+\end{itemize}
+
+\item Sweet32: Para cifradores de bloques de 64 bits como 3DES. Impacta en los datos que se pueden cifrar con la misma llave antes de repetirse en diferentes bloques. Dado que el limite es 32 Gb.
+\begin{itemize}
+\item Deshabilitar cualquier cipher suite que use 3DES o cifradores de bloque de 64 bits.
+\end{itemize}
+
+\item Return Of Bleichenbacher's Oracle Threat (ROBOT): Aprovecha las vulnerabilidades de padding en PKCS 1.5 para RSA.
+\begin{itemize}
+\item Deshabilitar todos los cipher suites que usen RSA para intercambio de llaves.
+\end{itemize}
+
+\item Existe un problema con la compresión que revela información a los atacantes, esto en la versión 1.2.
+
+\item Compresion Ratio Info-Leak Made Easy (CRIME):La compresión sólo funciona si hay datos repetidos, si tu sólo tienes un texto cifrado que contiene un texto comprimido y si puedes insertar o parcialmente insertar mensajes para ver el efecto de la compresión y notas que la compresión a mejorado con la inserción del mensaje, eso quiere decir que agregaste algo repetido en el mensaje original
+\item TIME: Es mas efectivo que CRIME.
+\item BREACH: Ataca tambien la compresión para revelar información.
+\begin{itemize}
+\item Deshabilitar compresión.
+\end{itemize}
+
+\item Heartbleed: Hace una petición de heartbeat excediendo el tamaño real, pudiendo leer la memoria y su contenido.
+\begin{itemize}
+\item Mantener las bibliotecas y aplicaciones actualizaciones.
+\end{itemize}
+\end{itemize}
+\subsection{Examen}
+\label{sec:orgbfb29b6}
+\begin{itemize}
+\item MACS, Firmas digitales, Certificados
+\item DH y transporte de RSA (cifrado hibrido)
+\item Cifrado simetrico AEAD
+\item TLS (versiones, handshake)
+\item Tareas/Proyectos
+\end{itemize}
 \end{document}

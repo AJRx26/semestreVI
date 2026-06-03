@@ -344,12 +344,10 @@ salt = os.urandom(16)
 - Uso de criptografia asimetrica para integridad y autenticidad de mensajes
 - Certificados y su diferencia con las llaves
 
-**** Message Authentication Code (MAC)
+*** Message Authentication Code (MAC)
 - Un cifrado puede ser alterado de formas que tenga sentido.
 - Un MAC es cualquier codigo o dato transmitido junto con el mensaje que puede ser evaluado para determinar si el mensaje fue alterado.
 - Usualmente se utiliza un hash como
-
-***** MAC, HMAC, CBC-MAC
 - Un MAC seguro no solo es codigo (hash) tambien debe incluir una llave.
 - Una llave MAC no esta relacionada con el cifrado
 - Sirve para asegurar que el codigo de autenticacion de mensaje solo puede ser computado por las entidades que conocen la llave.
@@ -358,7 +356,7 @@ salt = os.urandom(16)
 - Un atacante sin la llave no debe poder alterar el mensaje sin que se pueda detectar.
 - Mientras la llave se mantenga privada, el MAC
 
-****** HMAC
+**** HMAC
 - Hash-based Message Authentication Code
 - Es basicamente un hash keyed
 - Las funciones de hash son deterministas, dada la misma entrada siempre se produce la misma salida.
@@ -378,7 +376,7 @@ salt = os.urandom(16)
   - Los pads parecen arbitrarios pero tienen un sentido de seguridad matematico que ayuda a mitigar
 - Primero computas
 
-****** CBC-MAC
+**** CBC-MAC
 - Similar a AES-CBC
 - Recordar que CBC es Cipher Block Chaining
 - Un MAC a menudo se le llama "tag" (mensaje) del mensaje
@@ -392,12 +390,12 @@ salt = os.urandom(16)
 - Si se altera uno se alteran todos los bloques siguientes.
 - El ultimo bloque de CBC es en si un MAC.
 
-******* MAC Prepend Attack
+***** MAC Prepend Attack
 - Es posible mandar un mensaje manipulado y hacer que parezca que es el mensaje M1 o M2, suponiendo que esten generados por la misma llave.
 - M3 es una mezcla de M1 y M2.
 - No es necesario conocer la llave de MAC.
 
-******** Proceso de ataque, anteponiendo M1 a M2
+****** Proceso de ataque, anteponiendo M1 a M2
 - Recuperar el primer bloque de M2, denominado M21 (como es AES se toman los primeros 16 bytes)
 - Recuperar el resto de bloques de M2, denominado M2r
 - Obtener M'2 = t1 XOR M21
@@ -407,12 +405,12 @@ salt = os.urandom(16)
 - Basicamente lo que hace el atacante es reemplazar el primer bloque de M2 por uno manipulado.
 - La victima vera todo el mensaje M1 completo (con su padding), un bloque que se vera posiblemente corrupto y el mensaje M2 sin su primer bloque.
 
-******** Soluciones
+******* Soluciones
 - Agregar siempre la longitud del mensaje al inicio. Esto ayduara a corroborar si hay información extra.
 - Si se cifraron los datos usando AES-CBC, no se debe usar la misma llave para cifrar ni para obtener el MAC.
 - El IV debe ser diferente a un valor de cero.
 
-***** Cifrado y MAC
+*** Cifrado y MAC
 - Encrypt-Then-MAC: El MAC se aplica al texto cifrado.
 - MAC-Then-Encrypt: Se aplica al texto plano, luego se cifra el texto plano junto al MAC.
 - Encrypt-And-Mac: Se aplica MAC sobre el texto plano, pero no se cifra el MAC, solo el texto plano.
@@ -420,12 +418,13 @@ salt = os.urandom(16)
 - Recomendación: Siempre usar Encrypt-Then-MAC.
 - El ataque de padding oraculo a CBC funciona en MAC-Then-Encrypt.
 
-**** Firmas digitales
-***** RSA
+*** Firmas digitales
+**** RSA
 - Dado que los MAC usan llaves simetricas, si se compromete la llave puede ambos lados estan en riesgo de spoofing (usurpación de identidad).
 - Las firmas intentan mitigarlo mediante criptografia asimetrica. Ya que nos existen llaves "compartidas".
 - La llave publica solo se puede descifrar con la llave privada y vise-versa.
 - Si se cifra con la llave privada, puede ser descifrado por la llave publica.
+- Tambien pueden usarse para firmar listas de revocación de certificados CRL's.
 
 - Autenticidad en reversa: El receptor no sabra de quien es el mensaje pero el emisor sabe que solo podra ser procesada por la entidad autorizada.
 
@@ -445,21 +444,21 @@ salt = os.urandom(16)
 
 - Es comun usar tecnicas asimetricas al inicio de la comunicación para el establecimiento de confianza e intercambio de llaves simetricas. Despues todo el proceso se hace con llaves simetricas.
 
-***** Curvas Elipticas
+*** Curvas Elipticas
 - Alternativa a RSA
 - Se usa para firmas digitales y el intercambio de llaves.
 - Se usa ECDSA para firmar.
 - Parametros:
   - Tipo de curva (P-384 - SECP384r1)
 
-***** Transporte de Llaves RSA
+*** Transporte de Llaves RSA
 1. Alguna de las partes genera la llave simetrica. (probablemente el servidor)
 2. Se cifra la llave simetrica con una llave publica.
 3. La otra parte tiene una llave privada.
 4. Se transmite la llave cifrada y se descifra.
 - Seguridad hacia delante (Forward Secrecy)
 
-**** Certificados
+*** Certificados
 - Prueban la pertenencia de las llaves publicas.
 
 - Modelo PKI (Public Key Infraestructure)
@@ -515,7 +514,7 @@ salt = os.urandom(16)
   - Firmas digitales
   - Intercambios de llaves
 
-***** Revocación de certificados
+**** Revocación de certificados
 - Si la llave privada de un certificado creado por un CA es comprometido, el CA debe hacer saber a los demas que ya no es confiable.
 
 - Dado que no se puede tener un sistema offline de revocación, existen dos alternativas:
@@ -529,7 +528,7 @@ salt = os.urandom(16)
 - La recomendación final siempre sera proteger las llaves privadas, de preferencia en un lugar offline y/o con permisos minimos con un cifrado adicional.
 - Los certificados deben tener un tiempo de vida relativamente corto.
 
-***** Ataques de repetición
+*** Ataques de repetición
 - Un mensaje legitimo es utilizado por un atacante tiempo despues cuando el mensaje ya no es valido.
 
 - Soluciones:
@@ -694,11 +693,14 @@ salt = os.urandom(16)
   - Servidor de tickets
 
 ** TLS
+- Es una combinación de protocolos que trabajan en conjunto y soporta un numero de combinaciones de algoritmos y protocolos.
 - HTTPS basicamente encapsula trafico HTTP dentro de TLS.
 - TLS permite a un cliente verificar la identidad de un servidor y establecer una sesion segura y mantener llaves compartidas de cifrado.
 - Las llaves se mantienen secretas incluso si un atacante intercepta el trafico.
 - Usa PKI
 - Si una entidad quiere TLS requiere de un certificado X.509
+- Brinda seguridad a TCP/IP.
+- Existen dos versiones 1.2 y 1.3.
 
 *** Certificados X.509
 - Su proposito es ligar la identidad de un subject a una llave publica bajo la firma de un issuer.
@@ -742,6 +744,15 @@ salt = os.urandom(16)
 
 1. Generar una llave privada (2048 bits) y el CSR (durante su creacion se extrae la llave publica y se agrega a la peticion).
 2. El issuer genera el certificado firmandolo con su llave
+3. Con este certificado se pueden firmar nuevos certificados.
+4. Para los nuevos certificados se deben de crean sus respectivas llaves.
+5. Con los certificados del CA, se pueden generar certificados asociados a los nuevos CSR.
+6. Se pueden agregar limitaciones usando un archivo v3.ext
+7. El CA firma el CSR del subject, el issuer del nuevo certificado debe ser igual al subject del certificado del CA.
+
+**** Requerimentos
+- Se debe probar tener el control sobre el dominio del sitio.
+- Mediante protocolos como ACME o webhosting.
 
 - Envenenamiento de DNS
   - Solo funciona si usas http o si se tiene una llave privada asociada a la cadena de certificados.
@@ -754,62 +765,110 @@ salt = os.urandom(16)
 - Una cosa es que se compruebe que la entidad es la propietaria verdadera del certificado
 - Y otra es que el certificado sea confiable.
 
-*** TLS 1.2
-**** Handshake
+*** Handshake
+- Tiene como objetivos: establecer identidad y derivar llaves de sesión para el transporte seguro.
+
+**** TLS - 1.2
 1. Comienza con un cliente enviando un mensaje hello al servidor. Este mensaje contiene info de configuración, tipo nonce. Tambien esta la lista de Cipher Suites.
    - El objetivo es ponerse de acuerdo en cuanto al algoritmo y protocolos criptograficos a usar. La Cipher Suite da opciones.
    - La seguridad depende del Cipher Suite usado.
+   - El chiper suite incluye:
+     - Intercambio de llaves
+     - Firma digital
+     - Cifrado en masa
+     - Hashing
 2. El servidor recibe un hello cliente, escoge uno de los cipher suites propuestos del cliente. Cuando escoge uno, envia una respuesta con la siguiente info:
-   - Hello con nonce
-   - Certificado
-   - Intercambio de llaves DHE O ECDHE
+   - Hello con nonce aleatorio del servidor
+   - Certificado del servidor
+   - Parte publica del intercambio de llaves DHE O ECDHE, en caso de usarse Diffie-Hellman y no RSA.
 3. El cliente hace el proceso como auntenticar al servidor, derivar la llave y empezar a enviar datos cifrados.
+   - TLS solo autentica el servidor, el cliente no envia un certificado para autenticarse.
+   - Cuando ambas partes se autentican con un certificado se le llama Mutual TLS o MTLS.
+   - Para autenticar al cliente se usa mas la identidad del usuario como user-password entre otros. Esto despues de establecer una sesión segura con una llave compartida.
+4. El handshake no genera una llave en si, sino un PMS (pre-master-secret) junto a otros datos (nonce de ambas partes) para obtener el master secret.
+   - Este master secret se usa para generar las llaves de sesión para la comunicación en masa.
+   - En el caso de usar RSA, no es necesario usar firmas dado que se envian las llaves publicas (en los certificados).
+   - Mientras que DHE y ECDHE se derivan de manera simultanea y efimera. Ademas que debe de ser autenticado, al menos del lado del servidor, usando la llave privada del servidor de larga duración (RSA o ECDSA). El cliente cuando recibe los datos firmados usa la llave publica en el certificado del servidor para verificar la firma.
+   - Es recomendable usar DH/ECHD siempre.
+5. Finalizado el intercambio de llaves, toda la info debera ir cifrada y autenticada.
+6. El cliente envia un mensaje llamado "ChangeCipherSpec" que indica que todos los mensajes siguientes usaran el CipherSuite negociado.
+7. El servidor contesta con su propio CHangeCipherSpec.
+8. Finalmente, cada parte manda un mensaje ya cifrado "Finished" que completa el handshake. Este finished contiene todos los hashes del handshake enviado. Asegurando que ningun atacante altero alguna parte del handshake.
+   - En caso que no pase la comprobación, se cierra el canal dado que esta comprometido.
 
-4. TLS solo autentica el servidor, el cliente no envia un certificado para autenticarse.
-5. Una sesión puede tener varias llaves simetricas.
-   - Confidencialidad (transporte en si)
-     - Llave emisor-receptor
-     - Llave receptor-emisor
-   - Autenticación/Integridad (MAC)
-     - Llave emisor-receptor
-     - Llave receptor-emisor
+- TLS segmenta las transmisiones en paquetes, cada paquetes esta cifrado y autenticado, ademas, estan estructurados en un formato llamado TLSCipherText.
+- Son de 16 kilobytes y son similares al struct de C.
 
-6. Con DH o transporte RSA generas un PMS, que permite generar un master secret.
-   - Con el PMS puedes tener un generador de llaves
+***** Derivación de llaves
+- El PMS se expande al master secret usando una función pseudo-aleatoria (PRF), que toma un secreto y lo expande a mas bytes, usando un mecanismo HMAC-SHA256 para expandir bytes de entrada a un tamaño arbitrario.
+- El PMS se expande hasta 48 bytes para generar el master secret.
+- El master secret tambien se expande (usando PRF) a tantos bytes sea necesario para obtener las llaves de sesión e IV's requeridos.
+- Del master secret se obtiene el key_block que varia del tamaño dependiendo del cipher suite.
+- El key_block tiene maximo 6 parametros, esto depende del Cipher Suite:
+  - Cliente MAC key
+  - Servidor MAC key
+  - Cliente cifrado key
+  - Servidor cifrado key
+  - Cliente IV
+  - Servidor IV
 
-   - Intercambiar hellos (nonces, certificados, lista de cipher suits)
-   - Negociación de cihper suites
-   - Autenticacion
-   - Intercambio/derivación de llaves
-   - ChangeCipherspec
-   - Finish (comprobación de hash)
+**** TLS - 1.3
+- Desecha la mayoria de cipher suits, quedando solo 5 que estan basados en AEAD.
+- RSA ya no se usa para transporte de llaves.
+- Solo DHE y ECDHE.
+- El handshake se hace en una sola ronda de mensajes.
 
-7. Handshake TLS
-   - Establecer identidad
-   - Establecer llaves de sesion
-     - DH
-     - Transporte de llaves RSA
+1. Cliente envia su Hello junto a Cipher Suites y su llave publica (ECDH).
+2. El servidor recibe el Hello del cliente, envia al cliente su Hello con la elección del Cipher Suite, su llave publica, el certificado del servidor, la firma del certificado y el finished.
+3. El cliente recibe todo lo anterior del servidor y envia su finished.
 
-8. Transferencia en masa (bulk):
-   - Se transfieren los datos de interes (payload)
-   - Esa transferencia se hace con metodos simetricos.
+- TLS 1.3 elimina la latencia de transmisión.
 
-9. Http
-   - Es un protocolo peticion-respuesta
-   - La cantidad de interacciones peticion-respuesta hay una sesion http es de una por sesion.
+***** Datos miscelaneos
+- Una sesión puede tener varias llaves simetricas.
+- Confidencialidad (transporte en si)
+  - Llave emisor-receptor
+  - Llave receptor-emisor
+- Autenticación/Integridad (MAC)
+  - Llave emisor-receptor
+  - Llave receptor-emisor
 
-10. MiM en TLS
-    - Cliente manda su hello que incluye la lista de cipher suite soportados
-    - Un tercero altera la lista de cipher suits dejando solo las debiles
-    - La forma de mitigacion es verificar el finished del handshake el hash de todo lo que se ha transmitido.
+- Con DH o transporte RSA generas un PMS, que permite generar un master secret.
+  - Con el PMS puedes tener un generador de llaves
 
-    - Verificar certificados
-    - Verificar identidad -> reto-respuesta
+  - Intercambiar hellos (nonces, certificados, lista de cipher suits)
+  - Negociación de cihper suites
+  - Autenticacion
+  - Intercambio/derivación de llaves
+  - ChangeCipherspec
+  - Finish (comprobación de hash)
+
+- Handshake TLS
+  - Establecer identidad
+  - Establecer llaves de sesion
+    - DH
+    - Transporte de llaves RSA
+
+- Transferencia en masa (bulk):
+  - Se transfieren los datos de interes (payload)
+  - Esa transferencia se hace con metodos simetricos.
+
+- Http
+  - Es un protocolo peticion-respuesta
+  - La cantidad de interacciones peticion-respuesta hay una sesion http es de una por sesion.
+
+- MiM en TLS
+  - Cliente manda su hello que incluye la lista de cipher suite soportados
+  - Un tercero altera la lista de cipher suits dejando solo las debiles
+  - La forma de mitigacion es verificar el finished del handshake el hash de todo lo que se ha transmitido.
+
+  - Verificar certificados
+  - Verificar identidad -> reto-respuesta
 
 - La criptografia es segura siempre y cuando no se comprometan los secretos
-- Tiempo promedio para detectar una brecha es de 6 meses a 1 year
+- Tiempo promedio para detectar una brecha es de 6 meses a 1 año.
 
-*** Ventajas de TLS 1.3
+**** Ventajas de TLS 1.3
 - No tiene ciphersuits debiles
   - Nada con RSA -> transporte RSA
   - Solo AEAD
@@ -817,9 +876,40 @@ salt = os.urandom(16)
 
 - Heartbeats (latido): En un sistema distribuido no puedes saber si un nodo esta activo o inactivo, solo puedes comprobarlo haciendo una petición, el heartbeat es una forma de comprobar si un nodo sigue activo cada x tiempo.
 
-** Proyecto final
-- Versión 1
-  - Hacer una aplicación que le permita a un cliente subir o descargar archivos de manera segura.
+*** Verificación de certificados
+- No debe de estar expirado
+- No debe de estar revocado
+- Se debe respetar la jerarquia de issuer siendo el subject del siguiente certificado en la cadena hasta llegar a la raiz.
+
+*** Ataques a TLS
+- Padding Oracle On Downgrade Legacy Encryption: TLS 1.0 puede ser explotado cuando se usa CBC. En caso de usarse 1.1 o 1.2, se puede re-negociar para usar el protocolo 1.0.
+  - Deshabilitar TLS 1.0 y 1.1
+  - Verificar TLS 1.2 mediante una herramienta de auditoria
+  - Migrar a TLS 1.3
+
+- Se forzo al servidor a bajar de versión para tener cipher suites debiles.
+
+- Logjam: El hello-client es interceptado y cambia la lista del cipher suite a sus versiones EXPORT de DH.
+- EXPORT: Son algoritmos debiles en la cipher suite dado que eran exportadas a otros gobiernos.
+- FREAK: Ataca al transporte de llaves RSA usando versiones export.
+  - Deshabilitar Cipher-suites debiles, en especial versiones EXPORT
+  - Usa clientes que no acepten parametros debiles en DH/ECDH o RSA.
+
+- Sweet32: Para cifradores de bloques de 64 bits como 3DES. Impacta en los datos que se pueden cifrar con la misma llave antes de repetirse en diferentes bloques. Dado que el limite es 32 Gb.
+  - Deshabilitar cualquier cipher suite que use 3DES o cifradores de bloque de 64 bits.
+
+- Return Of Bleichenbacher's Oracle Threat (ROBOT): Aprovecha las vulnerabilidades de padding en PKCS 1.5 para RSA.
+  - Deshabilitar todos los cipher suites que usen RSA para intercambio de llaves.
+
+- Existe un problema con la compresión que revela información a los atacantes, esto en la versión 1.2.
+
+- Compresion Ratio Info-Leak Made Easy (CRIME):La compresión sólo funciona si hay datos repetidos, si tu sólo tienes un texto cifrado que contiene un texto comprimido y si puedes insertar o parcialmente insertar mensajes para ver el efecto de la compresión y notas que la compresión a mejorado con la inserción del mensaje, eso quiere decir que agregaste algo repetido en el mensaje original
+- TIME: Es mas efectivo que CRIME.
+- BREACH: Ataca tambien la compresión para revelar información.
+  - Deshabilitar compresión.
+
+- Heartbleed: Hace una petición de heartbeat excediendo el tamaño real, pudiendo leer la memoria y su contenido.
+  - Mantener las bibliotecas y aplicaciones actualizaciones.
 
 ** Examen
 - MACS, Firmas digitales, Certificados

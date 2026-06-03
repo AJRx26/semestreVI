@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-04-15 mié 01:10 -->
+<!-- 2026-06-02 mar 17:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Notas Criptografia - Semestre VI</title>
-<meta name="author" content="Abraham Nunez" />
+<meta name="author" content="Abraham Nuñez" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
   #content { max-width: 60em; margin: auto; }
@@ -201,71 +201,92 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org36d3977">1. Introdución</a></li>
-<li><a href="#org4de6c10">2. Información</a>
+<li><a href="#orgccfe6bd">1. Introdución</a></li>
+<li><a href="#org1667dd6">2. Información</a>
 <ul>
-<li><a href="#orge7f4efe">2.1. Prerrequisitos:</a></li>
-<li><a href="#orgbfa3397">2.2. Evaluación:</a></li>
-<li><a href="#org9ca7c5a">2.3. Herramientas:</a></li>
+<li><a href="#org7a7898c">2.1. Prerrequisitos:</a></li>
+<li><a href="#org551586b">2.2. Evaluación:</a></li>
+<li><a href="#orgb7af43f">2.3. Herramientas:</a></li>
 </ul>
 </li>
-<li><a href="#org9a7aef4">3. Temario</a>
+<li><a href="#orgdf81170">3. Temario</a>
 <ul>
-<li><a href="#org3509948">3.1. Descripción</a></li>
-<li><a href="#org416e66d">3.2. Unidad 1</a></li>
-<li><a href="#org0875435">3.3. Unidad 2</a></li>
-<li><a href="#org68b139a">3.4. Unidad 3</a></li>
-<li><a href="#orgabe548e">3.5. Unidad 4</a></li>
+<li><a href="#org94ccddf">3.1. Descripción</a></li>
+<li><a href="#orgb6f05f6">3.2. Unidad 1</a></li>
+<li><a href="#orgfa47ee5">3.3. Unidad 2</a></li>
+<li><a href="#org1041b99">3.4. Unidad 3</a></li>
+<li><a href="#org70f96e6">3.5. Unidad 4</a></li>
 </ul>
 </li>
-<li><a href="#orga04d10a">4. Introducción a la criptografia</a>
+<li><a href="#org3cddfb4">4. Introducción a la criptografia</a>
 <ul>
-<li><a href="#orgb416cf5">4.1. STRIDE</a></li>
-<li><a href="#org12cff93">4.2. Origen de la criptografia</a></li>
-<li><a href="#org25371c4">4.3. Criptografia</a>
+<li><a href="#orgdf86173">4.1. STRIDE</a></li>
+<li><a href="#org42a6f11">4.2. Origen de la criptografia</a></li>
+<li><a href="#org8cea7bb">4.3. Criptografia</a>
 <ul>
-<li><a href="#org83bfc0a">4.3.1. Herramientas</a></li>
-<li><a href="#orgce468cd">4.3.2. Cifrado Cesar</a></li>
-<li><a href="#org8c21eb0">4.3.3. Tres protecciones principales de la criptografia</a></li>
-<li><a href="#org22b6f95">4.3.4. AES</a></li>
-<li><a href="#org1ba9d04">4.3.5. YANAC</a></li>
-<li><a href="#org6dace9f">4.3.6. Codificar</a></li>
-<li><a href="#orgfc9f676">4.3.7. Cifrar</a></li>
-<li><a href="#org1c10e27">4.3.8. Ofuscar</a></li>
-<li><a href="#org27c4efd">4.3.9. Hashear</a></li>
-<li><a href="#orgfbfabf8">4.3.10. Cifrado cesar</a></li>
-<li><a href="#org62d76ec">4.3.11. Aritmetica Modular</a></li>
-<li><a href="#org441ffc7">4.3.12. Binario</a></li>
+<li><a href="#org102efdd">4.3.1. Herramientas</a></li>
+<li><a href="#org43c0285">4.3.2. Cifrado Cesar</a></li>
+<li><a href="#orgbd86ce9">4.3.3. Tres protecciones principales de la criptografia</a></li>
+<li><a href="#org0e0d25c">4.3.4. AES</a></li>
+<li><a href="#orga29c047">4.3.5. YANAC</a></li>
+<li><a href="#org0f7ecb9">4.3.6. Codificar</a></li>
+<li><a href="#org4bea094">4.3.7. Cifrar</a></li>
+<li><a href="#org50e2374">4.3.8. Ofuscar</a></li>
+<li><a href="#orga8f06ec">4.3.9. Hashear</a></li>
+<li><a href="#org0977bb2">4.3.10. Cifrado cesar</a></li>
+<li><a href="#org2414522">4.3.11. Aritmetica Modular</a></li>
+<li><a href="#org1cd5bf1">4.3.12. Binario</a></li>
 </ul>
 </li>
-<li><a href="#orgf7154b4">4.4. Hashing</a>
+<li><a href="#org96a3cec">4.4. Hashing</a>
 <ul>
-<li><a href="#orgce6feef">4.4.1. Cifrado vs Hashing</a></li>
-<li><a href="#org8d6e66b">4.4.2. DIGESTS</a></li>
-<li><a href="#org586507e">4.4.3. hashlib</a></li>
-<li><a href="#orgf87ea83">4.4.4. Funciones de hash</a></li>
-<li><a href="#org92ddba4">4.4.5. Hashing</a></li>
-<li><a href="#org44cf3cb">4.4.6. Seguridad en funciones de hash</a></li>
+<li><a href="#orgb806f36">4.4.1. Cifrado vs Hashing</a></li>
+<li><a href="#orga2e0388">4.4.2. DIGESTS</a></li>
+<li><a href="#org049f761">4.4.3. hashlib</a></li>
+<li><a href="#orga1a4231">4.4.4. Funciones de hash</a></li>
+<li><a href="#orge7ca0e4">4.4.5. Hashing</a></li>
+<li><a href="#org65aa56f">4.4.6. Seguridad en funciones de hash</a></li>
 </ul>
 </li>
-<li><a href="#org74f50ad">4.5. Cifrado simetrico</a>
+<li><a href="#orgb1035ec">4.5. Cifrado simetrico</a>
 <ul>
-<li><a href="#orgf5cdd80">4.5.1. AES</a></li>
-<li><a href="#orged2558c">4.5.2. Seguridad en cifrado simetrico</a></li>
+<li><a href="#org47ed7dd">4.5.1. AES</a></li>
+<li><a href="#org011bd62">4.5.2. Seguridad en cifrado simetrico</a></li>
 </ul>
 </li>
-<li><a href="#orgc046d6c">4.6. Cifrado asimetrico</a>
+<li><a href="#org9bd4493">4.6. Cifrado asimetrico</a></li>
+<li><a href="#org41a9c44">4.7. Integridad de mensajes, firmas y certificados</a></li>
+<li><a href="#org04b5583">4.8. Combinación de metodos simetricos con asimetricos</a>
 <ul>
-<li><a href="#orgd1bec73">4.6.1. Integridad de mensajes, firmas y certificados</a></li>
+<li><a href="#orgd25bb51">4.8.1. Agree Upon Transmission</a></li>
+<li><a href="#org2553cf9">4.8.2. Llaves de sesión</a></li>
+<li><a href="#orgde591a8">4.8.3. Diffie-Hellman DH</a></li>
+<li><a href="#org2d7df4a">4.8.4. Protocolo Reto-Respuesta</a></li>
+<li><a href="#org5184628">4.8.5. Ramsonware</a></li>
 </ul>
 </li>
+<li><a href="#org1ad4b4b">4.9. Cifrado simetrico avanzado</a>
+<ul>
+<li><a href="#org2024ad2">4.9.1. Cifrado autenticado con datos adicionales (AEAD)</a></li>
+<li><a href="#orgd5cc200">4.9.2. Kerberos</a></li>
+</ul>
+</li>
+<li><a href="#org6232623">4.10. TLS</a>
+<ul>
+<li><a href="#orgcf9220f">4.10.1. Certificados X.509</a></li>
+<li><a href="#orgf04c94e">4.10.2. TLS 1.2</a></li>
+<li><a href="#org89ecdac">4.10.3. Ventajas de TLS 1.3</a></li>
+</ul>
+</li>
+<li><a href="#orgb1aab6e">4.11. Proyecto final</a></li>
+<li><a href="#org41f167a">4.12. Examen</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org36d3977" class="outline-2">
-<h2 id="org36d3977"><span class="section-number-2">1.</span> Introdución</h2>
+<div id="outline-container-orgccfe6bd" class="outline-2">
+<h2 id="orgccfe6bd"><span class="section-number-2">1.</span> Introdución</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Profesor: Hector Xavier Limón Riaño</li>
@@ -275,12 +296,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org4de6c10" class="outline-2">
-<h2 id="org4de6c10"><span class="section-number-2">2.</span> Información</h2>
+<div id="outline-container-org1667dd6" class="outline-2">
+<h2 id="org1667dd6"><span class="section-number-2">2.</span> Información</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orge7f4efe" class="outline-3">
-<h3 id="orge7f4efe"><span class="section-number-3">2.1.</span> Prerrequisitos:</h3>
+<div id="outline-container-org7a7898c" class="outline-3">
+<h3 id="org7a7898c"><span class="section-number-3">2.1.</span> Prerrequisitos:</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Estructuras de datos (Python)</li>
@@ -293,8 +314,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgbfa3397" class="outline-3">
-<h3 id="orgbfa3397"><span class="section-number-3">2.2.</span> Evaluación:</h3>
+<div id="outline-container-org551586b" class="outline-3">
+<h3 id="org551586b"><span class="section-number-3">2.2.</span> Evaluación:</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
 <li>Examenes: 60%</li>
@@ -303,8 +324,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org9ca7c5a" class="outline-3">
-<h3 id="org9ca7c5a"><span class="section-number-3">2.3.</span> Herramientas:</h3>
+<div id="outline-container-orgb7af43f" class="outline-3">
+<h3 id="orgb7af43f"><span class="section-number-3">2.3.</span> Herramientas:</h3>
 <div class="outline-text-3" id="text-2-3">
 <ul class="org-ul">
 <li>Eminus</li>
@@ -314,20 +335,20 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org9a7aef4" class="outline-2">
-<h2 id="org9a7aef4"><span class="section-number-2">3.</span> Temario</h2>
+<div id="outline-container-orgdf81170" class="outline-2">
+<h2 id="orgdf81170"><span class="section-number-2">3.</span> Temario</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org3509948" class="outline-3">
-<h3 id="org3509948"><span class="section-number-3">3.1.</span> Descripción</h3>
+<div id="outline-container-org94ccddf" class="outline-3">
+<h3 id="org94ccddf"><span class="section-number-3">3.1.</span> Descripción</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Es un elemento fundamental de la protección de la información.
 </p>
 </div>
 </div>
-<div id="outline-container-org416e66d" class="outline-3">
-<h3 id="org416e66d"><span class="section-number-3">3.2.</span> Unidad 1</h3>
+<div id="outline-container-orgb6f05f6" class="outline-3">
+<h3 id="orgb6f05f6"><span class="section-number-3">3.2.</span> Unidad 1</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>Cifrado Cesar</li>
@@ -336,8 +357,8 @@ Es un elemento fundamental de la protección de la información.
 </ul>
 </div>
 </div>
-<div id="outline-container-org0875435" class="outline-3">
-<h3 id="org0875435"><span class="section-number-3">3.3.</span> Unidad 2</h3>
+<div id="outline-container-orgfa47ee5" class="outline-3">
+<h3 id="orgfa47ee5"><span class="section-number-3">3.3.</span> Unidad 2</h3>
 <div class="outline-text-3" id="text-3-3">
 <ul class="org-ul">
 <li>Funciones de hash</li>
@@ -348,8 +369,8 @@ Es un elemento fundamental de la protección de la información.
 </ul>
 </div>
 </div>
-<div id="outline-container-org68b139a" class="outline-3">
-<h3 id="org68b139a"><span class="section-number-3">3.4.</span> Unidad 3</h3>
+<div id="outline-container-org1041b99" class="outline-3">
+<h3 id="org1041b99"><span class="section-number-3">3.4.</span> Unidad 3</h3>
 <div class="outline-text-3" id="text-3-4">
 <ul class="org-ul">
 <li>Llaves publicas y privadas</li>
@@ -358,8 +379,8 @@ Es un elemento fundamental de la protección de la información.
 </ul>
 </div>
 </div>
-<div id="outline-container-orgabe548e" class="outline-3">
-<h3 id="orgabe548e"><span class="section-number-3">3.5.</span> Unidad 4</h3>
+<div id="outline-container-org70f96e6" class="outline-3">
+<h3 id="org70f96e6"><span class="section-number-3">3.5.</span> Unidad 4</h3>
 <div class="outline-text-3" id="text-3-5">
 <ul class="org-ul">
 <li>MAC, HMAC. CBC-MAC</li>
@@ -369,8 +390,8 @@ Es un elemento fundamental de la protección de la información.
 </div>
 </div>
 </div>
-<div id="outline-container-orga04d10a" class="outline-2">
-<h2 id="orga04d10a"><span class="section-number-2">4.</span> Introducción a la criptografia</h2>
+<div id="outline-container-org3cddfb4" class="outline-2">
+<h2 id="org3cddfb4"><span class="section-number-2">4.</span> Introducción a la criptografia</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li>CIA:
@@ -401,8 +422,8 @@ Datos pueden estar en 3 estados:
 <li>Uso -&gt; Estan en la memoria</li>
 </ul>
 </div>
-<div id="outline-container-orgb416cf5" class="outline-3">
-<h3 id="orgb416cf5"><span class="section-number-3">4.1.</span> STRIDE</h3>
+<div id="outline-container-orgdf86173" class="outline-3">
+<h3 id="orgdf86173"><span class="section-number-3">4.1.</span> STRIDE</h3>
 <div class="outline-text-3" id="text-4-1">
 <ul class="org-ul">
 <li>STRIDE es un modelo de amenazas, utilizado para ayudar a razonar y encontrar amenazas a un sistema.</li>
@@ -421,8 +442,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-org12cff93" class="outline-3">
-<h3 id="org12cff93"><span class="section-number-3">4.2.</span> Origen de la criptografia</h3>
+<div id="outline-container-org42a6f11" class="outline-3">
+<h3 id="org42a6f11"><span class="section-number-3">4.2.</span> Origen de la criptografia</h3>
 <div class="outline-text-3" id="text-4-2">
 <ul class="org-ul">
 <li>Viene del griego kryptos que significa oculto y graphe que signfica grafo o escritura.</li>
@@ -432,8 +453,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-org25371c4" class="outline-3">
-<h3 id="org25371c4"><span class="section-number-3">4.3.</span> Criptografia</h3>
+<div id="outline-container-org8cea7bb" class="outline-3">
+<h3 id="org8cea7bb"><span class="section-number-3">4.3.</span> Criptografia</h3>
 <div class="outline-text-3" id="text-4-3">
 <ul class="org-ul">
 <li>Esta en todos lados: ssh, criptomonedas y cualquier aplicación web.</li>
@@ -459,8 +480,8 @@ Datos pueden estar en 3 estados:
 <li>Determinismo -&gt; Es predecible</li>
 </ul>
 </div>
-<div id="outline-container-org83bfc0a" class="outline-4">
-<h4 id="org83bfc0a"><span class="section-number-4">4.3.1.</span> Herramientas</h4>
+<div id="outline-container-org102efdd" class="outline-4">
+<h4 id="org102efdd"><span class="section-number-4">4.3.1.</span> Herramientas</h4>
 <div class="outline-text-4" id="text-4-3-1">
 <ul class="org-ul">
 <li>cryptography: Biblioteca de python con todos los algoritmos criptograficos que se usaran en el curso.</li>
@@ -468,8 +489,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-orgce468cd" class="outline-4">
-<h4 id="orgce468cd"><span class="section-number-4">4.3.2.</span> Cifrado Cesar</h4>
+<div id="outline-container-org43c0285" class="outline-4">
+<h4 id="org43c0285"><span class="section-number-4">4.3.2.</span> Cifrado Cesar</h4>
 <div class="outline-text-4" id="text-4-3-2">
 <ul class="org-ul">
 <li>Consiste en reemplazar una letra de un mensaje por otra letra, o tambien, desplazar por un valor x (shift-cipher) el numero de letras.
@@ -483,8 +504,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-org8c21eb0" class="outline-4">
-<h4 id="org8c21eb0"><span class="section-number-4">4.3.3.</span> Tres protecciones principales de la criptografia</h4>
+<div id="outline-container-orgbd86ce9" class="outline-4">
+<h4 id="orgbd86ce9"><span class="section-number-4">4.3.3.</span> Tres protecciones principales de la criptografia</h4>
 <div class="outline-text-4" id="text-4-3-3">
 <ul class="org-ul">
 <li>Autenticidad: Firmas digitales, Codigos MAC.</li>
@@ -493,8 +514,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-org22b6f95" class="outline-4">
-<h4 id="org22b6f95"><span class="section-number-4">4.3.4.</span> AES</h4>
+<div id="outline-container-org0e0d25c" class="outline-4">
+<h4 id="org0e0d25c"><span class="section-number-4">4.3.4.</span> AES</h4>
 <div class="outline-text-4" id="text-4-3-4">
 <ul class="org-ul">
 <li>Estandar de cifrado asimetrico.</li>
@@ -507,8 +528,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-org1ba9d04" class="outline-4">
-<h4 id="org1ba9d04"><span class="section-number-4">4.3.5.</span> YANAC</h4>
+<div id="outline-container-orga29c047" class="outline-4">
+<h4 id="orga29c047"><span class="section-number-4">4.3.5.</span> YANAC</h4>
 <div class="outline-text-4" id="text-4-3-5">
 <ul class="org-ul">
 <li>YANAC: You Are Not A Criptographer. Acronimo popular en la comunidad criptografica.</li>
@@ -521,8 +542,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-org6dace9f" class="outline-4">
-<h4 id="org6dace9f"><span class="section-number-4">4.3.6.</span> Codificar</h4>
+<div id="outline-container-org0f7ecb9" class="outline-4">
+<h4 id="org0f7ecb9"><span class="section-number-4">4.3.6.</span> Codificar</h4>
 <div class="outline-text-4" id="text-4-3-6">
 <ul class="org-ul">
 <li>Transformar de una representacion a otra sin perdida.</li>
@@ -530,32 +551,32 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfc9f676" class="outline-4">
-<h4 id="orgfc9f676"><span class="section-number-4">4.3.7.</span> Cifrar</h4>
+<div id="outline-container-org4bea094" class="outline-4">
+<h4 id="org4bea094"><span class="section-number-4">4.3.7.</span> Cifrar</h4>
 <div class="outline-text-4" id="text-4-3-7">
 <ul class="org-ul">
 <li>Es el proceso de convertir informacion sensible en un formato ilegible mediante un secreto (llave) a las que solo partes autorizadas tienen acceso.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1c10e27" class="outline-4">
-<h4 id="org1c10e27"><span class="section-number-4">4.3.8.</span> Ofuscar</h4>
+<div id="outline-container-org50e2374" class="outline-4">
+<h4 id="org50e2374"><span class="section-number-4">4.3.8.</span> Ofuscar</h4>
 <div class="outline-text-4" id="text-4-3-8">
 <ul class="org-ul">
 <li>Se refiere a encubrir el significado haciendola mas confusa y complicada de interpretar.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org27c4efd" class="outline-4">
-<h4 id="org27c4efd"><span class="section-number-4">4.3.9.</span> Hashear</h4>
+<div id="outline-container-orga8f06ec" class="outline-4">
+<h4 id="orga8f06ec"><span class="section-number-4">4.3.9.</span> Hashear</h4>
 <div class="outline-text-4" id="text-4-3-9">
 <ul class="org-ul">
 <li>Es la funcion de aplicar una funcion de hash, es decir, que transforma un conjunto de datos en una cadena alfanumerica unica que actua como una huella digital del contenido original. No es invertible.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfbfabf8" class="outline-4">
-<h4 id="orgfbfabf8"><span class="section-number-4">4.3.10.</span> Cifrado cesar</h4>
+<div id="outline-container-org0977bb2" class="outline-4">
+<h4 id="org0977bb2"><span class="section-number-4">4.3.10.</span> Cifrado cesar</h4>
 <div class="outline-text-4" id="text-4-3-10">
 <ul class="org-ul">
 <li>Se basaen reemplazar una letra de un mensaje por otra letra.</li>
@@ -564,8 +585,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-org62d76ec" class="outline-4">
-<h4 id="org62d76ec"><span class="section-number-4">4.3.11.</span> Aritmetica Modular</h4>
+<div id="outline-container-org2414522" class="outline-4">
+<h4 id="org2414522"><span class="section-number-4">4.3.11.</span> Aritmetica Modular</h4>
 <div class="outline-text-4" id="text-4-3-11">
 <ul class="org-ul">
 <li>4 % 4</li>
@@ -575,8 +596,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-org441ffc7" class="outline-4">
-<h4 id="org441ffc7"><span class="section-number-4">4.3.12.</span> Binario</h4>
+<div id="outline-container-org1cd5bf1" class="outline-4">
+<h4 id="org1cd5bf1"><span class="section-number-4">4.3.12.</span> Binario</h4>
 <div class="outline-text-4" id="text-4-3-12">
 <ul class="org-ul">
 <li>El binario se manipula en paquetes de bytes (8 bits), no se puede manipular directamentes menos (al menos en las arquitecturas populares modernas).</li>
@@ -586,8 +607,8 @@ Datos pueden estar en 3 estados:
 </div>
 </div>
 </div>
-<div id="outline-container-orgf7154b4" class="outline-3">
-<h3 id="orgf7154b4"><span class="section-number-3">4.4.</span> Hashing</h3>
+<div id="outline-container-org96a3cec" class="outline-3">
+<h3 id="org96a3cec"><span class="section-number-3">4.4.</span> Hashing</h3>
 <div class="outline-text-3" id="text-4-4">
 <ul class="org-ul">
 <li>3**2 = 9 -&gt; Biyectivas</li>
@@ -608,8 +629,8 @@ Datos pueden estar en 3 estados:
 <li>Solo funciona con cadenas binarias</li>
 </ul>
 </div>
-<div id="outline-container-orgce6feef" class="outline-4">
-<h4 id="orgce6feef"><span class="section-number-4">4.4.1.</span> Cifrado vs Hashing</h4>
+<div id="outline-container-orgb806f36" class="outline-4">
+<h4 id="orgb806f36"><span class="section-number-4">4.4.1.</span> Cifrado vs Hashing</h4>
 <div class="outline-text-4" id="text-4-4-1">
 <ul class="org-ul">
 <li>El cifrado permite tener confidencialidad en los mensajes, pero ayuda a verificar la interidad de los mismos.</li>
@@ -619,8 +640,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-org8d6e66b" class="outline-4">
-<h4 id="org8d6e66b"><span class="section-number-4">4.4.2.</span> DIGESTS</h4>
+<div id="outline-container-orga2e0388" class="outline-4">
+<h4 id="orga2e0388"><span class="section-number-4">4.4.2.</span> DIGESTS</h4>
 <div class="outline-text-4" id="text-4-4-2">
 <ul class="org-ul">
 <li>Su traduccion seria &ldquo;resumen&rdquo;</li>
@@ -630,8 +651,8 @@ Datos pueden estar en 3 estados:
 </ul>
 </div>
 </div>
-<div id="outline-container-org586507e" class="outline-4">
-<h4 id="org586507e"><span class="section-number-4">4.4.3.</span> hashlib</h4>
+<div id="outline-container-org049f761" class="outline-4">
+<h4 id="org049f761"><span class="section-number-4">4.4.3.</span> hashlib</h4>
 <div class="outline-text-4" id="text-4-4-3">
 <p>
 import hashlib
@@ -642,8 +663,8 @@ md5hasher.hexdigest()
 </p>
 </div>
 </div>
-<div id="outline-container-orgf87ea83" class="outline-4">
-<h4 id="orgf87ea83"><span class="section-number-4">4.4.4.</span> Funciones de hash</h4>
+<div id="outline-container-orga1a4231" class="outline-4">
+<h4 id="orga1a4231"><span class="section-number-4">4.4.4.</span> Funciones de hash</h4>
 <div class="outline-text-4" id="text-4-4-4">
 <ul class="org-ul">
 <li>Una funcion de hash toma un contenido de cualquier tamano(hasta vacio) y siempre produce un numero de un tamano fijo.</li>
@@ -664,8 +685,8 @@ md5hasher.hexdigest()
 </ul>
 </div>
 </div>
-<div id="outline-container-org92ddba4" class="outline-4">
-<h4 id="org92ddba4"><span class="section-number-4">4.4.5.</span> Hashing</h4>
+<div id="outline-container-orge7ca0e4" class="outline-4">
+<h4 id="orge7ca0e4"><span class="section-number-4">4.4.5.</span> Hashing</h4>
 <div class="outline-text-4" id="text-4-4-5">
 <ul class="org-ul">
 <li>En computacion, el termino funcion de hash casi siempre se refiere a una funcion criptografica.</li>
@@ -690,7 +711,7 @@ md5hasher.hexdigest()
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="org6d0ee18"></a>Resistencia de preimagen<br />
+<li><a id="orgff43c55"></a>Resistencia de preimagen<br />
 <div class="outline-text-5" id="text-4-4-5-1">
 <ul class="org-ul">
 <li>Una preimagen es el conjunto de entradas de una funcion de hash que producen, en el caso de par o impar, una preimagen son todos los numeros pares que den valor 0.</li>
@@ -711,7 +732,7 @@ md5hasher.hexdigest()
 </ul>
 </div>
 </li>
-<li><a id="orgb92381b"></a>Segunda resistencia de preimagen<br />
+<li><a id="orgdd5d8bd"></a>Segunda resistencia de preimagen<br />
 <div class="outline-text-5" id="text-4-4-5-2">
 <ul class="org-ul">
 <li>Si tu tienes al menos un documento que produce un hash conocido, sigue siendo muy dificil encontrar otro documento que produzca el mismo hash.</li>
@@ -719,7 +740,7 @@ md5hasher.hexdigest()
 </ul>
 </div>
 </li>
-<li><a id="orgbd0a6d2"></a>Resistencia a colisiones<br />
+<li><a id="orga24a15f"></a>Resistencia a colisiones<br />
 <div class="outline-text-5" id="text-4-4-5-3">
 <ul class="org-ul">
 <li>Significa que es dificil encontrar dos entradas que produzcan el mismo hash y garantiza que sea computacionalmente inviable encontrar dos entradas diferentes que produzcan el mismo valor hash.</li>
@@ -731,8 +752,8 @@ md5hasher.hexdigest()
 </li>
 </ol>
 </div>
-<div id="outline-container-org44cf3cb" class="outline-4">
-<h4 id="org44cf3cb"><span class="section-number-4">4.4.6.</span> Seguridad en funciones de hash</h4>
+<div id="outline-container-org65aa56f" class="outline-4">
+<h4 id="org65aa56f"><span class="section-number-4">4.4.6.</span> Seguridad en funciones de hash</h4>
 <div class="outline-text-4" id="text-4-4-6">
 <ul class="org-ul">
 <li>Hash es usado para el almacenamiento de passwords, pero siguen teniendo problemas de seguridad, el mas comun es la situacion donde dos usuarios usen la misma contrasena y por tanto, genere el mismo hash, existen muchas soluciones (A2F, Token fisico, etc) pero la mas recomendada es agregqar un salt.
@@ -748,15 +769,15 @@ salt = os.urandom(16)
 </div>
 </div>
 </div>
-<div id="outline-container-org74f50ad" class="outline-3">
-<h3 id="org74f50ad"><span class="section-number-3">4.5.</span> Cifrado simetrico</h3>
+<div id="outline-container-orgb1035ec" class="outline-3">
+<h3 id="orgb1035ec"><span class="section-number-3">4.5.</span> Cifrado simetrico</h3>
 <div class="outline-text-3" id="text-4-5">
 <ul class="org-ul">
 <li>Cifrado que usa la misma llave para cifrar y descifrar, la llave es un secreto compartido.</li>
 </ul>
 </div>
-<div id="outline-container-orgf5cdd80" class="outline-4">
-<h4 id="orgf5cdd80"><span class="section-number-4">4.5.1.</span> AES</h4>
+<div id="outline-container-org47ed7dd" class="outline-4">
+<h4 id="org47ed7dd"><span class="section-number-4">4.5.1.</span> AES</h4>
 <div class="outline-text-4" id="text-4-5-1">
 <ul class="org-ul">
 <li>Advanced Encryption Standard</li>
@@ -767,9 +788,9 @@ salt = os.urandom(16)
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="org67147b0"></a>Modos de operacion de AES<br />
+<li><a id="orga3feeff"></a>Modos de operacion de AES<br />
 <ol class="org-ol">
-<li><a id="org2392bda"></a>ECB - Electronic Code Book<br />
+<li><a id="orga152a08"></a>ECB - Electronic Code Book<br />
 <div class="outline-text-6" id="text-4-5-1-1-1">
 <ul class="org-ul">
 <li>Cualquier texto plano de 16 bytes tiene 16 bytes correspondientes de salida.</li>
@@ -781,7 +802,7 @@ salt = os.urandom(16)
 </ul>
 </div>
 </li>
-<li><a id="org5bba44b"></a>CBC - Cipher Block Chaining<br />
+<li><a id="orgbe8a130"></a>CBC - Cipher Block Chaining<br />
 <div class="outline-text-6" id="text-4-5-1-1-2">
 <ul class="org-ul">
 <li>Despues de cifrar el bloque aplicar una funcion XOR con el siguiente bloque en texto plano, el resultado se cifra y se guarda ese bloque. Para descifrar se tiene que invertir el proceso.</li>
@@ -793,7 +814,7 @@ salt = os.urandom(16)
 </ul>
 </div>
 </li>
-<li><a id="org5fc04f2"></a>CTR - Counter Mode<br />
+<li><a id="orgf504b91"></a>CTR - Counter Mode<br />
 <div class="outline-text-6" id="text-4-5-1-1-3">
 <ul class="org-ul">
 <li>No requiere de padding</li>
@@ -809,8 +830,8 @@ salt = os.urandom(16)
 </li>
 </ol>
 </div>
-<div id="outline-container-orged2558c" class="outline-4">
-<h4 id="orged2558c"><span class="section-number-4">4.5.2.</span> Seguridad en cifrado simetrico</h4>
+<div id="outline-container-org011bd62" class="outline-4">
+<h4 id="org011bd62"><span class="section-number-4">4.5.2.</span> Seguridad en cifrado simetrico</h4>
 <div class="outline-text-4" id="text-4-5-2">
 <ul class="org-ul">
 <li>Para tener un cifrado seguro y efectivo se necesita:
@@ -827,8 +848,8 @@ llave.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc046d6c" class="outline-3">
-<h3 id="orgc046d6c"><span class="section-number-3">4.6.</span> Cifrado asimetrico</h3>
+<div id="outline-container-org9bd4493" class="outline-3">
+<h3 id="org9bd4493"><span class="section-number-3">4.6.</span> Cifrado asimetrico</h3>
 <div class="outline-text-3" id="text-4-6">
 <ul class="org-ul">
 <li>Las tecnicas asimetricas son variadas, no se limitan solo a cifrado
@@ -840,7 +861,7 @@ llave.</li>
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="orgf3fe2fc"></a>Dos llaves<br />
+<li><a id="orgfa86710"></a>Dos llaves<br />
 <div class="outline-text-5" id="text-4-6-0-1">
 <ul class="org-ul">
 <li>Se necesitan dos llaves: una publica y otra privada
@@ -852,7 +873,7 @@ llave.</li>
 </ul>
 </div>
 </li>
-<li><a id="org9c084e9"></a>RSA<br />
+<li><a id="org521db4c"></a>RSA<br />
 <div class="outline-text-5" id="text-4-6-0-2">
 <ul class="org-ul">
 <li>RSA esta casi obsoleto, debido a multiples vulnerabilidades</li>
@@ -868,9 +889,10 @@ llave.</li>
 </div>
 </li>
 </ol>
-<div id="outline-container-orgd1bec73" class="outline-4">
-<h4 id="orgd1bec73"><span class="section-number-4">4.6.1.</span> Integridad de mensajes, firmas y certificados</h4>
-<div class="outline-text-4" id="text-4-6-1">
+</div>
+<div id="outline-container-org41a9c44" class="outline-3">
+<h3 id="org41a9c44"><span class="section-number-3">4.7.</span> Integridad de mensajes, firmas y certificados</h3>
+<div class="outline-text-3" id="text-4-7">
 <ul class="org-ul">
 <li>MACS</li>
 <li>Firmas digitales</li>
@@ -882,8 +904,8 @@ llave.</li>
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="orgf08d949"></a>Message Authentication Code (MAC)<br />
-<div class="outline-text-5" id="text-4-6-1-1">
+<li><a id="org0bcd4f0"></a>Message Authentication Code (MAC)<br />
+<div class="outline-text-5" id="text-4-7-0-1">
 <ul class="org-ul">
 <li>Un cifrado puede ser alterado de formas que tenga sentido.</li>
 <li>Un MAC es cualquier codigo o dato transmitido junto con el mensaje que puede ser evaluado para determinar si el mensaje fue alterado.</li>
@@ -891,8 +913,8 @@ llave.</li>
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="org1ac91fd"></a>MAC, HMAC, CBC-MAC<br />
-<div class="outline-text-6" id="text-4-6-1-1-1">
+<li><a id="orge2272ee"></a>MAC, HMAC, CBC-MAC<br />
+<div class="outline-text-6" id="text-4-7-0-1-1">
 <ul class="org-ul">
 <li>Un MAC seguro no solo es codigo (hash) tambien debe incluir una llave.</li>
 <li>Una llave MAC no esta relacionada con el cifrado</li>
@@ -904,14 +926,14 @@ llave.</li>
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="orgebe7ac1"></a>HMAC<br />
-<div class="outline-text-7" id="text-4-6-1-1-1-1">
+<li><a id="org01d7238"></a>HMAC<br />
+<div class="outline-text-7" id="text-4-7-0-1-1-1">
 <ul class="org-ul">
 <li>Hash-based Message Authentication Code</li>
 <li>Es basicamente un hash keyed</li>
 <li>Las funciones de hash son deterministas, dada la misma entrada siempre se produce la misma salida.</li>
 <li>Solo agregar al inicio o al final</li>
-<li>H(K XOR opad, H((K XOR ipad), text))
+<li>H(K XOR opad + H((K XOR ipad)+ text))
 <ul class="org-ul">
 <li>H es la funcion de hash</li>
 <li>K es la llave que debe de cumplir ciertos requisitos</li>
@@ -923,6 +945,7 @@ llave.</li>
 <li>Si K es mas largo que B, entonces K se reduce aplicando H a K, osea H(K)</li>
 <li>Si se aplico 2 y la llave quedo muy corta, entonces se aplica 1</li>
 </ol></li>
+<li>Si se aplica lo anterior, siempre se va a tener una llave de longitud B.</li>
 <li>ipad se define com el byte 0x36 repetido B veces</li>
 <li>opad es el byte 0x5c repetido B veces</li>
 <li>Los pads parecen arbitrarios pero tienen un sentido de seguridad matematico que ayuda a mitigar</li>
@@ -931,8 +954,8 @@ llave.</li>
 </ul>
 </div>
 </li>
-<li><a id="orgd1cadf0"></a>CBC-MAC<br />
-<div class="outline-text-7" id="text-4-6-1-1-1-2">
+<li><a id="org52d3157"></a>CBC-MAC<br />
+<div class="outline-text-7" id="text-4-7-0-1-1-2">
 <ul class="org-ul">
 <li>Similar a AES-CBC</li>
 <li>Recordar que CBC es Cipher Block Chaining</li>
@@ -941,18 +964,25 @@ llave.</li>
 <li>En notacion matematica un tag se denota a menudo como t</li>
 <li>Asi, un MAC sobre un mensaje m1 produce un tag t1</li>
 <li>El par (m1, t1) es transmitido al receptor para ser verificado</li>
+
+<li>AES solo puede cifrar 128 bits de bloque a la vez.</li>
+<li>AES-CBC encadena la salida de un bloque cifrado con el siguiente bloque.</li>
+<li>Si se altera uno se alteran todos los bloques siguientes.</li>
+<li>El ultimo bloque de CBC es en si un MAC.</li>
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="org20687eb"></a>MAC Prepend Attack<br />
-<div class="outline-text-8" id="text-4-6-1-1-1-2-1">
+<li><a id="orgca3293e"></a>MAC Prepend Attack<br />
+<div class="outline-text-8" id="text-4-7-0-1-1-2-1">
 <ul class="org-ul">
 <li>Es posible mandar un mensaje manipulado y hacer que parezca que es el mensaje M1 o M2, suponiendo que esten generados por la misma llave.</li>
+<li>M3 es una mezcla de M1 y M2.</li>
+<li>No es necesario conocer la llave de MAC.</li>
 </ul>
 </div>
 <ol class="org-ol">
-<li><a id="org8ccaf28"></a>Proceso de ataque, anteponiendo M1 a M2<br />
-<div class="outline-text-9" id="text-4-6-1-1-1-2-1-1">
+<li><a id="org4dab11b"></a>Proceso de ataque, anteponiendo M1 a M2<br />
+<div class="outline-text-9" id="text-4-7-0-1-1-2-1-1">
 <ul class="org-ul">
 <li>Recuperar el primer bloque de M2, denominado M21 (como es AES se toman los primeros 16 bytes)</li>
 <li>Recuperar el resto de bloques de M2, denominado M2r</li>
@@ -965,17 +995,129 @@ llave.</li>
 </ul>
 </div>
 </li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><a id="org7af8722"></a>Firmas digitales<br />
-<div class="outline-text-5" id="text-4-6-1-2">
+<li><a id="orgb6b9b61"></a>Soluciones<br />
+<div class="outline-text-9" id="text-4-7-0-1-1-2-1-2">
 <ul class="org-ul">
+<li>Agregar siempre la longitud del mensaje al inicio. Esto ayduara a corroborar si hay información extra.</li>
+<li>Si se cifraron los datos usando AES-CBC, no se debe usar la misma llave para cifrar ni para obtener el MAC.</li>
+<li>El IV debe ser diferente a un valor de cero.</li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a id="orgc50030d"></a>Cifrado y MAC<br />
+<div class="outline-text-6" id="text-4-7-0-1-2">
+<ul class="org-ul">
+<li>Encrypt-Then-MAC: El MAC se aplica al texto cifrado.</li>
+<li>MAC-Then-Encrypt: Se aplica al texto plano, luego se cifra el texto plano junto al MAC.</li>
+<li>Encrypt-And-Mac: Se aplica MAC sobre el texto plano, pero no se cifra el MAC, solo el texto plano.</li>
+
+<li>Recomendación: Siempre usar Encrypt-Then-MAC.</li>
+<li>El ataque de padding oraculo a CBC funciona en MAC-Then-Encrypt.</li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+<li><a id="org534e024"></a>Firmas digitales<br />
+<ol class="org-ol">
+<li><a id="org232b5a2"></a>RSA<br />
+<div class="outline-text-6" id="text-4-7-0-2-1">
+<ul class="org-ul">
+<li>Dado que los MAC usan llaves simetricas, si se compromete la llave puede ambos lados estan en riesgo de spoofing (usurpación de identidad).</li>
+<li>Las firmas intentan mitigarlo mediante criptografia asimetrica. Ya que nos existen llaves &ldquo;compartidas&rdquo;.</li>
+<li>La llave publica solo se puede descifrar con la llave privada y vise-versa.</li>
+<li>Si se cifra con la llave privada, puede ser descifrado por la llave publica.</li>
+
+<li>Autenticidad en reversa: El receptor no sabra de quien es el mensaje pero el emisor sabe que solo podra ser procesada por la entidad autorizada.</li>
+
+<li>Existen muchos problemas con el cifrado asimetrico (RSA), es ineficiente para archivos grandes, no viene comprobación de integridad y solo puede procesar archivos del tamaño de modulo (2048 bits).</li>
+
+<li>Para solucionar eso, se hace lo siguiente: Cifrar el hash del mensaje, dando tanto integridad como autenticidad.
+<ol class="org-ol">
+<li>Calcular el hash del mensaje.</li>
+<li>Cifrar el hash mediante la llave privada, este hash cifrado es la firma del emisor.</li>
+<li>El receptor calcula el hash del mensaje, descifra la firma mediante la llave publica y comprueba que coincidan ambos hashes.</li>
+</ol></li>
+
+<li>La firma debe de aplicarse siempre al texto plano, nunca al cifrado.</li>
+
+<li>El cifrado con la llave publica es confidencialidad.</li>
+<li>El cifrado con la llave privada es autenticidad.</li>
+
+<li>El padding para firmas RSA es PSS.</li>
+
+<li>Es comun usar tecnicas asimetricas al inicio de la comunicación para el establecimiento de confianza e intercambio de llaves simetricas. Despues todo el proceso se hace con llaves simetricas.</li>
+</ul>
+</div>
+</li>
+<li><a id="org0f4cfda"></a>Curvas Elipticas<br />
+<div class="outline-text-6" id="text-4-7-0-2-2">
+<ul class="org-ul">
+<li>Alternativa a RSA</li>
+<li>Se usa para firmas digitales y el intercambio de llaves.</li>
+<li>Se usa ECDSA para firmar.</li>
+<li>Parametros:
+<ul class="org-ul">
+<li>Tipo de curva (P-384 - SECP384r1)</li>
+</ul></li>
+</ul>
+</div>
+</li>
+<li><a id="org42c9f40"></a>Transporte de Llaves RSA<br />
+<div class="outline-text-6" id="text-4-7-0-2-3">
+<ol class="org-ol">
+<li>Alguna de las partes genera la llave simetrica. (probablemente el servidor)</li>
+<li>Se cifra la llave simetrica con una llave publica.</li>
+<li>La otra parte tiene una llave privada.</li>
+<li>Se transmite la llave cifrada y se descifra.</li>
+<li>Seguridad hacia delante (Forward Secrecy)</li>
+</ol>
+</div>
+</li>
+</ol>
+</li>
+<li><a id="orgc33a01b"></a>Certificados<br />
+<div class="outline-text-5" id="text-4-7-0-3">
+<ul class="org-ul">
+<li>Prueban la pertenencia de las llaves publicas.</li>
+
+<li>Modelo PKI (Public Key Infraestructure)
+<ul class="org-ul">
+<li>Un registro global donde se almacenaban las llaves publicas asociadas a una entidad.</li>
+<li>La llave publica se compartia.</li>
+<li>No era escalable.</li>
+</ul></li>
+
+<li>Un certificado solo son datos, incluyen:
+<ul class="org-ul">
+<li>Una llave publica</li>
+<li>Metadatos del propietario de la llave (identidad del propietario de la llave, identidad del issuer, fecha de expiración, numero de serie, etc)
+<ul class="org-ul">
+<li>La identidad del propietario puede ser un nombre, email, URL, etc.</li>
+</ul></li>
+<li>Firma digital sobre todo el contenido del certificado</li>
+<li>Firma por la entida de confianza (issuer)</li>
+</ul></li>
+
+<li>Se comparten los certificados en lugar de las llaves publicas.</li>
+<li>Una entidad quiere un certificado:
+<ol class="org-ol">
+<li>Genera su par de llaves</li>
+<li>La entidad de confianza recibe la llave publica y genera el certificado</li>
+<li>La entidad de confianza firma el certificado con su llave privada</li>
+</ol></li>
+
+<li>Para evitar que un agente malicioso use un certificado que no es suyo, se usa el proceso reto-respuesta (challenge-response).
+<ul class="org-ul">
+<li>Se basa en pedirle que firme un mensaje con la llave privada y verificarla con la llave publica del certificado. Si coincide, entonces si puedes confiar.</li>
+</ul></li>
+
 <li>Protocolo reto-respuesta
 <ol class="org-ol">
 <li>El cliente recibe la llave publica del servidor (certificado).</li>
@@ -984,17 +1126,546 @@ llave.</li>
 <li>El servidor firma el dato y regresa la firma.</li>
 <li>El cliente comprueba la firma con la llave publica.</li>
 </ol></li>
+
+<li>Quien firma es quien quiere ser autenticado</li>
+<li>Siempre se firma con la llave privada</li>
+<li>Se verifica la firma con la llave publica</li>
+
+<li>La firma tiene dos propiedades de seguridad
+<ul class="org-ul">
+<li>Integridad</li>
+<li>Autenticidad</li>
+</ul></li>
+
+<li>Al issuer se le llama Certificate Authority (CA)
+<ul class="org-ul">
+<li>Estos tambien tienen sus propios certificados con nombre de identidad y su llave publica.</li>
+</ul></li>
+
+<li>Certificados:
+<ul class="org-ul">
+<li>Metadatos del propietario (subject)</li>
+<li>Metadatos de la propiedad de confianza (CA/issuer)</li>
+<li>Llave publica</li>
+<li>Firma del CA</li>
+</ul></li>
+
+<li>El certificado no tiene nada que ver con el cifrado, ni con la protección del canal en general.</li>
+<li>El certificado no se usa directamente para autenticar, eso se hace con firmas digitales.</li>
+<li>El certificado solo es un mecanismo para confiar en la llave publica</li>
+
+<li>Criptografia asimetrica
+<ul class="org-ul">
+<li>Firmas digitales</li>
+<li>Intercambios de llaves</li>
+</ul></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orga951697"></a>Revocación de certificados<br />
+<div class="outline-text-6" id="text-4-7-0-3-1">
+<ul class="org-ul">
+<li>Si la llave privada de un certificado creado por un CA es comprometido, el CA debe hacer saber a los demas que ya no es confiable.</li>
+
+<li>Dado que no se puede tener un sistema offline de revocación, existen dos alternativas:
+<ul class="org-ul">
+<li>Tener un componente en tiempo real</li>
+<li>No se puede actualizar en tiempo real</li>
+</ul></li>
+
+<li>Un ejemplo es OCSP (Online Certificate Status Protocol)
+<ul class="org-ul">
+<li>Revisa el estatus del certificado en tiempo real</li>
+<li>Tambien revisa CRL&rsquo;s (listas de certificados revocados)</li>
+</ul></li>
+
+<li>La recomendación final siempre sera proteger las llaves privadas, de preferencia en un lugar offline y/o con permisos minimos con un cifrado adicional.</li>
+<li>Los certificados deben tener un tiempo de vida relativamente corto.</li>
+</ul>
+</div>
+</li>
+<li><a id="orgf94e818"></a>Ataques de repetición<br />
+<div class="outline-text-6" id="text-4-7-0-3-2">
+<ul class="org-ul">
+<li>Un mensaje legitimo es utilizado por un atacante tiempo despues cuando el mensaje ya no es valido.</li>
+
+<li>Soluciones:
+<ul class="org-ul">
+<li>Se agrega un nonce (numero aleatorio) para hacer seguimiento de mensajes recibidos.</li>
+<li>Usar timestamp (fecha del mensaje) para rechazar mensajes demasiados viejos. Aunque es necesario una ventana de tiempo para lidiar con retrasos.</li>
+<li>Combinar timestamp y nonces aleatorios, rechazar mensajes muy viejos ademas que tengan el nonce repetidos dentro de la ventana de tiempo permitida.</li>
+</ul></li>
+</ul>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<div id="outline-container-org04b5583" class="outline-3">
+<h3 id="org04b5583"><span class="section-number-3">4.8.</span> Combinación de metodos simetricos con asimetricos</h3>
+<div class="outline-text-3" id="text-4-8">
+<ul class="org-ul">
+<li>Intercambio de llaves (simetricas)</li>
+<li>RSA cifra llaves AES compartidas en la comunicación</li>
+</ul>
+</div>
+<div id="outline-container-orgd25bb51" class="outline-4">
+<h4 id="orgd25bb51"><span class="section-number-4">4.8.1.</span> Agree Upon Transmission</h4>
+<div class="outline-text-4" id="text-4-8-1">
+<ul class="org-ul">
+<li>Transmite un solo flujo de bytes con todos los datos necesarios concatenados</li>
+<li>Sirve para transferir un solo mensaje</li>
+<li>Tienes: llaves<sub>aes</sub>, llave<sub>mac</sub>, iv cifradas con la llave publica</li>
+<li>Llave publica del receptor (viene con el certificado)</li>
+<li>Cifras las llaves con la llave publica (RSA)</li>
+<li>Firmar llaves planas</li>
+<li>Cifras el mensaje con la llave<sub>aes</sub> e IV</li>
+<li>Calcular el HMAC sobre todos los datos</li>
+<li>De sesiones cortas</li>
+<li>Es practico para mensajes largos</li>
+
+<li>Llave AES, IV y llave MAC cifradas con la llave publica del receptor</li>
+<li>La firma digital sobre la concatenación (no cifrada) de la llave AES, IV y llave MAC.</li>
+<li>Los bytes del mensaje transmitido, cifrados con la llave AES e IV.</li>
+<li>El HMAC sobre la transmisión utilizando la llave MAC.</li>
+
+<li>Descifra mediante su llave privada, obtiene la llave AES, IV y MAC</li>
+<li>Verifica la firma digital, mediante el certificado del emisor.</li>
+<li>Calcula HMAC de 1, 2 y 3 con la llave MAC y lo compara con 4.</li>
+<li>Descifra 3 mediante la llave AES y el IV.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2553cf9" class="outline-4">
+<h4 id="org2553cf9"><span class="section-number-4">4.8.2.</span> Llaves de sesión</h4>
+<div class="outline-text-4" id="text-4-8-2">
+<ul class="org-ul">
+<li>Se usa una sola vez y se descarta permanentemente, es decir, son efimeras.</li>
+<li>Llaves para el cifrado en masa</li>
+<li>CIfrado en masa: Se cifra una gran cantidad de datos.</li>
+<li>Payload: cargo util</li>
+<li>Son faciles de crear</li>
+<li>Se pueden derivar de un secreto base usando funciones de derivación de llaves.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgde591a8" class="outline-4">
+<h4 id="orgde591a8"><span class="section-number-4">4.8.3.</span> Diffie-Hellman DH</h4>
+<div class="outline-text-4" id="text-4-8-3">
+<ul class="org-ul">
+<li>Criptografia asimetrica</li>
+<li>Una variante es con curvas elipticas ECDH</li>
+<li>Intercambia parametros publicos para computar simultaneamente la misma llave en ambos lados, esto se llama Key Agreement</li>
+
+<li>Primero crea un par de numeros matematicos, uno privado y publico. Esto para cada participante.</li>
+<li>Ambas partes intercambian sus numeros publicos.</li>
+<li>Con el numero publico externo y el numero privado local se genera la misma llave compartida en ambos lados.</li>
+
+<li>El resultado es una llave simetrica o un dato que permite derivar una llave simetrica.</li>
+<li>Requiere comunicación bidireccional.</li>
+<li>Los parametros de DH deben ser iguales
+<ul class="org-ul">
+<li>Tamaño de la llave (2048)</li>
+<li>Generador (2, 5)</li>
+</ul></li>
+
+<li>Se recomienda usar HKDF para derivar la llave</li>
+<li>DH no tiene autenticación integrada</li>
+<li>Una o ambas partes deben de firmar publicos intercambiados.</li>
+
+<li>Son preferiables para el transporte de llaves antes que RSA.</li>
+<li>Principalmente porque ofrecen &ldquo;Confidencialidad hacia delante&rdquo; (Forward Secrecy) dada la naturaleza de las llaves efimeras, si una llave es comprometida, no se revela nada acerca de comunicaciones previas.</li>
+
+<li>A veces para establecer un canal de confianza necesitas transmitir datos con poca protección (pueden ser manipulados)</li>
+<li>Eventualmente se llega a tener un canal que se cree protegido (ya se hizo bien el intercambio de llaves)</li>
+<li>Mientras tanto se fueron calculando hashes de todos lo que se transmitio</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org3c75e95"></a>Autenticación con DH y ECDH<br />
+<div class="outline-text-5" id="text-4-8-3-1">
+<ul class="org-ul">
+<li>El intercambio de llaves requiere una llave publica RSA o ECDSA, con su certificado firmado. Se usan para establecer identidad de cada parte, firmando info efimera durante el proceso de generación.</li>
+<li>Ademas se agrega challenge-response.</li>
 </ul>
 </div>
 </li>
 </ol>
 </div>
+<div id="outline-container-org2d7df4a" class="outline-4">
+<h4 id="org2d7df4a"><span class="section-number-4">4.8.4.</span> Protocolo Reto-Respuesta</h4>
+<div class="outline-text-4" id="text-4-8-4">
+<ul class="org-ul">
+<li>&ldquo;Yo te envío un reto aleatorio. Si puedes responder correctamente, demuestras que posees la llave privada.&rdquo;</li>
+
+<li>Paso 1: Alice envía su certificado
+<ul class="org-ul">
+<li>Alice → Bob</li>
+<li>El certificado contiene:
+<ul class="org-ul">
+<li>Nombre Alice</li>
+<li>Llave pública Alice</li>
+<li>Firma del CA</li>
+</ul></li>
+
+<li>Bob verifica:
+<ul class="org-ul">
+<li>Certificado válido</li>
+<li>No expirado</li>
+<li>Firmado por una CA confiable</li>
+</ul></li>
+</ul></li>
+
+<li>Paso 2: Bob genera un reto
+<ul class="org-ul">
+<li>Bob crea un número aleatorio:</li>
+<li>Reto (Nonce) = 93741852 (Porque debe ser imposible predecirlo.)</li>
+</ul></li>
+
+<li>Paso 3: Bob envía el reto
+<ul class="org-ul">
+<li>Bob → Alice (93741852)</li>
+</ul></li>
+
+<li>Paso 4: Alice firma el reto
+<ul class="org-ul">
+<li>Alice calcula: Firma = Sign(93741852) usando la llave privada de Alice.</li>
+<li>Con RSA: Firma = Reto<sup>d</sup> mod n</li>
+</ul></li>
+
+<li>Paso 5: Alice responde
+<ul class="org-ul">
+<li>Alice → Bob (Firma)</li>
+</ul></li>
+
+<li>Paso 6: Bob verifica
+<ul class="org-ul">
+<li>Bob utiliza: Llave pública de Alice obtenida del certificado.</li>
+<li>Verifica: Verify(Firma, Reto)
+<ul class="org-ul">
+<li>Si la verificación es correcta: Sólo alguien con la llave privada pudo generar esa firma.</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5184628" class="outline-4">
+<h4 id="org5184628"><span class="section-number-4">4.8.5.</span> Ramsonware</h4>
+<div class="outline-text-4" id="text-4-8-5">
+<ul class="org-ul">
+<li>Software que cifra archivos y se rehusa a liberarlos hasta que le pagues al extorsionador que esta detras de todo.</li>
+
+<li>El atacante genera dos llaves permanentes.</li>
+<li>El atacante hardcodea la llave publica permanente en el ramsonware</li>
+<li>Cuando el malware se activa se crean un par de llaves locales</li>
+<li>Se cifra la llave privada local con la llave publica permanente y se elimina la versión plana.</li>
+<li>El malware cifra los archivos usando AES, cada archivo cifrado tiene una llave diferente que es cifrada con la llave publica local, solo pueden ser descifradas por la llave privada local.</li>
+<li>Cuando se haga el pago, el malware envia la llave privada local cifrada al servidor CC</li>
+<li>Con la llave privada permanente se descifra la llave privada local y se reenvia a la victima</li>
+<li>Ahora se pueden descifrar las llaves AES.</li>
+<li>La llave privada permanente nunca es revelada.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org1ad4b4b" class="outline-3">
+<h3 id="org1ad4b4b"><span class="section-number-3">4.9.</span> Cifrado simetrico avanzado</h3>
+<div class="outline-text-3" id="text-4-9">
+</div>
+<div id="outline-container-org2024ad2" class="outline-4">
+<h4 id="org2024ad2"><span class="section-number-4">4.9.1.</span> Cifrado autenticado con datos adicionales (AEAD)</h4>
+<div class="outline-text-4" id="text-4-9-1">
+<ul class="org-ul">
+<li>Authenticated Encryption with Aditional Data</li>
+<li>Proveen autenticidad, integridad y confidencialidad.</li>
+<li>Reemplazan a los MAC&rsquo;s</li>
+<li>Es mejor usar AEAD antes que los MAC</li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="org12d92c0"></a>AES-GCM (Galois/Counter Mode)<br />
+<div class="outline-text-5" id="text-4-9-1-1">
+<ul class="org-ul">
+<li>Permite cifrar y autenticar con una sola llave</li>
+<li>IV de tamano de 12 bytes</li>
+<li>No usa padding</li>
+<li>Recomendable usar junto a Scrypt o HDKF</li>
+<li>Datos adicionales no se cifran pero deben de autenticarse mediante la llave derivada.</li>
+<li>Al terminar el proceso se obtiene un tag.</li>
+
+<li>No usar IV 0</li>
+<li>Segementar lo que transmites</li>
+<li>Un IV difeente para cada segmento</li>
+<li>No transmitir mas de 64 gb con la misma llave</li>
+<li>No usar el mismo par de llave e IV (nonce)</li>
+
+<li>GCM usa IV&rsquo;s de 12 bytes, a los 4 bytes restantes se les agrega un padding de ceros, para tener un contador de 16 bytes.</li>
+</ul>
+</div>
+</li>
+<li><a id="orge16b7b5"></a>AES-CCM<br />
+<div class="outline-text-5" id="text-4-9-1-2">
+<ul class="org-ul">
+<li>Basado en CBC</li>
+<li>Tag computado similar a CBC-MAC</li>
+<li>IV de entre 7 a 13 bytes</li>
+<li>Puede cifrar datos mayores a 64 GB</li>
+<li>No es tan eficiente como GCM</li>
+</ul>
+</div>
+</li>
+<li><a id="org05ae61e"></a>Chacha20-Poly1305<br />
+<div class="outline-text-5" id="text-4-9-1-3">
+<ul class="org-ul">
+<li>Combina un cifrador de flujo (ChaCha20) con un algoritmo de MAC (Poly1305)</li>
+<li>No se han encontrado vulnerabilidades en este algoritmo</li>
+<li>Suele ser mas rapido que AES</li>
+<li>Es verdaderamente de flujo</li>
+<li>Usa un IV de 12 bytes.</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-orgd5cc200" class="outline-4">
+<h4 id="orgd5cc200"><span class="section-number-4">4.9.2.</span> Kerberos</h4>
+<div class="outline-text-4" id="text-4-9-2">
+<ul class="org-ul">
+<li>Es un protocolo muy conocido basado en cifrado simetrico para autenticación.</li>
+<li>Es un intermediario entre dos entidades que se desean comunicar siendo un tercero de confianza.</li>
+<li>Si el cliente se autentica primero al servicio de Kerberos, le permite el acceso a los servicios que esten conectados a Kerberos</li>
+<li>Componentes basicos:
+<ul class="org-ul">
+<li>Servicio de autenticación</li>
+<li>Servidor de tickets</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-org6232623" class="outline-3">
+<h3 id="org6232623"><span class="section-number-3">4.10.</span> TLS</h3>
+<div class="outline-text-3" id="text-4-10">
+<ul class="org-ul">
+<li>HTTPS basicamente encapsula trafico HTTP dentro de TLS.</li>
+<li>TLS permite a un cliente verificar la identidad de un servidor y establecer una sesion segura y mantener llaves compartidas de cifrado.</li>
+<li>Las llaves se mantienen secretas incluso si un atacante intercepta el trafico.</li>
+<li>Usa PKI</li>
+<li>Si una entidad quiere TLS requiere de un certificado X.509</li>
+</ul>
+</div>
+<div id="outline-container-orgcf9220f" class="outline-4">
+<h4 id="orgcf9220f"><span class="section-number-4">4.10.1.</span> Certificados X.509</h4>
+<div class="outline-text-4" id="text-4-10-1">
+<ul class="org-ul">
+<li>Su proposito es ligar la identidad de un subject a una llave publica bajo la firma de un issuer.</li>
+
+<li>Tiene 3 posibles campos, pueden tener varios niveles de sub-campos.
+<ul class="org-ul">
+<li>Certificate
+<ul class="org-ul">
+<li>(a) Version Number</li>
+<li>(b) Serial Number</li>
+<li>(c) Signature Algorithm ID</li>
+<li>(d) Issuer Name (describe la identidad pretendida)</li>
+<li>(e) Validity Period
+<ul class="org-ul">
+<li>i. Not Before</li>
+<li>ii. Not After</li>
+</ul></li>
+<li>(f) Subject Name (describe la identidad pretendida)</li>
+<li>(g) Subject Public Key Info
+<ul class="org-ul">
+<li>i. Public Key Algorithm</li>
+<li>ii. Subject Public Key</li>
+</ul></li>
+<li>(h) Issuer Unique Identifier (optional)</li>
+<li>(i) Subject Unique Identifier (optional)</li>
+<li>(j) Extensions (optional)</li>
+</ul></li>
+<li>Certificate Signature Algorithm</li>
+<li>Certificate Signature</li>
+</ul></li>
+
+<li>La version 3: Incluye el campo adicional &ldquo;Subject Alternative Name&rdquo;</li>
+<li>Una vez identificados el issuer y el subject, los campos restantes son la llave pública del subject y la firma del contenido del certificado.</li>
+<li>Los certificados vienen firmados por un issuer.</li>
+<li>Si quiero comprobar un certificado tambien necesito el certificado del issuer (la llave publica del issuer).</li>
+<li>Se necesita una cadena de certificados, hasta llegar al certificado raiz (autofirmado).</li>
+<li>Si quieres engañar a alguien para entrar a un sitio web falso que necesitas?
+<ul class="org-ul">
+<li>Sitio web con dominio casi igual.
+<ul class="org-ul">
+<li>IDS/IPS</li>
+<li>Educar al usuario</li>
+</ul></li>
+</ul></li>
+
+<li>Si alguien quiere tener un certificado, necesita un Certificate Signing Request (CSR) y enviarselo al CA. Esta peticion tiene todos los campos que un certificado X.509 solo que sin los campos del issuer.</li>
+<li>El CA usa su porpio certificado y llave privada para generar el certificado con los campos faltantes. El issuer del certificado debe ser igual al campo de subject del certificado de quien firma.</li>
+<li>Cuando los campos son rellenados el CA firma el certificado con su llave privada.</li>
+<li>El CSR solo tiene la llave publica.</li>
+<li>Los certificados estan en formato DER o PEM.</li>
+<li>Prueba de posesion: El CSR esta firmado por la llave privada del subject.</li>
+<li>En un certificado auto-firmado el subjec e issuer son iguales.</li>
+
+<li>Generar una llave privada (2048 bits) y el CSR (durante su creacion se extrae la llave publica y se agrega a la peticion).</li>
+<li>El issuer genera el certificado firmandolo con su llave</li>
+<li>Con este certificado se pueden firmar nuevos certificados.</li>
+<li>Para los nuevos certificados se deben de crean sus respectivas llaves.</li>
+<li>Con los certificados del CA, se pueden generar certificados asociados a los nuevos CSR.</li>
+
+<li>Envenenamiento de DNS
+<ul class="org-ul">
+<li>Solo funciona si usas http o si se tiene una llave privada asociada a la cadena de certificados.
+<ul class="org-ul">
+<li>Se mitiga para http con redireccion hacia https</li>
+</ul></li>
+<li>Por que no funciona con https?
+<ul class="org-ul">
+<li>Por la comprobación de certificados</li>
+</ul></li>
+</ul></li>
+
+<li>Yo tengo un certificado</li>
+<li>Como lo avala un tercero?</li>
+<li>Una cosa es que se compruebe que la entidad es la propietaria verdadera del certificado</li>
+<li>Y otra es que el certificado sea confiable.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf04c94e" class="outline-4">
+<h4 id="orgf04c94e"><span class="section-number-4">4.10.2.</span> TLS 1.2</h4>
+<div class="outline-text-4" id="text-4-10-2">
+</div>
+<ol class="org-ol">
+<li><a id="org78356a7"></a>Handshake<br />
+<div class="outline-text-5" id="text-4-10-2-1">
+<ol class="org-ol">
+<li>Comienza con un cliente enviando un mensaje hello al servidor. Este mensaje contiene info de configuración, tipo nonce. Tambien esta la lista de Cipher Suites.
+<ul class="org-ul">
+<li>El objetivo es ponerse de acuerdo en cuanto al algoritmo y protocolos criptograficos a usar. La Cipher Suite da opciones.</li>
+<li>La seguridad depende del Cipher Suite usado.</li>
+</ul></li>
+<li>El servidor recibe un hello cliente, escoge uno de los cipher suites propuestos del cliente. Cuando escoge uno, envia una respuesta con la siguiente info:
+<ul class="org-ul">
+<li>Hello con nonce</li>
+<li>Certificado</li>
+<li>Intercambio de llaves DHE O ECDHE</li>
+</ul></li>
+<li>El cliente hace el proceso como auntenticar al servidor, derivar la llave y empezar a enviar datos cifrados.</li>
+
+<li>TLS solo autentica el servidor, el cliente no envia un certificado para autenticarse.</li>
+<li>Una sesión puede tener varias llaves simetricas.
+<ul class="org-ul">
+<li>Confidencialidad (transporte en si)
+<ul class="org-ul">
+<li>Llave emisor-receptor</li>
+<li>Llave receptor-emisor</li>
+</ul></li>
+<li>Autenticación/Integridad (MAC)
+<ul class="org-ul">
+<li>Llave emisor-receptor</li>
+<li>Llave receptor-emisor</li>
+</ul></li>
+</ul></li>
+
+<li>Con DH o transporte RSA generas un PMS, que permite generar un master secret.
+<ul class="org-ul">
+<li>Con el PMS puedes tener un generador de llaves</li>
+
+<li>Intercambiar hellos (nonces, certificados, lista de cipher suits)</li>
+<li>Negociación de cihper suites</li>
+<li>Autenticacion</li>
+<li>Intercambio/derivación de llaves</li>
+<li>ChangeCipherspec</li>
+<li>Finish (comprobación de hash)</li>
+</ul></li>
+
+<li>Handshake TLS
+<ul class="org-ul">
+<li>Establecer identidad</li>
+<li>Establecer llaves de sesion
+<ul class="org-ul">
+<li>DH</li>
+<li>Transporte de llaves RSA</li>
+</ul></li>
+</ul></li>
+
+<li>Transferencia en masa (bulk):
+<ul class="org-ul">
+<li>Se transfieren los datos de interes (payload)</li>
+<li>Esa transferencia se hace con metodos simetricos.</li>
+</ul></li>
+
+<li>Http
+<ul class="org-ul">
+<li>Es un protocolo peticion-respuesta</li>
+<li>La cantidad de interacciones peticion-respuesta hay una sesion http es de una por sesion.</li>
+</ul></li>
+
+<li>MiM en TLS
+<ul class="org-ul">
+<li>Cliente manda su hello que incluye la lista de cipher suite soportados</li>
+<li>Un tercero altera la lista de cipher suits dejando solo las debiles</li>
+<li>La forma de mitigacion es verificar el finished del handshake el hash de todo lo que se ha transmitido.</li>
+
+<li>Verificar certificados</li>
+<li>Verificar identidad -&gt; reto-respuesta</li>
+</ul></li>
+
+<li>La criptografia es segura siempre y cuando no se comprometan los secretos</li>
+<li>Tiempo promedio para detectar una brecha es de 6 meses a 1 year</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org89ecdac" class="outline-4">
+<h4 id="org89ecdac"><span class="section-number-4">4.10.3.</span> Ventajas de TLS 1.3</h4>
+<div class="outline-text-4" id="text-4-10-3">
+<ul class="org-ul">
+<li>No tiene ciphersuits debiles
+<ul class="org-ul">
+<li>Nada con RSA -&gt; transporte RSA</li>
+<li>Solo AEAD</li>
+</ul></li>
+<li>Menor latencia</li>
+
+<li>Heartbeats (latido): En un sistema distribuido no puedes saber si un nodo esta activo o inactivo, solo puedes comprobarlo haciendo una petición, el heartbeat es una forma de comprobar si un nodo sigue activo cada x tiempo.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb1aab6e" class="outline-3">
+<h3 id="orgb1aab6e"><span class="section-number-3">4.11.</span> Proyecto final</h3>
+<div class="outline-text-3" id="text-4-11">
+<ul class="org-ul">
+<li>Versión 1
+<ul class="org-ul">
+<li>Hacer una aplicación que le permita a un cliente subir o descargar archivos de manera segura.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org41f167a" class="outline-3">
+<h3 id="org41f167a"><span class="section-number-3">4.12.</span> Examen</h3>
+<div class="outline-text-3" id="text-4-12">
+<ul class="org-ul">
+<li>MACS, Firmas digitales, Certificados</li>
+<li>DH y transporte de RSA (cifrado hibrido)</li>
+<li>Cifrado simetrico AEAD</li>
+<li>TLS (versiones, handshake)</li>
+<li>Tareas/Proyectos</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Abraham Nunez</p>
-<p class="date">Created: 2026-04-15 mié 01:10</p>
+<p class="author">Author: Abraham Nuñez</p>
+<p class="date">Created: 2026-06-02 mar 17:24</p>
 </div>
 </body>
 </html>
