@@ -46,14 +46,16 @@ function initForm() {
     if (!ok) {
       e.preventDefault();
       var first = form.querySelector('.is-invalid');
-      if (first) first.scrollIntoView({behavior: 'smooth', block: 'center'});
-    } else {
-      var btn = document.getElementById('btnSubmit');
-      var sp = document.getElementById('loadingSpinner');
-      if (btn) btn.disabled = true;
-      if (sp) sp.classList.remove('d-none');
-    }
-  });
+      if (first) {
+        first.scrollIntoView({
+          behavior: 'smooth', block: 'center'
+      });
+  }} 
+  else {
+    e.preventDefault();
+    enviarFormularioAjax(form);
+  }
+});
 
   var inputs = form.querySelectorAll('input, select, textarea');
   for (var j = 0; j < inputs.length; j++) {
@@ -61,6 +63,71 @@ function initForm() {
       this.classList.remove('is-invalid');
     });
   }
+}
+
+async function enviarFormularioAjax(form) {
+  var btn = document.getElementById('btnSubmit');
+  var spinner = document.getElementById('loadingSpinner');
+
+  try {
+    if (btn) btn.disabled = true;
+    if (spinner) spinner.classList.remove('d-none');
+    var formData = new FormData(form);
+    const response = await fetch('/solicitud', {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      },
+      body: formData
+    });
+
+    const resultado = await response.json();
+    if (!response.ok || !resultado.success) {
+      throw resultado;
+    }
+
+    mostrarMensaje(
+      'Solicitud enviada correctamente. Folio #' + resultado.id,
+      'success'
+    );
+
+    form.reset();
+  } catch (error) {
+    if (error.errores) {
+      mostrarMensaje(
+        error.errores.join('<br>'),
+        'danger'
+      );
+
+    } else {
+      mostrarMensaje(
+        'Error al enviar la solicitud.',
+        'danger'
+      );
+    }
+  } finally {
+    if (btn) btn.disabled = false;
+    if (spinner) spinner.classList.add('d-none');
+  }
+}
+
+function mostrarMensaje(texto, tipo) {
+  var anterior = document.getElementById('mensajeAjax');
+
+  if (anterior) {
+      anterior.remove();
+  }
+
+  var div = document.createElement('div');
+  div.id = 'mensajeAjax';
+  div.className = 'alert alert-' + tipo + ' mt-3';
+  div.innerHTML = texto;
+  var form = document.getElementById('solicitudForm');
+  form.prepend(div);
+
+  setTimeout(function() {
+      div.remove();
+  }, 5000);
 }
 
 function selectService(id) {
@@ -187,4 +254,71 @@ function fmt(ds) {
   if (!ds) return '-';
   var d = new Date(ds);
   return d.toLocaleDateString('es-MX', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const contenedor = document.getElementById('ajaxServicios');
+  if (contenedor) {
+    cargarServicios();
+  }
+});
+
+async function cargarServicios() {
+  try {
+    const response =
+      await fetch('/api/servicios');
+
+    if (!response.ok) {
+      throw new Error();
+    }
+
+    const resultado = await response.json();
+
+    const contenedor = document.getElementById('ajaxServicios');
+
+    contenedor.innerHTML = '';
+
+    resultado.data.forEach(s => {
+
+      contenedor.innerHTML += `
+        <div class="col-md-6 col-lg-4">
+          <article class="card service-card h-100">
+            <div class="card-body">
+
+              <span class="badge category-badge mb-2">
+                ${s.categoria_nombre || 'Servicio'}
+              </span>
+
+              <h5 class="card-title fw-bold">
+                ${s.nombre}
+              </h5>
+
+              <p class="card-text">
+                ${s.descripcion}
+              </p>
+
+              <a
+                href="/contacto"
+                class="btn btn-primary btn-sm">
+                Solicitar
+              </a>
+
+            </div>
+          </article>
+        </div>
+      `;
+
+    });
+
+  } catch (error) {
+
+    console.error(error);
+    document.getElementById(
+      'ajaxServicios'
+    ).innerHTML = `
+      <div class="alert alert-danger">
+        No fue posible cargar los servicios.
+      </div>
+    `;
+  }
 }

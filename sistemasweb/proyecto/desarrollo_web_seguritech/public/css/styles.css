@@ -1,5 +1,49 @@
 /* === SEGURITECH - CSS Simple === */
 
+:root{
+  --navy:#0C2340;
+  --blue:#1565C0;
+  --green:#00C2A0;
+  --gray:#F4F6F9;
+  --light:#E8F0FE;
+}
+
+.custom-navbar{
+  background: var(--navy);
+}
+
+.hero-section{
+  background: linear-gradient(135deg, var(--navy), var(--blue)
+  );
+
+  color:white;
+  padding:140px 20px;
+}
+
+.service-card{
+  background: var(--light);
+  border:none;
+  transition:.3s;
+}
+
+.service-card:hover{
+  transform: translateY(-8px);
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.category-badge{
+  background:var(--green);
+  color:white;
+}
+
+.mission-card{
+  border-left:5px solid var(--blue);
+}
+
+.vision-card{
+  border-left:5px solid var(--green);
+}
+
 body {
   padding-top: 56px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
