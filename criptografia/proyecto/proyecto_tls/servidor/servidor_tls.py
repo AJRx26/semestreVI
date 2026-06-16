@@ -35,15 +35,18 @@ def autenticar_usuario(cliente_sock):
         # Leer mensaje del cliente
         credenciales = utils.leer_mensaje(cliente_sock).decode('utf-8')
         usuario, password = credenciales.split(':', 1)
-        password_hash = hashlib.sha512(password.encode()).hexdigest() # Hash SHA-512 de la contraseña para comparar
+        #password_hash = hashlib.sha512(password.encode()).hexdigest() # Hash SHA-512 de la contraseña para comparar
 
         # Buscar en la base de usuarios locales
         with open("usuarios.txt", "r", encoding="utf-8") as f:
             for linea in f:
-                user, hashp = linea.strip().split(':', 1)
-                if usuario == user and password_hash == hashp:
-                    utils.mandar_mensaje(cliente_sock, b"OK")
-                    return True
+                user, salt, hashp = linea.strip().split(':', 2)
+                if usuario == user:
+                    if utils.hashear_password(password, salt) == hashp:
+                        utils.mandar_mensaje(cliente_sock, b"OK")
+                        return True
+                    break
+                
 
         # No se encontró coincidencia
         utils.mandar_mensaje(cliente_sock, b"ERROR")
@@ -171,7 +174,7 @@ if __name__ == '__main__':
             # cierra conexión con el cliente específico
             cliente.close()
             print("Conexión con cliente cerrada.")
-            
+
     except Exception as e:
         print(f"Error aceptando conexión: {e}")
 

@@ -84,25 +84,29 @@ def autenticar_usuario(cliente_sock, llave_sesion_recibir, llave_sesion_enviar):
         ).decode('utf-8')
 
         usuario, password = credenciales.split(':', 1)
-        password_hash = hashlib.sha512(password.encode()).hexdigest() # genera hash de la contraseña
 
         with open("usuarios.txt", "r", encoding="utf-8") as f:
             for linea in f:
-                user, hashp = linea.strip().split(':', 1)
-                if usuario == user and password_hash == hashp: # si ambas son verdaderas, usuario válido
-                    utils.mandar_mensaje(
-                        cliente_sock,
-                        # envía OK con la llave envíar 
-                        utils.cifrar(llave_sesion_enviar, b"OK", int(time.time())) # time -> generar el timestamp
-                    )
-                    return True
+                user, salt, hashp = linea.strip().split(':', 2)  # ahora son 3 campos user:salt:hash
+                if usuario == user:
+                    if utils.hashear_password(password, salt) == hashp: # genera hash del salt + contraseña y la comapra con el hash en usuarios.txr
+                        utils.mandar_mensaje(
+                            cliente_sock,
+                            # envía OK con la llave envíar
+                            utils.cifrar(llave_sesion_enviar, b"OK", int(time.time())) # time -> generar el timestamp
+                        )
+                        return True
 
+                    # Si el usuario existe pero el password es incorrecto, se manda un mensaje de error
+                    break
+
+        #si no hay coincidencias en usuarios.txt
         utils.mandar_mensaje(
             cliente_sock,
             utils.cifrar(llave_sesion_enviar, b"ERROR", int(time.time()))
         )
         return False
-
+    
     except Exception as e:
         print(f"Error autenticando: {e}")
         try:
@@ -111,9 +115,9 @@ def autenticar_usuario(cliente_sock, llave_sesion_recibir, llave_sesion_enviar):
                 utils.cifrar(llave_sesion_enviar, b"ERROR", int(time.time()))
             )
         except:
-            pass
+            pass #se cierra la conexion
         return False
-        
+
 
 # --- FASE 4 - FASE 5: OPERACIONES DE REPOSITORIO (CIFRADO DE FLUJO) y CIERRE -----------------------------------
 

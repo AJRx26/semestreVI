@@ -13,6 +13,8 @@ from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 import os
 import time
+import hashlib
+import os
 
 
 def _recibir_exacto(sock, n):
@@ -160,3 +162,13 @@ def descifrar(llave, paquete):
         raise Exception("El segmento ha caducado (más de 2 horas)")
     
     return datos
+
+def generar_salt():
+    """Genera un salt aleatorio de 32 bytes en hexadecimal."""
+    return os.urandom(32).hex()
+
+def hashear_password(password, salt):
+    """Aplica SHA-512 con salt a una contraseña."""
+    #salt + password
+    return hashlib.sha512((salt + password).encode()).hexdigest()
+
