@@ -1,15 +1,21 @@
 <%- include('partials/header') %>
 
 <main>
-    <section class="container py-5">
-        <header class="text-center mb-5">
-            <h1>Catálogo de Servicios</h1>
-            <p class="lead">Conoce nuestras soluciones tecnológicas y de ciberseguridad.</p>
-        </header>
-        <div id="ajaxServicios" class="row g-4">
-            <!-- Servicios cargados mediante AJAX -->
-        </div>
-    </section>
+  <section class="container py-5">
+    <header class="text-center mb-5">
+      <h1>Catálogo de Servicios</h1>
+      <p class="lead">Conoce nuestras soluciones tecnológicas.</p>
+    </header>
+    
+    <nav id="filtros-categoras" class="filtro-categorias text-center mb-4" aria-label="Filtros">
+      <button class="btn-filtro active" data-categoria="0">Todos</button>
+      <button class="btn-filtro" data-categoria="1">Redes</button>
+      <button class="btn-filtro" data-categoria="2">Ciberseguridad</button>
+      <button class="btn-filtro" data-categoria="3">Desarrollo</button>
+    </nav>
+    
+    <div id="ajaxServicios" class="row g-4"></div>
+</section>
 </main>
 
 <%- include('partials/footer') %>

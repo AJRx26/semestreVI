@@ -1,0 +1,116 @@
+<%- include('partials/header') %>
+
+<main>
+  <section class="container py-5">
+
+    <header class="text-center mb-5">
+      <h1>Catálogo de Servicios</h1>
+      <p class="lead">Conoce nuestras soluciones tecnológicas.</p>
+    </header>
+
+    <!-- Filtros de categoría -->
+    <nav id="filtros-categorias" class="filtro-categorias text-center mb-4" aria-label="Filtros de categoría">
+      <button class="btn-filtro active" data-categoria="0">Todos</button>
+      <button class="btn-filtro" data-categoria="1">Redes de Cómputo</button>
+      <button class="btn-filtro" data-categoria="2">Ciberseguridad</button>
+      <button class="btn-filtro" data-categoria="3">Desarrollo de Software</button>
+      <button class="btn-filtro" data-categoria="4">Capacitación</button>
+    </nav>
+
+    <!-- Contenedor de tarjetas (llenado por JS) -->
+    <div id="ajaxServicios" class="row g-4">
+      <div class="col-12 text-center py-5" id="loadingServicios">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+        <p class="text-muted mt-2">Cargando servicios...</p>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<%- include('partials/footer') %>
+
+<script>
+(function () {
+  let todosLosServicios = [];
+  let categoriaActiva = 0;
+
+  // Cargar servicios desde la API al entrar a la página
+  fetch('/api/servicios')
+    .then(function (res) {
+      if (!res.ok) throw new Error('Error de red');
+      return res.json();
+    })
+    .then(function (data) {
+      if (!data.success) throw new Error('Error en la API');
+      todosLosServicios = data.data;
+      renderServicios();
+    })
+    .catch(function () {
+      document.getElementById('ajaxServicios').innerHTML =
+        '<div class="col-12">' +
+          '<div class="alert alert-danger text-center">' +
+            'Error al cargar los servicios. Intenta recargar la página.' +
+          '</div>' +
+        '</div>';
+    });
+
+  // Renderizar las tarjetas según la categoría activa
+  function renderServicios() {
+    var contenedor = document.getElementById('ajaxServicios');
+
+    var filtrados = categoriaActiva === 0
+      ? todosLosServicios
+      : todosLosServicios.filter(function (s) {
+          return s.categoria_id === categoriaActiva;
+        });
+
+    if (filtrados.length === 0) {
+      contenedor.innerHTML =
+        '<div class="col-12 text-center text-muted py-5">' +
+          'No hay servicios en esta categoría.' +
+        '</div>';
+      return;
+    }
+
+    contenedor.innerHTML = filtrados.map(function (s) {
+      var categoria = s.categoria_nombre || 'General';
+      var imagen    = s.imagen || '';
+      return (
+        '<div class="col-md-6 col-lg-4">' +
+          '<article class="card h-100 shadow-sm">' +
+            '<img src="/images/' + imagen + '" ' +
+                 'class="card-img-top" ' +
+                 'alt="' + s.nombre + '" ' +
+                 'style="height:180px;object-fit:cover;" ' +
+                 'onerror="this.style.display=\'none\'">' +
+            '<div class="card-body d-flex flex-column">' +
+              '<span class="badge bg-secondary mb-2 align-self-start">' + categoria + '</span>' +
+              '<h3 class="h5 card-title">' + s.nombre + '</h3>' +
+              '<p class="card-text text-muted small flex-grow-1">' + s.descripcion + '</p>' +
+              '<a href="/contacto" class="btn btn-outline-primary btn-sm mt-3">Solicitar cotización</a>' +
+            '</div>' +
+          '</article>' +
+        '</div>'
+      );
+    }).join('');
+  }
+
+  // Conectar los botones de filtro
+  document.getElementById('filtros-categorias').addEventListener('click', function (e) {
+    var btn = e.target.closest('.btn-filtro');
+    if (!btn) return;
+
+    document.querySelectorAll('.btn-filtro').forEach(function (b) {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+
+    categoriaActiva = parseInt(btn.dataset.categoria, 10);
+    renderServicios();
+  });
+
+})();
+</script>

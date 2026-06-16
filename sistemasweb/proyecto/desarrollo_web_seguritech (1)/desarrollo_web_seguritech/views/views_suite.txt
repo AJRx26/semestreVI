@@ -1,0 +1,468 @@
+views/dashboard.ejs
+
+
+<div class="container py-4 mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-0">Estadisticas</h2>
+    <a href="/" class="btn btn-outline-dark btn-sm">Volver</a>
+  </div>
+
+  <div id="loadingDashboard" class="text-center py-5">
+    <div class="spinner-border text-primary"></div>
+    <p class="text-muted mt-2">Cargando datos...</p>
+  </div>
+
+  <div id="dashboardContent" class="d-none">
+    <!-- KPIs -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-lg-3">
+        <div class="card text-center shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="text-primary fw-bold mb-1" id="kpiTotalSolicitudes">0</h3>
+            <small class="text-muted">Total Solicitudes</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card text-center shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="text-success fw-bold mb-1" id="kpiTotalServicios">0</h3>
+            <small class="text-muted">Servicios</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card text-center shadow-sm h-100">
+          <div class="card-body">
+            <h6 class="text-warning fw-bold mb-1 text-truncate" id="kpiServicioTop">-</h6>
+            <small class="text-muted">Más Solicitado</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card text-center shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="text-info fw-bold mb-1" id="kpiPendientes">0</h3>
+            <small class="text-muted">Pendientes</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráficos -->
+    <div class="row g-3 mb-4">
+      <div class="col-12 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-header fw-bold">Solicitudes por Estado</div>
+          <div class="card-body" id="estadosContainer"></div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-header fw-bold">Solicitudes por Servicio</div>
+          <div class="card-body" id="serviciosContainer"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="card shadow-sm">
+      <div class="card-header fw-bold">Últimas 5 Solicitudes</div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover mb-0">
+            <thead class="table-dark">
+              <tr><th>ID</th><th>Cliente</th><th>Servicio</th><th>Estado</th><th>Fecha</th></tr>
+            </thead>
+            <tbody id="tbodySolicitudes"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="dashboardError" class="d-none">
+    <div class="alert alert-danger text-center">
+      <p class="mb-2">Error al cargar el dashboard.</p>
+      <button class="btn btn-danger btn-sm" id="btnReintentar">Reintentar</button>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
+
+views/nosotros.ejs
+
+<%- include('partials/header') %>
+
+<main>
+
+    <!-- Presentación -->
+    <section class="container py-5">
+        <header class="text-center mb-5">
+            <h1 class="fw-bold">
+                Nosotros
+            </h1>
+            <p class="lead">Conoce más sobre SeguriTech y el equipo detrás del proyecto.</p>
+        </header>
+        <div class="row g-4">
+
+            <!-- Misión -->
+            <article class="col-md-6">
+                <div class="card h-100 mission-card">
+                    <div class="card-body">
+                        <h2 class="h4">Misión</h2>
+                        <p>
+                            Brindar soluciones tecnológicas innovadoras,
+                            seguras y eficientes que permitan a nuestros
+                            clientes mejorar sus procesos digitales.
+                        </p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Visión -->
+            <article class="col-md-6">
+                <div class="card h-100 vision-card">
+                    <div class="card-body">
+                        <h2 class="h4">Visión</h2>
+                        <p>
+                            Ser una empresa referente en servicios
+                            tecnológicos y ciberseguridad, destacando
+                            por nuestra innovación y compromiso.
+                        </p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Equipo creativo -->
+    <section class="container py-5">
+        <header class="text-center mb-5">
+            <h2 class="fw-bold">Equipo creativo del proyecto.</h2>
+            <p class="text-muted">Personas encargadas del diseño y desarrollo de la solución.</p>
+        </header>
+        <div class="row g-4">
+
+            <!-- Integrante 1 -->
+            <article class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="bi bi-person-circle fs-1"></i>
+                        </div>
+                        <h3 class="h5">Abraham Nuñez Sanchez</h3>
+                        <p class="text-muted">Administrador de bases de datos</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Integrante 2 -->
+            <article class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+
+                        <div class="mb-3">
+                            <i class="bi bi-person-circle fs-1"></i>
+                        </div>
+
+                        <h3 class="h5">Turan Ozbek</h3>
+                        <p class="text-muted">Computo forense</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Integrante 3 -->
+            <article class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="bi bi-person-circle fs-1"></i>
+                        </div>
+
+                        <h3 class="h5">Alan Penagos Gonzales</h3>
+                        <p class="text-muted">Administrador de red</p>
+
+                    </div>
+                </div>
+            </article>
+
+            <!-- Integrante 4 -->
+            <article class="col-md-6 col-lg-3">
+                <div class="card h-100 text-center">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <i class="bi bi-person-circle fs-1"></i>
+                        </div>
+
+                        <h3 class="h5">Rafael Alejandro Diaz Rangel</h3>
+                        <p class="text-muted">Pentester</p>
+
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
+
+views/error.ejs
+
+<%- include('partials/header') %>
+<div class="container text-center py-5 mt-5">
+  <h1 class="fw-bold"><%= titulo %></h1>
+  <p class="text-muted"><%= mensaje %></p>
+  <a href="/" class="btn btn-primary">Volver al Inicio</a>
+</div>
+<%- include('partials/footer') %>
+
+views/index.ejs
+
+<%- include('partials/header') %>
+
+<main>
+
+  <!-- SECCIÓN 1: HERO / BANNER PRINCIPAL
+       Título, subtítulo y botones de acción.
+       La clase .hero-section aplica el gradiente navy→blue del CSS. -->
+  <section id="inicio" class="hero-section text-center">
+    <div class="container">
+
+      <h1 class="fw-bold">SeguriTech</h1>
+
+      <p class="lead">Soluciones Tecnológicas y Ciberseguridad</p>
+
+      <a href="/servicios" class="btn btn-primary">Ver Servicios</a>
+
+      <a href="/contacto" class="btn btn-outline-light ms-2">Solicitar Cotización</a>
+
+    </div>
+  </section>
+
+
+  <!-- SECCIÓN 2: ¿POR QUÉ ELEGIRNOS?
+       Tres tarjetas estáticas con las áreas principales.
+       .service-card aplica el estilo de marca definido en el CSS. -->
+  <section class="container py-5" aria-labelledby="porque-elegirnos">
+
+    <h2 id="porque-elegirnos" class="text-center mb-4">
+      ¿Por qué elegirnos?
+    </h2>
+
+    <div class="row">
+
+      <div class="col-md-4">
+        <article class="card service-card h-100">
+          <div class="card-body text-center">
+            <h3>Ciberseguridad</h3>
+            <p>Protección integral para empresas.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-4">
+        <article class="card service-card h-100">
+          <div class="card-body text-center">
+            <h3>Infraestructura</h3>
+            <p>Diseño y administración de redes.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-4">
+        <article class="card service-card h-100">
+          <div class="card-body text-center">
+            <h3>Desarrollo Web</h3>
+            <p>Aplicaciones modernas y seguras.</p>
+          </div>
+        </article>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SECCIÓN 3: TEXTO INFORMATIVO (placeholder)
+       Bloque de texto debajo de las tarjetas. -->
+  <section class="container py-4" aria-label="Información de la empresa">
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+
+        <h3 class="mb-3" style="color: var(--navy);">
+          Comprometidos con tu seguridad
+        </h3>
+
+        <!-- Párrafo 1 -->
+        <p class="text-muted">
+          En SeguriTech ofrecemos soluciones enfocadas en tecnología, infraestructura y ciberseguridad para ayudar a empresas y organizaciones a mejorar sus procesos digitales, proteger su información y fortalecer sus sistemas tecnológicos.
+          Nuestro objetivo es brindar servicios confiables y adaptados a las necesidades de cada cliente, combinando innovación, seguridad y eficiencia para enfrentar los retos del entorno digital actual.
+        </p>
+
+        <!-- Párrafo 2  -->
+        <p class="text-muted">
+          Desde la implementación de infraestructura tecnológica hasta el desarrollo de soluciones web y estrategias de protección informática, trabajamos para construir entornos más seguros, eficientes y preparados para el futuro.
+          Explora nuestros servicios y encuentra la solución tecnológica que tu organización necesita.
+        </p>
+
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<%- include('partials/footer') %>
+
+views/servicios.ejs
+
+<%- include('partials/header') %>
+
+<main>
+  <section class="container py-5">
+    <header class="text-center mb-5">
+      <h1>Catálogo de Servicios</h1>
+      <p class="lead">Conoce nuestras soluciones tecnológicas.</p>
+    </header>
+    
+    <nav id="filtros-categoras" class="filtro-categorias text-center mb-4" aria-label="Filtros">
+      <button class="btn-filtro active" data-categoria="0">Todos</button>
+      <button class="btn-filtro" data-categoria="1">Redes</button>
+      <button class="btn-filtro" data-categoria="2">Ciberseguridad</button>
+      <button class="btn-filtro" data-categoria="3">Desarrollo</button>
+    </nav>
+    
+    <div id="ajaxServicios" class="row g-4"></div>
+</section>
+</main>
+
+<%- include('partials/footer') %>
+
+views/contacto.ejs
+
+<%- include('partials/header') %>
+
+<section class="container py-5" id="contacto">
+
+    <header class="text-center mb-5">
+        <h1>Contacto</h1>
+        <p class="lead">
+            Ponte en contacto con nuestro equipo para recibir asesoría
+            y soluciones tecnológicas personalizadas.
+        </p>
+    </header>
+
+    <!-- Información de contacto -->
+    <section class="mb-5">
+        <div class="row g-4">
+            <div class="col-md-3">
+                <article class="card h-100 shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Teléfono</h5>
+                        <p class="card-text">+52 999 999 9999</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-md-3">
+                <article class="card h-100 shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Correo electrónico</h5>
+                        <p class="card-text">contacto@seguritech.com</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-md-3">
+                <article class="card h-100 shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Ubicación</h5>
+                        <p class="card-text">Veracruz, México</p>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-md-3">
+                <article class="card h-100 shadow-sm text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">Horario</h5>
+                        <p class="card-text">
+                            Lunes - Viernes<br>
+                            9:00 AM - 6:00 PM
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de solicitud -->
+    <section>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h4 mb-0 fw-bold">Solicitar Cotización</h2>
+                    </div>
+
+                    <div class="card-body">
+                        <form id="solicitudForm" action="/solicitud" method="POST" enctype="multipart/form-data" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Nombre completo *</label>
+
+                                <input type="text" class="form-control" name="nombre" id="nombre" value="<%= typeof formData !== 'undefined' ? formData.nombre : '' %>" required minlength="3">
+                                <div class="invalid-feedback">Mínimo 3 caracteres.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Email *</label>
+
+                                <input type="email" class="form-control" name="email" id="email" value="<%= typeof formData !== 'undefined' ? formData.email : '' %>" required>
+                                <div class="invalid-feedback">Email inválido.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Teléfono *</label>
+
+                                <input type="tel" class="form-control" name="telefono" id="telefono" required minlength="7">
+                                <div class="invalid-feedback">Mínimo 7 caracteres.</div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Servicio *</label>
+
+                                <select class="form-select" name="servicio_id" id="servicio_id" required>
+
+                                    <option value="" disabled selected>Selecciona un servicio</option>
+                                    <% servicios.forEach(s => { %>
+                                    <option value="<%= s.id %>">
+                                        <%= s.nombre %>
+                                    </option>
+                                    <% }); %>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Archivo adjunto</label>
+
+                                <input type="file" class="form-control" name="archivo">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Mensaje *</label>
+                                <textarea class="form-control" name="mensaje" id="mensaje" rows="4" required minlength="10"></textarea>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

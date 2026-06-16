@@ -1,0 +1,177 @@
+/* =========================
+   VARIABLES
+========================= */
+
+:root{
+    --navy: #0C2340;
+    --blue: #1565C0;
+    --green: #00C2A0;
+    --light: #E8F0FE;
+    --gray: #F4F6F9;
+}
+
+/* =========================
+   GENERAL
+========================= */
+/* Texto general */
+body{
+    padding-top:70px;
+    background:var(--gray);
+    font-family:'Inter', sans-serif;
+    font-weight:400;
+}
+
+/* Encabezados principales */
+h1{
+    font-weight:800;
+}
+
+/* Encabezados secundarios */
+h2, h3{
+    font-weight:700;
+}
+
+/* Títulos pequeños */
+h4, h5{
+    font-weight:600;
+}
+
+/* Texto dentro de tarjetas */
+.card p{
+    font-weight:400;
+    line-height:1.6;
+}
+
+/* Navegación y botones */
+.nav-link, .btn{
+    font-weight:500;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.custom-navbar{
+    background: var(--navy);
+}
+
+/* =========================
+   HERO (INICIO)
+========================= */
+.hero-section{
+    background: linear-gradient(
+        135deg,
+        var(--navy),
+        var(--blue)
+    );
+
+    color: white;
+    padding: 120px 20px;
+}
+
+.hero-section h1{
+    font-size: 3rem;
+}
+
+.hero-section p{
+    font-size: 1.2rem;
+}
+
+/* =========================
+   TARJETAS GENERALES
+========================= */
+.card{
+    border: none;
+    transition: .3s;
+}
+
+.card:hover{
+    transform: translateY(-5px);
+}
+
+/* =========================
+   SERVICIOS
+========================= */
+.service-card{
+    background: var(--green);
+    color:white;
+    border:none;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    transition:.3s;
+}
+
+.service-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 25px rgba(0,0,0,.2);
+}
+
+.filtro-categorias{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.btn-filtro{
+    border: none;
+    background: var(--light);
+    padding: .5rem 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.btn-filtro.active{
+    background: var(--blue);
+    color: white;
+}
+
+/* =========================
+   NOSOTROS
+========================= */
+.mission-card,
+.vision-card{
+    background:var(--green);
+    color:white;
+    border:none;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.mission-card h2,
+.vision-card h2{
+    color:white;
+}
+
+/* =========================
+   CONTACTO
+========================= */
+#contacto .card{
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+.progress{
+    height: 8px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer{
+    margin-top: auto;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px){
+
+    .hero-section{
+        padding: 80px 20px;
+    }
+
+    .hero-section h1{
+        font-size: 2.2rem;
+    }
+
+}

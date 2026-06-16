@@ -22,8 +22,7 @@ const servicioController = {
     // Página Catálogo
     getServiciosPage: async (req, res, next) => {
         try {
-            const servicios =
-                await Servicio.getAllWithCategoria();
+            const servicios = await Servicio.getAllWithCategoria();
             res.render('servicios', {
                 titulo: 'Servicios',
                 servicios
@@ -35,8 +34,7 @@ const servicioController = {
     // Página Contacto
     getContacto: async (req, res, next) => {
         try {
-            const servicios =
-                await Servicio.getAllWithCategoria();
+            const servicios = await Servicio.getAllWithCategoria();
             res.render('contacto', {
                 titulo: 'Contacto',
                 servicios
@@ -48,8 +46,7 @@ const servicioController = {
     // API AJAX
     getServiciosJSON: async (req, res, next) => {
         try {
-            const servicios =
-                await Servicio.getAllWithCategoria();
+            const servicios = await Servicio.getAllWithCategoria();
             res.json({
                 success: true,
                 data: servicios
