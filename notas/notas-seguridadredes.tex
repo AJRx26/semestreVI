@@ -1,0 +1,448 @@
+% Created 2026-06-16 mar 23:57
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Abraham Nuñez}
+\date{\today}
+\title{Seguridad en Redes de Computo - Notas Semestre VI}
+\hypersetup{
+ pdfauthor={Abraham Nuñez},
+ pdftitle={Seguridad en Redes de Computo - Notas Semestre VI},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 30.1 (Org mode 9.7.39)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introducción}
+\label{sec:org86b12c2}
+\begin{itemize}
+\item Profesor: Martha Elizabet Dominguez Barcenas
+\item Marteria: Seguridad en Redes de Computo
+\item Carrera: Ciberseguridad e Infraestructura de Computo
+\end{itemize}
+\section{Información}
+\label{sec:org01ca361}
+\subsection{Evaluación:}
+\label{sec:org5c10c37}
+\begin{itemize}
+\item Examenes: 45\%
+\item Actividades: 30\%
+\item Proyecto final: 25\%
+\end{itemize}
+\subsection{Herramientas:}
+\label{sec:org955c03b}
+\begin{itemize}
+\item GNS3
+\item Packet Tracert
+\item Material de Cisco
+\end{itemize}
+\section{Introducción a la seguridad en redes de computo}
+\label{sec:orgafdf53d}
+\begin{itemize}
+\item Los sistemas de información sostienen la forma en la que la mayoria de las organizaciones hacen negocios.
+\item Información: Incluye datos, conocimiento, propiedad intelectual, etc. Que son importantes para una organización.
+\item La triada CIA:
+\begin{itemize}
+\item Confidencialidad
+\item Accesibilidad
+\item Disponibilidad
+\item No repudio: Es la capacidad de demostrar el origen de la creación o modificación de cierta información.
+\end{itemize}
+\end{itemize}
+\subsection{Seguridad de la información}
+\label{sec:org7a1fee2}
+\begin{itemize}
+\item Riesgo: Potencial de perdida, mediante el impacto y la probabilidad de una amenaza aproveche de una vulnerabilidad en uno o mas activos de un sistema de información.
+\begin{itemize}
+\item Activo: Algo de valor para la organización. Como sistemas de información, información. Pueden ser activos digitales, fisicos e inclusos reputacionales.
+\end{itemize}
+\item Amenaza: Peligro potencial para los activos, los datos o la red de una organización. Incluye un actor de amenaza o perpetrador de hechos que representan la amenaza.
+\begin{itemize}
+\item Hackers maliciosos.
+\item Empleado deshonestos.
+\item Empleado que abre un archivo malicioso.
+\item Los actores de amenaza se pueden clasificar en: agentes maliciosos internos, agentes maliciosos externos, internos e internos accidentales.
+\end{itemize}
+\item Vulnerabilidad: Es la debilidad de un activo (en un sistema o en su diseño) que puede ser explotada por una amenaza.
+\begin{itemize}
+\item Activos de hardware
+\item Activos de software
+\end{itemize}
+\end{itemize}
+\subsubsection{Gesionar el riesgo}
+\label{sec:org799c0c2}
+\begin{itemize}
+\item Proceso de minimizar el potencial de perdida.
+\item Implica identificar, evaluar, priorizar riesgos y aplicar medidas de control.
+\item Proporcionar transparencia y contabilidad de las operaciones diarias en una organización, alineando los riesgos con los objetivos estrategicos.
+\item Ayuda a la organización a prepararse para eventos adversos que podrian impactarle negativamente.
+\end{itemize}
+\begin{enumerate}
+\item Tratamiento del riesgo
+\label{sec:org8204893}
+\begin{enumerate}
+\item Forma de control
+\label{sec:orgf2c2f9d}
+\begin{itemize}
+\item Evitar el riesgo.
+\item Reducir el riesgo.
+\item Transferir el riesgo.
+\item Aceptar el riesgo.
+\end{itemize}
+\item Controles de mitigación
+\label{sec:org97ff614}
+\begin{itemize}
+\item Metodos por los cuales se intenta proteger cada activo de amenazas (contra-medida que reduce la probabilidad o la gravedad de una amenaza o riesgo).
+\begin{itemize}
+\item Riesgo residual: Despues de aplicar el control de mitigación, se vuelve un riesgo aceptable.
+\end{itemize}
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+\subsubsection{Regulaciones legales y estructuras de cumplimientos}
+\label{sec:orgf1e2a31}
+\begin{itemize}
+\item Los requisitos de la organización podrian proceder de autoridades gubernamentales o de organismos de certificación.
+\item Tambien hay estandares como los de la Organización Internacional para la Estandarización (ISO).
+\begin{itemize}
+\item ISO 27001
+\item ISO 27018
+\end{itemize}
+\item Las organizaciones que cumplen con los requisitos establecidos en la norma estan listas para ser auditadas por terceros y obtener certificaciones o acreditaciones al respecto.
+\item Importancia de una certificación:
+\begin{itemize}
+\item Altamente valoradas por los clientes y empresas asociadas.
+\item Evidencia de que se ha alcanzado el nivel minimo de seguridad en la organización.
+\item Las regulaciones estan en constante evolución, por lo que la organización debe estar al pendiente de ello.
+\end{itemize}
+\end{itemize}
+\subsubsection{Estrategias de seguridad de la información}
+\label{sec:orgf875491}
+\begin{itemize}
+\item Las organizaciones requieren de programas de seguridad de la información, documentados y actualizados regularmente (la periodicidad de la norma a seguir).
+\item Debe incluir:
+\begin{itemize}
+\item Creación de politicas, procedimientos y manuales de seguridad de la información.
+\item Establecimiento y mantenimiento de un programa de concientización.
+\item Gestión de riesgos por parte de terceros (servicios en la nube: SLA).
+\item Presentación de informes y mejora continua.
+\begin{itemize}
+\item Captar la atención de personas interesadas.
+\item Resaltar la relación costo-beneficio de la estrategia de seguridad de la información.
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\subsubsection{Vector de ataque}
+\label{sec:orgd8acf1f}
+\begin{itemize}
+\item Ruta por la que un actor de amenaza puede obtener acceso a un recurso en la red.
+\item Se originan dentro y fuera de la red corporativa.
+\begin{itemize}
+\item Ataque de DoS
+\item Robo o copia de datos confidenciales
+\item Desconexión de la red.
+\end{itemize}
+\end{itemize}
+\begin{enumerate}
+\item Ataques de red habituales
+\label{sec:org6c6ef13}
+\begin{itemize}
+\item Ataques de reconocimiento
+\item Ataques de acceso
+\item Ingenieria social
+\item 
+\end{itemize}
+\end{enumerate}
+\subsection{ACL}
+\label{sec:orga8709d3}
+\begin{itemize}
+\item Proporcionar control de flujo de trafico. Limitar trafico a ciertos enlaces, restringir entrega de actualizaciones.
+\end{itemize}
+\subsubsection{Funcionamiento}
+\label{sec:org4957850}
+\begin{itemize}
+\item Se pueden aplicar para trafico entrante y saliente
+\begin{itemize}
+\item Paquetes que ingresan por interfacez de entrada (antes de su busqueda en la table de routing)
+\item Paquetes que salen por las interfaces de salida del router (despues de que se enrutan)
+\end{itemize}
+\item Router compara IPv4 de origen con cada ACE en orden secuencial.
+\item Si hay coincidencia se ejecuta la ACE (las ACE restantes )
+\end{itemize}
+\subsubsection{Mascara Wildcard}
+\label{sec:org23c1d05}
+\begin{itemize}
+\item Para coincidencia con un host
+\begin{itemize}
+\item Host: 192.168.1.1
+\item Wildcard: 0.0.0.0
+\end{itemize}
+
+\item Para coincidencia con una subred IPv4
+\begin{itemize}
+\item 192.168.1.0/24
+\item 255.255.255.255 - 255.255.255.0 = 0.0.0.255
+\item Mascara Wildcard: 0.0.0.255
+\end{itemize}
+
+\item Para coincidencia de distintas subredes
+\begin{itemize}
+\item 192.168.10.0 y 192.168.11.0
+\item Calculas mascara sumarizada: 255.255.254.0
+10 = 00001010
+11 = 00001011
+\item Calculo de mascara wildcard: 0.0.1.255
+\end{itemize}
+
+\item Para coincidencia con un rango de direcciones:
+\begin{itemize}
+\item Ejemplo de rango: 192.168.16.0/24 a 192.168.31.0/24
+\item Mascara de subred sumarizada: 255.255.240.0
+16 = 00010000
+31 = 00011111
+
+\item Mascara wildcard: 255.255.255.255 - 255.255.240.0 = 0.0.15.255
+\end{itemize}
+\end{itemize}
+\begin{enumerate}
+\item Palabras clave
+\label{sec:org73deaae}
+\begin{itemize}
+\item Host: Equivale a una mascara wildcard 0.0.0.0
+\item Any: Equivale a una mascara wildcard 255.255.255.255
+\end{itemize}
+\end{enumerate}
+\subsection{VPN's}
+\label{sec:orgebda1bc}
+\begin{itemize}
+\item Las organizanciones usan redes privadas virtuales (VPN) para crear conexiones de red privada de extremo a extremo. Una VPN es virtual porque transporta la información dentro de una red privada, pero en realidad, esa información se transporta usando una red publica.
+\end{itemize}
+\subsection{Tuneles}
+\label{sec:orgf69dc39}
+
+\subsection{Tunel PPTP}
+\label{sec:orgb6916d4}
+
+
+\subsection{TLS HANDSHAKE}
+\label{sec:orgf5cb008}
+\begin{itemize}
+\item El intercambio de datos de la aplicacion mediante TLS requiere la negociación previa de un tunel de cifrado.
+\item Cliente servidor deben acordar:
+\begin{itemize}
+\item La versión de TLS a utilizar
+\item Elegir el conjunto de cifrado
+\item Verificar los certificados
+\end{itemize}
+
+\item Se realiza el handshake de TCP
+\item Cliente envia versión de TLS, lista de conjunto de cifrado compatibles y otras opciones de TLS que se desee utilizar (CLient Hello)
+\item Servidor selecciona version
+\end{itemize}
+\subsection{RSA}
+\label{sec:orgb3062db}
+\begin{itemize}
+\item Sistema criptográfico de clave publica o asimétrica, de Rivest, Shamir y Adleman.
+\item Mecanismo de intercambio de claves predominante en la mayoría de las implementaciones de TLS
+\item Esta clave simétrica negociada se utiliza para cifrar su sesión
+\end{itemize}
+\subsection{Diffie-Hellman}
+\label{sec:org1997b29}
+\begin{itemize}
+\item Cliente y servidor pueden negociar el secreto compartido.
+
+\item Los peers intercambian un valor inicial publicamente.
+\item Los peers guardan un valor secreto.
+\item Cada peer mezcla el valor publico con el valor secreto, obteniendo un valor distinta cada uno.
+\item El valor se intercambia publicamente.
+\item Cada peer combina dicho valor con su valor secreto.
+\item El resultado es un valor final idéntica en cada peer.
+\item El valor final es la clave compartida.
+\end{itemize}
+\subsection{Open VPN}
+\label{sec:orgcfdda45}
+\begin{itemize}
+\item Es una VPN SSL
+\item Implementa la extensión de red segura de capa 2 o 3 mediante el protocolo SSL/TLS
+\item Admite metodos de autenticación de cliente
+\end{itemize}
+\subsection{Configuracion de AutoVPN}
+\label{sec:orgfda7d54}
+\begin{itemize}
+\item apt-get install openvpn easy-rsa
+\item ls /etc/openvpn
+\item make-cadir easy-rsa (en /etc/openvpn)
+\item cd easy-rsa/
+\item ls -la
+\item ./easyrsa init-pki (en /easy-rsa)
+\item ls -la
+\item vim /easyrsa/vars
+\item ./easyrsa build-ca (en /easy-rsa)
+\item poner un password (importante recordar)
+\item SRC CA
+\item ls pki/ca.crt
+\item ls -la pki/
+\item ls pki/private
+\item cd easy-rsa/
+\item ./easyrsa gen-req servidor-src-licic nopass
+\item ./easyrsa sign-req server servidor-feiuvi
+\item ./easyrsa gen-req cliente1-feiuv nopass
+\item ./easyrsa sign-req client cliente1-feiuv
+\end{itemize}
+\subsection{Detección de intrusiones}
+\label{sec:org5b7e839}
+\begin{itemize}
+\item Supervisar eventos en un sistema informatico o una red y analizarlos en busca de indicios de posibles incidentes.
+\item Incidentes: Amenazas inminentes de infracción de las politicas de seguridad informatica. Puede tener multiples causas.
+
+\item IDS: Programa informatico que automatiza el proceso de detección de intrusiones.
+\item IPS: Programa informatio que tiene las
+
+\item Enfoque en la identificación de posibles incidentes.
+\item No detectan cuando un sistema ya fue comprometido
+
+\item Identificación de problemas en las politicas de seguridad.
+\item Documentación de amenazas para la organización.
+\item Disuadir a personas de infringir politicas de seguridad.
+\end{itemize}
+\subsubsection{Funciones clave de los IDPS}
+\label{sec:orgf0a37b3}
+\begin{itemize}
+\item Registro de información sobre los eventos observados
+\item Notificación de eventos observados al administrador de seguridad.
+\item Generación de reportes.
+\end{itemize}
+\subsubsection{Tecnicas de respuesta de los IPS}
+\label{sec:org0745aec}
+\begin{itemize}
+\item Detiene el ataque por si mismo.
+\item Modifica el entorno de seguridad.
+\item Modifica el contenido del ataque.
+\end{itemize}
+\subsubsection{Precisión en la detección}
+\label{sec:org895dd8c}
+\begin{itemize}
+\item Los IDPS no son totalmente precisos.
+\item Falsos positivos: Actividad benigna como maliciosa.
+\item Falsos negativos: Actividad maliciosa como benigna.
+\end{itemize}
+\subsubsection{Metodologias de detección comunes}
+\label{sec:orgfa898fb}
+\begin{enumerate}
+\item Detección basada en firmas
+\label{sec:org6d95627}
+\begin{itemize}
+\item Firma: Un patron que corresponde a una amenaza conocida.
+\item Proceso de comparar firmas contra eventos observados para identificar posibles incidentes.
+\item Es ineficaz para detectar amenazas no conocidas o camufladas mediante tecnicas de evasión.
+\end{itemize}
+\item Detección basada en anomalias
+\label{sec:orgf07fd1d}
+\begin{itemize}
+\item Proceso de comparar definiciones de lo que se considera una actividad normal con los eventos observados para identificar desviaciones significativas.
+\item Usa perfiles que representan un comportamiento normal de elementos como usuarios, host, conexiones de red o aplicaciones.
+\item Es muy efectiva detectando amenazas desconocidas previamente.
+\item Periodo de entrenamiento que puede durar dias o semanas.
+\end{itemize}
+\begin{enumerate}
+\item Tipos de perfiles
+\label{sec:orgde2da2e}
+\begin{itemize}
+\item Perfil estatico: No cambia el perfil, solo cuando el IDPS sea configurado para generar un nuevo perfil.
+\item Perfil dinamicos: Se ajusta constantemente con eventos adiciones que son observados .
+\item Ambientes muy diversos o dinamicos, pueden generar muchos falsos positivos.
+\end{itemize}
+\end{enumerate}
+\item Analisis de protocolos con estado
+\label{sec:org4cfb6a2}
+\begin{itemize}
+\item Proceso de comparar perfiles predeterminados de funciones generalmente aceptadas, como actividades de protocolos benignas para cada estado del protocolo, con los eventos observados y con el fin de identificar desviaciones.
+\item Se basa en perfiles universales desarrollados por los provedores que especifican como deben y como no deben utilizarse determinados protocolos.
+\item Con estado: Significa que el IDPS es capaz de comprender y rastrear el estado de los protocolos de red, transporte y aplicación (que tienen noción de estado).
+
+\item Protocolo con estado: FTP
+
+\item Permite identificar secuencias de comandos inesperadas
+\item Con protocolos que realizan autenticación
+\item Comprueba aspectos como la longitud minima y maxima de los argumentos para un comando.
+\item Se basan principalmente en estandares de protocolo de proveedores y organismos de normalización como la IETF
+
+\item Consumen muchos recursos, debido a la complejidad del analisis.
+\item No pueden detectar ataques que no violen las caracteristicas de comportamiento ``aceptable'' de un protocolo.
+\item El modelo de protocolo utilizado por un IDPS podria entrar en conflicto con la forma en que se implementa el protocolo en una aplicación o sistema operativo especifico.
+\end{itemize}
+\end{enumerate}
+\subsubsection{Tipos de tecnologias IDPS}
+\label{sec:org7f31daf}
+\begin{itemize}
+\item Basados en red
+\item Inalambricos
+\item Basados en analisis de red (NBA)
+\item Basados en host2
+\end{itemize}
+\subsubsection{Componentes tipicos de IDPs}
+\label{sec:org768fdaa}
+\begin{itemize}
+\item Sensor o agente.
+\item Servidor de gestión
+\item Servidor de gestión
+\item Servidor de base de datos
+\item Consola
+\end{itemize}
+\subsubsection{Capacidades de detección}
+\label{sec:orgf0b49ae}
+\begin{itemize}
+\item Umbrales
+\item Listas negras: Actividades maliciosas
+\item Listas blancas: Actividades benignas
+\item Configurar alertas
+\item Edición y visualización del codigo
+\end{itemize}
+\subsubsection{IDPs basado en red}
+\label{sec:org999b409}
+\begin{itemize}
+\item Sensores (appliance)
+\item Uno o mas servidores de gestión
+\item Multiples consolas
+\item Uno o mas servidores de BD (opcional)
+
+\item Las tarjetas estan en modo promiscuo para aceptar todos los paquetes entrantes detectados.
+
+\item Pueden instalarse en uno o dos modos
+\begin{itemize}
+\item En linea/Inline: El trafico supervisado debe de pasar a traves de el.
+\item Pasivo/Passive: Supervisa una copia del trafico real. No pasa a travez del sensor.
+\end{itemize}
+\end{itemize}
+\subsubsection{Capacidades de prevención}
+\label{sec:org1605518}
+\begin{itemize}
+\item Finalizar sesiones TCP
+\item Implementar firewall en linea
+\item Limite de bandhwith
+\item Alteración de contenido malicioso
+\item Reconfiguración de dispositivos de red
+\item Ejecución de un programa o script
+\end{itemize}
+\subsubsection{Soluciones de NIDPS Open Source}
+\label{sec:org13479d3}
+\begin{itemize}
+\item Snort
+\item Suricata
+\item Zeek
+\end{itemize}
+\end{document}
