@@ -160,7 +160,6 @@ def descifrar(llave, paquete):
     # resta -> diferencia en segundos entre: momento en que se generó paquete y momento en que servidor procesa
     if abs(tiempo_ahora - timestamp_del_paquete) > 7200: # abs -> convertir número negativo en positivo
         raise Exception("El segmento ha caducado (más de 2 horas)")
-    
     return datos
 
 

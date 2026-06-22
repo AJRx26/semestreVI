@@ -72,7 +72,7 @@ def realizar_handshake(cliente_sock, llave_privada_servidor):
 
 
 # --- FASE 3: AUTENTICACIÓN DEL CLIENTE (CAPA DE APLICACIÓN) -------------------------------------------    
-def autenticar_usuario(cliente_sock, llave_sesion_recibir, llave_sesion_enviar):
+def autenticar_usuario(cliente_sock, llave_sesion_recibir, llave_sesion_enviar, path_users):
     """
     Verifica usuario y hash SHA-512 desde el archivo usuarios.txt.
     Todo viaja cifrado.
@@ -85,7 +85,7 @@ def autenticar_usuario(cliente_sock, llave_sesion_recibir, llave_sesion_enviar):
 
         usuario, password = credenciales.split(':', 1)
 
-        with open("usuarios.txt", "r", encoding="utf-8") as f:
+        with open(path_users, "r", encoding="utf-8") as f:
             for linea in f:
                 user, salt, hashp = linea.strip().split(':', 2)  # ahora son 3 campos user:salt:hash
                 if usuario == user:
@@ -208,6 +208,7 @@ if __name__ == '__main__':
     all_args.add_argument("-p", "--puerto", required=True, help="Puerto donde escuchara el servidor")
     all_args.add_argument("--privada", required=True, help="Ruta de la llave privada permanente (.pem)")
     all_args.add_argument("-d", "--directorio", required=True, help="Ruta de la carpeta directorio")
+    all_args.add_argument("--users", required=True, help="Ruta del archivo de usuarios.txt")
 
     args = all_args.parse_args()
 
@@ -218,6 +219,7 @@ if __name__ == '__main__':
     puerto = args.puerto
     path_directorio_archivos = args.directorio
     path_llave_privada = args.privada
+    path_users = args.users
 
     with open(path_llave_privada, "rb") as f:
         llave_priv_perm = serialization.load_pem_private_key(f.read(), password=None)
@@ -233,7 +235,7 @@ if __name__ == '__main__':
         )
         print("Sesión segura establecida.")
 
-        if autenticar_usuario(cliente, llave_sesion_recibir, llave_sesion_enviar):
+        if autenticar_usuario(cliente, llave_sesion_recibir, llave_sesion_enviar, path_users):
             print("Cliente autenticado. Esperando operaciones...")
 
             operacion = utils.leer_mensaje(cliente).decode('utf-8')
